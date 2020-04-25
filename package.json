@@ -1,10 +1,11 @@
 {
   "name": "elusive",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "dist/sub"
   ],
   "scripts": {
     "clean": "rm -rf ./dist",
