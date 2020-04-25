@@ -1,1 +1,1 @@
-module.exports = require('./dist/sub/index.js');
+module.exports = require('./dist/sub');
