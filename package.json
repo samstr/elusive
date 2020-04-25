@@ -1,11 +1,15 @@
 {
   "name": "elusive",
   "version": "0.0.2",
+  "repository": "https://github.com/samstr/elusive",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "clean": "rm -rf ./dist",
     "build": "yarn clean && rollup -c",
-    "lint": "eslint ./src",
-    "release": "todo"
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "next": "^9.3.5",
