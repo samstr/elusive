@@ -1,2 +1,1 @@
-import { subthing } from './dist/sub/index.js';
-export { subthing };
+module.exports = require('./dist/sub/index.js');
