@@ -7,6 +7,7 @@ export default [
     input: {
       components: './src/components/index.js',
       errors: './src/errors/index.js',
+      forms: './src/forms/index.js',
       sessions: './src/sessions/index.js',
     },
     output: [
@@ -23,11 +24,11 @@ export default [
       'react',
       'react-bootstrap',
       'react-dom',
+      'sanitize-html',
     ],
-    //preserveModules: true,
     plugins: [
       resolve({
-        // preferBuiltins: true,
+        preferBuiltins: true,
       }),
       babel({
         runtimeHelpers: true,
