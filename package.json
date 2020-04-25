@@ -2,10 +2,11 @@
   "name": "elusive",
   "version": "1.0.6",
   "repository": "https://github.com/samstr/elusive",
-  "main": "dist/index.js",
   "files": [
     "dist",
-    "sub.js"
+    "components.js",
+    "errors.js",
+    "sessions.js"
   ],
   "scripts": {
     "clean": "rm -rf ./dist",
@@ -13,8 +14,11 @@
     "lint": "eslint ./src"
   },
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "next": "^9.3.5",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {

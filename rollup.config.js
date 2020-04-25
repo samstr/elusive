@@ -4,7 +4,11 @@ import babel from 'rollup-plugin-babel';
 
 export default [
   {
-    input: ['./src/index.js', './src/sub/index.js'],
+    input: {
+      components: './src/components/index.js',
+      errors: './src/errors/index.js',
+      sessions: './src/sessions/index.js',
+    },
     output: [
       {
         dir: 'dist',
@@ -20,10 +24,10 @@ export default [
       'react-bootstrap',
       'react-dom',
     ],
-    preserveModules: true,
+    //preserveModules: true,
     plugins: [
       resolve({
-        preferBuiltins: true,
+        // preferBuiltins: true,
       }),
       babel({
         runtimeHelpers: true,
