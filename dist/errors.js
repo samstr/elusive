@@ -5,13 +5,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
 require('prop-types');
 require('react');
 require('react-bootstrap');
-var errors = require('./index-72262e3e.js');
+var errors = require('./errors-5835407b.js');
+var FormErrors = require('./FormErrors-22a51af8.js');
 
 
 
 exports.BaseError = errors.BaseError;
-exports.FormErrors = errors.FormErrors;
-exports.GenericErrors = errors.GenericErrors;
-exports.createErrorResponseArray = errors.createErrorResponseArray;
-exports.fieldErrors = errors.fieldErrors;
-exports.genericErrors = errors.genericErrors;
+exports.FormErrors = FormErrors.FormErrors;
+exports.GenericErrors = FormErrors.GenericErrors;
+exports.createErrorResponseArray = FormErrors.createErrorResponseArray;
+exports.fieldErrors = FormErrors.fieldErrors;
+exports.genericErrors = FormErrors.genericErrors;

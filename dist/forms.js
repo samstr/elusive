@@ -7,79 +7,117 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 require('prop-types');
 require('react');
 require('react-bootstrap');
-var errors = require('./index-72262e3e.js');
+var errors = require('./errors-5835407b.js');
+var getPrototypeOf = require('./getPrototypeOf-d3751d5a.js');
+var FormErrors = require('./FormErrors-22a51af8.js');
 var sanitizeHtml = _interopDefault(require('sanitize-html'));
 
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
+function _createSuper(Derived) { return function () { var Super = getPrototypeOf._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = getPrototypeOf._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return getPrototypeOf._possibleConstructorReturn(this, result); }; }
 
-  return _setPrototypeOf(o, p);
-}
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+var FormError = /*#__PURE__*/function (_BaseError) {
+  getPrototypeOf._inherits(FormError, _BaseError);
 
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
+  var _super = _createSuper(FormError);
+
+  function FormError() {
+    errors._classCallCheck(this, FormError);
+
+    return _super.apply(this, arguments);
   }
 
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
+  return FormError;
+}(errors.BaseError);
+var UnknownFormError = /*#__PURE__*/function (_FormError) {
+  getPrototypeOf._inherits(UnknownFormError, _FormError);
 
-function _typeof(obj) {
-  "@babel/helpers - typeof";
+  var _super2 = _createSuper(UnknownFormError);
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
+  function UnknownFormError(props) {
+    var _this;
+
+    errors._classCallCheck(this, UnknownFormError);
+
+    _this = _super2.call(this, props);
+    _this.name = 'UnknownFormError';
+    return _this;
   }
 
-  return _typeof(obj);
-}
+  return UnknownFormError;
+}(FormError);
+var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
+  getPrototypeOf._inherits(InvalidFieldValueError, _FormError2);
 
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  var _super3 = _createSuper(InvalidFieldValueError);
+
+  function InvalidFieldValueError(props) {
+    var _this2;
+
+    errors._classCallCheck(this, InvalidFieldValueError);
+
+    _this2 = _super3.call(this, props);
+    _this2.name = 'InvalidFieldValueError';
+    return _this2;
   }
 
-  return self;
-}
+  return InvalidFieldValueError;
+}(FormError);
+var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
+  getPrototypeOf._inherits(FieldValueTooShortError, _FormError3);
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
+  var _super4 = _createSuper(FieldValueTooShortError);
+
+  function FieldValueTooShortError(props) {
+    var _this3;
+
+    errors._classCallCheck(this, FieldValueTooShortError);
+
+    _this3 = _super4.call(this, props);
+    _this3.name = 'FieldValueTooShortError';
+    return _this3;
   }
 
-  return _assertThisInitialized(self);
-}
+  return FieldValueTooShortError;
+}(FormError);
+var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
+  getPrototypeOf._inherits(FieldValueTooLongError, _FormError4);
 
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
+  var _super5 = _createSuper(FieldValueTooLongError);
+
+  function FieldValueTooLongError(props) {
+    var _this4;
+
+    errors._classCallCheck(this, FieldValueTooLongError);
+
+    _this4 = _super5.call(this, props);
+    _this4.name = 'FieldValueTooLongError';
+    return _this4;
+  }
+
+  return FieldValueTooLongError;
+}(FormError);
+var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
+  getPrototypeOf._inherits(MissingRequiredFieldError, _FormError5);
+
+  var _super6 = _createSuper(MissingRequiredFieldError);
+
+  function MissingRequiredFieldError(props) {
+    var _this5;
+
+    errors._classCallCheck(this, MissingRequiredFieldError);
+
+    _this5 = _super6.call(this, props);
+    _this5.name = 'MissingRequiredFieldError';
+    return _this5;
+  }
+
+  return MissingRequiredFieldError;
+}(FormError);
 
 function _readOnlyError(name) {
   throw new Error("\"" + name + "\" is read-only");
 }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var createForm = function createForm(_ref) {
   var fields = _ref.fields,
       _validate = _ref.validate;
@@ -87,7 +125,7 @@ var createForm = function createForm(_ref) {
     fields: fields,
     validate: function validate(values) {
       var cleanValues = {};
-      var errors$1 = []; // validate each field
+      var errors = []; // validate each field
 
       Object.keys(fields).forEach(function (field) {
         var value = values[field];
@@ -96,36 +134,36 @@ var createForm = function createForm(_ref) {
           cleanValues[field] = fields[field].validate(value);
         } catch (err) {
           if (err instanceof FormError) {
-            errors$1.push(err);
+            errors.push(err);
           } else {
             // TODO Sentry?
             console.log(err);
-            errors$1 = [new UnknownFormError({
+            errors = [new UnknownFormError({
               message: 'Unknown error'
             })];
           }
         }
       });
 
-      if (!errors$1.length && typeof _validate === 'function') {
+      if (!errors.length && typeof _validate === 'function') {
         try {
           // additional validation
           _validate(cleanValues);
         } catch (err) {
           if (err instanceof FormError) {
-            errors$1.push(err);
+            errors.push(err);
           } else {
             // TODO Sentry?
             console.log(err);
-            errors$1 = [new UnknownFormError({
+            errors = [new UnknownFormError({
               message: 'Unknown error'
             })];
           }
         }
       }
 
-      if (errors$1.length) {
-        return errors.createErrorResponseArray(errors$1);
+      if (errors.length) {
+        return FormErrors.createErrorResponseArray(errors);
       }
 
       return {
@@ -273,104 +311,6 @@ var getOnChangeValue = function getOnChangeValue(event) {
     value: _value
   };
 };
-var FormError = /*#__PURE__*/function (_BaseError) {
-  _inherits(FormError, _BaseError);
-
-  var _super = _createSuper(FormError);
-
-  function FormError() {
-    errors._classCallCheck(this, FormError);
-
-    return _super.apply(this, arguments);
-  }
-
-  return FormError;
-}(errors.BaseError);
-var UnknownFormError = /*#__PURE__*/function (_FormError) {
-  _inherits(UnknownFormError, _FormError);
-
-  var _super2 = _createSuper(UnknownFormError);
-
-  function UnknownFormError(props) {
-    var _this;
-
-    errors._classCallCheck(this, UnknownFormError);
-
-    _this = _super2.call(this, props);
-    _this.name = 'UnknownFormError';
-    return _this;
-  }
-
-  return UnknownFormError;
-}(FormError);
-var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
-  _inherits(InvalidFieldValueError, _FormError2);
-
-  var _super3 = _createSuper(InvalidFieldValueError);
-
-  function InvalidFieldValueError(props) {
-    var _this2;
-
-    errors._classCallCheck(this, InvalidFieldValueError);
-
-    _this2 = _super3.call(this, props);
-    _this2.name = 'InvalidFieldValueError';
-    return _this2;
-  }
-
-  return InvalidFieldValueError;
-}(FormError);
-var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
-  _inherits(FieldValueTooShortError, _FormError3);
-
-  var _super4 = _createSuper(FieldValueTooShortError);
-
-  function FieldValueTooShortError(props) {
-    var _this3;
-
-    errors._classCallCheck(this, FieldValueTooShortError);
-
-    _this3 = _super4.call(this, props);
-    _this3.name = 'FieldValueTooShortError';
-    return _this3;
-  }
-
-  return FieldValueTooShortError;
-}(FormError);
-var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
-  _inherits(FieldValueTooLongError, _FormError4);
-
-  var _super5 = _createSuper(FieldValueTooLongError);
-
-  function FieldValueTooLongError(props) {
-    var _this4;
-
-    errors._classCallCheck(this, FieldValueTooLongError);
-
-    _this4 = _super5.call(this, props);
-    _this4.name = 'FieldValueTooLongError';
-    return _this4;
-  }
-
-  return FieldValueTooLongError;
-}(FormError);
-var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
-  _inherits(MissingRequiredFieldError, _FormError5);
-
-  var _super6 = _createSuper(MissingRequiredFieldError);
-
-  function MissingRequiredFieldError(props) {
-    var _this5;
-
-    errors._classCallCheck(this, MissingRequiredFieldError);
-
-    _this5 = _super6.call(this, props);
-    _this5.name = 'MissingRequiredFieldError';
-    return _this5;
-  }
-
-  return MissingRequiredFieldError;
-}(FormError);
 
 exports.FieldValueTooLongError = FieldValueTooLongError;
 exports.FieldValueTooShortError = FieldValueTooShortError;

@@ -19,9 +19,12 @@ export default [
     ],
     external: [
       'axios',
+      'bcryptjs',
       'bootstrap',
       'firebase-admin',
+      'jsonwebtoken',
       'next',
+      'nookies',
       'prop-types',
       'react',
       'react-bootstrap',

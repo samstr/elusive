@@ -1,3 +1,6 @@
+import { BaseError } from './errors';
+export { BaseError };
+
 import FormErrors from './FormErrors';
 export { FormErrors };
 
@@ -6,15 +9,3 @@ export { GenericErrors };
 
 import { createErrorResponseArray, genericErrors, fieldErrors } from './utils';
 export { createErrorResponseArray, genericErrors, fieldErrors };
-
-export class BaseError {
-  constructor(props) {
-    if (props && props.message) {
-      this.message = props.message;
-    }
-
-    if (props && props.fields) {
-      this.fields = props.fields;
-    }
-  }
-}

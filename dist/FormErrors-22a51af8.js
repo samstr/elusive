@@ -7,12 +7,6 @@ var React = require('react');
 var React__default = _interopDefault(React);
 var reactBootstrap = require('react-bootstrap');
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
 var __jsx = React__default.createElement;
 
 var GenericErrors = function GenericErrors(_ref) {
@@ -103,22 +97,8 @@ FormErrors.propTypes = {
   includingFields: PropTypes.arrayOf(PropTypes.string)
 };
 
-var BaseError = function BaseError(props) {
-  _classCallCheck(this, BaseError);
-
-  if (props && props.message) {
-    this.message = props.message;
-  }
-
-  if (props && props.fields) {
-    this.fields = props.fields;
-  }
-};
-
-exports.BaseError = BaseError;
 exports.FormErrors = FormErrors;
 exports.GenericErrors = GenericErrors;
-exports._classCallCheck = _classCallCheck;
 exports.createErrorResponseArray = createErrorResponseArray;
 exports.fieldErrors = fieldErrors;
 exports.genericErrors = genericErrors;
