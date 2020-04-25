@@ -8,6 +8,7 @@ export default [
       components: './src/components/index.js',
       errors: './src/errors/index.js',
       forms: './src/forms/index.js',
+      models: './src/models/index.js',
       sessions: './src/sessions/index.js',
     },
     output: [
@@ -19,12 +20,14 @@ export default [
     external: [
       'axios',
       'bootstrap',
+      'firebase-admin',
       'next',
       'prop-types',
       'react',
       'react-bootstrap',
       'react-dom',
       'sanitize-html',
+      'uuid',
     ],
     plugins: [
       resolve({
