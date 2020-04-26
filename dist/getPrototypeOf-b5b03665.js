@@ -66,3 +66,4 @@ function _getPrototypeOf(o) {
 exports._getPrototypeOf = _getPrototypeOf;
 exports._inherits = _inherits;
 exports._possibleConstructorReturn = _possibleConstructorReturn;
+exports._setPrototypeOf = _setPrototypeOf;

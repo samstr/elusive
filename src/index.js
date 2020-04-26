@@ -1,18 +1,4 @@
-class ElusiveClient {
-  static instance;
-
-  init = (options) => {
-    this.options = options;
-  };
-
-  static getInstance() {
-    if (ElusiveClient.instance) {
-      return ElusiveClient.instance;
-    }
-    ElusiveClient.instance = new ElusiveClient();
-    return ElusiveClient.instance;
-  }
-}
+import ElusiveClient from './client';
 
 const Elusive = ElusiveClient.getInstance();
 

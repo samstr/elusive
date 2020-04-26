@@ -5,6 +5,6 @@ var client = require('./index-f3e3cee9.js');
 require('./defineProperty-ba7cd53d.js');
 require('./getPrototypeOf-b5b03665.js');
 
-var Elusive = client.ElusiveClient.getInstance();
 
-module.exports = Elusive;
+
+module.exports = client.ElusiveClient;

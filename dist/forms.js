@@ -5,10 +5,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
+var getPrototypeOf = require('./getPrototypeOf-b5b03665.js');
 require('prop-types');
 require('react');
 require('react-bootstrap');
-var getPrototypeOf = require('./getPrototypeOf-d3751d5a.js');
 var errors = require('./errors-df969561.js');
 var FormErrors = require('./FormErrors-22a51af8.js');
 var sanitizeHtml = _interopDefault(require('sanitize-html'));

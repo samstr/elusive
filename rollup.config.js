@@ -6,6 +6,7 @@ export default [
   {
     input: {
       index: './src/index.js',
+      client: './src/client/index.js',
       components: './src/components/index.js',
       errors: './src/errors/index.js',
       forms: './src/forms/index.js',
