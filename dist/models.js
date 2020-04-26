@@ -4,8 +4,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var index$1 = require('./index-2340470f.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
+var index$1 = require('./index-2340470f.js');
 var admin = _interopDefault(require('firebase-admin'));
 var uuid = require('uuid');
 

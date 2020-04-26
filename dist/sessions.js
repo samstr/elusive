@@ -6,6 +6,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
+require('./defineProperty-ba7cd53d.js');
 require('prop-types');
 require('react');
 require('react-bootstrap');
@@ -141,8 +142,8 @@ var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
 var BCRYPT_SALT_ROUNDS = 10;
 var viewElusiveOptions = function viewElusiveOptions() {
   console.log('getting elusive options');
-  console.log(index.options);
-  console.log('');
+  console.log('Elusive', index);
+  console.log('Elusive options', index.options);
 };
 var buildSessionCookieString = function buildSessionCookieString(name, value, expiryDate) {
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');

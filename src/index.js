@@ -1,23 +1,19 @@
-/*class ElusiveSingleton {
+class ElusiveClient {
   static instance;
 
-  constructor() {
-    // your logic here
-  }
+  init = (options) => {
+    this.options = options;
+  };
 
   static getInstance() {
-    if (Singleton.instance) {
-      return Singleton.instance;
+    if (ElusiveClient.instance) {
+      return ElusiveClient.instance;
     }
-    Singleton.instance = new Singleton();
-    return Singleton.instance;
+    ElusiveClient.instance = new ElusiveClient();
+    return ElusiveClient.instance;
   }
-}*/
+}
 
-class Elusive {}
-
-Elusive.init = (options) => {
-  Elusive.options = options;
-};
+const Elusive = ElusiveClient.getInstance();
 
 export default Elusive;

@@ -8,8 +8,8 @@ import Elusive from '../';
 
 export const viewElusiveOptions = () => {
   console.log('getting elusive options');
-  console.log(Elusive.options);
-  console.log('');
+  console.log('Elusive', Elusive);
+  console.log('Elusive options', Elusive.options);
 };
 
 export const buildSessionCookieString = (name, value, expiryDate) =>
