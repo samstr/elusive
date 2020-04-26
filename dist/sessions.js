@@ -142,6 +142,7 @@ var BCRYPT_SALT_ROUNDS = 10;
 var viewElusiveOptions = function viewElusiveOptions() {
   console.log('getting elusive options');
   console.log(index.options);
+  console.log('');
 };
 var buildSessionCookieString = function buildSessionCookieString(name, value, expiryDate) {
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
