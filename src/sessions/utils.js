@@ -2,9 +2,8 @@ import bcrypt from 'bcryptjs';
 import { parseCookies } from 'nookies';
 import jwt, { TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 
-import { BCRYPT_SALT_ROUNDS } from './config';
-
 import Elusive from '../';
+import { InvalidAccessTokenError } from './errors';
 
 // XXX remove later
 export const viewElusiveOptions = () => {
@@ -61,12 +60,13 @@ export const signTokens = (claims, secret) => ({
 });
 
 export const deleteSessionCookieStrings = () => {
+  const { sessions: options } = Elusive.options;
   const expiryDate = new Date(0).toUTCString(); // set it in the past
 
   return [
-    buildSessionCookieString(ACCESS_TOKEN_COOKIE_NAME, '', expiryDate),
-    buildSessionCookieString(REFRESH_TOKEN_COOKIE_NAME, '', expiryDate),
-    buildSessionCookieString(USER_ID_COOKIE_NAME, '', expiryDate),
+    buildSessionCookieString(options.cookies.accessTokenName, '', expiryDate),
+    buildSessionCookieString(options.cookies.refreshTokenName, '', expiryDate),
+    buildSessionCookieString(options.cookies.userIdName, '', expiryDate),
   ];
 };
 
@@ -121,67 +121,72 @@ export const validateSession = async (req, res) => {
   const refreshToken = cookies[options.cookies.refreshTokenName];
   const userId = cookies[options.cookies.userIdName];
 
+  console.log('req.cookies', req.cookies);
   console.log('accessToken', accessToken);
   console.log('refreshToken', refreshToken);
   console.log('userId', userId);
 
-  console.log('req.cookies', req.cookies);
+  throw new InvalidAccessTokenError('Invalid accessToken');
 
   // Regardless of whether the route has requiresAuth: true/false
   // we always validate the request if the cookies are present incase
   // we need to regenerate tokens
-  /*if (accessToken && refreshToken && userId) {
+  if (accessToken && refreshToken && userId) {
     const {
       decoded: accessTokenDecoded,
       expired: accessTokenExpired,
       invalid: accessTokenInvalid,
-    } = verifyAccessTokenFromCookie(accessToken, jwtSecret);
+    } = verifyAccessTokenFromCookie(accessToken, options.jwt.secret);
+
+    console.log('accessTokenDecoded', accessTokenDecoded);
+    console.log('accessTokenExpired', accessTokenExpired);
+    console.log('accessTokenInvalid', accessTokenInvalid);
 
     if (accessTokenInvalid) {
       throw new InvalidAccessTokenError();
     }
 
-    if (accessTokenDecoded) {
-      if (accessTokenDecoded.user.id !== userId) {
-        throw new UserIdCookieAndTokenMismatchError();
-      }
+    // if (accessTokenDecoded) {
+    //  if (accessTokenDecoded.user.id !== userId) {
+    //    throw new UserIdCookieAndTokenMismatchError();
+    //  }
 
-      session.claims = accessTokenDecoded;
+    //  session.claims = accessTokenDecoded;
 
-      // we don't need these on the object
-      delete session.claims.iat;
-      delete session.claims.exp;
-    }
+    // we don't need these on the object
+    //  delete session.claims.iat;
+    //  delete session.claims.exp;
+    // }
 
-    if (accessTokenExpired) {
-      // access token has expired (every 15 mins) so we need to generate a new one
-      const {
-        decoded: refreshTokenDecoded,
-        expired: refreshTokenExpired,
-        invalid: refreshTokenInvalid,
-      } = verifyRefreshTokenFromCookie(refreshToken, jwtSecret);
+    // if (accessTokenExpired) {
+    // access token has expired (every 15 mins) so we need to generate a new one
+    // const {
+    //  decoded: refreshTokenDecoded,
+    //  expired: refreshTokenExpired,
+    //  invalid: refreshTokenInvalid,
+    // } = verifyRefreshTokenFromCookie(refreshToken, jwtSecret);
 
-      if (refreshTokenInvalid) {
-        throw new InvalidRefreshTokenError();
-      }
+    // if (refreshTokenInvalid) {
+    //  throw new InvalidRefreshTokenError();
+    // }
 
-      if (refreshTokenExpired) {
-        // this should never happen since we're always refreshing it whenever we refresh an accessToken
-        throw new RefreshTokenExpiredError();
-      }
+    // if (refreshTokenExpired) {
+    // this should never happen since we're always refreshing it whenever we refresh an accessToken
+    // throw new RefreshTokenExpiredError();
+    // }
 
-      if (refreshTokenDecoded.user.id !== userId) {
-        throw new UserIdCookieAndTokenMismatchError();
-      }
+    // if (refreshTokenDecoded.user.id !== userId) {
+    // throw new UserIdCookieAndTokenMismatchError();
+    // }
 
-      // TODO: wrap this in try catch and throw ReloadUserError()
-      const user = await reloadUser(refreshTokenDecoded.user.id);
+    // TODO: wrap this in try catch and throw ReloadUserError()
+    // const user = await reloadUser(refreshTokenDecoded.user.id);
 
-      session.claims = createTokenClaims(user);
+    // session.claims = createTokenClaims(user);
 
-      createSessionCookies(res, signTokens(session.claims, jwtSecret), user.id);
-    }
-  }*/
+    // createSessionCookies(res, signTokens(session.claims, jwtSecret), user.id);
+    // }
+  }
 
   session.isAuthenticated = !!session.claims;
 

@@ -4,10 +4,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-require('./classCallCheck-d2bb402f.js');
-require('./index-f3e3cee9.js');
+require('./wrapNativeSuper-b3646a2a.js');
+require('./index-0426ceb4.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
-require('./getPrototypeOf-b5b03665.js');
 require('./index.js');
 var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');

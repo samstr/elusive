@@ -4,25 +4,24 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var getPrototypeOf = require('./getPrototypeOf-b5b03665.js');
+var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
 require('prop-types');
 require('react');
 require('react-bootstrap');
-var errors = require('./errors-df969561.js');
+var errors = require('./errors-a41e2d55.js');
 var FormErrors = require('./FormErrors-22a51af8.js');
 var sanitizeHtml = _interopDefault(require('sanitize-html'));
 
-function _createSuper(Derived) { return function () { var Super = getPrototypeOf._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = getPrototypeOf._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return getPrototypeOf._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var FormError = /*#__PURE__*/function (_BaseError) {
-  getPrototypeOf._inherits(FormError, _BaseError);
+  wrapNativeSuper._inherits(FormError, _BaseError);
 
   var _super = _createSuper(FormError);
 
   function FormError() {
-    classCallCheck._classCallCheck(this, FormError);
+    wrapNativeSuper._classCallCheck(this, FormError);
 
     return _super.apply(this, arguments);
   }
@@ -30,14 +29,14 @@ var FormError = /*#__PURE__*/function (_BaseError) {
   return FormError;
 }(errors.BaseError);
 var UnknownFormError = /*#__PURE__*/function (_FormError) {
-  getPrototypeOf._inherits(UnknownFormError, _FormError);
+  wrapNativeSuper._inherits(UnknownFormError, _FormError);
 
   var _super2 = _createSuper(UnknownFormError);
 
   function UnknownFormError(props) {
     var _this;
 
-    classCallCheck._classCallCheck(this, UnknownFormError);
+    wrapNativeSuper._classCallCheck(this, UnknownFormError);
 
     _this = _super2.call(this, props);
     _this.name = 'UnknownFormError';
@@ -47,14 +46,14 @@ var UnknownFormError = /*#__PURE__*/function (_FormError) {
   return UnknownFormError;
 }(FormError);
 var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
-  getPrototypeOf._inherits(InvalidFieldValueError, _FormError2);
+  wrapNativeSuper._inherits(InvalidFieldValueError, _FormError2);
 
   var _super3 = _createSuper(InvalidFieldValueError);
 
   function InvalidFieldValueError(props) {
     var _this2;
 
-    classCallCheck._classCallCheck(this, InvalidFieldValueError);
+    wrapNativeSuper._classCallCheck(this, InvalidFieldValueError);
 
     _this2 = _super3.call(this, props);
     _this2.name = 'InvalidFieldValueError';
@@ -64,14 +63,14 @@ var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
   return InvalidFieldValueError;
 }(FormError);
 var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
-  getPrototypeOf._inherits(FieldValueTooShortError, _FormError3);
+  wrapNativeSuper._inherits(FieldValueTooShortError, _FormError3);
 
   var _super4 = _createSuper(FieldValueTooShortError);
 
   function FieldValueTooShortError(props) {
     var _this3;
 
-    classCallCheck._classCallCheck(this, FieldValueTooShortError);
+    wrapNativeSuper._classCallCheck(this, FieldValueTooShortError);
 
     _this3 = _super4.call(this, props);
     _this3.name = 'FieldValueTooShortError';
@@ -81,14 +80,14 @@ var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
   return FieldValueTooShortError;
 }(FormError);
 var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
-  getPrototypeOf._inherits(FieldValueTooLongError, _FormError4);
+  wrapNativeSuper._inherits(FieldValueTooLongError, _FormError4);
 
   var _super5 = _createSuper(FieldValueTooLongError);
 
   function FieldValueTooLongError(props) {
     var _this4;
 
-    classCallCheck._classCallCheck(this, FieldValueTooLongError);
+    wrapNativeSuper._classCallCheck(this, FieldValueTooLongError);
 
     _this4 = _super5.call(this, props);
     _this4.name = 'FieldValueTooLongError';
@@ -98,14 +97,14 @@ var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
   return FieldValueTooLongError;
 }(FormError);
 var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
-  getPrototypeOf._inherits(MissingRequiredFieldError, _FormError5);
+  wrapNativeSuper._inherits(MissingRequiredFieldError, _FormError5);
 
   var _super6 = _createSuper(MissingRequiredFieldError);
 
   function MissingRequiredFieldError(props) {
     var _this5;
 
-    classCallCheck._classCallCheck(this, MissingRequiredFieldError);
+    wrapNativeSuper._classCallCheck(this, MissingRequiredFieldError);
 
     _this5 = _super6.call(this, props);
     _this5.name = 'MissingRequiredFieldError';
