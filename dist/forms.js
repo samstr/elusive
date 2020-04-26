@@ -4,11 +4,12 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var classCallCheck = require('./classCallCheck-d2bb402f.js');
 require('prop-types');
 require('react');
 require('react-bootstrap');
-var errors = require('./errors-5835407b.js');
 var getPrototypeOf = require('./getPrototypeOf-d3751d5a.js');
+var errors = require('./errors-df969561.js');
 var FormErrors = require('./FormErrors-22a51af8.js');
 var sanitizeHtml = _interopDefault(require('sanitize-html'));
 
@@ -21,7 +22,7 @@ var FormError = /*#__PURE__*/function (_BaseError) {
   var _super = _createSuper(FormError);
 
   function FormError() {
-    errors._classCallCheck(this, FormError);
+    classCallCheck._classCallCheck(this, FormError);
 
     return _super.apply(this, arguments);
   }
@@ -36,7 +37,7 @@ var UnknownFormError = /*#__PURE__*/function (_FormError) {
   function UnknownFormError(props) {
     var _this;
 
-    errors._classCallCheck(this, UnknownFormError);
+    classCallCheck._classCallCheck(this, UnknownFormError);
 
     _this = _super2.call(this, props);
     _this.name = 'UnknownFormError';
@@ -53,7 +54,7 @@ var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
   function InvalidFieldValueError(props) {
     var _this2;
 
-    errors._classCallCheck(this, InvalidFieldValueError);
+    classCallCheck._classCallCheck(this, InvalidFieldValueError);
 
     _this2 = _super3.call(this, props);
     _this2.name = 'InvalidFieldValueError';
@@ -70,7 +71,7 @@ var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
   function FieldValueTooShortError(props) {
     var _this3;
 
-    errors._classCallCheck(this, FieldValueTooShortError);
+    classCallCheck._classCallCheck(this, FieldValueTooShortError);
 
     _this3 = _super4.call(this, props);
     _this3.name = 'FieldValueTooShortError';
@@ -87,7 +88,7 @@ var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
   function FieldValueTooLongError(props) {
     var _this4;
 
-    errors._classCallCheck(this, FieldValueTooLongError);
+    classCallCheck._classCallCheck(this, FieldValueTooLongError);
 
     _this4 = _super5.call(this, props);
     _this4.name = 'FieldValueTooLongError';
@@ -104,7 +105,7 @@ var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
   function MissingRequiredFieldError(props) {
     var _this5;
 
-    errors._classCallCheck(this, MissingRequiredFieldError);
+    classCallCheck._classCallCheck(this, MissingRequiredFieldError);
 
     _this5 = _super6.call(this, props);
     _this5.name = 'MissingRequiredFieldError';

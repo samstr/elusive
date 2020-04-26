@@ -4,12 +4,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var classCallCheck = require('./classCallCheck-d2bb402f.js');
+require('./index.js');
 require('prop-types');
 require('react');
 require('react-bootstrap');
-var index = require('./index-2340470f.js');
-var errors = require('./errors-5835407b.js');
+var index$1 = require('./index-2340470f.js');
 var getPrototypeOf = require('./getPrototypeOf-d3751d5a.js');
+var errors = require('./errors-df969561.js');
 require('./FormErrors-22a51af8.js');
 var SessionContext = require('./SessionContext-b57e1931.js');
 var bcrypt = _interopDefault(require('bcryptjs'));
@@ -26,7 +28,7 @@ var SessionError = /*#__PURE__*/function (_BaseError) {
   var _super = _createSuper(SessionError);
 
   function SessionError() {
-    errors._classCallCheck(this, SessionError);
+    classCallCheck._classCallCheck(this, SessionError);
 
     return _super.apply(this, arguments);
   }
@@ -41,7 +43,7 @@ var InvalidAccessTokenError$1 = /*#__PURE__*/function (_SessionError) {
   function InvalidAccessTokenError(props) {
     var _this;
 
-    errors._classCallCheck(this, InvalidAccessTokenError);
+    classCallCheck._classCallCheck(this, InvalidAccessTokenError);
 
     _this = _super2.call(this, props);
     _this.name = 'InvalidAccessTokenError';
@@ -58,7 +60,7 @@ var UserIdCookieAndTokenMismatchError$1 = /*#__PURE__*/function (_SessionError2)
   function UserIdCookieAndTokenMismatchError(props) {
     var _this2;
 
-    errors._classCallCheck(this, UserIdCookieAndTokenMismatchError);
+    classCallCheck._classCallCheck(this, UserIdCookieAndTokenMismatchError);
 
     _this2 = _super3.call(this, props);
     _this2.name = 'UserIdCookieAndTokenMismatchError';
@@ -75,7 +77,7 @@ var InvalidRefreshTokenError$1 = /*#__PURE__*/function (_SessionError3) {
   function InvalidRefreshTokenError(props) {
     var _this3;
 
-    errors._classCallCheck(this, InvalidRefreshTokenError);
+    classCallCheck._classCallCheck(this, InvalidRefreshTokenError);
 
     _this3 = _super4.call(this, props);
     _this3.name = 'InvalidRefreshTokenError';
@@ -92,7 +94,7 @@ var RefreshTokenExpiredError$1 = /*#__PURE__*/function (_SessionError4) {
   function RefreshTokenExpiredError(props) {
     var _this4;
 
-    errors._classCallCheck(this, RefreshTokenExpiredError);
+    classCallCheck._classCallCheck(this, RefreshTokenExpiredError);
 
     _this4 = _super5.call(this, props);
     _this4.name = 'RefreshTokenExpiredError';
@@ -109,7 +111,7 @@ var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError5) {
   function SessionUserNoLongerExistsError(props) {
     var _this5;
 
-    errors._classCallCheck(this, SessionUserNoLongerExistsError);
+    classCallCheck._classCallCheck(this, SessionUserNoLongerExistsError);
 
     _this5 = _super6.call(this, props);
     _this5.name = 'SessionUserNoLongerExistsError';
@@ -126,7 +128,7 @@ var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
   function SessionUserNotEnabledError(props) {
     var _this6;
 
-    errors._classCallCheck(this, SessionUserNotEnabledError);
+    classCallCheck._classCallCheck(this, SessionUserNotEnabledError);
 
     _this6 = _super7.call(this, props);
     _this6.name = 'SessionUserNotEnabledError';
@@ -135,15 +137,6 @@ var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
 
   return SessionUserNotEnabledError;
 }(SessionError);
-
-var JWT_ACCESS_TOKEN_EXPIRY_MINS = 3; // XXX set to 10
-
-var JWT_REFRESH_TOKEN_EXPIRY_MINS = 43800; // 1 month
-
-var ACCESS_TOKEN_COOKIE_NAME = 'at';
-var REFRESH_TOKEN_COOKIE_NAME = 'rt';
-var USER_ID_COOKIE_NAME = 'uid';
-var COOKIE_EXPIRY_MINS = 43800; // 1 month
 
 var BCRYPT_SALT_ROUNDS = 10;
 var buildSessionCookieString = function buildSessionCookieString(name, value, expiryDate) {
@@ -225,14 +218,14 @@ var verifyRefreshTokenFromCookie = function verifyRefreshTokenFromCookie(refresh
     throw err;
   }
 };
-var validateSession = function validateSession(req, res, config) {
-  var createTokenClaims, getUser, jwtSecret, session, cookies, accessToken, refreshToken, userId, _verifyAccessTokenFro, accessTokenDecoded, accessTokenExpired, accessTokenInvalid, _verifyRefreshTokenFr, refreshTokenDecoded, refreshTokenExpired, refreshTokenInvalid, user;
+var validateSession = function validateSession(req, res, options) {
+  var createTokenClaims, reloadUser, jwtSecret, session, cookies, accessToken, refreshToken, userId, _verifyAccessTokenFro, accessTokenDecoded, accessTokenExpired, accessTokenInvalid, _verifyRefreshTokenFr, refreshTokenDecoded, refreshTokenExpired, refreshTokenInvalid, user;
 
-  return index._regeneratorRuntime.async(function validateSession$(_context) {
+  return index$1._regeneratorRuntime.async(function validateSession$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          createTokenClaims = config.createTokenClaims, getUser = config.getUser, jwtSecret = config.jwtSecret;
+          createTokenClaims = options.createTokenClaims, reloadUser = options.reloadUser, jwtSecret = options.jwtSecret;
           session = {
             isAuthenticated: false,
             claims: null
@@ -314,7 +307,7 @@ var validateSession = function validateSession(req, res, config) {
 
         case 24:
           _context.next = 26;
-          return index._regeneratorRuntime.awrap(getUser(refreshTokenDecoded.user.id));
+          return index$1._regeneratorRuntime.awrap(reloadUser(refreshTokenDecoded.user.id));
 
         case 26:
           user = _context.sent;

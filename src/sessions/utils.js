@@ -2,15 +2,14 @@ import bcrypt from 'bcryptjs';
 import { parseCookies } from 'nookies';
 import jwt, { TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 
-export const JWT_ACCESS_TOKEN_EXPIRY_MINS = 3; // XXX set to 10
-export const JWT_REFRESH_TOKEN_EXPIRY_MINS = 43800; // 1 month
-
-export const ACCESS_TOKEN_COOKIE_NAME = 'at';
-export const REFRESH_TOKEN_COOKIE_NAME = 'rt';
-export const USER_ID_COOKIE_NAME = 'uid';
-export const COOKIE_EXPIRY_MINS = 43800; // 1 month
-
 const BCRYPT_SALT_ROUNDS = 10;
+
+import Elusive from '../';
+
+export const viewElusiveOptions = () => {
+  console.log('getting elusive options');
+  console.log(Elusive.options);
+};
 
 export const buildSessionCookieString = (name, value, expiryDate) =>
   [
@@ -107,8 +106,8 @@ export const verifyRefreshTokenFromCookie = (refreshToken, secret) => {
   }
 };
 
-export const validateSession = async (req, res, config) => {
-  const { createTokenClaims, getUser, jwtSecret } = config;
+export const validateSession = async (req, res, options) => {
+  const { createTokenClaims, reloadUser, jwtSecret } = options;
 
   const session = {
     isAuthenticated: false,
@@ -167,8 +166,8 @@ export const validateSession = async (req, res, config) => {
         throw new UserIdCookieAndTokenMismatchError();
       }
 
-      // TODO: wrap this in try catch and throw GetUserError()
-      const user = await getUser(refreshTokenDecoded.user.id);
+      // TODO: wrap this in try catch and throw ReloadUserError()
+      const user = await reloadUser(refreshTokenDecoded.user.id);
 
       session.claims = createTokenClaims(user);
 

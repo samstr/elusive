@@ -5,6 +5,7 @@ import babel from 'rollup-plugin-babel';
 export default [
   {
     input: {
+      index: './src/index.js',
       components: './src/components/index.js',
       errors: './src/errors/index.js',
       forms: './src/forms/index.js',

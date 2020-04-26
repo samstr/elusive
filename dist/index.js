@@ -1,3 +1,7 @@
+'use strict';
+
+var classCallCheck = require('./classCallCheck-d2bb402f.js');
+
 /*class ElusiveSingleton {
   static instance;
 
@@ -13,11 +17,12 @@
     return Singleton.instance;
   }
 }*/
+var Elusive = function Elusive() {
+  classCallCheck._classCallCheck(this, Elusive);
+};
 
-class Elusive {}
-
-Elusive.init = (options) => {
+Elusive.init = function (options) {
   Elusive.options = options;
 };
 
-export default Elusive;
+module.exports = Elusive;

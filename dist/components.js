@@ -4,11 +4,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+require('./classCallCheck-d2bb402f.js');
+require('./index.js');
 var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');
 var React__default = _interopDefault(React);
 var reactBootstrap = require('react-bootstrap');
-var index = require('./index-2340470f.js');
+var index$1 = require('./index-2340470f.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
@@ -103,7 +105,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
       (function _callee() {
         var response, sessionResponse, _window$location, pathname, search, href, encodedNext, _window$location2, _pathname, _search, url, _response;
 
-        return index._regeneratorRuntime.async(function _callee$(_context) {
+        return index$1._regeneratorRuntime.async(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -116,7 +118,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
 
                 _context.prev = 2;
                 _context.next = 5;
-                return index._regeneratorRuntime.awrap(axios__default.get('/api/session', {
+                return index$1._regeneratorRuntime.awrap(axios__default.get('/api/session', {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelSessionRequest = c;
                   })
@@ -175,7 +177,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 url = "/api/page".concat(_pathname).concat(_search);
                 _context.prev = 29;
                 _context.next = 32;
-                return index._regeneratorRuntime.awrap(axios__default.get(url, {
+                return index$1._regeneratorRuntime.awrap(axios__default.get(url, {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelDataRequest = c;
                   })
