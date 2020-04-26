@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-require('./index.js');
+var index = require('./index.js');
 require('prop-types');
 require('react');
 require('react-bootstrap');
@@ -139,6 +139,10 @@ var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
 }(SessionError);
 
 var BCRYPT_SALT_ROUNDS = 10;
+var viewElusiveOptions = function viewElusiveOptions() {
+  console.log('getting elusive options');
+  console.log(index.options);
+};
 var buildSessionCookieString = function buildSessionCookieString(name, value, expiryDate) {
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
 };
@@ -349,3 +353,4 @@ exports.validateSession = validateSession;
 exports.verifyAccessTokenFromCookie = verifyAccessTokenFromCookie;
 exports.verifyRefreshTokenFromCookie = verifyRefreshTokenFromCookie;
 exports.verifyToken = verifyToken;
+exports.viewElusiveOptions = viewElusiveOptions;
