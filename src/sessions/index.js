@@ -34,6 +34,7 @@ import {
   verifyAccessTokenFromCookie,
   verifyRefreshTokenFromCookie,
   validateSession,
+  viewElusiveOptions,
 } from './utils';
 export {
   buildSessionCookieString,
@@ -49,4 +50,5 @@ export {
   verifyAccessTokenFromCookie,
   verifyRefreshTokenFromCookie,
   validateSession,
+  viewElusiveOptions,
 };
