@@ -5,11 +5,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
-require('prop-types');
-require('react');
-require('react-bootstrap');
 var errors = require('./errors-a41e2d55.js');
-var FormErrors = require('./FormErrors-22a51af8.js');
+require('react');
+require('prop-types');
+require('react-bootstrap');
+var FormErrors = require('./FormErrors-0bc42a8b.js');
 var sanitizeHtml = _interopDefault(require('sanitize-html'));
 
 function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }

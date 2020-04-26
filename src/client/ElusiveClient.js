@@ -31,13 +31,14 @@ class ElusiveClient {
           secret: null,
         },
       },
+      sentry: null,
     };
   };
 
   init = (options) => {
     this.setDefaultOptions();
 
-    const { sessions } = options;
+    const { sentry, sessions } = options;
 
     if (sessions) {
       const { bcrypt, cookies, jwt } = sessions;
@@ -92,6 +93,10 @@ class ElusiveClient {
           throw new MissingJWTSecretOptionError();
         }
       }
+    }
+
+    if (sentry) {
+      this.options.sentry = sentry;
     }
   };
 

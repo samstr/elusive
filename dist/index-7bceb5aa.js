@@ -82,14 +82,16 @@ var ElusiveClient = /*#__PURE__*/function () {
             refreshTokenExpiryMins: JWT_REFRESH_TOKEN_EXPIRY_MINS,
             secret: null
           }
-        }
+        },
+        sentry: null
       };
     });
 
     defineProperty._defineProperty(this, "init", function (options) {
       _this.setDefaultOptions();
 
-      var sessions = options.sessions;
+      var sentry = options.sentry,
+          sessions = options.sessions;
 
       if (sessions) {
         var bcrypt = sessions.bcrypt,
@@ -146,6 +148,10 @@ var ElusiveClient = /*#__PURE__*/function () {
             throw new MissingJWTSecretOptionError();
           }
         }
+      }
+
+      if (sentry) {
+        _this.options.sentry = sentry;
       }
     });
   }
