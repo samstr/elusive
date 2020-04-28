@@ -22,6 +22,7 @@ export default [
       },
     ],
     external: [
+      '@sentry/node',
       'axios',
       'bcryptjs',
       'bootstrap',

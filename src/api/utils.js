@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/node';
+
 import Elusive from '../';
 import { BaseError } from '../errors';
 import {
@@ -25,6 +27,14 @@ const errorMessage = (message) => ({
 });
 
 export const apiWrapper = async (req, res, fn, options) => {
+  const { sentry } = Elusive.options;
+
+  if (sentry && sentry.dsn) {
+    Sentry.init({
+      dsn: sentry.dsn,
+    });
+  }
+
   const defaultOptions = {
     allowedMethods: [GET],
     requireAuth: false,
@@ -47,6 +57,7 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     return await fn(props);
   } catch (err) {
+    console.log('we caught an error', err);
     if (err instanceof HttpError) {
       if (err instanceof HttpMethodNotAllowedError) {
         return httpMethodNotAllowedResponse(res, errorMessage(err.message));
@@ -68,7 +79,12 @@ export const apiWrapper = async (req, res, fn, options) => {
       return httpBadRequestResponse(res, errorMessage(err.message));
     }
 
-    throw err;
+    console.error('error in apiWrapper:', err);
+
+    if (sentry && sentry.dsn) {
+      console.log('sending to Sentry');
+      Sentry.captureException(err);
+    }
 
     return httpInternalServerErrorResponse(
       res,
