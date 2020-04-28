@@ -6,6 +6,7 @@ import {
   HttpMethodNotAllowedError,
   httpBadRequestResponse,
   httpForbiddenResponse,
+  httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
   validateRequest,
 } from '../http';
@@ -63,10 +64,13 @@ export const apiWrapper = async (req, res, fn, options) => {
       );
     }
 
-    console.log(err);
-
     if (err instanceof BaseError) {
       return httpBadRequestResponse(res, errorMessage(err.message));
     }
+
+    return httpInternalServerErrorResponse(
+      res,
+      errorMessage('An unknown error occured.')
+    );
   }
 };
