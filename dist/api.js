@@ -102,9 +102,9 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           return _context.abrupt("return", utils.httpBadRequestResponse(res, errorMessage(_context.t0.message)));
 
         case 24:
-          return _context.abrupt("return", utils.httpInternalServerErrorResponse(res, errorMessage('An unknown error occured.')));
+          throw _context.t0;
 
-        case 25:
+        case 26:
         case "end":
           return _context.stop();
       }

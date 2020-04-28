@@ -68,6 +68,8 @@ export const apiWrapper = async (req, res, fn, options) => {
       return httpBadRequestResponse(res, errorMessage(err.message));
     }
 
+    throw err;
+
     return httpInternalServerErrorResponse(
       res,
       errorMessage('An unknown error occured.')
