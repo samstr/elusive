@@ -6,7 +6,6 @@ import {
   HttpMethodNotAllowedError,
   httpBadRequestResponse,
   httpForbiddenResponse,
-  httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
   validateRequest,
 } from '../http';
@@ -25,8 +24,6 @@ const errorMessage = (message) => ({
 });
 
 export const apiWrapper = async (req, res, fn, options) => {
-  const { sentry } = Elusive.options;
-
   const defaultOptions = {
     allowedMethods: [GET],
     requireAuth: false,
@@ -49,7 +46,6 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     return await fn(props);
   } catch (err) {
-    console.log('we caught an error', err);
     if (err instanceof HttpError) {
       if (err instanceof HttpMethodNotAllowedError) {
         return httpMethodNotAllowedResponse(res, errorMessage(err.message));
@@ -67,22 +63,10 @@ export const apiWrapper = async (req, res, fn, options) => {
       );
     }
 
+    console.log(err);
+
     if (err instanceof BaseError) {
       return httpBadRequestResponse(res, errorMessage(err.message));
     }
-
-    console.error('error in apiWrapper:', err);
-    console.log('sentry is', sentry);
-
-    if (sentry) {
-      console.log('capturing it in sentry');
-      sentry.captureException(err);
-      console.log('done!');
-    }
-
-    return httpInternalServerErrorResponse(
-      res,
-      errorMessage('An unknown error occured.')
-    );
   }
 };
