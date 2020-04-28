@@ -5,8 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 require('./wrapNativeSuper-b3646a2a.js');
 require('./index-7bceb5aa.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
-require('./index.js');
+var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
+var Sentry = require('@sentry/node');
 var errors = require('./errors-a41e2d55.js');
 require('react');
 require('prop-types');
@@ -32,11 +33,19 @@ var errorMessage = function errorMessage(message) {
 };
 
 var apiWrapper = function apiWrapper(req, res, fn, options) {
-  var defaultOptions, props;
+  var sentry, defaultOptions, props;
   return index$1._regeneratorRuntime.async(function apiWrapper$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          sentry = index.options.sentry;
+
+          if (sentry && sentry.dsn) {
+            Sentry.init({
+              dsn: sentry.dsn
+            });
+          }
+
           defaultOptions = {
             allowedMethods: [utils.GET],
             requireAuth: false,
@@ -47,69 +56,77 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             req: req,
             res: res
           };
-          _context.prev = 3;
+          _context.prev = 5;
           utils.validateRequest(req, res, options);
 
           if (!options.useSession) {
-            _context.next = 9;
+            _context.next = 11;
             break;
           }
 
-          _context.next = 8;
+          _context.next = 10;
           return index$1._regeneratorRuntime.awrap(utils$1.validateSession(req, res));
 
-        case 8:
+        case 10:
           props.session = _context.sent;
 
-        case 9:
-          _context.next = 11;
+        case 11:
+          _context.next = 13;
           return index$1._regeneratorRuntime.awrap(fn(props));
 
-        case 11:
+        case 13:
           return _context.abrupt("return", _context.sent);
 
-        case 14:
-          _context.prev = 14;
-          _context.t0 = _context["catch"](3);
+        case 16:
+          _context.prev = 16;
+          _context.t0 = _context["catch"](5);
+          console.log('we caught an error', _context.t0);
 
           if (!(_context.t0 instanceof utils.HttpError)) {
-            _context.next = 19;
+            _context.next = 22;
             break;
           }
 
           if (!(_context.t0 instanceof utils.HttpMethodNotAllowedError)) {
-            _context.next = 19;
+            _context.next = 22;
             break;
           }
 
           return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, errorMessage(_context.t0.message)));
 
-        case 19:
+        case 22:
           if (!(_context.t0 instanceof utils$1.SessionError)) {
-            _context.next = 22;
+            _context.next = 25;
             break;
           }
 
           utils$1.deleteSessionCookies(res);
           return _context.abrupt("return", utils.httpForbiddenResponse(res, errorMessage('There was a problem with your session. Please log in again.')));
 
-        case 22:
+        case 25:
           if (!(_context.t0 instanceof errors.BaseError)) {
-            _context.next = 24;
+            _context.next = 27;
             break;
           }
 
           return _context.abrupt("return", utils.httpBadRequestResponse(res, errorMessage(_context.t0.message)));
 
-        case 24:
-          throw _context.t0;
+        case 27:
+          console.error('error in apiWrapper:', _context.t0);
 
-        case 26:
+          if (sentry && sentry.dsn) {
+            console.log('sending to Sentry');
+            Sentry.captureException(_context.t0);
+          }
+
+          return _context.abrupt("return", utils.httpInternalServerErrorResponse(res, errorMessage('An unknown error occured.')));
+
+        case 30:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[3, 14]], Promise);
+  }, null, null, [[5, 16]], Promise);
 };
 
 exports.apiWrapper = apiWrapper;
