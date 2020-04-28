@@ -109,7 +109,8 @@ export const verifyRefreshTokenFromCookie = (refreshToken, secret) => {
 export const validateSession = async (req, res) => {
   const { sessions: options } = Elusive.options;
 
-  console.log('options', options);
+  // console.log('zz options', options);
+  // console.log('zz sentry', sentry);
 
   const session = {
     isAuthenticated: false,
@@ -126,8 +127,6 @@ export const validateSession = async (req, res) => {
   console.log('refreshToken', refreshToken);
   console.log('userId', userId);
 
-  throw new InvalidAccessTokenError('Invalid accessToken');
-
   // Regardless of whether the route has requiresAuth: true/false
   // we always validate the request if the cookies are present incase
   // we need to regenerate tokens
@@ -143,7 +142,7 @@ export const validateSession = async (req, res) => {
     console.log('accessTokenInvalid', accessTokenInvalid);
 
     if (accessTokenInvalid) {
-      throw new InvalidAccessTokenError();
+      throw new InvalidAccessTokenError('Invalid accessToken');
     }
 
     // if (accessTokenDecoded) {

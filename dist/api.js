@@ -13,7 +13,7 @@ require('prop-types');
 require('react-bootstrap');
 require('./FormErrors-0bc42a8b.js');
 var utils = require('./utils-6b1b613c.js');
-var utils$1 = require('./utils-f720c639.js');
+var utils$1 = require('./utils-c94c8815.js');
 require('./SessionContext-2a34dac4.js');
 require('bcryptjs');
 require('nookies');
@@ -32,11 +32,12 @@ var errorMessage = function errorMessage(message) {
 };
 
 var apiWrapper = function apiWrapper(req, res, fn, options) {
-  var defaultOptions, props;
+  var sentry, defaultOptions, props;
   return index$1._regeneratorRuntime.async(function apiWrapper$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          sentry = index.options.sentry;
           defaultOptions = {
             allowedMethods: [utils.GET],
             requireAuth: false,
@@ -47,79 +48,79 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             req: req,
             res: res
           };
-          _context.prev = 3;
+          _context.prev = 4;
           utils.validateRequest(req, res, options);
 
           if (!options.useSession) {
-            _context.next = 9;
+            _context.next = 10;
             break;
           }
 
-          _context.next = 8;
+          _context.next = 9;
           return index$1._regeneratorRuntime.awrap(utils$1.validateSession(req, res));
 
-        case 8:
+        case 9:
           props.session = _context.sent;
 
-        case 9:
-          _context.next = 24;
-          break;
+        case 10:
+          _context.next = 12;
+          return index$1._regeneratorRuntime.awrap(fn(props));
 
-        case 11:
-          _context.prev = 11;
-          _context.t0 = _context["catch"](3);
+        case 12:
+          return _context.abrupt("return", _context.sent);
+
+        case 15:
+          _context.prev = 15;
+          _context.t0 = _context["catch"](4);
+          console.log('we caught an error', _context.t0);
 
           if (!(_context.t0 instanceof utils.HttpError)) {
-            _context.next = 16;
+            _context.next = 21;
             break;
           }
 
           if (!(_context.t0 instanceof utils.HttpMethodNotAllowedError)) {
-            _context.next = 16;
+            _context.next = 21;
             break;
           }
 
           return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, errorMessage(_context.t0.message)));
 
-        case 16:
+        case 21:
           if (!(_context.t0 instanceof utils$1.SessionError)) {
-            _context.next = 19;
+            _context.next = 24;
             break;
           }
 
           utils$1.deleteSessionCookies(res);
           return _context.abrupt("return", utils.httpForbiddenResponse(res, errorMessage('There was a problem with your session. Please log in again.')));
 
-        case 19:
+        case 24:
           if (!(_context.t0 instanceof errors.BaseError)) {
-            _context.next = 21;
+            _context.next = 26;
             break;
           }
 
           return _context.abrupt("return", utils.httpBadRequestResponse(res, errorMessage(_context.t0.message)));
 
-        case 21:
-          console.error(_context.t0);
+        case 26:
+          console.error('error in apiWrapper:', _context.t0);
+          console.log('sentry is', sentry);
 
-          if (index.options.sentry) {
+          if (sentry) {
+            console.log('capturing it in sentry');
             sentry.captureException(_context.t0);
+            console.log('done!');
           }
 
           return _context.abrupt("return", utils.httpInternalServerErrorResponse(res, errorMessage('An unknown error occured.')));
 
-        case 24:
-          _context.next = 26;
-          return index$1._regeneratorRuntime.awrap(fn(props));
-
-        case 26:
-          return _context.abrupt("return", _context.sent);
-
-        case 27:
+        case 30:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[3, 11]], Promise);
+  }, null, null, [[4, 15]], Promise);
 };
 
 exports.apiWrapper = apiWrapper;
