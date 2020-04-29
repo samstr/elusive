@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node';
 
 import Elusive from '../';
-import { BaseError } from '../errors';
+import { BaseError, createErrorResponseArray } from '../errors';
 import {
   GET,
   HttpError,
@@ -59,6 +59,13 @@ export const apiWrapper = async (req, res, fn, options) => {
       ...props,
       ...(await fn({ ...props, req, res })),
     };
+
+    if (props.errors && props.errors.length) {
+      return httpBadRequestResponse(
+        res,
+        createErrorResponseArray(props.errors)
+      );
+    }
 
     return res.json(props);
   } catch (err) {
