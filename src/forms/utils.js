@@ -1,6 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 
-import { createErrorResponseArray } from '../errors';
+import { errorJson } from '../errors';
 
 import {
   FieldValueTooShortError,
@@ -50,7 +50,7 @@ export const createForm = ({ fields, validate }) => ({
     }
 
     if (errors.length) {
-      return createErrorResponseArray(errors);
+      return errorJson(errors);
     }
 
     return {
