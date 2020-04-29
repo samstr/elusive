@@ -14,7 +14,7 @@ const FormErrors = ({ errors, field, includingFields }) => {
     return (
       <Form.Control.Feedback type="invalid">
         {_fieldErrors.map((error) => (
-          <div key={error.name}>{error.message}</div>
+          <div key={error.message}>{error.message}</div>
         ))}
       </Form.Control.Feedback>
     );
@@ -30,8 +30,8 @@ const FormErrors = ({ errors, field, includingFields }) => {
 FormErrors.propTypes = {
   errors: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
       message: PropTypes.string.isRequired,
+      fields: PropTypes.arrayOf(PropTypes.string),
     })
   ),
   field: PropTypes.string,

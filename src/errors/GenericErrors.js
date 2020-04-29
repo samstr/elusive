@@ -6,7 +6,7 @@ const GenericErrors = ({ errors }) => {
   return (
     <Alert variant="danger">
       {errors.map((error) => (
-        <div key={error.name}>{error.message}</div>
+        <div key={error.message}>{error.message}</div>
       ))}
     </Alert>
   );
@@ -15,8 +15,8 @@ const GenericErrors = ({ errors }) => {
 GenericErrors.propTypes = {
   errors: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
       message: PropTypes.string.isRequired,
+      fields: PropTypes.arrayOf(PropTypes.string),
     })
   ),
 };

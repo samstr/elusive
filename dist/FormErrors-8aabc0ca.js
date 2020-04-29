@@ -15,15 +15,15 @@ var GenericErrors = function GenericErrors(_ref) {
     variant: "danger"
   }, errors.map(function (error) {
     return __jsx("div", {
-      key: error.name
+      key: error.message
     }, error.message);
   }));
 };
 
 GenericErrors.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired
+    message: PropTypes.string.isRequired,
+    fields: PropTypes.arrayOf(PropTypes.string)
   }))
 };
 
@@ -73,7 +73,7 @@ var FormErrors = function FormErrors(_ref) {
       type: "invalid"
     }, _fieldErrors.map(function (error) {
       return __jsx$1("div", {
-        key: error.name
+        key: error.message
       }, error.message);
     }));
   } // Generic errors
@@ -89,8 +89,8 @@ var FormErrors = function FormErrors(_ref) {
 
 FormErrors.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired
+    message: PropTypes.string.isRequired,
+    fields: PropTypes.arrayOf(PropTypes.string)
   })),
   field: PropTypes.string,
   includingFields: PropTypes.arrayOf(PropTypes.string)
