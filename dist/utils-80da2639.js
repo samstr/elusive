@@ -107,15 +107,12 @@ var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
   return SessionUserNotEnabledError;
 }(SessionError);
 
-var viewElusiveOptions = function viewElusiveOptions() {
-  return index.options;
-};
 var buildSessionCookieString = function buildSessionCookieString(name, value, expiryDate) {
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
 };
 var createSessionCookieStrings = function createSessionCookieStrings(tokens, userId) {
   var options = index.options.sessions;
-  var dateFuture = Date.now() + 60000 * COOKIE_EXPIRY_MINS;
+  var dateFuture = Date.now() + 60000 * options.cookies.expiryMins;
   var expiryDate = new Date(dateFuture).toUTCString();
   return [buildSessionCookieString(options.cookies.accessTokenName, tokens.access, expiryDate), buildSessionCookieString(options.cookies.refreshTokenName, tokens.refresh, expiryDate), buildSessionCookieString(options.cookies.userIdName, userId, expiryDate)];
 };
@@ -269,4 +266,3 @@ exports.validateSession = validateSession;
 exports.verifyAccessTokenFromCookie = verifyAccessTokenFromCookie;
 exports.verifyRefreshTokenFromCookie = verifyRefreshTokenFromCookie;
 exports.verifyToken = verifyToken;
-exports.viewElusiveOptions = viewElusiveOptions;
