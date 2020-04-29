@@ -30,6 +30,10 @@ class ElusiveClient {
           refreshTokenExpiryMins: JWT_REFRESH_TOKEN_EXPIRY_MINS,
           secret: null,
         },
+        callbacks: {
+          createTokenClaims: null,
+          reloadUser: null,
+        },
       },
       sentry: null,
     };
@@ -41,13 +45,25 @@ class ElusiveClient {
     const { sentry, sessions } = options;
 
     if (sessions) {
-      const { bcrypt, cookies, jwt } = sessions;
+      const { bcrypt, callbacks, cookies, jwt } = sessions;
 
       if (bcrypt) {
         const { saltRounds } = bcrypt;
 
         if (saltRounds) {
           this.options.sessions.bcrypt.saltRounds = saltRounds;
+        }
+      }
+
+      if (callbacks) {
+        const { createTokenClaims, reloadUser } = callbacks;
+
+        if (createTokenClaims) {
+          this.options.sessions.callbacks.createTokenClaims = createTokenClaims;
+        }
+
+        if (reloadUser) {
+          this.options.sessions.callbacks.reloadUser = reloadUser;
         }
       }
 

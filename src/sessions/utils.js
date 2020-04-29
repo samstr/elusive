@@ -80,8 +80,8 @@ export const verifyToken = (token, secret) => jwt.verify(token, secret);
 
 export const verifyAccessTokenFromCookie = (accessToken, secret) => {
   try {
-    const decoded = verifyToken(accessToken, secret);
-    return { decoded };
+    const claims = verifyToken(accessToken, secret);
+    return { claims };
   } catch (err) {
     if (err instanceof TokenExpiredError) {
       return { expired: true };
@@ -95,8 +95,8 @@ export const verifyAccessTokenFromCookie = (accessToken, secret) => {
 
 export const verifyRefreshTokenFromCookie = (refreshToken, secret) => {
   try {
-    const decoded = verifyToken(refreshToken, secret);
-    return { decoded };
+    const claims = verifyToken(refreshToken, secret);
+    return { claims };
   } catch (err) {
     if (err instanceof TokenExpiredError) {
       return { expired: true };
@@ -110,6 +110,7 @@ export const verifyRefreshTokenFromCookie = (refreshToken, secret) => {
 
 export const validateSession = async (req, res) => {
   const { sessions: options } = Elusive.options;
+  const { createTokenClaims, reloadUser } = options.callbacks;
 
   const session = {
     isAuthenticated: false,
@@ -122,69 +123,68 @@ export const validateSession = async (req, res) => {
     [options.cookies.userIdName]: userId,
   } = req.cookies;
 
-  console.log('req.cookies', req.cookies);
-  console.log('accessToken', accessToken);
-  console.log('refreshToken', refreshToken);
-  console.log('userId', userId);
-
   // Regardless of whether the route has requiresAuth: true/false
   // we always validate the request if the cookies are present incase
   // we need to regenerate tokens
   if (accessToken && refreshToken && userId) {
     const {
-      decoded: accessTokenDecoded,
+      claims: accessTokenClaims,
       expired: accessTokenExpired,
       invalid: accessTokenInvalid,
     } = verifyAccessTokenFromCookie(accessToken, options.jwt.secret);
 
-    // console.log('accessTokenDecoded', accessTokenDecoded);
-    // console.log('accessTokenExpired', accessTokenExpired);
-    // console.log('accessTokenInvalid', accessTokenInvalid);
-
     if (accessTokenInvalid) {
-      throw new InvalidAccessTokenError('Invalid accessToken');
+      throw new InvalidAccessTokenError('Invalid access token');
     }
 
-    // if (accessTokenDecoded) {
-    //  if (accessTokenDecoded.user.id !== userId) {
-    //    throw new UserIdCookieAndTokenMismatchError();
-    //  }
+    if (accessTokenClaims) {
+      if (accessTokenClaims.user.id !== userId) {
+        throw new UserIdCookieAndTokenMismatchError(
+          'User id cookie does not match access token'
+        );
+      }
 
-    //  session.claims = accessTokenDecoded;
+      session.claims = accessTokenClaims;
 
-    // we don't need these on the object
-    //  delete session.claims.iat;
-    //  delete session.claims.exp;
-    // }
+      // we don't need these on the object
+      delete session.claims.iat;
+      delete session.claims.exp;
+    }
 
-    // if (accessTokenExpired) {
-    // access token has expired (every 15 mins) so we need to generate a new one
-    // const {
-    //  decoded: refreshTokenDecoded,
-    //  expired: refreshTokenExpired,
-    //  invalid: refreshTokenInvalid,
-    // } = verifyRefreshTokenFromCookie(refreshToken, jwtSecret);
+    if (accessTokenExpired) {
+      // access token has expired (every 10 mins) so we need to generate a new one
+      const {
+        claims: refreshTokenClaims,
+        expired: refreshTokenExpired,
+        invalid: refreshTokenInvalid,
+      } = verifyRefreshTokenFromCookie(refreshToken, options.jwt.secret);
 
-    // if (refreshTokenInvalid) {
-    //  throw new InvalidRefreshTokenError();
-    // }
+      if (refreshTokenInvalid) {
+        throw new InvalidRefreshTokenError('Invalid refresh token');
+      }
 
-    // if (refreshTokenExpired) {
-    // this should never happen since we're always refreshing it whenever we refresh an accessToken
-    // throw new RefreshTokenExpiredError();
-    // }
+      if (refreshTokenExpired) {
+        // this should never happen since we're always refreshing it whenever we refresh an accessToken
+        throw new RefreshTokenExpiredError('Refresh token expired');
+      }
 
-    // if (refreshTokenDecoded.user.id !== userId) {
-    // throw new UserIdCookieAndTokenMismatchError();
-    // }
+      if (refreshTokenClaims.user.id !== userId) {
+        throw new UserIdCookieAndTokenMismatchError(
+          'User id cookie does not match refresh token'
+        );
+      }
 
-    // TODO: wrap this in try catch and throw ReloadUserError()
-    // const user = await reloadUser(refreshTokenDecoded.user.id);
+      // TODO: wrap this in try catch and throw ReloadUserError()
+      const user = await reloadUser(refreshTokenClaims.user.id);
 
-    // session.claims = createTokenClaims(user);
+      session.claims = createTokenClaims(user);
 
-    // createSessionCookies(res, signTokens(session.claims, jwtSecret), user.id);
-    // }
+      createSessionCookies(
+        res,
+        signTokens(session.claims, options.jwt.secret),
+        user.id
+      );
+    }
   }
 
   session.isAuthenticated = !!session.claims;
