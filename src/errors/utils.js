@@ -1,7 +1,6 @@
 export const createErrorResponseArray = (errors) => ({
   errors: errors.map((err) => {
     const obj = {
-      name: err.name,
       message: err.message,
     };
 

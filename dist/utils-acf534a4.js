@@ -6,7 +6,7 @@ var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 var errors = require('./errors-a41e2d55.js');
-require('./FormErrors-0bc42a8b.js');
+require('./FormErrors-1b06fe20.js');
 var bcrypt = _interopDefault(require('bcryptjs'));
 var nookies = require('nookies');
 var jwt = require('jsonwebtoken');

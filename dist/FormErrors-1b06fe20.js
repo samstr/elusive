@@ -31,7 +31,6 @@ var createErrorResponseArray = function createErrorResponseArray(errors) {
   return {
     errors: errors.map(function (err) {
       var obj = {
-        name: err.name,
         message: err.message
       };
 

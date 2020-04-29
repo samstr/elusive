@@ -9,7 +9,7 @@ var errors = require('./errors-a41e2d55.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var FormErrors = require('./FormErrors-0bc42a8b.js');
+var FormErrors = require('./FormErrors-1b06fe20.js');
 var sanitizeHtml = _interopDefault(require('sanitize-html'));
 
 function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }
