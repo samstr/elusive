@@ -5,8 +5,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
-var errors = require('./errors-a41e2d55.js');
-require('./FormErrors-9579dce8.js');
+var FormErrors = require('./FormErrors-a91e4b79.js');
 var bcrypt = _interopDefault(require('bcryptjs'));
 var jwt = require('jsonwebtoken');
 var jwt__default = _interopDefault(jwt);
@@ -26,7 +25,7 @@ var SessionError = /*#__PURE__*/function (_BaseError) {
   }
 
   return SessionError;
-}(errors.BaseError);
+}(FormErrors.BaseError);
 var InvalidAccessTokenError = /*#__PURE__*/function (_SessionError) {
   wrapNativeSuper._inherits(InvalidAccessTokenError, _SessionError);
 

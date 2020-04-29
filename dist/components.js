@@ -9,11 +9,12 @@ require('./index-b22bf051.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 require('./index.js');
 var index$1 = require('./index-2340470f.js');
+require('./FormErrors-a91e4b79.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 var PropTypes = _interopDefault(require('prop-types'));
 var reactBootstrap = require('react-bootstrap');
-require('./FormErrors-9579dce8.js');
+var utils = require('./utils-5540e6b6.js');
 var SessionContext = require('./SessionContext-2a34dac4.js');
 require('bcryptjs');
 require('jsonwebtoken');
@@ -77,6 +78,32 @@ var defaultOptions = {
   requireAuth: false
 };
 
+var loginRouteWithNext = function loginRouteWithNext() {
+  var _window$location = window.location,
+      pathname = _window$location.pathname,
+      search = _window$location.search;
+  var href = '/login';
+
+  if (pathname !== '/logout') {
+    var encodedNext = encodeURIComponent("".concat(pathname).concat(search));
+    href = "".concat(href, "?next=").concat(encodedNext);
+  }
+
+  return href;
+};
+
+var handleError = function handleError(err) {
+  if (err instanceof axios.Cancel) return;
+
+  if (response.status === utils.HTTP_STATUS_FORBIDDEN) {
+    router.replace(loginRouteWithNext());
+  } else {
+    // If it's an unknown error
+    // NOTE we need to let some errors get passed into props
+    console.log('Unknown error from session or data endpoints: ', err);
+  }
+};
+
 var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
   options = _objectSpread({}, defaultOptions, {}, options);
 
@@ -103,7 +130,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
       var cancelDataRequest;
 
       (function _callee() {
-        var response, sessionResponse, _window$location, pathname, search, href, encodedNext, _window$location2, _pathname, _search, url, _response;
+        var _response, sessionResponse, _window$location2, pathname, search, url, _response2;
 
         return index$1._regeneratorRuntime.async(function _callee$(_context) {
           while (1) {
@@ -112,7 +139,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 props = _objectSpread({}, pageProps);
 
                 if (!options.useSession) {
-                  _context.next = 25;
+                  _context.next = 21;
                   break;
                 }
 
@@ -125,92 +152,74 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 }));
 
               case 5:
-                response = _context.sent;
+                _response = _context.sent;
                 cancelSessionRequest = null;
-                sessionResponse = response.data.session;
+                sessionResponse = _response.data.session;
                 sessionResponse._ready = true;
                 props.session = sessionResponse;
 
                 if (!(options.requireAuth && !sessionResponse.isAuthenticated)) {
-                  _context.next = 18;
+                  _context.next = 15;
                   break;
                 }
 
-                _window$location = window.location, pathname = _window$location.pathname, search = _window$location.search;
-                href = '/login';
-
-                if (pathname !== '/logout') {
-                  encodedNext = encodeURIComponent("".concat(pathname).concat(search));
-                  href = "".concat(href, "?next=").concat(encodedNext);
-                }
-
-                router.replace(href);
+                router.replace(loginRouteWithNext());
                 return _context.abrupt("return");
 
-              case 18:
+              case 15:
                 session.setSession(sessionResponse);
 
-              case 19:
-                _context.next = 25;
+              case 16:
+                _context.next = 21;
                 break;
 
-              case 21:
-                _context.prev = 21;
+              case 18:
+                _context.prev = 18;
                 _context.t0 = _context["catch"](2);
+                return _context.abrupt("return", handleError(_context.t0));
 
-                if (!(_context.t0 instanceof axios.Cancel)) {
-                  console.log('error getting /api/session', _context.t0);
-                }
-
-                return _context.abrupt("return");
-
-              case 25:
+              case 21:
                 if (options.useGlobals) ;
 
                 if (!options.useData) {
-                  _context.next = 41;
+                  _context.next = 36;
                   break;
                 }
 
                 // get page data
-                _window$location2 = window.location, _pathname = _window$location2.pathname, _search = _window$location2.search;
-                url = "/api/page".concat(_pathname).concat(_search);
-                _context.prev = 29;
-                _context.next = 32;
+                _window$location2 = window.location, pathname = _window$location2.pathname, search = _window$location2.search;
+                url = "/api/page".concat(pathname).concat(search);
+                _context.prev = 25;
+                _context.next = 28;
                 return index$1._regeneratorRuntime.awrap(axios__default.get(url, {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelDataRequest = c;
                   })
                 }));
 
-              case 32:
-                _response = _context.sent;
+              case 28:
+                _response2 = _context.sent;
                 cancelDataRequest = null;
-                props.data = _response.data;
-                _context.next = 41;
+                props.data = _response2.data;
+                _context.next = 36;
                 break;
 
-              case 37:
-                _context.prev = 37;
-                _context.t1 = _context["catch"](29);
+              case 33:
+                _context.prev = 33;
+                _context.t1 = _context["catch"](25);
+                return _context.abrupt("return", handleError(_context.t1));
 
-                if (!(_context.t1 instanceof axios.Cancel)) {
-                  console.log("error getting ".concat(url), _context.t1);
-                }
-
-                return _context.abrupt("return");
-
-              case 41:
+              case 36:
                 if (shouldSetPageProps) {
                   setPageProps(props);
                 }
 
-              case 42:
+              case 37:
               case "end":
                 return _context.stop();
             }
           }
-        }, null, null, [[2, 21], [29, 37]], Promise);
+        }, null, null, [[2, 18], [25, 33]], Promise);
       })();
 
       return function () {

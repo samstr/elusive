@@ -1,8 +1,7 @@
 'use strict';
 
 var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
-var errors = require('./errors-a41e2d55.js');
-require('./FormErrors-9579dce8.js');
+var FormErrors = require('./FormErrors-a91e4b79.js');
 
 function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }
 
@@ -19,7 +18,7 @@ var HttpError = /*#__PURE__*/function (_BaseError) {
   }
 
   return HttpError;
-}(errors.BaseError);
+}(FormErrors.BaseError);
 var HttpMethodNotAllowedError = /*#__PURE__*/function (_HttpError) {
   wrapNativeSuper._inherits(HttpMethodNotAllowedError, _HttpError);
 

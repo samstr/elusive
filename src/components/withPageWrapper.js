@@ -2,6 +2,7 @@ import axios, { CancelToken, Cancel } from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
+import { HTTP_STATUS_FORBIDDEN } from '../http';
 import { useSession } from '../sessions';
 
 const defaultOptions = {
@@ -9,6 +10,29 @@ const defaultOptions = {
   useGlobals: false,
   useData: false,
   requireAuth: false,
+};
+
+const loginRouteWithNext = () => {
+  const { pathname, search } = window.location;
+  let href = '/login';
+
+  if (pathname !== '/logout') {
+    const encodedNext = encodeURIComponent(`${pathname}${search}`);
+    href = `${href}?next=${encodedNext}`;
+  }
+
+  return href;
+};
+
+const handleError = (err) => {
+  if (err instanceof Cancel) return;
+  if (response.status === HTTP_STATUS_FORBIDDEN) {
+    router.replace(loginRouteWithNext());
+  } else {
+    // If it's an unknown error
+    // NOTE we need to let some errors get passed into props
+    console.log('Unknown error from session or data endpoints: ', err);
+  }
 };
 
 const withPageWrapper = (WrappedComponent, options) => {
@@ -55,22 +79,13 @@ const withPageWrapper = (WrappedComponent, options) => {
             props.session = sessionResponse;
 
             if (options.requireAuth && !sessionResponse.isAuthenticated) {
-              const { pathname, search } = window.location;
-              let href = '/login';
-              if (pathname !== '/logout') {
-                const encodedNext = encodeURIComponent(`${pathname}${search}`);
-                href = `${href}?next=${encodedNext}`;
-              }
-              router.replace(href);
+              router.replace(loginRouteWithNext());
               return;
             } else {
               session.setSession(sessionResponse);
             }
           } catch (err) {
-            if (!(err instanceof Cancel)) {
-              console.log('error getting /api/session', err);
-            }
-            return;
+            return handleError(err);
           }
         }
 
@@ -92,10 +107,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             cancelDataRequest = null;
             props.data = response.data;
           } catch (err) {
-            if (!(err instanceof Cancel)) {
-              console.log(`error getting ${url}`, err);
-            }
-            return;
+            return handleError(err);
           }
         }
 
