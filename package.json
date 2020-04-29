@@ -1,11 +1,12 @@
 {
   "name": "elusive",
-  "version": "1.0.79",
+  "version": "1.1.0",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
     "dist",
     "api.js",
+    "auth.js",
     "client.js",
     "components.js",
     "errors.js",
