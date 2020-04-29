@@ -29,11 +29,7 @@ export const createForm = ({ fields, validate }) => ({
         } else {
           // TODO Sentry?
           console.log(err);
-          errors = [
-            new UnknownFormError({
-              message: 'Unknown error',
-            }),
-          ];
+          errors = [new UnknownFormError('An unknown form error occured.')];
         }
       }
     });
@@ -48,11 +44,7 @@ export const createForm = ({ fields, validate }) => ({
         } else {
           // TODO Sentry?
           console.log(err);
-          errors = [
-            new UnknownFormError({
-              message: 'Unknown error',
-            }),
-          ];
+          errors = [new UnknownFormError('An unknown form error occured.')];
         }
       }
     }

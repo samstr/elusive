@@ -55,7 +55,12 @@ export const apiWrapper = async (req, res, fn, options) => {
       props.session = await validateSession(req, res);
     }
 
-    return await fn(props);
+    props = {
+      ...props,
+      ...(await fn(props)),
+    };
+
+    return res.json(props);
   } catch (err) {
     console.log('we caught an error', err);
     if (err instanceof HttpError) {
