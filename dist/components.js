@@ -94,12 +94,13 @@ var loginRouteWithNext = function loginRouteWithNext() {
 
 var handleError = function handleError(err, router) {
   if (err instanceof axios.Cancel) return;
-  console.log(err.response);
-  console.log(err.response.status);
-  console.log(utils.HTTP_STATUS_FORBIDDEN);
 
   if (err.response.status === utils.HTTP_STATUS_FORBIDDEN) {
-    router.replace(loginRouteWithNext());
+    var pathname = window.location.pathname;
+
+    if (pathname !== '/login') {
+      router.replace(loginRouteWithNext());
+    }
   } else {
     // If it's an unknown error
     // NOTE we need to let some errors get passed into props

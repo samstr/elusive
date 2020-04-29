@@ -26,11 +26,12 @@ const loginRouteWithNext = () => {
 
 const handleError = (err, router) => {
   if (err instanceof Cancel) return;
-  console.log(err.response);
-  console.log(err.response.status);
-  console.log(HTTP_STATUS_FORBIDDEN);
   if (err.response.status === HTTP_STATUS_FORBIDDEN) {
-    router.replace(loginRouteWithNext());
+    const { pathname } = window.location;
+
+    if (pathname !== '/login') {
+      router.replace(loginRouteWithNext());
+    }
   } else {
     // If it's an unknown error
     // NOTE we need to let some errors get passed into props
