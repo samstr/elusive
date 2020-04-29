@@ -24,7 +24,7 @@ const loginRouteWithNext = () => {
   return href;
 };
 
-const handleError = (err) => {
+const handleError = (response, err) => {
   if (err instanceof Cancel) return;
   if (response.status === HTTP_STATUS_FORBIDDEN) {
     router.replace(loginRouteWithNext());
@@ -85,7 +85,7 @@ const withPageWrapper = (WrappedComponent, options) => {
               session.setSession(sessionResponse);
             }
           } catch (err) {
-            return handleError(err);
+            return handleError(response, err);
           }
         }
 
@@ -107,7 +107,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             cancelDataRequest = null;
             props.data = response.data;
           } catch (err) {
-            return handleError(err);
+            return handleError(response, err);
           }
         }
 

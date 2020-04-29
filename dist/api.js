@@ -106,7 +106,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           }
 
           utils$1.deleteSessionCookies(res);
-          return _context.abrupt("return", utils.httpForbiddenResponse(res, FormErrors.errorJson('There was a problem with your session. Please log in again.')));
+          return _context.abrupt("return", utils.httpForbiddenResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 33:
           if (!(_context.t5 instanceof FormErrors.BaseError)) {

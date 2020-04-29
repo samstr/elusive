@@ -69,10 +69,7 @@ export const apiWrapper = async (req, res, fn, options) => {
     if (err instanceof SessionError) {
       deleteSessionCookies(res);
 
-      return httpForbiddenResponse(
-        res,
-        errorJson('There was a problem with your session. Please log in again.')
-      );
+      return httpForbiddenResponse(res, errorJson(err));
     }
 
     if (err instanceof BaseError) {

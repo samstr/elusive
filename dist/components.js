@@ -92,7 +92,7 @@ var loginRouteWithNext = function loginRouteWithNext() {
   return href;
 };
 
-var handleError = function handleError(err) {
+var handleError = function handleError(response, err) {
   if (err instanceof axios.Cancel) return;
 
   if (response.status === utils.HTTP_STATUS_FORBIDDEN) {
@@ -176,7 +176,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
               case 18:
                 _context.prev = 18;
                 _context.t0 = _context["catch"](2);
-                return _context.abrupt("return", handleError(_context.t0));
+                return _context.abrupt("return", handleError(response, _context.t0));
 
               case 21:
                 if (options.useGlobals) ;
@@ -207,7 +207,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
               case 33:
                 _context.prev = 33;
                 _context.t1 = _context["catch"](25);
-                return _context.abrupt("return", handleError(_context.t1));
+                return _context.abrupt("return", handleError(response, _context.t1));
 
               case 36:
                 if (shouldSetPageProps) {

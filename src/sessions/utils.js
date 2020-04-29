@@ -174,20 +174,15 @@ export const validateSession = async (req, res) => {
         );
       }
 
-      try {
-        const user = await reloadUser(refreshTokenClaims.user.id);
+      const user = await reloadUser(refreshTokenClaims.user.id);
 
-        session.claims = createTokenClaims(user);
+      session.claims = createTokenClaims(user);
 
-        createSessionCookies(
-          res,
-          signTokens(session.claims, options.jwt.secret),
-          user.id
-        );
-      } catch (err) {
-        console.log('caught and throwing', err);
-        throw err;
-      }
+      createSessionCookies(
+        res,
+        signTokens(session.claims, options.jwt.secret),
+        user.id
+      );
     }
   }
 
