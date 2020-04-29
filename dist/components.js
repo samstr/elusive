@@ -16,7 +16,6 @@ var reactBootstrap = require('react-bootstrap');
 require('./FormErrors-9579dce8.js');
 var SessionContext = require('./SessionContext-2a34dac4.js');
 require('bcryptjs');
-require('nookies');
 require('jsonwebtoken');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);

@@ -12,10 +12,9 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 require('./FormErrors-9579dce8.js');
-var utils$1 = require('./utils-80da2639.js');
+var utils$1 = require('./utils-434f8069.js');
 var SessionContext = require('./SessionContext-2a34dac4.js');
 require('bcryptjs');
-require('nookies');
 require('jsonwebtoken');
 
 

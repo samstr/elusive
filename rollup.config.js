@@ -30,7 +30,6 @@ export default [
       'firebase-admin',
       'jsonwebtoken',
       'next',
-      'nookies',
       'prop-types',
       'react',
       'react-bootstrap',

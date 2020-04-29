@@ -14,10 +14,9 @@ require('prop-types');
 require('react-bootstrap');
 var FormErrors = require('./FormErrors-9579dce8.js');
 var utils = require('./utils-a7a7ad8b.js');
-var utils$1 = require('./utils-80da2639.js');
+var utils$1 = require('./utils-434f8069.js');
 require('./SessionContext-2a34dac4.js');
 require('bcryptjs');
-require('nookies');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -53,7 +52,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           }
 
           _context.next = 10;
-          return index$1._regeneratorRuntime.awrap(utils$1.validateSession(req, res));
+          return index$1._regeneratorRuntime.awrap(utils$1.validateSession(req));
 
         case 10:
           props.session = _context.sent;

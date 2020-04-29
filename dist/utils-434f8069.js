@@ -8,7 +8,6 @@ var index$1 = require('./index-2340470f.js');
 var errors = require('./errors-a41e2d55.js');
 require('./FormErrors-9579dce8.js');
 var bcrypt = _interopDefault(require('bcryptjs'));
-var nookies = require('nookies');
 var jwt = require('jsonwebtoken');
 var jwt__default = _interopDefault(jwt);
 
@@ -191,35 +190,27 @@ var verifyRefreshTokenFromCookie = function verifyRefreshTokenFromCookie(refresh
   }
 };
 var validateSession = function validateSession(req, res) {
-  var options, session, cookies, accessToken, refreshToken, userId, _verifyAccessTokenFro, accessTokenDecoded, accessTokenExpired, accessTokenInvalid;
+  var options, session, _req$cookies, accessToken, refreshToken, userId, _verifyAccessTokenFro, accessTokenDecoded, accessTokenExpired, accessTokenInvalid;
 
   return index$1._regeneratorRuntime.async(function validateSession$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          options = index.options.sessions; // console.log('zz options', options);
-          // console.log('zz sentry', sentry);
-
+          options = index.options.sessions;
           session = {
             isAuthenticated: false,
             claims: null
           };
-          cookies = nookies.parseCookies({
-            req: req,
-            res: res
-          });
-          accessToken = cookies[options.accessTokenName];
-          refreshToken = cookies[options.cookies.refreshTokenName];
-          userId = cookies[options.cookies.userIdName]; // console.log('req.cookies', req.cookies);
-          // console.log('accessToken', accessToken);
-          // console.log('refreshToken', refreshToken);
-          // console.log('userId', userId);
-          // Regardless of whether the route has requiresAuth: true/false
+          _req$cookies = req.cookies, accessToken = _req$cookies[options.cookies.accessTokenName], refreshToken = _req$cookies[options.cookies.refreshTokenName], userId = _req$cookies[options.cookies.userIdName];
+          console.log('req.cookies', req.cookies);
+          console.log('accessToken', accessToken);
+          console.log('refreshToken', refreshToken);
+          console.log('userId', userId); // Regardless of whether the route has requiresAuth: true/false
           // we always validate the request if the cookies are present incase
           // we need to regenerate tokens
 
           if (!(accessToken && refreshToken && userId)) {
-            _context.next = 10;
+            _context.next = 11;
             break;
           }
 
@@ -228,17 +219,17 @@ var validateSession = function validateSession(req, res) {
           // console.log('accessTokenInvalid', accessTokenInvalid);
 
           if (!accessTokenInvalid) {
-            _context.next = 10;
+            _context.next = 11;
             break;
           }
 
           throw new InvalidAccessTokenError('Invalid accessToken');
 
-        case 10:
+        case 11:
           session.isAuthenticated = !!session.claims;
           return _context.abrupt("return", session);
 
-        case 12:
+        case 13:
         case "end":
           return _context.stop();
       }

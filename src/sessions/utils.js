@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-import { parseCookies } from 'nookies';
 import jwt, { TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 
 import Elusive from '../';
@@ -112,23 +111,21 @@ export const verifyRefreshTokenFromCookie = (refreshToken, secret) => {
 export const validateSession = async (req, res) => {
   const { sessions: options } = Elusive.options;
 
-  // console.log('zz options', options);
-  // console.log('zz sentry', sentry);
-
   const session = {
     isAuthenticated: false,
     claims: null,
   };
 
-  const cookies = parseCookies({ req, res });
-  const accessToken = cookies[options.accessTokenName];
-  const refreshToken = cookies[options.cookies.refreshTokenName];
-  const userId = cookies[options.cookies.userIdName];
+  const {
+    [options.cookies.accessTokenName]: accessToken,
+    [options.cookies.refreshTokenName]: refreshToken,
+    [options.cookies.userIdName]: userId,
+  } = req.cookies;
 
-  // console.log('req.cookies', req.cookies);
-  // console.log('accessToken', accessToken);
-  // console.log('refreshToken', refreshToken);
-  // console.log('userId', userId);
+  console.log('req.cookies', req.cookies);
+  console.log('accessToken', accessToken);
+  console.log('refreshToken', refreshToken);
+  console.log('userId', userId);
 
   // Regardless of whether the route has requiresAuth: true/false
   // we always validate the request if the cookies are present incase
