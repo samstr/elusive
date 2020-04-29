@@ -46,7 +46,7 @@ export const apiWrapper = async (req, res, fn, options) => {
     ...options,
   };
 
-  const props = { req, res };
+  let props = { req, res };
 
   try {
     validateRequest(req, res, options);

@@ -7,7 +7,6 @@ require('./index-7bceb5aa.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
-var readOnlyError = require('./readOnlyError-08c63dc8.js');
 var Sentry = require('@sentry/node');
 var errors = require('./errors-a41e2d55.js');
 require('react');
@@ -72,55 +71,53 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           props.session = _context.sent;
 
         case 11:
-          readOnlyError._readOnlyError("props");
-
           _context.t0 = _objectSpread;
           _context.t1 = {};
           _context.t2 = props;
           _context.t3 = {};
-          _context.next = 18;
+          _context.next = 17;
           return index$1._regeneratorRuntime.awrap(fn(props));
 
-        case 18:
+        case 17:
           _context.t4 = _context.sent;
           props = (0, _context.t0)(_context.t1, _context.t2, _context.t3, _context.t4);
           return _context.abrupt("return", res.json(props));
 
-        case 23:
-          _context.prev = 23;
+        case 22:
+          _context.prev = 22;
           _context.t5 = _context["catch"](5);
           console.log('we caught an error', _context.t5);
 
           if (!(_context.t5 instanceof utils.HttpError)) {
-            _context.next = 29;
+            _context.next = 28;
             break;
           }
 
           if (!(_context.t5 instanceof utils.HttpMethodNotAllowedError)) {
-            _context.next = 29;
+            _context.next = 28;
             break;
           }
 
           return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, errorMessage(_context.t5.message)));
 
-        case 29:
+        case 28:
           if (!(_context.t5 instanceof utils$1.SessionError)) {
-            _context.next = 32;
+            _context.next = 31;
             break;
           }
 
           utils$1.deleteSessionCookies(res);
           return _context.abrupt("return", utils.httpForbiddenResponse(res, errorMessage('There was a problem with your session. Please log in again.')));
 
-        case 32:
+        case 31:
           if (!(_context.t5 instanceof errors.BaseError)) {
-            _context.next = 34;
+            _context.next = 33;
             break;
           }
 
           return _context.abrupt("return", utils.httpBadRequestResponse(res, errorMessage(_context.t5.message)));
 
-        case 34:
+        case 33:
           console.error('error in apiWrapper:', _context.t5);
 
           if (sentry && sentry.dsn) {
@@ -130,12 +127,12 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
 
           return _context.abrupt("return", utils.httpInternalServerErrorResponse(res, errorMessage('An unknown error occured.')));
 
-        case 37:
+        case 36:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[5, 23]], Promise);
+  }, null, null, [[5, 22]], Promise);
 };
 
 exports.apiWrapper = apiWrapper;
