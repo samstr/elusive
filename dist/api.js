@@ -52,12 +52,9 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             useSession: false
           };
           options = _objectSpread({}, defaultOptions, {}, options);
-          props = {
-            req: req,
-            res: res
-          };
-          _context.prev = 5;
+          _context.prev = 4;
           utils.validateRequest(req, res, options);
+          props = {};
 
           if (!options.useSession) {
             _context.next = 11;
@@ -76,7 +73,10 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           _context.t2 = props;
           _context.t3 = {};
           _context.next = 17;
-          return index$1._regeneratorRuntime.awrap(fn(props));
+          return index$1._regeneratorRuntime.awrap(fn(_objectSpread({}, props, {
+            req: req,
+            res: res
+          })));
 
         case 17:
           _context.t4 = _context.sent;
@@ -85,7 +85,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
 
         case 22:
           _context.prev = 22;
-          _context.t5 = _context["catch"](5);
+          _context.t5 = _context["catch"](4);
           console.log('we caught an error', _context.t5);
 
           if (!(_context.t5 instanceof utils.HttpError)) {
@@ -132,7 +132,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           return _context.stop();
       }
     }
-  }, null, null, [[5, 22]], Promise);
+  }, null, null, [[4, 22]], Promise);
 };
 
 exports.apiWrapper = apiWrapper;

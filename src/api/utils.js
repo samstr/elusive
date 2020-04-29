@@ -46,10 +46,10 @@ export const apiWrapper = async (req, res, fn, options) => {
     ...options,
   };
 
-  let props = { req, res };
-
   try {
     validateRequest(req, res, options);
+
+    let props = {};
 
     if (options.useSession) {
       props.session = await validateSession(req, res);
@@ -57,7 +57,7 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     props = {
       ...props,
-      ...(await fn(props)),
+      ...(await fn({ ...props, req, res })),
     };
 
     return res.json(props);
