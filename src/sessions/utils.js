@@ -21,21 +21,23 @@ export const buildSessionCookieString = (name, value, expiryDate) =>
   ].join(';');
 
 export const createSessionCookieStrings = (tokens, userId) => {
+  const { sessions: options } = Elusive.options;
+
   const dateFuture = Date.now() + 60000 * COOKIE_EXPIRY_MINS;
   const expiryDate = new Date(dateFuture).toUTCString();
 
   return [
     buildSessionCookieString(
-      ACCESS_TOKEN_COOKIE_NAME,
+      options.cookies.accessTokenName,
       tokens.access,
       expiryDate
     ),
     buildSessionCookieString(
-      REFRESH_TOKEN_COOKIE_NAME,
+      options.cookies.refreshTokenName,
       tokens.refresh,
       expiryDate
     ),
-    buildSessionCookieString(USER_ID_COOKIE_NAME, userId, expiryDate),
+    buildSessionCookieString(options.cookies.userIdName, userId, expiryDate),
   ];
 };
 
@@ -43,8 +45,11 @@ export const createSessionCookies = (res, tokens, userId) => {
   res.setHeader('Set-Cookie', createSessionCookieStrings(tokens, userId));
 };
 
-export const hashPassword = (password) =>
-  bcrypt.hashSync(password, BCRYPT_SALT_ROUNDS);
+export const hashPassword = (password) => {
+  const { sessions: options } = Elusive.options;
+
+  return bcrypt.hashSync(password, options.bcrypt.saltRounds);
+};
 
 export const comparePasswordHash = (password, hash) =>
   bcrypt.compareSync(password, hash);
@@ -54,10 +59,14 @@ export const signToken = (claims, secret, expiryMins) =>
     expiresIn: expiryMins * 60,
   });
 
-export const signTokens = (claims, secret) => ({
-  access: signToken(claims, secret, JWT_ACCESS_TOKEN_EXPIRY_MINS),
-  refresh: signToken(claims, secret, JWT_REFRESH_TOKEN_EXPIRY_MINS),
-});
+export const signTokens = (claims, secret) => {
+  const { sessions: options } = Elusive.options;
+
+  return {
+    access: signToken(claims, secret, options.jwt.accessTokenExpiryMins),
+    refresh: signToken(claims, secret, options.jwt.refreshTokenExpiryMins),
+  };
+};
 
 export const deleteSessionCookieStrings = () => {
   const { sessions: options } = Elusive.options;

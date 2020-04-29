@@ -114,15 +114,17 @@ var buildSessionCookieString = function buildSessionCookieString(name, value, ex
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
 };
 var createSessionCookieStrings = function createSessionCookieStrings(tokens, userId) {
+  var options = index.options.sessions;
   var dateFuture = Date.now() + 60000 * COOKIE_EXPIRY_MINS;
   var expiryDate = new Date(dateFuture).toUTCString();
-  return [buildSessionCookieString(ACCESS_TOKEN_COOKIE_NAME, tokens.access, expiryDate), buildSessionCookieString(REFRESH_TOKEN_COOKIE_NAME, tokens.refresh, expiryDate), buildSessionCookieString(USER_ID_COOKIE_NAME, userId, expiryDate)];
+  return [buildSessionCookieString(options.cookies.accessTokenName, tokens.access, expiryDate), buildSessionCookieString(options.cookies.refreshTokenName, tokens.refresh, expiryDate), buildSessionCookieString(options.cookies.userIdName, userId, expiryDate)];
 };
 var createSessionCookies = function createSessionCookies(res, tokens, userId) {
   res.setHeader('Set-Cookie', createSessionCookieStrings(tokens, userId));
 };
 var hashPassword = function hashPassword(password) {
-  return bcrypt.hashSync(password, BCRYPT_SALT_ROUNDS);
+  var options = index.options.sessions;
+  return bcrypt.hashSync(password, options.bcrypt.saltRounds);
 };
 var comparePasswordHash = function comparePasswordHash(password, hash) {
   return bcrypt.compareSync(password, hash);
@@ -133,9 +135,10 @@ var signToken = function signToken(claims, secret, expiryMins) {
   });
 };
 var signTokens = function signTokens(claims, secret) {
+  var options = index.options.sessions;
   return {
-    access: signToken(claims, secret, JWT_ACCESS_TOKEN_EXPIRY_MINS),
-    refresh: signToken(claims, secret, JWT_REFRESH_TOKEN_EXPIRY_MINS)
+    access: signToken(claims, secret, options.jwt.accessTokenExpiryMins),
+    refresh: signToken(claims, secret, options.jwt.refreshTokenExpiryMins)
   };
 };
 var deleteSessionCookieStrings = function deleteSessionCookieStrings() {
