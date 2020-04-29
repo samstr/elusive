@@ -20,10 +20,19 @@ var FormError = /*#__PURE__*/function (_BaseError) {
 
   var _super = _createSuper(FormError);
 
-  function FormError() {
+  function FormError(message, fields) {
+    var _this;
+
     wrapNativeSuper._classCallCheck(this, FormError);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, message);
+    _this.fields = [];
+
+    if (fields) {
+      _this.fields = fields;
+    }
+
+    return _this;
   }
 
   return FormError;
@@ -33,14 +42,10 @@ var UnknownFormError = /*#__PURE__*/function (_FormError) {
 
   var _super2 = _createSuper(UnknownFormError);
 
-  function UnknownFormError(props) {
-    var _this;
-
+  function UnknownFormError() {
     wrapNativeSuper._classCallCheck(this, UnknownFormError);
 
-    _this = _super2.call(this, props);
-    _this.name = 'UnknownFormError';
-    return _this;
+    return _super2.apply(this, arguments);
   }
 
   return UnknownFormError;
@@ -50,14 +55,10 @@ var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
 
   var _super3 = _createSuper(InvalidFieldValueError);
 
-  function InvalidFieldValueError(props) {
-    var _this2;
-
+  function InvalidFieldValueError() {
     wrapNativeSuper._classCallCheck(this, InvalidFieldValueError);
 
-    _this2 = _super3.call(this, props);
-    _this2.name = 'InvalidFieldValueError';
-    return _this2;
+    return _super3.apply(this, arguments);
   }
 
   return InvalidFieldValueError;
@@ -67,14 +68,10 @@ var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
 
   var _super4 = _createSuper(FieldValueTooShortError);
 
-  function FieldValueTooShortError(props) {
-    var _this3;
-
+  function FieldValueTooShortError() {
     wrapNativeSuper._classCallCheck(this, FieldValueTooShortError);
 
-    _this3 = _super4.call(this, props);
-    _this3.name = 'FieldValueTooShortError';
-    return _this3;
+    return _super4.apply(this, arguments);
   }
 
   return FieldValueTooShortError;
@@ -84,14 +81,10 @@ var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
 
   var _super5 = _createSuper(FieldValueTooLongError);
 
-  function FieldValueTooLongError(props) {
-    var _this4;
-
+  function FieldValueTooLongError() {
     wrapNativeSuper._classCallCheck(this, FieldValueTooLongError);
 
-    _this4 = _super5.call(this, props);
-    _this4.name = 'FieldValueTooLongError';
-    return _this4;
+    return _super5.apply(this, arguments);
   }
 
   return FieldValueTooLongError;
@@ -101,14 +94,10 @@ var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
 
   var _super6 = _createSuper(MissingRequiredFieldError);
 
-  function MissingRequiredFieldError(props) {
-    var _this5;
-
+  function MissingRequiredFieldError() {
     wrapNativeSuper._classCallCheck(this, MissingRequiredFieldError);
 
-    _this5 = _super6.call(this, props);
-    _this5.name = 'MissingRequiredFieldError';
-    return _this5;
+    return _super6.apply(this, arguments);
   }
 
   return MissingRequiredFieldError;
@@ -184,10 +173,7 @@ var field = function field(name, options, _validate2) {
 
       if (options.required && options.required.value) {
         if (options.required.value && !cleanValue) {
-          throw new MissingRequiredFieldError({
-            message: options.required.errorMessage,
-            fields: [name]
-          });
+          throw new MissingRequiredFieldError(options.required.errorMessage, [name]);
         }
       }
 
@@ -212,28 +198,19 @@ var textField = function textField(name, options, validate) {
 
     if (options.minLength && options.minLength.value) {
       if (cleanValue.length < options.minLength.value) {
-        throw new FieldValueTooShortError({
-          message: options.minLength.errorMessage,
-          fields: [name]
-        });
+        throw new FieldValueTooShortError(options.minLength.errorMessage, [name]);
       }
     }
 
     if (options.maxLength && options.maxLength.value) {
       if (cleanValue.length > options.maxLength.value) {
-        throw new FieldValueTooLongError({
-          message: options.maxLength.errorMessage,
-          fields: [name]
-        });
+        throw new FieldValueTooLongError(options.maxLength.errorMessage, [name]);
       }
     }
 
     if (options.invalid && options.invalid.value) {
       if (!options.invalid.value.test(cleanValue)) {
-        throw new InvalidFieldValueError({
-          message: options.invalid.errorMessage,
-          fields: [name]
-        });
+        throw new InvalidFieldValueError(options.invalid.errorMessage, [name]);
       }
     }
 
@@ -257,10 +234,7 @@ var emailField = function emailField(name, options) {
     }
 
     if (!regex.test(cleanValue)) {
-      throw new InvalidFieldValueError({
-        message: options.invalid.errorMessage,
-        fields: [name]
-      });
+      throw new InvalidFieldValueError(options.invalid.errorMessage, [name]);
     }
 
     return cleanValue;
@@ -273,10 +247,7 @@ var booleanField = function booleanField(name, options, _validate3) {
 
       if (options.required && options.required.value) {
         if (options.required.value && !cleanValue) {
-          throw new MissingRequiredFieldError({
-            message: options.required.errorMessage,
-            fields: [name]
-          });
+          throw new MissingRequiredFieldError(options.required.errorMessage, [name]);
         }
       }
 

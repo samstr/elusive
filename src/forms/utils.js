@@ -78,10 +78,9 @@ export const field = (name, options, validate) => ({
 
     if (options.required && options.required.value) {
       if (options.required.value && !cleanValue) {
-        throw new MissingRequiredFieldError({
-          message: options.required.errorMessage,
-          fields: [name],
-        });
+        throw new MissingRequiredFieldError(options.required.errorMessage, [
+          name,
+        ]);
       }
     }
 
@@ -106,28 +105,23 @@ export const textField = (name, options, validate) =>
 
     if (options.minLength && options.minLength.value) {
       if (cleanValue.length < options.minLength.value) {
-        throw new FieldValueTooShortError({
-          message: options.minLength.errorMessage,
-          fields: [name],
-        });
+        throw new FieldValueTooShortError(options.minLength.errorMessage, [
+          name,
+        ]);
       }
     }
 
     if (options.maxLength && options.maxLength.value) {
       if (cleanValue.length > options.maxLength.value) {
-        throw new FieldValueTooLongError({
-          message: options.maxLength.errorMessage,
-          fields: [name],
-        });
+        throw new FieldValueTooLongError(options.maxLength.errorMessage, [
+          name,
+        ]);
       }
     }
 
     if (options.invalid && options.invalid.value) {
       if (!options.invalid.value.test(cleanValue)) {
-        throw new InvalidFieldValueError({
-          message: options.invalid.errorMessage,
-          fields: [name],
-        });
+        throw new InvalidFieldValueError(options.invalid.errorMessage, [name]);
       }
     }
 
@@ -151,10 +145,7 @@ export const emailField = (name, options) =>
     }
 
     if (!regex.test(cleanValue)) {
-      throw new InvalidFieldValueError({
-        message: options.invalid.errorMessage,
-        fields: [name],
-      });
+      throw new InvalidFieldValueError(options.invalid.errorMessage, [name]);
     }
 
     return cleanValue;
@@ -166,10 +157,9 @@ export const booleanField = (name, options, validate) => ({
 
     if (options.required && options.required.value) {
       if (options.required.value && !cleanValue) {
-        throw new MissingRequiredFieldError({
-          message: options.required.errorMessage,
-          fields: [name],
-        });
+        throw new MissingRequiredFieldError(options.required.errorMessage, [
+          name,
+        ]);
       }
     }
 

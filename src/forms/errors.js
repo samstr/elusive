@@ -1,38 +1,19 @@
 import { BaseError } from '../errors';
 
-export class FormError extends BaseError {}
+export class FormError extends BaseError {
+  constructor(message, fields) {
+    super(message);
 
-export class UnknownFormError extends FormError {
-  constructor(props) {
-    super(props);
-    this.name = 'UnknownFormError';
+    this.fields = [];
+
+    if (fields) {
+      this.fields = fields;
+    }
   }
 }
 
-export class InvalidFieldValueError extends FormError {
-  constructor(props) {
-    super(props);
-    this.name = 'InvalidFieldValueError';
-  }
-}
-
-export class FieldValueTooShortError extends FormError {
-  constructor(props) {
-    super(props);
-    this.name = 'FieldValueTooShortError';
-  }
-}
-
-export class FieldValueTooLongError extends FormError {
-  constructor(props) {
-    super(props);
-    this.name = 'FieldValueTooLongError';
-  }
-}
-
-export class MissingRequiredFieldError extends FormError {
-  constructor(props) {
-    super(props);
-    this.name = 'MissingRequiredFieldError';
-  }
-}
+export class UnknownFormError extends FormError {}
+export class InvalidFieldValueError extends FormError {}
+export class FieldValueTooShortError extends FormError {}
+export class FieldValueTooLongError extends FormError {}
+export class MissingRequiredFieldError extends FormError {}
