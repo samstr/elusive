@@ -94,6 +94,9 @@ var loginRouteWithNext = function loginRouteWithNext() {
 
 var handleError = function handleError(response, err) {
   if (err instanceof axios.Cancel) return;
+  console.log(response);
+  console.log(response.status);
+  console.log(utils.HTTP_STATUS_FORBIDDEN);
 
   if (response.status === utils.HTTP_STATUS_FORBIDDEN) {
     router.replace(loginRouteWithNext());

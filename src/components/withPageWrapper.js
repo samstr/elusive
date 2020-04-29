@@ -26,6 +26,9 @@ const loginRouteWithNext = () => {
 
 const handleError = (response, err) => {
   if (err instanceof Cancel) return;
+  console.log(response);
+  console.log(response.status);
+  console.log(HTTP_STATUS_FORBIDDEN);
   if (response.status === HTTP_STATUS_FORBIDDEN) {
     router.replace(loginRouteWithNext());
   } else {
