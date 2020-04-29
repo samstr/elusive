@@ -210,36 +210,35 @@ var validateSession = function validateSession(req, res) {
           });
           accessToken = cookies[options.accessTokenName];
           refreshToken = cookies[options.cookies.refreshTokenName];
-          userId = cookies[options.cookies.userIdName];
-          console.log('req.cookies', req.cookies);
-          console.log('accessToken', accessToken);
-          console.log('refreshToken', refreshToken);
-          console.log('userId', userId); // Regardless of whether the route has requiresAuth: true/false
+          userId = cookies[options.cookies.userIdName]; // console.log('req.cookies', req.cookies);
+          // console.log('accessToken', accessToken);
+          // console.log('refreshToken', refreshToken);
+          // console.log('userId', userId);
+          // Regardless of whether the route has requiresAuth: true/false
           // we always validate the request if the cookies are present incase
           // we need to regenerate tokens
 
           if (!(accessToken && refreshToken && userId)) {
-            _context.next = 17;
+            _context.next = 10;
             break;
           }
 
-          _verifyAccessTokenFro = verifyAccessTokenFromCookie(accessToken, options.jwt.secret), accessTokenDecoded = _verifyAccessTokenFro.decoded, accessTokenExpired = _verifyAccessTokenFro.expired, accessTokenInvalid = _verifyAccessTokenFro.invalid;
-          console.log('accessTokenDecoded', accessTokenDecoded);
-          console.log('accessTokenExpired', accessTokenExpired);
-          console.log('accessTokenInvalid', accessTokenInvalid);
+          _verifyAccessTokenFro = verifyAccessTokenFromCookie(accessToken, options.jwt.secret), accessTokenDecoded = _verifyAccessTokenFro.decoded, accessTokenExpired = _verifyAccessTokenFro.expired, accessTokenInvalid = _verifyAccessTokenFro.invalid; // console.log('accessTokenDecoded', accessTokenDecoded);
+          // console.log('accessTokenExpired', accessTokenExpired);
+          // console.log('accessTokenInvalid', accessTokenInvalid);
 
           if (!accessTokenInvalid) {
-            _context.next = 17;
+            _context.next = 10;
             break;
           }
 
           throw new InvalidAccessTokenError('Invalid accessToken');
 
-        case 17:
+        case 10:
           session.isAuthenticated = !!session.claims;
           return _context.abrupt("return", session);
 
-        case 19:
+        case 12:
         case "end":
           return _context.stop();
       }

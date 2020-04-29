@@ -122,10 +122,10 @@ export const validateSession = async (req, res) => {
   const refreshToken = cookies[options.cookies.refreshTokenName];
   const userId = cookies[options.cookies.userIdName];
 
-  console.log('req.cookies', req.cookies);
-  console.log('accessToken', accessToken);
-  console.log('refreshToken', refreshToken);
-  console.log('userId', userId);
+  // console.log('req.cookies', req.cookies);
+  // console.log('accessToken', accessToken);
+  // console.log('refreshToken', refreshToken);
+  // console.log('userId', userId);
 
   // Regardless of whether the route has requiresAuth: true/false
   // we always validate the request if the cookies are present incase
@@ -137,9 +137,9 @@ export const validateSession = async (req, res) => {
       invalid: accessTokenInvalid,
     } = verifyAccessTokenFromCookie(accessToken, options.jwt.secret);
 
-    console.log('accessTokenDecoded', accessTokenDecoded);
-    console.log('accessTokenExpired', accessTokenExpired);
-    console.log('accessTokenInvalid', accessTokenInvalid);
+    // console.log('accessTokenDecoded', accessTokenDecoded);
+    // console.log('accessTokenExpired', accessTokenExpired);
+    // console.log('accessTokenInvalid', accessTokenInvalid);
 
     if (accessTokenInvalid) {
       throw new InvalidAccessTokenError('Invalid accessToken');
