@@ -181,7 +181,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
               case 18:
                 _context.prev = 18;
                 _context.t0 = _context["catch"](2);
-                return _context.abrupt("return", handleError(_context.t0, router));
+                return _context.abrupt("return", handleError(_context.t0, router, session));
 
               case 21:
                 if (options.useGlobals) ;
@@ -212,7 +212,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
               case 33:
                 _context.prev = 33;
                 _context.t1 = _context["catch"](25);
-                return _context.abrupt("return", handleError(_context.t1, router));
+                return _context.abrupt("return", handleError(_context.t1, router, session));
 
               case 36:
                 if (shouldSetPageProps) {

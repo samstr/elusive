@@ -91,7 +91,7 @@ const withPageWrapper = (WrappedComponent, options) => {
               session.login(sessionResponse);
             }
           } catch (err) {
-            return handleError(err, router);
+            return handleError(err, router, session);
           }
         }
 
@@ -113,7 +113,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             cancelDataRequest = null;
             props.data = response.data;
           } catch (err) {
-            return handleError(err, router);
+            return handleError(err, router, session);
           }
         }
 
