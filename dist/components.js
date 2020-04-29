@@ -92,7 +92,7 @@ var loginRouteWithNext = function loginRouteWithNext() {
   return href;
 };
 
-var handleError = function handleError(response, err) {
+var handleError = function handleError(err, response, router) {
   if (err instanceof axios.Cancel) return;
   console.log(response);
   console.log(response.status);
@@ -179,7 +179,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
               case 18:
                 _context.prev = 18;
                 _context.t0 = _context["catch"](2);
-                return _context.abrupt("return", handleError(response, _context.t0));
+                return _context.abrupt("return", handleError(_context.t0, response, router));
 
               case 21:
                 if (options.useGlobals) ;
@@ -210,7 +210,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
               case 33:
                 _context.prev = 33;
                 _context.t1 = _context["catch"](25);
-                return _context.abrupt("return", handleError(response, _context.t1));
+                return _context.abrupt("return", handleError(_context.t1, response, router));
 
               case 36:
                 if (shouldSetPageProps) {

@@ -24,7 +24,7 @@ const loginRouteWithNext = () => {
   return href;
 };
 
-const handleError = (response, err) => {
+const handleError = (err, response, router) => {
   if (err instanceof Cancel) return;
   console.log(response);
   console.log(response.status);
@@ -88,7 +88,7 @@ const withPageWrapper = (WrappedComponent, options) => {
               session.setSession(sessionResponse);
             }
           } catch (err) {
-            return handleError(response, err);
+            return handleError(err, response, router);
           }
         }
 
@@ -110,7 +110,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             cancelDataRequest = null;
             props.data = response.data;
           } catch (err) {
-            return handleError(response, err);
+            return handleError(err, response, router);
           }
         }
 
