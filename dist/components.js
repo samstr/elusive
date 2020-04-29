@@ -92,13 +92,13 @@ var loginRouteWithNext = function loginRouteWithNext() {
   return href;
 };
 
-var handleError = function handleError(err, response, router) {
+var handleError = function handleError(err, router) {
   if (err instanceof axios.Cancel) return;
-  console.log(response);
-  console.log(response.status);
+  console.log(err.response);
+  console.log(err.response.status);
   console.log(utils.HTTP_STATUS_FORBIDDEN);
 
-  if (response.status === utils.HTTP_STATUS_FORBIDDEN) {
+  if (err.response.status === utils.HTTP_STATUS_FORBIDDEN) {
     router.replace(loginRouteWithNext());
   } else {
     // If it's an unknown error
@@ -133,7 +133,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
       var cancelDataRequest;
 
       (function _callee() {
-        var _response, sessionResponse, _window$location2, pathname, search, url, _response2;
+        var response, sessionResponse, _window$location2, pathname, search, url, _response;
 
         return index$1._regeneratorRuntime.async(function _callee$(_context) {
           while (1) {
@@ -155,9 +155,9 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 }));
 
               case 5:
-                _response = _context.sent;
+                response = _context.sent;
                 cancelSessionRequest = null;
-                sessionResponse = _response.data.session;
+                sessionResponse = response.data.session;
                 sessionResponse._ready = true;
                 props.session = sessionResponse;
 
@@ -179,7 +179,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
               case 18:
                 _context.prev = 18;
                 _context.t0 = _context["catch"](2);
-                return _context.abrupt("return", handleError(_context.t0, response, router));
+                return _context.abrupt("return", handleError(_context.t0, router));
 
               case 21:
                 if (options.useGlobals) ;
@@ -201,16 +201,16 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 }));
 
               case 28:
-                _response2 = _context.sent;
+                _response = _context.sent;
                 cancelDataRequest = null;
-                props.data = _response2.data;
+                props.data = _response.data;
                 _context.next = 36;
                 break;
 
               case 33:
                 _context.prev = 33;
                 _context.t1 = _context["catch"](25);
-                return _context.abrupt("return", handleError(_context.t1, response, router));
+                return _context.abrupt("return", handleError(_context.t1, router));
 
               case 36:
                 if (shouldSetPageProps) {

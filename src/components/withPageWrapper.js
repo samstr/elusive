@@ -24,12 +24,12 @@ const loginRouteWithNext = () => {
   return href;
 };
 
-const handleError = (err, response, router) => {
+const handleError = (err, router) => {
   if (err instanceof Cancel) return;
-  console.log(response);
-  console.log(response.status);
+  console.log(err.response);
+  console.log(err.response.status);
   console.log(HTTP_STATUS_FORBIDDEN);
-  if (response.status === HTTP_STATUS_FORBIDDEN) {
+  if (err.response.status === HTTP_STATUS_FORBIDDEN) {
     router.replace(loginRouteWithNext());
   } else {
     // If it's an unknown error
@@ -88,7 +88,7 @@ const withPageWrapper = (WrappedComponent, options) => {
               session.setSession(sessionResponse);
             }
           } catch (err) {
-            return handleError(err, response, router);
+            return handleError(err, router);
           }
         }
 
@@ -110,7 +110,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             cancelDataRequest = null;
             props.data = response.data;
           } catch (err) {
-            return handleError(err, response, router);
+            return handleError(err, router);
           }
         }
 
