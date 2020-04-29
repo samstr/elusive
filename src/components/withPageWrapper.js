@@ -49,7 +49,7 @@ const withPageWrapper = (WrappedComponent, options) => {
               }),
             });
             cancelSessionRequest = null;
-            const sessionResponse = response.data;
+            const sessionResponse = response.data.session;
 
             sessionResponse._ready = true;
             props.session = sessionResponse;

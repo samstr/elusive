@@ -127,7 +127,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
               case 5:
                 response = _context.sent;
                 cancelSessionRequest = null;
-                sessionResponse = response.data;
+                sessionResponse = response.data.session;
                 sessionResponse._ready = true;
                 props.session = sessionResponse;
 
