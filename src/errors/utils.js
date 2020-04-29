@@ -1,16 +1,28 @@
-export const createErrorResponseArray = (errors) => ({
-  errors: errors.map((err) => {
-    const obj = {
-      message: err.message,
+export const errorJson = (errors) => {
+  if (Array.isArray(errors)) {
+    return {
+      errors: errors.map((err) => {
+        const obj = {
+          message: err.message,
+        };
+
+        if (err.fields) {
+          obj.fields = err.fields;
+        }
+
+        return obj;
+      }),
     };
-
-    if (err.fields) {
-      obj.fields = err.fields;
-    }
-
-    return obj;
-  }),
-});
+  } else {
+    return {
+      errors: [
+        {
+          message: errors.message,
+        },
+      ],
+    };
+  }
+};
 
 export const genericErrors = (errors, includingFields) => {
   if (!errors || !errors.length) return [];

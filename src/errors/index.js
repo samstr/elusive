@@ -7,5 +7,5 @@ export { FormErrors };
 import GenericErrors from './GenericErrors';
 export { GenericErrors };
 
-import { createErrorResponseArray, genericErrors, fieldErrors } from './utils';
-export { createErrorResponseArray, genericErrors, fieldErrors };
+import { errorJson, fieldErrors, genericErrors } from './utils';
+export { errorJson, fieldErrors, genericErrors };

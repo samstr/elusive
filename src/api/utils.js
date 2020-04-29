@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node';
 
 import Elusive from '../';
-import { BaseError, createErrorResponseArray } from '../errors';
+import { BaseError, errorJson } from '../errors';
 import {
   GET,
   HttpError,
@@ -17,14 +17,6 @@ import {
   deleteSessionCookies,
   validateSession,
 } from '../sessions';
-
-const errorMessage = (message) => ({
-  errors: [
-    {
-      message,
-    },
-  ],
-});
 
 export const apiWrapper = async (req, res, fn, options) => {
   const { sentry } = Elusive.options;
@@ -61,10 +53,7 @@ export const apiWrapper = async (req, res, fn, options) => {
     };
 
     if (props.errors && props.errors.length) {
-      return httpBadRequestResponse(
-        res,
-        createErrorResponseArray(props.errors)
-      );
+      return httpBadRequestResponse(res, errorJson(props.errors));
     }
 
     return res.json(props);
@@ -72,7 +61,7 @@ export const apiWrapper = async (req, res, fn, options) => {
     console.log('we caught an error', err);
     if (err instanceof HttpError) {
       if (err instanceof HttpMethodNotAllowedError) {
-        return httpMethodNotAllowedResponse(res, errorMessage(err.message));
+        return httpMethodNotAllowedResponse(res, errorJson(err));
       }
     }
 
@@ -81,14 +70,12 @@ export const apiWrapper = async (req, res, fn, options) => {
 
       return httpForbiddenResponse(
         res,
-        errorMessage(
-          'There was a problem with your session. Please log in again.'
-        )
+        errorJson('There was a problem with your session. Please log in again.')
       );
     }
 
     if (err instanceof BaseError) {
-      return httpBadRequestResponse(res, errorMessage(err.message));
+      return httpBadRequestResponse(res, errorJson(err));
     }
 
     console.error('error in apiWrapper:', err);
@@ -100,7 +87,7 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     return httpInternalServerErrorResponse(
       res,
-      errorMessage('An unknown error occured.')
+      errorJson(new Error('An unknown error occured.'))
     );
   }
 };
