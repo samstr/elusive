@@ -1,14 +1,14 @@
 import {
   AlreadyAuthenticatedError,
   AuthenticationFailedError,
-  BaseError,
+  AuthError,
   NotAuthenticatedError,
   UserAlreadyExistsError,
 } from './errors';
 export {
   AlreadyAuthenticatedError,
   AuthenticationFailedError,
-  BaseError,
+  AuthError,
   NotAuthenticatedError,
   UserAlreadyExistsError,
 };
