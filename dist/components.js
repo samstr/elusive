@@ -15,7 +15,7 @@ var React__default = _interopDefault(React);
 var PropTypes = _interopDefault(require('prop-types'));
 var reactBootstrap = require('react-bootstrap');
 var utils = require('./utils-5540e6b6.js');
-var SessionContext = require('./SessionContext-2a34dac4.js');
+var SessionContext = require('./SessionContext-af7ae771.js');
 require('bcryptjs');
 require('jsonwebtoken');
 var axios = require('axios');
@@ -92,10 +92,11 @@ var loginRouteWithNext = function loginRouteWithNext() {
   return href;
 };
 
-var handleError = function handleError(err, router) {
+var handleError = function handleError(err, router, session) {
   if (err instanceof axios.Cancel) return;
 
   if (err.response.status === utils.HTTP_STATUS_FORBIDDEN) {
+    session.logout();
     var pathname = window.location.pathname;
 
     if (pathname !== '/login') {
@@ -171,7 +172,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 return _context.abrupt("return");
 
               case 15:
-                session.setSession(sessionResponse);
+                session.login(sessionResponse);
 
               case 16:
                 _context.next = 21;

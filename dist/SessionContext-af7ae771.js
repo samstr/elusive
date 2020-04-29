@@ -19,7 +19,12 @@ var SessionProvider = function SessionProvider(_ref) {
       session = _useState[0],
       setSession = _useState[1];
 
-  session.setSession = setSession;
+  session.login = setSession;
+
+  session.logout = function () {
+    setSession(defaultValue);
+  };
+
   return __jsx(SessionContext.Provider, {
     value: session
   }, children);

@@ -10,7 +10,10 @@ export const SessionContext = createContext(defaultValue);
 
 export const SessionProvider = ({ children }) => {
   const [session, setSession] = useState(defaultValue);
-  session.setSession = setSession;
+  session.login = setSession;
+  session.logout = () => {
+    setSession(defaultValue);
+  };
 
   return (
     <SessionContext.Provider value={session}>

@@ -24,9 +24,11 @@ const loginRouteWithNext = () => {
   return href;
 };
 
-const handleError = (err, router) => {
+const handleError = (err, router, session) => {
   if (err instanceof Cancel) return;
   if (err.response.status === HTTP_STATUS_FORBIDDEN) {
+    session.logout();
+
     const { pathname } = window.location;
 
     if (pathname !== '/login') {
@@ -86,7 +88,7 @@ const withPageWrapper = (WrappedComponent, options) => {
               router.replace(loginRouteWithNext());
               return;
             } else {
-              session.setSession(sessionResponse);
+              session.login(sessionResponse);
             }
           } catch (err) {
             return handleError(err, router);
