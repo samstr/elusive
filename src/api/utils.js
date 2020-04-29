@@ -24,6 +24,7 @@ export const apiWrapper = async (req, res, fn, options) => {
   if (sentry && sentry.dsn) {
     Sentry.init({
       dsn: sentry.dsn,
+      enabled: sentry.enabled,
     });
   }
 

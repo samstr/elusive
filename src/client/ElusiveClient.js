@@ -35,7 +35,10 @@ class ElusiveClient {
           reloadUser: null,
         },
       },
-      sentry: null,
+      sentry: {
+        dsn: null,
+        enabled: false,
+      },
     };
   };
 
@@ -112,7 +115,15 @@ class ElusiveClient {
     }
 
     if (sentry) {
-      this.options.sentry = sentry;
+      const { dsn, enabled } = sentry;
+
+      if (dsn) {
+        this.options.sentry.dsn = dsn;
+      }
+
+      if (enabled) {
+        this.options.sentry.enabled = enabled;
+      }
     }
   };
 

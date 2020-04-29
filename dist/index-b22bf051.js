@@ -87,7 +87,10 @@ var ElusiveClient = /*#__PURE__*/function () {
             reloadUser: null
           }
         },
-        sentry: null
+        sentry: {
+          dsn: null,
+          enabled: false
+        }
       };
     });
 
@@ -169,7 +172,16 @@ var ElusiveClient = /*#__PURE__*/function () {
       }
 
       if (sentry) {
-        _this.options.sentry = sentry;
+        var dsn = sentry.dsn,
+            enabled = sentry.enabled;
+
+        if (dsn) {
+          _this.options.sentry.dsn = dsn;
+        }
+
+        if (enabled) {
+          _this.options.sentry.enabled = enabled;
+        }
       }
     });
   }
