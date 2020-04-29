@@ -5,11 +5,6 @@ import jwt, { TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 import Elusive from '../';
 import { InvalidAccessTokenError } from './errors';
 
-// XXX remove later
-export const viewElusiveOptions = () => {
-  return Elusive.options;
-};
-
 export const buildSessionCookieString = (name, value, expiryDate) =>
   [
     `${name}=${value}`,
@@ -22,8 +17,7 @@ export const buildSessionCookieString = (name, value, expiryDate) =>
 
 export const createSessionCookieStrings = (tokens, userId) => {
   const { sessions: options } = Elusive.options;
-
-  const dateFuture = Date.now() + 60000 * COOKIE_EXPIRY_MINS;
+  const dateFuture = Date.now() + 60000 * options.cookies.expiryMins;
   const expiryDate = new Date(dateFuture).toUTCString();
 
   return [
