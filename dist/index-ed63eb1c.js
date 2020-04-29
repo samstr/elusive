@@ -81,6 +81,10 @@ var ElusiveClient = /*#__PURE__*/function () {
             accessTokenExpiryMins: JWT_ACCESS_TOKEN_EXPIRY_MINS,
             refreshTokenExpiryMins: JWT_REFRESH_TOKEN_EXPIRY_MINS,
             secret: null
+          },
+          callbacks: {
+            createTokenClaims: null,
+            reloadUser: null
           }
         },
         sentry: null
@@ -95,6 +99,7 @@ var ElusiveClient = /*#__PURE__*/function () {
 
       if (sessions) {
         var bcrypt = sessions.bcrypt,
+            callbacks = sessions.callbacks,
             cookies = sessions.cookies,
             jwt = sessions.jwt;
 
@@ -103,6 +108,19 @@ var ElusiveClient = /*#__PURE__*/function () {
 
           if (saltRounds) {
             _this.options.sessions.bcrypt.saltRounds = saltRounds;
+          }
+        }
+
+        if (callbacks) {
+          var createTokenClaims = callbacks.createTokenClaims,
+              reloadUser = callbacks.reloadUser;
+
+          if (createTokenClaims) {
+            _this.options.sessions.callbacks.createTokenClaims = createTokenClaims;
+          }
+
+          if (reloadUser) {
+            _this.options.sessions.callbacks.reloadUser = reloadUser;
           }
         }
 

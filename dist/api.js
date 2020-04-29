@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./wrapNativeSuper-b3646a2a.js');
-require('./index-7bceb5aa.js');
+require('./index-ed63eb1c.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
@@ -14,7 +14,7 @@ require('prop-types');
 require('react-bootstrap');
 var FormErrors = require('./FormErrors-9579dce8.js');
 var utils = require('./utils-a7a7ad8b.js');
-var utils$1 = require('./utils-434f8069.js');
+var utils$1 = require('./utils-6061e22a.js');
 require('./SessionContext-2a34dac4.js');
 require('bcryptjs');
 require('jsonwebtoken');
@@ -52,7 +52,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           }
 
           _context.next = 10;
-          return index$1._regeneratorRuntime.awrap(utils$1.validateSession(req));
+          return index$1._regeneratorRuntime.awrap(utils$1.validateSession(req, res));
 
         case 10:
           props.session = _context.sent;
