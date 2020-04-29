@@ -174,16 +174,20 @@ export const validateSession = async (req, res) => {
         );
       }
 
-      // TODO: wrap this in try catch and throw ReloadUserError()
-      const user = await reloadUser(refreshTokenClaims.user.id);
+      try {
+        const user = await reloadUser(refreshTokenClaims.user.id);
 
-      session.claims = createTokenClaims(user);
+        session.claims = createTokenClaims(user);
 
-      createSessionCookies(
-        res,
-        signTokens(session.claims, options.jwt.secret),
-        user.id
-      );
+        createSessionCookies(
+          res,
+          signTokens(session.claims, options.jwt.secret),
+          user.id
+        );
+      } catch (err) {
+        console.log('caught and throwing', err);
+        throw err;
+      }
     }
   }
 
