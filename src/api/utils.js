@@ -43,12 +43,10 @@ export const apiWrapper = async (req, res, fn, options) => {
   try {
     validateRequest(req, res, options);
 
-    let props = {};
-
     if (options.useSession) {
-      props.session = await validateSession(req, res);
+      const session = await validateSession(req, res);
 
-      if (options.requireAuth && !props.session.isAuthenticated) {
+      if (options.requireAuth && !session.isAuthenticated) {
         return httpForbiddenResponse(
           res,
           errorJson(new Error('You do not have access to view this page.'))
@@ -56,10 +54,7 @@ export const apiWrapper = async (req, res, fn, options) => {
       }
     }
 
-    props = {
-      ...props,
-      ...(await fn({ ...props, req, res })),
-    };
+    const props = await fn({ ...props, req, res, session });
 
     if (props.errors && props.errors.length) {
       return httpBadRequestResponse(res, errorJson(props.errors));
