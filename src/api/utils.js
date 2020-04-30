@@ -43,8 +43,10 @@ export const apiWrapper = async (req, res, fn, options) => {
   try {
     validateRequest(req, res, options);
 
+    let session;
+
     if (options.useSession) {
-      const session = await validateSession(req, res);
+      session = await validateSession(req, res);
 
       if (options.requireAuth && !session.isAuthenticated) {
         return httpForbiddenResponse(
@@ -54,7 +56,7 @@ export const apiWrapper = async (req, res, fn, options) => {
       }
     }
 
-    const props = await fn({ ...props, req, res, session });
+    const props = await fn({ req, res, session });
 
     if (props.errors && props.errors.length) {
       return httpBadRequestResponse(res, errorJson(props.errors));

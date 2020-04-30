@@ -22,8 +22,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = function apiWrapper(req, res, fn, options) {
-  var sentry, defaultOptions, _session, props;
-
+  var sentry, defaultOptions, session, props;
   return index$1._regeneratorRuntime.async(function apiWrapper$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -55,9 +54,9 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           return index$1._regeneratorRuntime.awrap(utils$1.validateSession(req, res));
 
         case 9:
-          _session = _context.sent;
+          session = _context.sent;
 
-          if (!(options.requireAuth && !_session.isAuthenticated)) {
+          if (!(options.requireAuth && !session.isAuthenticated)) {
             _context.next = 12;
             break;
           }
@@ -66,11 +65,11 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
 
         case 12:
           _context.next = 14;
-          return index$1._regeneratorRuntime.awrap(fn(_objectSpread({}, props, {
+          return index$1._regeneratorRuntime.awrap(fn({
             req: req,
             res: res,
             session: session
-          })));
+          }));
 
         case 14:
           props = _context.sent;
