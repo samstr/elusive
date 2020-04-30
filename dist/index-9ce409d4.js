@@ -28,6 +28,13 @@ var COOKIES_EXPIRY_MINS = 43800; // 1 month
 var JWT_ACCESS_TOKEN_EXPIRY_MINS = 10;
 var JWT_REFRESH_TOKEN_EXPIRY_MINS = 43800; // 1 month
 
+var loginRoute = function loginRoute() {
+  return '/login';
+};
+var logoutRoute = function logoutRoute() {
+  return '/logout';
+};
+
 function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
@@ -67,6 +74,10 @@ var ElusiveClient = /*#__PURE__*/function () {
 
     defineProperty._defineProperty(this, "setDefaultOptions", function () {
       _this.options = {
+        routes: {
+          login: loginRoute,
+          logout: logoutRoute
+        },
         sessions: {
           bcrypt: {
             saltRounds: BCRYPT_SALT_ROUNDS
@@ -97,8 +108,22 @@ var ElusiveClient = /*#__PURE__*/function () {
     defineProperty._defineProperty(this, "init", function (options) {
       _this.setDefaultOptions();
 
-      var sentry = options.sentry,
+      var routes = options.routes,
+          sentry = options.sentry,
           sessions = options.sessions;
+
+      if (routes) {
+        var login = routes.login,
+            logout = routes.logout;
+
+        if (login) {
+          _this.options.routes.login = login;
+        }
+
+        if (logout) {
+          _this.options.routes.logout = logout;
+        }
+      }
 
       if (sessions) {
         var bcrypt = sessions.bcrypt,

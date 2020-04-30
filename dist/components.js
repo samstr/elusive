@@ -5,9 +5,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./wrapNativeSuper-b3646a2a.js');
-require('./index-b22bf051.js');
+require('./index-9ce409d4.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
-require('./index.js');
+var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 require('./FormErrors-a91e4b79.js');
 var React = require('react');
@@ -79,12 +79,13 @@ var defaultOptions = {
 };
 
 var loginRouteWithNext = function loginRouteWithNext() {
+  var routes = index.options.routes;
   var _window$location = window.location,
       pathname = _window$location.pathname,
       search = _window$location.search;
-  var href = '/login';
+  var href = routes.login();
 
-  if (pathname !== '/logout') {
+  if (pathname !== routes.logout()) {
     var encodedNext = encodeURIComponent("".concat(pathname).concat(search));
     href = "".concat(href, "?next=").concat(encodedNext);
   }
@@ -93,13 +94,14 @@ var loginRouteWithNext = function loginRouteWithNext() {
 };
 
 var handleError = function handleError(err, router, session) {
-  if (err instanceof axios.Cancel) return;
+  var routes = index.options.routes;
+  if (axios__default.isCancel(err)) return;
 
   if (err.response.status === utils.HTTP_STATUS_FORBIDDEN) {
     session.logout();
     var pathname = window.location.pathname;
 
-    if (pathname !== '/login') {
+    if (pathname !== routes.login()) {
       router.replace(loginRouteWithNext());
     }
   } else {
