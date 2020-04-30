@@ -96,10 +96,6 @@ var loginRouteWithNext = function loginRouteWithNext() {
 var handleError = function handleError(err, router, session) {
   var routes = index.options.routes;
   if (axios__default.isCancel(err)) return;
-  console.log('handling error');
-  console.log(err);
-  console.log(err.response);
-  console.log('HTTP_STATUS_UNAUTHORIZED', utils.HTTP_STATUS_UNAUTHORIZED);
 
   if (err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
     session.logout();
