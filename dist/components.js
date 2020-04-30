@@ -97,7 +97,7 @@ var handleError = function handleError(err, router, session) {
   var routes = index.options.routes;
   if (axios__default.isCancel(err)) return;
 
-  if (err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
+  if (err.response && err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
     session.logout();
     var pathname = window.location.pathname;
 

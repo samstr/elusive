@@ -31,7 +31,7 @@ const handleError = (err, router, session) => {
 
   if (axios.isCancel(err)) return;
 
-  if (err.response.status === HTTP_STATUS_UNAUTHORIZED) {
+  if (err.response && err.response.status === HTTP_STATUS_UNAUTHORIZED) {
     session.logout();
 
     const { pathname } = window.location;
