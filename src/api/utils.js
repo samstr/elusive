@@ -56,7 +56,7 @@ export const apiWrapper = async (req, res, fn, options) => {
       }
     }
 
-    const props = {};
+    let props = {};
 
     props = {
       ...props,
