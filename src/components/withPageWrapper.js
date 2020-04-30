@@ -31,6 +31,11 @@ const handleError = (err, router, session) => {
 
   if (axios.isCancel(err)) return;
 
+  console.log('handling error');
+  console.log(err);
+  console.log(err.response);
+  console.log('HTTP_STATUS_UNAUTHORIZED', HTTP_STATUS_UNAUTHORIZED);
+
   if (err.response.status === HTTP_STATUS_UNAUTHORIZED) {
     session.logout();
 
