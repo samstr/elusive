@@ -2,6 +2,7 @@ import axios, { CancelToken, Cancel } from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
+import Elusive from '../';
 import { HTTP_STATUS_FORBIDDEN } from '../http';
 import { useSession } from '../sessions';
 
@@ -13,10 +14,11 @@ const defaultOptions = {
 };
 
 const loginRouteWithNext = () => {
+  const { routes } = Elusive.options;
   const { pathname, search } = window.location;
-  let href = '/login';
+  let href = routes.login();
 
-  if (pathname !== '/logout') {
+  if (pathname !== routes.logout()) {
     const encodedNext = encodeURIComponent(`${pathname}${search}`);
     href = `${href}?next=${encodedNext}`;
   }
@@ -25,13 +27,16 @@ const loginRouteWithNext = () => {
 };
 
 const handleError = (err, router, session) => {
+  const { routes } = Elusive.options;
+
   if (axios.isCancel(err)) return;
+
   if (err.response.status === HTTP_STATUS_FORBIDDEN) {
     session.logout();
 
     const { pathname } = window.location;
 
-    if (pathname !== '/login') {
+    if (pathname !== routes.login()) {
       router.replace(loginRouteWithNext());
     }
   } else {

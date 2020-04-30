@@ -5,3 +5,6 @@ export const COOKIES_USER_ID_NAME = 'uid';
 export const COOKIES_EXPIRY_MINS = 43800; // 1 month
 export const JWT_ACCESS_TOKEN_EXPIRY_MINS = 10;
 export const JWT_REFRESH_TOKEN_EXPIRY_MINS = 43800; // 1 month
+
+export const loginRoute = () => '/login';
+export const logoutRoute = () => '/logout';

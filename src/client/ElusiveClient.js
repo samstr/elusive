@@ -6,6 +6,8 @@ import {
   COOKIES_USER_ID_NAME,
   JWT_ACCESS_TOKEN_EXPIRY_MINS,
   JWT_REFRESH_TOKEN_EXPIRY_MINS,
+  loginRoute,
+  logoutRoute,
 } from '../sessions/config';
 
 import { MissingJWTSecretOptionError } from './errors';
@@ -15,6 +17,10 @@ class ElusiveClient {
 
   setDefaultOptions = () => {
     this.options = {
+      routes: {
+        login: loginRoute,
+        logout: logoutRoute,
+      },
       sessions: {
         bcrypt: {
           saltRounds: BCRYPT_SALT_ROUNDS,
@@ -45,7 +51,19 @@ class ElusiveClient {
   init = (options) => {
     this.setDefaultOptions();
 
-    const { sentry, sessions } = options;
+    const { routes, sentry, sessions } = options;
+
+    if (routes) {
+      const { login, logout } = routes;
+
+      if (login) {
+        this.options.routes.login = login;
+      }
+
+      if (logout) {
+        this.options.routes.logout = logout;
+      }
+    }
 
     if (sessions) {
       const { bcrypt, callbacks, cookies, jwt } = sessions;
