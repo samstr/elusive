@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./wrapNativeSuper-b3646a2a.js');
-require('./index-9ce409d4.js');
+require('./index-4b16c673.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');

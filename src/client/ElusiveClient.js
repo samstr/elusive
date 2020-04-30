@@ -12,6 +12,8 @@ import {
 
 import { MissingJWTSecretOptionError } from './errors';
 
+const isServer = typeof window === 'undefined';
+
 class ElusiveClient {
   static instance;
 
@@ -127,7 +129,9 @@ class ElusiveClient {
         if (secret) {
           this.options.sessions.jwt.secret = secret;
         } else {
-          throw new MissingJWTSecretOptionError();
+          if (typeof window === 'undefined') {
+            throw new MissingJWTSecretOptionError();
+          }
         }
       }
     }

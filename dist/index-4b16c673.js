@@ -191,7 +191,9 @@ var ElusiveClient = /*#__PURE__*/function () {
           if (secret) {
             _this.options.sessions.jwt.secret = secret;
           } else {
-            throw new MissingJWTSecretOptionError();
+            if (typeof window === 'undefined') {
+              throw new MissingJWTSecretOptionError();
+            }
           }
         }
       }
