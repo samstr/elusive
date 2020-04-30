@@ -8,12 +8,14 @@ import {
   HTTP_STATUS_INTERNAL_SERVER_ERROR,
   HTTP_STATUS_METHOD_NOT_ALLOWED,
   HTTP_STATUS_OK,
+  HTTP_STATUS_UNAUTHORIZED,
   POST,
   httpBadRequestResponse,
   httpForbiddenResponse,
   httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
   httpResponse,
+  httpUnauthorizedResponse,
   validateRequest,
 } from './utils';
 export {
@@ -23,11 +25,13 @@ export {
   HTTP_STATUS_INTERNAL_SERVER_ERROR,
   HTTP_STATUS_METHOD_NOT_ALLOWED,
   HTTP_STATUS_OK,
+  HTTP_STATUS_UNAUTHORIZED,
   POST,
   httpBadRequestResponse,
   httpForbiddenResponse,
   httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
   httpResponse,
+  httpUnauthorizedResponse,
   validateRequest,
 };
