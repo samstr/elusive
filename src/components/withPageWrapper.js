@@ -26,24 +26,38 @@ const loginRouteWithNext = () => {
   return href;
 };
 
-const handleError = (err, router, session) => {
+const handleError = (err) => {
   const { routes } = Elusive.options;
+
+  let data;
+  let logout;
+  let redirect;
 
   if (axios.isCancel(err)) return;
 
   if (err.response && err.response.status === HTTP_STATUS_UNAUTHORIZED) {
-    session.logout();
+    logout = true;
 
     const { pathname } = window.location;
 
     if (pathname !== routes.login()) {
-      router.replace(loginRouteWithNext());
+      redirect = loginRouteWithNext();
     }
-  } else {
-    // If it's an unknown error
-    // NOTE we need to let some errors get passed into props
+  }
+
+  if (err.response && err.response.data) {
+    data = err.response.data;
+  }
+
+  if (!data && !logout && !redirect) {
     console.log('Unknown error from session or data endpoints: ', err);
   }
+
+  return {
+    data,
+    logout,
+    redirect,
+  };
 };
 
 const withPageWrapper = (WrappedComponent, options) => {
@@ -96,7 +110,24 @@ const withPageWrapper = (WrappedComponent, options) => {
               session.login(sessionResponse);
             }
           } catch (err) {
-            return handleError(err, router, session);
+            const { data, logout, redirect } = handleError(err);
+
+            if (!data && !logout && !redirect) {
+              return;
+            }
+
+            if (data) {
+              props.data = data;
+            }
+
+            if (logout) {
+              session.logout();
+            }
+
+            if (redirect) {
+              router.replace(redirect);
+              return;
+            }
           }
         }
 
@@ -118,7 +149,24 @@ const withPageWrapper = (WrappedComponent, options) => {
             cancelDataRequest = null;
             props.data = response.data;
           } catch (err) {
-            return handleError(err, router, session);
+            const { data, logout, redirect } = handleError(err);
+
+            if (!data && !logout && !redirect) {
+              return;
+            }
+
+            if (data) {
+              props.data = data;
+            }
+
+            if (logout) {
+              session.logout();
+            }
+
+            if (redirect) {
+              router.replace(redirect);
+              return;
+            }
           }
         }
 
