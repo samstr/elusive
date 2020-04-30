@@ -6,6 +6,9 @@ var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 var FormErrors = require('./FormErrors-a91e4b79.js');
+var React = require('react');
+var React__default = _interopDefault(React);
+var PropTypes = _interopDefault(require('prop-types'));
 var bcrypt = _interopDefault(require('bcryptjs'));
 var jwt = require('jsonwebtoken');
 var jwt__default = _interopDefault(jwt);
@@ -104,6 +107,39 @@ var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
 
   return SessionUserNotEnabledError;
 }(SessionError);
+
+var __jsx = React__default.createElement;
+var defaultValue = {
+  isAuthenticated: false,
+  claims: null
+};
+var SessionContext = React.createContext(defaultValue);
+var SessionContextProvider = function SessionContextProvider(_ref) {
+  var children = _ref.children;
+
+  var _useState = React.useState(defaultValue),
+      sessionContext = _useState[0],
+      setSessionContext = _useState[1];
+
+  var resetSessionContext = function resetSessionContext() {
+    setSessionContext(defaultValue);
+  };
+
+  var context = {
+    sessionContext: sessionContext,
+    setSessionContext: setSessionContext,
+    resetSessionContext: resetSessionContext
+  };
+  return __jsx(SessionContext.Provider, {
+    value: context
+  }, children);
+};
+SessionContextProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+var useSessionContext = function useSessionContext() {
+  return React.useContext(SessionContext);
+};
 
 var buildSessionCookieString = function buildSessionCookieString(name, value, expiryDate) {
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
@@ -294,6 +330,8 @@ var validateSession = function validateSession(req, res) {
 exports.InvalidAccessTokenError = InvalidAccessTokenError;
 exports.InvalidRefreshTokenError = InvalidRefreshTokenError$1;
 exports.RefreshTokenExpiredError = RefreshTokenExpiredError$1;
+exports.SessionContext = SessionContext;
+exports.SessionContextProvider = SessionContextProvider;
 exports.SessionError = SessionError;
 exports.SessionUserNoLongerExistsError = SessionUserNoLongerExistsError;
 exports.SessionUserNotEnabledError = SessionUserNotEnabledError;
@@ -307,6 +345,7 @@ exports.deleteSessionCookies = deleteSessionCookies;
 exports.hashPassword = hashPassword;
 exports.signToken = signToken;
 exports.signTokens = signTokens;
+exports.useSessionContext = useSessionContext;
 exports.validateSession = validateSession;
 exports.verifyAccessTokenFromCookie = verifyAccessTokenFromCookie;
 exports.verifyRefreshTokenFromCookie = verifyRefreshTokenFromCookie;

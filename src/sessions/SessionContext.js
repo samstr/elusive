@@ -8,22 +8,28 @@ const defaultValue = {
 
 export const SessionContext = createContext(defaultValue);
 
-export const SessionProvider = ({ children }) => {
-  const [session, setSession] = useState(defaultValue);
-  session.login = setSession;
-  session.logout = () => {
-    setSession(defaultValue);
+export const SessionContextProvider = ({ children }) => {
+  const [sessionContext, setSessionContext] = useState(defaultValue);
+
+  const resetSessionContext = () => {
+    setSessionContext(defaultValue);
+  };
+
+  const context = {
+    sessionContext,
+    setSessionContext,
+    resetSessionContext,
   };
 
   return (
-    <SessionContext.Provider value={session}>
+    <SessionContext.Provider value={context}>
       {children}
     </SessionContext.Provider>
   );
 };
 
-SessionProvider.propTypes = {
+SessionContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const useSession = () => useContext(SessionContext);
+export const useSessionContext = () => useContext(SessionContext);

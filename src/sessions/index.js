@@ -36,8 +36,12 @@ export {
   SessionUserNotEnabledError,
 };
 
-import { SessionContext, SessionProvider, useSession } from './SessionContext';
-export { SessionContext, SessionProvider, useSession };
+import {
+  SessionContext,
+  SessionContextProvider,
+  useSessionContext,
+} from './SessionContext';
+export { SessionContext, SessionContextProvider, useSessionContext };
 
 import {
   buildSessionCookieString,

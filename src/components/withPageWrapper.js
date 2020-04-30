@@ -1,3 +1,4 @@
+/*
 import axios, { CancelToken } from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
@@ -71,7 +72,7 @@ const withPageWrapper = (WrappedComponent, options) => {
     const session = useSession();
     const [pageProps, setPageProps] = useState(props);
 
-    useEffect(() => {
+    /* useEffect(() => {
       if (options.redirect) {
         const { href, asPath } = options.redirect;
         router.replace(href, asPath);
@@ -199,3 +200,4 @@ const withPageWrapper = (WrappedComponent, options) => {
 };
 
 export default withPageWrapper;
+*/
