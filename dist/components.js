@@ -98,7 +98,11 @@ var handleError = function handleError(err) {
   var data;
   var logout;
   var redirect;
-  if (axios__default.isCancel(err)) return;
+  if (axios__default.isCancel(err)) return {
+    data: data,
+    logout: logout,
+    redirect: redirect
+  };
 
   if (err.response && err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
     logout = true;
@@ -159,7 +163,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 props = _objectSpread({}, pageProps);
 
                 if (!options.useSession) {
-                  _context.next = 28;
+                  _context.next = 25;
                   break;
                 }
 
@@ -177,35 +181,33 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 sessionResponse = response.data.session;
                 sessionResponse._ready = true;
                 props.session = sessionResponse;
+                session.login(sessionResponse);
 
                 if (!(options.requireAuth && !sessionResponse.isAuthenticated)) {
-                  _context.next = 15;
+                  _context.next = 14;
                   break;
                 }
 
                 router.replace(loginRouteWithNext());
                 return _context.abrupt("return");
 
-              case 15:
-                session.login(sessionResponse);
-
-              case 16:
-                _context.next = 28;
+              case 14:
+                _context.next = 25;
                 break;
 
-              case 18:
-                _context.prev = 18;
+              case 16:
+                _context.prev = 16;
                 _context.t0 = _context["catch"](2);
                 _handleError = handleError(_context.t0), data = _handleError.data, logout = _handleError.logout, redirect = _handleError.redirect;
 
                 if (!(!data && !logout && !redirect)) {
-                  _context.next = 23;
+                  _context.next = 21;
                   break;
                 }
 
                 return _context.abrupt("return");
 
-              case 23:
+              case 21:
                 if (data) {
                   props.data = data;
                 }
@@ -215,52 +217,51 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 }
 
                 if (!redirect) {
-                  _context.next = 28;
+                  _context.next = 25;
                   break;
                 }
 
-                router.replace(redirect);
                 return _context.abrupt("return");
 
-              case 28:
+              case 25:
                 if (options.useGlobals) ;
 
                 if (!options.useData) {
-                  _context.next = 50;
+                  _context.next = 46;
                   break;
                 }
 
                 // get page data
                 _window$location2 = window.location, pathname = _window$location2.pathname, search = _window$location2.search;
                 url = "/api/page".concat(pathname).concat(search);
-                _context.prev = 32;
-                _context.next = 35;
+                _context.prev = 29;
+                _context.next = 32;
                 return index$1._regeneratorRuntime.awrap(axios__default.get(url, {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelDataRequest = c;
                   })
                 }));
 
-              case 35:
+              case 32:
                 _response = _context.sent;
                 cancelDataRequest = null;
                 props.data = _response.data;
-                _context.next = 50;
+                _context.next = 46;
                 break;
 
-              case 40:
-                _context.prev = 40;
-                _context.t1 = _context["catch"](32);
+              case 37:
+                _context.prev = 37;
+                _context.t1 = _context["catch"](29);
                 _handleError2 = handleError(_context.t1), _data = _handleError2.data, _logout = _handleError2.logout, _redirect = _handleError2.redirect;
 
                 if (!(!_data && !_logout && !_redirect)) {
-                  _context.next = 45;
+                  _context.next = 42;
                   break;
                 }
 
                 return _context.abrupt("return");
 
-              case 45:
+              case 42:
                 if (_data) {
                   props.data = _data;
                 }
@@ -270,24 +271,23 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 }
 
                 if (!_redirect) {
-                  _context.next = 50;
+                  _context.next = 46;
                   break;
                 }
 
-                router.replace(_redirect);
                 return _context.abrupt("return");
 
-              case 50:
+              case 46:
                 if (shouldSetPageProps) {
                   setPageProps(props);
                 }
 
-              case 51:
+              case 47:
               case "end":
                 return _context.stop();
             }
           }
-        }, null, null, [[2, 18], [32, 40]], Promise);
+        }, null, null, [[2, 16], [29, 37]], Promise);
       })();
 
       return function () {

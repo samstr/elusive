@@ -33,7 +33,7 @@ const handleError = (err) => {
   let logout;
   let redirect;
 
-  if (axios.isCancel(err)) return;
+  if (axios.isCancel(err)) return { data, logout, redirect };
 
   if (err.response && err.response.status === HTTP_STATUS_UNAUTHORIZED) {
     logout = true;
@@ -103,11 +103,11 @@ const withPageWrapper = (WrappedComponent, options) => {
             sessionResponse._ready = true;
             props.session = sessionResponse;
 
+            session.login(sessionResponse);
+
             if (options.requireAuth && !sessionResponse.isAuthenticated) {
               router.replace(loginRouteWithNext());
               return;
-            } else {
-              session.login(sessionResponse);
             }
           } catch (err) {
             const { data, logout, redirect } = handleError(err);
@@ -125,7 +125,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             }
 
             if (redirect) {
-              router.replace(redirect);
+              //router.replace(redirect);
               return;
             }
           }
@@ -164,7 +164,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             }
 
             if (redirect) {
-              router.replace(redirect);
+              //router.replace(redirect);
               return;
             }
           }
