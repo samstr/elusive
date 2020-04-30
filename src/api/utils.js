@@ -60,7 +60,7 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     props = {
       ...props,
-      ...(await fn({ req, res, session })),
+      ...(await fn({ session })),
     };
 
     if (props.errors && props.errors.length) {

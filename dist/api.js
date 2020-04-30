@@ -71,8 +71,6 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           _context.t3 = {};
           _context.next = 19;
           return index$1._regeneratorRuntime.awrap(fn({
-            req: req,
-            res: res,
             session: session
           }));
 
