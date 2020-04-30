@@ -56,7 +56,12 @@ export const apiWrapper = async (req, res, fn, options) => {
       }
     }
 
-    const props = await fn({ req, res, session });
+    const props = {};
+
+    props = {
+      ...props,
+      ...(await fn({ req, res, session })),
+    };
 
     if (props.errors && props.errors.length) {
       return httpBadRequestResponse(res, errorJson(props.errors));

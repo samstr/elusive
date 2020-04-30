@@ -5,6 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
+var readOnlyError = require('./readOnlyError-08c63dc8.js');
 var FormErrors = require('./FormErrors-a91e4b79.js');
 require('react');
 require('prop-types');
@@ -101,10 +102,6 @@ var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
 
   return MissingRequiredFieldError;
 }(FormError);
-
-function _readOnlyError(name) {
-  throw new Error("\"" + name + "\" is read-only");
-}
 
 var createForm = function createForm(_ref) {
   var fields = _ref.fields,
@@ -247,7 +244,7 @@ var booleanField = function booleanField(name, options, _validate3) {
       }
 
       if (typeof _validate3 === 'function') {
-        cleanValue = (_readOnlyError("cleanValue"), _validate3(cleanValue));
+        cleanValue = (readOnlyError._readOnlyError("cleanValue"), _validate3(cleanValue));
       }
 
       return cleanValue || null;

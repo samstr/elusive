@@ -7,6 +7,7 @@ require('./index-4b16c673.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
+var readOnlyError = require('./readOnlyError-08c63dc8.js');
 var Sentry = require('@sentry/node');
 var FormErrors = require('./FormErrors-a91e4b79.js');
 require('react');
@@ -64,75 +65,84 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           return _context.abrupt("return", utils.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
 
         case 12:
-          _context.next = 14;
+          props = {};
+
+          readOnlyError._readOnlyError("props");
+
+          _context.t0 = _objectSpread;
+          _context.t1 = {};
+          _context.t2 = props;
+          _context.t3 = {};
+          _context.next = 20;
           return index$1._regeneratorRuntime.awrap(fn({
             req: req,
             res: res,
             session: session
           }));
 
-        case 14:
-          props = _context.sent;
+        case 20:
+          _context.t4 = _context.sent;
+          props = (0, _context.t0)(_context.t1, _context.t2, _context.t3, _context.t4);
 
           if (!(props.errors && props.errors.length)) {
-            _context.next = 17;
+            _context.next = 24;
             break;
           }
 
           return _context.abrupt("return", utils.httpBadRequestResponse(res, FormErrors.errorJson(props.errors)));
 
-        case 17:
+        case 24:
           return _context.abrupt("return", res.json(props));
 
-        case 20:
-          _context.prev = 20;
-          _context.t0 = _context["catch"](4);
+        case 27:
+          _context.prev = 27;
+          _context.t5 = _context["catch"](4);
 
-          if (!(_context.t0 instanceof utils.HttpError)) {
-            _context.next = 25;
+          if (!(_context.t5 instanceof utils.HttpError)) {
+            _context.next = 32;
             break;
           }
 
-          if (!(_context.t0 instanceof utils.HttpMethodNotAllowedError)) {
-            _context.next = 25;
+          if (!(_context.t5 instanceof utils.HttpMethodNotAllowedError)) {
+            _context.next = 32;
             break;
           }
 
-          return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t0)));
+          return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 25:
-          if (!(_context.t0 instanceof utils$1.SessionError)) {
-            _context.next = 28;
+        case 32:
+          if (!(_context.t5 instanceof utils$1.SessionError)) {
+            _context.next = 35;
             break;
           }
 
           utils$1.deleteSessionCookies(res);
-          return _context.abrupt("return", utils.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t0)));
+          return _context.abrupt("return", utils.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 28:
-          if (!(_context.t0 instanceof FormErrors.BaseError)) {
-            _context.next = 30;
+        case 35:
+          if (!(_context.t5 instanceof FormErrors.BaseError)) {
+            _context.next = 37;
             break;
           }
 
-          return _context.abrupt("return", utils.httpBadRequestResponse(res, FormErrors.errorJson(_context.t0)));
+          return _context.abrupt("return", utils.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 30:
-          console.error('error in apiWrapper:', _context.t0);
+        case 37:
+          console.error('error in apiWrapper:', _context.t5);
 
           if (sentry && sentry.dsn) {
             console.log('sending to Sentry');
-            Sentry.captureException(_context.t0);
+            Sentry.captureException(_context.t5);
           }
 
           return _context.abrupt("return", utils.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
 
-        case 33:
+        case 40:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[4, 20]], Promise);
+  }, null, null, [[4, 27]], Promise);
 };
 
 exports.apiWrapper = apiWrapper;
