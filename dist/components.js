@@ -163,7 +163,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 props = _objectSpread({}, pageProps);
 
                 if (!options.useSession) {
-                  _context.next = 25;
+                  _context.next = 26;
                   break;
                 }
 
@@ -192,7 +192,7 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 return _context.abrupt("return");
 
               case 14:
-                _context.next = 25;
+                _context.next = 26;
                 break;
 
               case 16:
@@ -217,51 +217,52 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 }
 
                 if (!redirect) {
-                  _context.next = 25;
+                  _context.next = 26;
                   break;
                 }
 
+                router.replace(redirect);
                 return _context.abrupt("return");
 
-              case 25:
+              case 26:
                 if (options.useGlobals) ;
 
                 if (!options.useData) {
-                  _context.next = 46;
+                  _context.next = 48;
                   break;
                 }
 
                 // get page data
                 _window$location2 = window.location, pathname = _window$location2.pathname, search = _window$location2.search;
                 url = "/api/page".concat(pathname).concat(search);
-                _context.prev = 29;
-                _context.next = 32;
+                _context.prev = 30;
+                _context.next = 33;
                 return index$1._regeneratorRuntime.awrap(axios__default.get(url, {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelDataRequest = c;
                   })
                 }));
 
-              case 32:
+              case 33:
                 _response = _context.sent;
                 cancelDataRequest = null;
                 props.data = _response.data;
-                _context.next = 46;
+                _context.next = 48;
                 break;
 
-              case 37:
-                _context.prev = 37;
-                _context.t1 = _context["catch"](29);
+              case 38:
+                _context.prev = 38;
+                _context.t1 = _context["catch"](30);
                 _handleError2 = handleError(_context.t1), _data = _handleError2.data, _logout = _handleError2.logout, _redirect = _handleError2.redirect;
 
                 if (!(!_data && !_logout && !_redirect)) {
-                  _context.next = 42;
+                  _context.next = 43;
                   break;
                 }
 
                 return _context.abrupt("return");
 
-              case 42:
+              case 43:
                 if (_data) {
                   props.data = _data;
                 }
@@ -271,23 +272,24 @@ var withPageWrapper = function withPageWrapper(WrappedComponent, options) {
                 }
 
                 if (!_redirect) {
-                  _context.next = 46;
+                  _context.next = 48;
                   break;
                 }
 
+                router.replace(_redirect);
                 return _context.abrupt("return");
 
-              case 46:
+              case 48:
                 if (shouldSetPageProps) {
                   setPageProps(props);
                 }
 
-              case 47:
+              case 49:
               case "end":
                 return _context.stop();
             }
           }
-        }, null, null, [[2, 16], [29, 37]], Promise);
+        }, null, null, [[2, 16], [30, 38]], Promise);
       })();
 
       return function () {

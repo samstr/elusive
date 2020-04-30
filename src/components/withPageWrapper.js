@@ -125,7 +125,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             }
 
             if (redirect) {
-              //router.replace(redirect);
+              router.replace(redirect);
               return;
             }
           }
@@ -164,7 +164,7 @@ const withPageWrapper = (WrappedComponent, options) => {
             }
 
             if (redirect) {
-              //router.replace(redirect);
+              router.replace(redirect);
               return;
             }
           }
