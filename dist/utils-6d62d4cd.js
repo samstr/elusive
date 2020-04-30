@@ -45,6 +45,7 @@ var validateRequest = function validateRequest(req, res, options) {
   var allowedMethods = options.allowedMethods;
 
   if (!allowedMethods.includes(req.method.toUpperCase())) {
+    res.setHeader('Allow', allowedMethods.join(', '));
     throw new HttpMethodNotAllowedError('Method not allowed');
   }
 };

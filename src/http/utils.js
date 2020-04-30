@@ -16,6 +16,7 @@ export const validateRequest = (req, res, options) => {
   const { allowedMethods } = options;
 
   if (!allowedMethods.includes(req.method.toUpperCase())) {
+    res.setHeader('Allow', allowedMethods.join(', '));
     throw new HttpMethodNotAllowedError('Method not allowed');
   }
 };
