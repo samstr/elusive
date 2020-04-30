@@ -7,6 +7,7 @@ import {
   HttpError,
   HttpMethodNotAllowedError,
   httpBadRequestResponse,
+  httpForbiddenResponse,
   httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
   httpUnauthorizedResponse,
@@ -46,6 +47,13 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     if (options.useSession) {
       props.session = await validateSession(req, res);
+
+      if (options.requireAuth && !props.session.isAuthenticated) {
+        return httpForbiddenResponse(
+          res,
+          errorJson('You do not have access to view this page.')
+        );
+      }
     }
 
     props = {
