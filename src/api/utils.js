@@ -59,7 +59,6 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     return res.json(props);
   } catch (err) {
-    console.log('we caught an error', err);
     if (err instanceof HttpError) {
       if (err instanceof HttpMethodNotAllowedError) {
         return httpMethodNotAllowedResponse(res, errorJson(err));

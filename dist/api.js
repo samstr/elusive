@@ -85,38 +85,37 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
         case 24:
           _context.prev = 24;
           _context.t5 = _context["catch"](4);
-          console.log('we caught an error', _context.t5);
 
           if (!(_context.t5 instanceof utils.HttpError)) {
-            _context.next = 30;
+            _context.next = 29;
             break;
           }
 
           if (!(_context.t5 instanceof utils.HttpMethodNotAllowedError)) {
-            _context.next = 30;
+            _context.next = 29;
             break;
           }
 
           return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 30:
+        case 29:
           if (!(_context.t5 instanceof utils$1.SessionError)) {
-            _context.next = 33;
+            _context.next = 32;
             break;
           }
 
           utils$1.deleteSessionCookies(res);
           return _context.abrupt("return", utils.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 33:
+        case 32:
           if (!(_context.t5 instanceof FormErrors.BaseError)) {
-            _context.next = 35;
+            _context.next = 34;
             break;
           }
 
           return _context.abrupt("return", utils.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 35:
+        case 34:
           console.error('error in apiWrapper:', _context.t5);
 
           if (sentry && sentry.dsn) {
@@ -126,7 +125,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
 
           return _context.abrupt("return", utils.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
 
-        case 38:
+        case 37:
         case "end":
           return _context.stop();
       }
