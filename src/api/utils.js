@@ -51,7 +51,7 @@ export const apiWrapper = async (req, res, fn, options) => {
       if (options.requireAuth && !props.session.isAuthenticated) {
         return httpForbiddenResponse(
           res,
-          errorJson('You do not have access to view this page.')
+          errorJson(new Error('You do not have access to view this page.'))
         );
       }
     }

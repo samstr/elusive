@@ -62,7 +62,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             break;
           }
 
-          return _context.abrupt("return", utils.httpForbiddenResponse(res, FormErrors.errorJson('You do not have access to view this page.')));
+          return _context.abrupt("return", utils.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
 
         case 13:
           _context.t0 = _objectSpread;
