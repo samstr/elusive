@@ -25,7 +25,7 @@ const loginRouteWithNext = () => {
 };
 
 const handleError = (err, router, session) => {
-  if (err instanceof Cancel) return;
+  if (axios.isCancel(err)) return;
   if (err.response.status === HTTP_STATUS_FORBIDDEN) {
     session.logout();
 
