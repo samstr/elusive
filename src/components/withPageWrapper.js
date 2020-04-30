@@ -1,4 +1,4 @@
-import axios, { CancelToken, Cancel } from 'axios';
+import axios, { CancelToken } from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
