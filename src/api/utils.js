@@ -7,9 +7,9 @@ import {
   HttpError,
   HttpMethodNotAllowedError,
   httpBadRequestResponse,
-  httpForbiddenResponse,
   httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
+  httpUnauthorizedResponse,
   validateRequest,
 } from '../http';
 import {
@@ -69,7 +69,7 @@ export const apiWrapper = async (req, res, fn, options) => {
     if (err instanceof SessionError) {
       deleteSessionCookies(res);
 
-      return httpForbiddenResponse(res, errorJson(err));
+      return httpUnauthorizedResponse(res, errorJson(err));
     }
 
     if (err instanceof BaseError) {

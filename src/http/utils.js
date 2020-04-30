@@ -6,6 +6,7 @@ export const POST = 'POST';
 export const HTTP_STATUS_OK = 200;
 
 export const HTTP_STATUS_BAD_REQUEST = 400;
+export const HTTP_STATUS_UNAUTHORIZED = 401;
 export const HTTP_STATUS_FORBIDDEN = 403;
 export const HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
 
@@ -27,6 +28,10 @@ export const httpResponse = (res, status, data) => {
 // 400
 export const httpBadRequestResponse = (res, data) =>
   httpResponse(res, HTTP_STATUS_BAD_REQUEST, data);
+
+// 401
+export const httpUnauthorizedResponse = (res, data) =>
+  httpResponse(res, HTTP_STATUS_UNAUTHORIZED, data);
 
 // 403
 export const httpForbiddenResponse = (res, data) =>

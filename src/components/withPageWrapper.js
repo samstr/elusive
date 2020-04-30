@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 import Elusive from '../';
-import { HTTP_STATUS_FORBIDDEN } from '../http';
+import { HTTP_STATUS_UNAUTHORIZED } from '../http';
 import { useSession } from '../sessions';
 
 const defaultOptions = {
@@ -31,7 +31,7 @@ const handleError = (err, router, session) => {
 
   if (axios.isCancel(err)) return;
 
-  if (err.response.status === HTTP_STATUS_FORBIDDEN) {
+  if (err.response.status === HTTP_STATUS_UNAUTHORIZED) {
     session.logout();
 
     const { pathname } = window.location;
