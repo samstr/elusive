@@ -17,8 +17,15 @@ require('./FormErrors-9579dce8.js');
 var SessionContext = require('./SessionContext-859ea7a9.js');
 require('bcryptjs');
 require('jsonwebtoken');
-var utils = require('./utils-f7119ee5.js');
 var router = require('next/router');
+var utils = require('./utils-f7119ee5.js');
+
+var useRedirect = function useRedirect(href, asPath) {
+  var router$1 = router.useRouter();
+  React.useEffect(function () {
+    router$1.replace(href, asPath);
+  }, []);
+};
 
 var useRequireAuth = function useRequireAuth() {
   var router$1 = router.useRouter();
@@ -33,4 +40,5 @@ var useRequireAuth = function useRequireAuth() {
   }, [sessionContext._ready]);
 };
 
+exports.useRedirect = useRedirect;
 exports.useRequireAuth = useRequireAuth;
