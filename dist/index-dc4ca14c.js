@@ -28,6 +28,9 @@ var COOKIES_EXPIRY_MINS = 43800; // 1 month
 var JWT_ACCESS_TOKEN_EXPIRY_MINS = 10;
 var JWT_REFRESH_TOKEN_EXPIRY_MINS = 43800; // 1 month
 
+var apiSessionRoute = function apiSessionRoute() {
+  return '/api/session';
+};
 var loginRoute = function loginRoute() {
   return '/login';
 };
@@ -75,6 +78,7 @@ var ElusiveClient = /*#__PURE__*/function () {
     defineProperty._defineProperty(this, "setDefaultOptions", function () {
       _this.options = {
         routes: {
+          apiSession: apiSessionRoute,
           login: loginRoute,
           logout: logoutRoute
         },
@@ -113,8 +117,13 @@ var ElusiveClient = /*#__PURE__*/function () {
           sessions = options.sessions;
 
       if (routes) {
-        var login = routes.login,
+        var apiSession = routes.apiSession,
+            login = routes.login,
             logout = routes.logout;
+
+        if (apiSession) {
+          _this.options.routes.apiSession = apiSession;
+        }
 
         if (login) {
           _this.options.routes.login = login;

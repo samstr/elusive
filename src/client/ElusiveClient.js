@@ -6,6 +6,7 @@ import {
   COOKIES_USER_ID_NAME,
   JWT_ACCESS_TOKEN_EXPIRY_MINS,
   JWT_REFRESH_TOKEN_EXPIRY_MINS,
+  apiSessionRoute,
   loginRoute,
   logoutRoute,
 } from '../sessions/config';
@@ -20,6 +21,7 @@ class ElusiveClient {
   setDefaultOptions = () => {
     this.options = {
       routes: {
+        apiSession: apiSessionRoute,
         login: loginRoute,
         logout: logoutRoute,
       },
@@ -56,7 +58,11 @@ class ElusiveClient {
     const { routes, sentry, sessions } = options;
 
     if (routes) {
-      const { login, logout } = routes;
+      const { apiSession, login, logout } = routes;
+
+      if (apiSession) {
+        this.options.routes.apiSession = apiSession;
+      }
 
       if (login) {
         this.options.routes.login = login;
