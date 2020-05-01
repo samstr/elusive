@@ -7,26 +7,6 @@ import Elusive from '../';
 import { HTTP_STATUS_UNAUTHORIZED } from '../http';
 import { useSession } from '../sessions';
 
-const defaultOptions = {
-  useSession: false,
-  useGlobals: false,
-  useData: false,
-  requireAuth: false,
-};
-
-const loginRouteWithNext = () => {
-  const { routes } = Elusive.options;
-  const { pathname, search } = window.location;
-  let href = routes.login();
-
-  if (pathname !== routes.logout()) {
-    const encodedNext = encodeURIComponent(`${pathname}${search}`);
-    href = `${href}?next=${encodedNext}`;
-  }
-
-  return href;
-};
-
 const handleError = (err) => {
   const { routes } = Elusive.options;
 
