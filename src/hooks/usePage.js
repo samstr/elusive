@@ -66,6 +66,7 @@ const usePage = (options) => {
     if (options.redirect) {
       const { href, asPath } = options.redirect;
       router.replace(href, asPath);
+      return;
     }
 
     (async () => {
