@@ -45,7 +45,7 @@ var usePage = function usePage(options) {
   var defaultOptions = {
     data: false,
     requireAuth: false,
-    session: false,
+    session: true,
     redirect: null
   };
   options = _objectSpread({}, defaultOptions, {}, options);
