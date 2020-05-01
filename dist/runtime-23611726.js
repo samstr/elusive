@@ -735,6 +735,4 @@ try {
 }
 });
 
-var regenerator = runtime_1;
-
-exports._regeneratorRuntime = regenerator;
+exports.runtime_1 = runtime_1;

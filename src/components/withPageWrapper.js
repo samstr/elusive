@@ -41,23 +41,7 @@ const handleError = (err) => {
   };
 };
 
-const withPageWrapper = (WrappedComponent, options) => {
-  options = {
-    ...defaultOptions,
-    ...options,
-  };
-
-  const Component = (props) => {
-    const { router } = props;
-    const session = useSession();
-    const [pageProps, setPageProps] = useState(props);
-
-    /* useEffect(() => {
-      if (options.redirect) {
-        const { href, asPath } = options.redirect;
-        router.replace(href, asPath);
-      }
-    }, []);
+    /* 
 
     useEffect(() => {
       let shouldSetPageProps = true;

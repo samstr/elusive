@@ -3,10 +3,11 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
-var FormErrors = require('./FormErrors-a91e4b79.js');
+var errors = require('./errors-a41e2d55.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
+require('./FormErrors-9579dce8.js');
 
 function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }
 
@@ -23,7 +24,7 @@ var AuthError = /*#__PURE__*/function (_BaseError) {
   }
 
   return AuthError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 var AlreadyAuthenticatedError = /*#__PURE__*/function (_AuthError) {
   wrapNativeSuper._inherits(AlreadyAuthenticatedError, _AuthError);
 

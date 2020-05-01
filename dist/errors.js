@@ -3,14 +3,15 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./wrapNativeSuper-b3646a2a.js');
-var FormErrors = require('./FormErrors-a91e4b79.js');
+var errors = require('./errors-a41e2d55.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
+var FormErrors = require('./FormErrors-9579dce8.js');
 
 
 
-exports.BaseError = FormErrors.BaseError;
+exports.BaseError = errors.BaseError;
 exports.FormErrors = FormErrors.FormErrors;
 exports.GenericErrors = FormErrors.GenericErrors;
 exports.errorJson = FormErrors.errorJson;

@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "1.2.4",
+  "version": "1.2.7",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -11,6 +11,7 @@
     "components.js",
     "errors.js",
     "forms.js",
+    "hooks.js",
     "http.js",
     "models.js",
     "routes.js",
@@ -28,7 +29,7 @@
     "bootstrap": "^4.4.1",
     "firebase-admin": "^8.11.0",
     "jsonwebtoken": "^8.5.1",
-    "next": "^9.3.5",
+    "next": "^9.3.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
