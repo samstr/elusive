@@ -16,7 +16,7 @@ const usePage = (options) => {
   const defaultOptions = {
     data: false,
     requireAuth: false,
-    session: false,
+    session: true,
     redirect: null,
   };
 
@@ -71,7 +71,7 @@ const usePage = (options) => {
     (async () => {
       if (options.session) {
         try {
-          const response = await axios(routes.apiSessionRoute(), {
+          const response = await axios(routes.apiSession(), {
             cancelToken: new CancelToken((c) => {
               cancelSessionRequest = c;
             }),

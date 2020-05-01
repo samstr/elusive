@@ -111,7 +111,7 @@ var usePage = function usePage(options) {
 
               _context.prev = 1;
               _context.next = 4;
-              return index$1._regeneratorRuntime.awrap(axios__default(routes.apiSessionRoute(), {
+              return index$1._regeneratorRuntime.awrap(axios__default(routes.apiSession(), {
                 cancelToken: new axios.CancelToken(function (c) {
                   cancelSessionRequest = c;
                 })
