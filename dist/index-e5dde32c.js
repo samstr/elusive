@@ -60,7 +60,7 @@ var ElusiveClient = /*#__PURE__*/function () {
         },
         tokens: {
           accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
-          createTokenClaims: null,
+          createClaims: null,
           refreshTokenExpiryMins: REFRESH_TOKEN_EXPIRY_MINS,
           secret: null
         }
@@ -145,7 +145,7 @@ var ElusiveClient = /*#__PURE__*/function () {
       if (tokens) {
         var _tokens = tokens,
             accessTokenExpiryMins = _tokens.accessTokenExpiryMins,
-            createTokenClaims = _tokens.createTokenClaims,
+            createClaims = _tokens.createClaims,
             refreshTokenExpiryMins = _tokens.refreshTokenExpiryMins,
             secret = _tokens.secret;
 
@@ -153,8 +153,8 @@ var ElusiveClient = /*#__PURE__*/function () {
           _this.options.tokens.accessTokenExpiryMins = accessTokenExpiryMins;
         }
 
-        if (createTokenClaims) {
-          _this.options.tokens.createTokenClaims = createTokenClaims;
+        if (createClaims) {
+          _this.options.tokens.createClaims = createClaims;
         }
 
         if (refreshTokenExpiryMins) {

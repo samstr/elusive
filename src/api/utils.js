@@ -17,7 +17,7 @@ import {
 import { SessionError, deleteSessionCookies } from '../sessions';
 
 export const apiWrapper = async (req, res, fn, options) => {
-  const { sentry, jwt, sessions } = Elusive.options;
+  const { sentry, sessions, tokens } = Elusive.options;
 
   if (sentry && sentry.dsn) {
     Sentry.init({
@@ -40,14 +40,18 @@ export const apiWrapper = async (req, res, fn, options) => {
   try {
     validateRequest(req, res, options);
 
-    const accessToken = req.cookies[sessions.cookies.accessTokenName];
-    const refreshToken = req.cookies[sessions.cookies.refreshTokenName];
-    const userId = req.cookies[sessions.cookies.userIdName];
+    const accessToken = req.cookies[sessions.accessTokenCookieName];
+    const refreshToken = req.cookies[sessions.refreshTokenCookieName];
+    const userId = req.cookies[sessions.userIdCookieName];
 
     const { session, newTokens } = await getSession(accessToken, refreshToken);
 
     if (session.isAuthenticated && newTokens && options.setTokens) {
-      createSessionCookies(res, signTokens(session.claims, jwt.secret), userId);
+      createSessionCookies(
+        res,
+        signTokens(session.claims, tokens.secret),
+        userId
+      );
     }
 
     if (options.requireAuth && !session.isAuthenticated) {

@@ -37,7 +37,7 @@ class ElusiveClient {
       },
       tokens: {
         accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
-        createTokenClaims: null,
+        createClaims: null,
         refreshTokenExpiryMins: REFRESH_TOKEN_EXPIRY_MINS,
         secret: null,
       },
@@ -118,7 +118,7 @@ class ElusiveClient {
     if (tokens) {
       const {
         accessTokenExpiryMins,
-        createTokenClaims,
+        createClaims,
         refreshTokenExpiryMins,
         secret,
       } = tokens;
@@ -127,8 +127,8 @@ class ElusiveClient {
         this.options.tokens.accessTokenExpiryMins = accessTokenExpiryMins;
       }
 
-      if (createTokenClaims) {
-        this.options.tokens.createTokenClaims = createTokenClaims;
+      if (createClaims) {
+        this.options.tokens.createClaims = createClaims;
       }
 
       if (refreshTokenExpiryMins) {

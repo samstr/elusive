@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-require('./index-08623d88.js');
+require('./index-e5dde32c.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 require('./utils-1794fb54.js');
 var index = require('./index.js');
@@ -14,19 +14,19 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 var utils$1 = require('./utils-b08f259e.js');
-var utils$2 = require('./utils-ab1e44de.js');
+var utils$2 = require('./utils-5adae97c.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = function apiWrapper(req, res, fn, options) {
-  var _Elusive$options, sentry, jwt, sessions, defaultOptions, accessToken, refreshToken, userId, _await$getSession, session, newTokens, data;
+  var _Elusive$options, sentry, sessions, tokens, defaultOptions, accessToken, refreshToken, userId, _await$getSession, session, newTokens, data;
 
   return index$1._regeneratorRuntime.async(function apiWrapper$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _Elusive$options = index.options, sentry = _Elusive$options.sentry, jwt = _Elusive$options.jwt, sessions = _Elusive$options.sessions;
+          _Elusive$options = index.options, sentry = _Elusive$options.sentry, sessions = _Elusive$options.sessions, tokens = _Elusive$options.tokens;
 
           if (sentry && sentry.dsn) {
             Sentry.init({
@@ -43,9 +43,9 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           options = _objectSpread({}, defaultOptions, {}, options);
           _context.prev = 4;
           utils$1.validateRequest(req, res, options);
-          accessToken = req.cookies[sessions.cookies.accessTokenName];
-          refreshToken = req.cookies[sessions.cookies.refreshTokenName];
-          userId = req.cookies[sessions.cookies.userIdName];
+          accessToken = req.cookies[sessions.accessTokenCookieName];
+          refreshToken = req.cookies[sessions.refreshTokenCookieName];
+          userId = req.cookies[sessions.userIdCookieName];
           _context.next = 11;
           return index$1._regeneratorRuntime.awrap(getSession(accessToken, refreshToken));
 
@@ -55,7 +55,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           newTokens = _await$getSession.newTokens;
 
           if (session.isAuthenticated && newTokens && options.setTokens) {
-            createSessionCookies(res, signTokens(session.claims, jwt.secret), userId);
+            createSessionCookies(res, signTokens(session.claims, tokens.secret), userId);
           }
 
           if (!(options.requireAuth && !session.isAuthenticated)) {
