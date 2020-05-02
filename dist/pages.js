@@ -67,7 +67,7 @@ var useData = function useData() {
             case 0:
               _context.prev = 0;
               _window$location = window.location, pathname = _window$location.pathname, search = _window$location.search;
-              url = "/api/page".concat(pathname).concat(search);
+              url = "/api/data".concat(pathname).concat(search);
               _context.next = 5;
               return index$1._regeneratorRuntime.awrap(axios__default(url, {
                 cancelToken: new axios.CancelToken(function (c) {

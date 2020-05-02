@@ -41,7 +41,7 @@ const useData = () => {
     const fetch = async () => {
       try {
         const { pathname, search } = window.location;
-        const url = `/api/page${pathname}${search}`;
+        const url = `/api/data${pathname}${search}`;
 
         const response = await axios(url, {
           cancelToken: new CancelToken((c) => {
