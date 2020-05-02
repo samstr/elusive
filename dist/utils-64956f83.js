@@ -52,6 +52,10 @@ var validateRequest = function validateRequest(req, res, options) {
 var httpResponse = function httpResponse(res, status, data) {
   res.status(status).json(data);
   res.end();
+}; // 200
+
+var httpOKResponse = function httpOKResponse(res, data) {
+  return httpResponse(res, HTTP_STATUS_OK, data);
 }; // 400
 
 var httpBadRequestResponse = function httpBadRequestResponse(res, data) {
@@ -88,6 +92,7 @@ exports.httpBadRequestResponse = httpBadRequestResponse;
 exports.httpForbiddenResponse = httpForbiddenResponse;
 exports.httpInternalServerErrorResponse = httpInternalServerErrorResponse;
 exports.httpMethodNotAllowedResponse = httpMethodNotAllowedResponse;
+exports.httpOKResponse = httpOKResponse;
 exports.httpResponse = httpResponse;
 exports.httpUnauthorizedResponse = httpUnauthorizedResponse;
 exports.validateRequest = validateRequest;

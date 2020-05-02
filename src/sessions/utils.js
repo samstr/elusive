@@ -1,8 +1,6 @@
-import bcrypt from 'bcryptjs';
 import jwt, { TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 
 import Elusive from '../';
-import { InvalidAccessTokenError } from './errors';
 
 export const buildSessionCookieString = (name, value, expiryDate) =>
   [
@@ -37,15 +35,6 @@ export const createSessionCookieStrings = (tokens, userId) => {
 export const createSessionCookies = (res, tokens, userId) => {
   res.setHeader('Set-Cookie', createSessionCookieStrings(tokens, userId));
 };
-
-export const hashPassword = (password) => {
-  const { sessions: options } = Elusive.options;
-
-  return bcrypt.hashSync(password, options.bcrypt.saltRounds);
-};
-
-export const comparePasswordHash = (password, hash) =>
-  bcrypt.compareSync(password, hash);
 
 export const signToken = (claims, secret, expiryMins) =>
   jwt.sign(claims, secret, {
@@ -108,7 +97,9 @@ export const verifyRefreshTokenFromCookie = (refreshToken, secret) => {
   }
 };
 
-export const validateSession = async (req, res) => {
+export const getSession = (accessToken, refreshToken, userId) => {};
+
+/*export const validateSession = async (req, res) => {
   const { sessions: options } = Elusive.options;
   const { createTokenClaims, reloadUser } = options.callbacks;
 
@@ -190,3 +181,4 @@ export const validateSession = async (req, res) => {
 
   return session;
 };
+*/

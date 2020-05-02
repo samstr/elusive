@@ -10,17 +10,14 @@ import {
   httpForbiddenResponse,
   httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
+  httpOKResponse,
   httpUnauthorizedResponse,
   validateRequest,
 } from '../http';
-import {
-  SessionError,
-  deleteSessionCookies,
-  validateSession,
-} from '../sessions';
+import { SessionError, deleteSessionCookies } from '../sessions';
 
 export const apiWrapper = async (req, res, fn, options) => {
-  const { sentry } = Elusive.options;
+  const { sentry, jwt, sessions } = Elusive.options;
 
   if (sentry && sentry.dsn) {
     Sentry.init({
@@ -32,7 +29,7 @@ export const apiWrapper = async (req, res, fn, options) => {
   const defaultOptions = {
     allowedMethods: [GET],
     requireAuth: false,
-    useSession: false,
+    setTokens: false,
   };
 
   options = {
@@ -43,31 +40,35 @@ export const apiWrapper = async (req, res, fn, options) => {
   try {
     validateRequest(req, res, options);
 
-    let session;
+    const accessToken = req.cookies[sessions.cookies.accessTokenName];
+    const refreshToken = req.cookies[sessions.cookies.refreshTokenName];
+    const userId = req.cookies[sessions.cookies.userIdName];
 
-    if (options.useSession) {
-      session = await validateSession(req, res);
+    const { session, newTokens } = await getSession(accessToken, refreshToken);
 
-      if (options.requireAuth && !session.isAuthenticated) {
-        return httpForbiddenResponse(
-          res,
-          errorJson(new Error('You do not have access to view this page.'))
-        );
-      }
+    if (session.isAuthenticated && newTokens && options.setTokens) {
+      createSessionCookies(res, signTokens(session.claims, jwt.secret), userId);
     }
 
-    let props = {};
+    if (options.requireAuth && !session.isAuthenticated) {
+      return httpForbiddenResponse(
+        res,
+        errorJson(new Error('You do not have access to view this page.'))
+      );
+    }
 
-    props = {
-      ...props,
+    let data = {};
+
+    data = {
+      ...data,
       ...(await fn({ session })),
     };
 
-    if (props.errors && props.errors.length) {
-      return httpBadRequestResponse(res, errorJson(props.errors));
+    if (data.errors && data.errors.length) {
+      return httpBadRequestResponse(res, errorJson(data.errors));
     }
 
-    return res.json(props);
+    return httpOKResponse(res, data);
   } catch (err) {
     if (err instanceof HttpError) {
       if (err instanceof HttpMethodNotAllowedError) {

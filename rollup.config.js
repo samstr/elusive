@@ -12,7 +12,6 @@ export default [
       components: './src/components/index.js',
       errors: './src/errors/index.js',
       forms: './src/forms/index.js',
-      hooks: './src/hooks/index.js',
       http: './src/http/index.js',
       models: './src/models/index.js',
       sessions: './src/sessions/index.js',

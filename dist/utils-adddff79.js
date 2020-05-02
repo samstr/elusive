@@ -4,9 +4,10 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
 var index = require('./index.js');
-var index$1 = require('./index-2340470f.js');
 var FormErrors = require('./FormErrors-a91e4b79.js');
-var bcrypt = _interopDefault(require('bcryptjs'));
+var React = require('react');
+var React__default = _interopDefault(React);
+var PropTypes = _interopDefault(require('prop-types'));
 var jwt = require('jsonwebtoken');
 var jwt__default = _interopDefault(jwt);
 
@@ -39,7 +40,7 @@ var InvalidAccessTokenError = /*#__PURE__*/function (_SessionError) {
 
   return InvalidAccessTokenError;
 }(SessionError);
-var UserIdCookieAndTokenMismatchError$1 = /*#__PURE__*/function (_SessionError2) {
+var UserIdCookieAndTokenMismatchError = /*#__PURE__*/function (_SessionError2) {
   wrapNativeSuper._inherits(UserIdCookieAndTokenMismatchError, _SessionError2);
 
   var _super3 = _createSuper(UserIdCookieAndTokenMismatchError);
@@ -52,7 +53,7 @@ var UserIdCookieAndTokenMismatchError$1 = /*#__PURE__*/function (_SessionError2)
 
   return UserIdCookieAndTokenMismatchError;
 }(SessionError);
-var InvalidRefreshTokenError$1 = /*#__PURE__*/function (_SessionError3) {
+var InvalidRefreshTokenError = /*#__PURE__*/function (_SessionError3) {
   wrapNativeSuper._inherits(InvalidRefreshTokenError, _SessionError3);
 
   var _super4 = _createSuper(InvalidRefreshTokenError);
@@ -65,7 +66,7 @@ var InvalidRefreshTokenError$1 = /*#__PURE__*/function (_SessionError3) {
 
   return InvalidRefreshTokenError;
 }(SessionError);
-var RefreshTokenExpiredError$1 = /*#__PURE__*/function (_SessionError4) {
+var RefreshTokenExpiredError = /*#__PURE__*/function (_SessionError4) {
   wrapNativeSuper._inherits(RefreshTokenExpiredError, _SessionError4);
 
   var _super5 = _createSuper(RefreshTokenExpiredError);
@@ -105,6 +106,39 @@ var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
   return SessionUserNotEnabledError;
 }(SessionError);
 
+var __jsx = React__default.createElement;
+var defaultValue = {
+  isAuthenticated: false,
+  claims: null
+};
+var SessionContext = React.createContext(defaultValue);
+var SessionContextProvider = function SessionContextProvider(_ref) {
+  var children = _ref.children;
+
+  var _useState = React.useState(defaultValue),
+      sessionContext = _useState[0],
+      setSessionContext = _useState[1];
+
+  var resetSessionContext = function resetSessionContext() {
+    setSessionContext(defaultValue);
+  };
+
+  var context = {
+    sessionContext: sessionContext,
+    setSessionContext: setSessionContext,
+    resetSessionContext: resetSessionContext
+  };
+  return __jsx(SessionContext.Provider, {
+    value: context
+  }, children);
+};
+SessionContextProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+var useSessionContext = function useSessionContext() {
+  return React.useContext(SessionContext);
+};
+
 var buildSessionCookieString = function buildSessionCookieString(name, value, expiryDate) {
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
 };
@@ -116,13 +150,6 @@ var createSessionCookieStrings = function createSessionCookieStrings(tokens, use
 };
 var createSessionCookies = function createSessionCookies(res, tokens, userId) {
   res.setHeader('Set-Cookie', createSessionCookieStrings(tokens, userId));
-};
-var hashPassword = function hashPassword(password) {
-  var options = index.options.sessions;
-  return bcrypt.hashSync(password, options.bcrypt.saltRounds);
-};
-var comparePasswordHash = function comparePasswordHash(password, hash) {
-  return bcrypt.compareSync(password, hash);
 };
 var signToken = function signToken(claims, secret, expiryMins) {
   return jwt__default.sign(claims, secret, {
@@ -188,126 +215,109 @@ var verifyRefreshTokenFromCookie = function verifyRefreshTokenFromCookie(refresh
     throw err;
   }
 };
-var validateSession = function validateSession(req, res) {
-  var options, _options$callbacks, createTokenClaims, reloadUser, session, _req$cookies, accessToken, refreshToken, userId, _verifyAccessTokenFro, accessTokenClaims, accessTokenExpired, accessTokenInvalid, _verifyRefreshTokenFr, refreshTokenClaims, refreshTokenExpired, refreshTokenInvalid, user;
+var getSession = function getSession(accessToken, refreshToken, userId) {};
+/*export const validateSession = async (req, res) => {
+  const { sessions: options } = Elusive.options;
+  const { createTokenClaims, reloadUser } = options.callbacks;
 
-  return index$1._regeneratorRuntime.async(function validateSession$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          options = index.options.sessions;
-          _options$callbacks = options.callbacks, createTokenClaims = _options$callbacks.createTokenClaims, reloadUser = _options$callbacks.reloadUser;
-          session = {
-            isAuthenticated: false,
-            claims: null
-          };
-          _req$cookies = req.cookies, accessToken = _req$cookies[options.cookies.accessTokenName], refreshToken = _req$cookies[options.cookies.refreshTokenName], userId = _req$cookies[options.cookies.userIdName]; // Regardless of whether the route has requiresAuth: true/false
-          // we always validate the request if the cookies are present incase
-          // we need to regenerate tokens
+  const session = {
+    isAuthenticated: false,
+    claims: null,
+  };
 
-          if (!(accessToken && refreshToken && userId)) {
-            _context.next = 27;
-            break;
-          }
+  const {
+    [options.cookies.accessTokenName]: accessToken,
+    [options.cookies.refreshTokenName]: refreshToken,
+    [options.cookies.userIdName]: userId,
+  } = req.cookies;
 
-          _verifyAccessTokenFro = verifyAccessTokenFromCookie(accessToken, options.jwt.secret), accessTokenClaims = _verifyAccessTokenFro.claims, accessTokenExpired = _verifyAccessTokenFro.expired, accessTokenInvalid = _verifyAccessTokenFro.invalid;
+  // Regardless of whether the route has requiresAuth: true/false
+  // we always validate the request if the cookies are present incase
+  // we need to regenerate tokens
+  if (accessToken && refreshToken && userId) {
+    const {
+      claims: accessTokenClaims,
+      expired: accessTokenExpired,
+      invalid: accessTokenInvalid,
+    } = verifyAccessTokenFromCookie(accessToken, options.jwt.secret);
 
-          if (!accessTokenInvalid) {
-            _context.next = 8;
-            break;
-          }
-
-          throw new InvalidAccessTokenError('Invalid access token');
-
-        case 8:
-          if (!accessTokenClaims) {
-            _context.next = 14;
-            break;
-          }
-
-          if (!(accessTokenClaims.user.id !== userId)) {
-            _context.next = 11;
-            break;
-          }
-
-          throw new UserIdCookieAndTokenMismatchError('User id cookie does not match access token');
-
-        case 11:
-          session.claims = accessTokenClaims; // we don't need these on the object
-
-          delete session.claims.iat;
-          delete session.claims.exp;
-
-        case 14:
-          if (!accessTokenExpired) {
-            _context.next = 27;
-            break;
-          }
-
-          // access token has expired (every 10 mins) so we need to generate a new one
-          _verifyRefreshTokenFr = verifyRefreshTokenFromCookie(refreshToken, options.jwt.secret), refreshTokenClaims = _verifyRefreshTokenFr.claims, refreshTokenExpired = _verifyRefreshTokenFr.expired, refreshTokenInvalid = _verifyRefreshTokenFr.invalid;
-
-          if (!refreshTokenInvalid) {
-            _context.next = 18;
-            break;
-          }
-
-          throw new InvalidRefreshTokenError('Invalid refresh token');
-
-        case 18:
-          if (!refreshTokenExpired) {
-            _context.next = 20;
-            break;
-          }
-
-          throw new RefreshTokenExpiredError('Refresh token expired');
-
-        case 20:
-          if (!(refreshTokenClaims.user.id !== userId)) {
-            _context.next = 22;
-            break;
-          }
-
-          throw new UserIdCookieAndTokenMismatchError('User id cookie does not match refresh token');
-
-        case 22:
-          _context.next = 24;
-          return index$1._regeneratorRuntime.awrap(reloadUser(refreshTokenClaims.user.id));
-
-        case 24:
-          user = _context.sent;
-          session.claims = createTokenClaims(user);
-          createSessionCookies(res, signTokens(session.claims, options.jwt.secret), user.id);
-
-        case 27:
-          session.isAuthenticated = !!session.claims;
-          return _context.abrupt("return", session);
-
-        case 29:
-        case "end":
-          return _context.stop();
-      }
+    if (accessTokenInvalid) {
+      throw new InvalidAccessTokenError('Invalid access token');
     }
-  }, null, null, null, Promise);
+
+    if (accessTokenClaims) {
+      if (accessTokenClaims.user.id !== userId) {
+        throw new UserIdCookieAndTokenMismatchError(
+          'User id cookie does not match access token'
+        );
+      }
+
+      session.claims = accessTokenClaims;
+
+      // we don't need these on the object
+      delete session.claims.iat;
+      delete session.claims.exp;
+    }
+
+    if (accessTokenExpired) {
+      // access token has expired (every 10 mins) so we need to generate a new one
+      const {
+        claims: refreshTokenClaims,
+        expired: refreshTokenExpired,
+        invalid: refreshTokenInvalid,
+      } = verifyRefreshTokenFromCookie(refreshToken, options.jwt.secret);
+
+      if (refreshTokenInvalid) {
+        throw new InvalidRefreshTokenError('Invalid refresh token');
+      }
+
+      if (refreshTokenExpired) {
+        // this should never happen since we're always refreshing it whenever we refresh an accessToken
+        throw new RefreshTokenExpiredError('Refresh token expired');
+      }
+
+      if (refreshTokenClaims.user.id !== userId) {
+        throw new UserIdCookieAndTokenMismatchError(
+          'User id cookie does not match refresh token'
+        );
+      }
+
+      const user = await reloadUser(refreshTokenClaims.user.id);
+
+      session.claims = createTokenClaims(user);
+
+      createSessionCookies(
+        res,
+        signTokens(session.claims, options.jwt.secret),
+        user.id
+      );
+    }
+  }
+
+  session.isAuthenticated = !!session.claims;
+
+  return session;
 };
+*/
 
 exports.InvalidAccessTokenError = InvalidAccessTokenError;
-exports.InvalidRefreshTokenError = InvalidRefreshTokenError$1;
-exports.RefreshTokenExpiredError = RefreshTokenExpiredError$1;
+exports.InvalidRefreshTokenError = InvalidRefreshTokenError;
+exports.RefreshTokenExpiredError = RefreshTokenExpiredError;
+exports.SessionContext = SessionContext;
+exports.SessionContextProvider = SessionContextProvider;
 exports.SessionError = SessionError;
 exports.SessionUserNoLongerExistsError = SessionUserNoLongerExistsError;
 exports.SessionUserNotEnabledError = SessionUserNotEnabledError;
-exports.UserIdCookieAndTokenMismatchError = UserIdCookieAndTokenMismatchError$1;
+exports.UserIdCookieAndTokenMismatchError = UserIdCookieAndTokenMismatchError;
 exports.buildSessionCookieString = buildSessionCookieString;
-exports.comparePasswordHash = comparePasswordHash;
 exports.createSessionCookieStrings = createSessionCookieStrings;
 exports.createSessionCookies = createSessionCookies;
 exports.deleteSessionCookieStrings = deleteSessionCookieStrings;
 exports.deleteSessionCookies = deleteSessionCookies;
-exports.hashPassword = hashPassword;
+exports.getSession = getSession;
 exports.signToken = signToken;
 exports.signTokens = signTokens;
-exports.validateSession = validateSession;
+exports.useSessionContext = useSessionContext;
 exports.verifyAccessTokenFromCookie = verifyAccessTokenFromCookie;
 exports.verifyRefreshTokenFromCookie = verifyRefreshTokenFromCookie;
 exports.verifyToken = verifyToken;

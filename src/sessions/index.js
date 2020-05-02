@@ -1,5 +1,4 @@
 import {
-  BCRYPT_SALT_ROUNDS,
   COOKIES_ACCESS_TOKEN_NAME,
   COOKIES_REFRESH_TOKEN_NAME,
   COOKIES_USER_ID_NAME,
@@ -8,7 +7,6 @@ import {
   JWT_REFRESH_TOKEN_EXPIRY_MINS,
 } from './config';
 export {
-  BCRYPT_SALT_ROUNDS,
   COOKIES_ACCESS_TOKEN_NAME,
   COOKIES_REFRESH_TOKEN_NAME,
   COOKIES_USER_ID_NAME,
@@ -47,29 +45,25 @@ import {
   buildSessionCookieString,
   createSessionCookieStrings,
   createSessionCookies,
-  hashPassword,
-  comparePasswordHash,
   signToken,
   signTokens,
   deleteSessionCookieStrings,
   deleteSessionCookies,
+  getSession,
   verifyToken,
   verifyAccessTokenFromCookie,
   verifyRefreshTokenFromCookie,
-  validateSession,
 } from './utils';
 export {
   buildSessionCookieString,
   createSessionCookieStrings,
   createSessionCookies,
-  hashPassword,
-  comparePasswordHash,
   signToken,
   signTokens,
   deleteSessionCookieStrings,
   deleteSessionCookies,
+  getSession,
   verifyToken,
   verifyAccessTokenFromCookie,
   verifyRefreshTokenFromCookie,
-  validateSession,
 };

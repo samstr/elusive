@@ -2,11 +2,17 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
 var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
+var client = require('./index-dbb6645d.js');
+require('./defineProperty-ba7cd53d.js');
+var index = require('./index.js');
 var FormErrors = require('./FormErrors-a91e4b79.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
+var bcrypt = _interopDefault(require('bcryptjs'));
 
 function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }
 
@@ -77,8 +83,19 @@ var NotAuthenticatedError = /*#__PURE__*/function (_AuthError4) {
   return NotAuthenticatedError;
 }(AuthError);
 
+var hashPassword = function hashPassword(password) {
+  var options = index.options.sessions;
+  return bcrypt.hashSync(password, options.bcrypt.saltRounds);
+};
+var comparePasswordHash = function comparePasswordHash(password, hash) {
+  return bcrypt.compareSync(password, hash);
+};
+
+exports.SALT_ROUNDS = client.SALT_ROUNDS;
 exports.AlreadyAuthenticatedError = AlreadyAuthenticatedError;
 exports.AuthError = AuthError;
 exports.AuthenticationFailedError = AuthenticationFailedError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.UserAlreadyExistsError = UserAlreadyExistsError;
+exports.comparePasswordHash = comparePasswordHash;
+exports.hashPassword = hashPassword;

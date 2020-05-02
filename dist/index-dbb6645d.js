@@ -19,7 +19,8 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-var BCRYPT_SALT_ROUNDS = 10;
+var SALT_ROUNDS = 10;
+
 var COOKIES_ACCESS_TOKEN_NAME = 'at';
 var COOKIES_REFRESH_TOKEN_NAME = 'rt';
 var COOKIES_USER_ID_NAME = 'uid';
@@ -77,15 +78,15 @@ var ElusiveClient = /*#__PURE__*/function () {
 
     defineProperty._defineProperty(this, "setDefaultOptions", function () {
       _this.options = {
+        auth: {
+          saltRounds: SALT_ROUNDS
+        },
         routes: {
           apiSession: apiSessionRoute,
           login: loginRoute,
           logout: logoutRoute
         },
         sessions: {
-          bcrypt: {
-            saltRounds: BCRYPT_SALT_ROUNDS
-          },
           cookies: {
             accessTokenName: COOKIES_ACCESS_TOKEN_NAME,
             expiryMins: COOKIES_EXPIRY_MINS,
@@ -112,9 +113,18 @@ var ElusiveClient = /*#__PURE__*/function () {
     defineProperty._defineProperty(this, "init", function (options) {
       _this.setDefaultOptions();
 
-      var routes = options.routes,
+      var auth = options.auth,
+          routes = options.routes,
           sentry = options.sentry,
           sessions = options.sessions;
+
+      if (auth) {
+        var saltRounds = auth.saltRounds;
+
+        if (saltRounds) {
+          _this.options.auth.saltRounds = saltRounds;
+        }
+      }
 
       if (routes) {
         var apiSession = routes.apiSession,
@@ -141,10 +151,10 @@ var ElusiveClient = /*#__PURE__*/function () {
             jwt = sessions.jwt;
 
         if (bcrypt) {
-          var saltRounds = bcrypt.saltRounds;
+          var _saltRounds = bcrypt.saltRounds;
 
-          if (saltRounds) {
-            _this.options.sessions.bcrypt.saltRounds = saltRounds;
+          if (_saltRounds) {
+            _this.options.sessions.bcrypt.saltRounds = _saltRounds;
           }
         }
 
@@ -239,7 +249,6 @@ var ElusiveClient = /*#__PURE__*/function () {
 
 defineProperty._defineProperty(ElusiveClient, "instance", void 0);
 
-exports.BCRYPT_SALT_ROUNDS = BCRYPT_SALT_ROUNDS;
 exports.COOKIES_ACCESS_TOKEN_NAME = COOKIES_ACCESS_TOKEN_NAME;
 exports.COOKIES_EXPIRY_MINS = COOKIES_EXPIRY_MINS;
 exports.COOKIES_REFRESH_TOKEN_NAME = COOKIES_REFRESH_TOKEN_NAME;
@@ -247,3 +256,4 @@ exports.COOKIES_USER_ID_NAME = COOKIES_USER_ID_NAME;
 exports.ElusiveClient = ElusiveClient;
 exports.JWT_ACCESS_TOKEN_EXPIRY_MINS = JWT_ACCESS_TOKEN_EXPIRY_MINS;
 exports.JWT_REFRESH_TOKEN_EXPIRY_MINS = JWT_REFRESH_TOKEN_EXPIRY_MINS;
+exports.SALT_ROUNDS = SALT_ROUNDS;

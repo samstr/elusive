@@ -1,5 +1,5 @@
+import { SALT_ROUNDS } from '../auth/config';
 import {
-  BCRYPT_SALT_ROUNDS,
   COOKIES_ACCESS_TOKEN_NAME,
   COOKIES_EXPIRY_MINS,
   COOKIES_REFRESH_TOKEN_NAME,
@@ -13,22 +13,20 @@ import {
 
 import { MissingJWTSecretOptionError } from './errors';
 
-const isServer = typeof window === 'undefined';
-
 class ElusiveClient {
   static instance;
 
   setDefaultOptions = () => {
     this.options = {
+      auth: {
+        saltRounds: SALT_ROUNDS,
+      },
       routes: {
         apiSession: apiSessionRoute,
         login: loginRoute,
         logout: logoutRoute,
       },
       sessions: {
-        bcrypt: {
-          saltRounds: BCRYPT_SALT_ROUNDS,
-        },
         cookies: {
           accessTokenName: COOKIES_ACCESS_TOKEN_NAME,
           expiryMins: COOKIES_EXPIRY_MINS,
@@ -55,7 +53,15 @@ class ElusiveClient {
   init = (options) => {
     this.setDefaultOptions();
 
-    const { routes, sentry, sessions } = options;
+    const { auth, routes, sentry, sessions } = options;
+
+    if (auth) {
+      const { saltRounds } = auth;
+
+      if (saltRounds) {
+        this.options.auth.saltRounds = saltRounds;
+      }
+    }
 
     if (routes) {
       const { apiSession, login, logout } = routes;

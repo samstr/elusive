@@ -1,4 +1,3 @@
-export const BCRYPT_SALT_ROUNDS = 10;
 export const COOKIES_ACCESS_TOKEN_NAME = 'at';
 export const COOKIES_REFRESH_TOKEN_NAME = 'rt';
 export const COOKIES_USER_ID_NAME = 'uid';

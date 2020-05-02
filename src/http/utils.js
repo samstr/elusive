@@ -26,6 +26,10 @@ export const httpResponse = (res, status, data) => {
   res.end();
 };
 
+// 200
+export const httpOKResponse = (res, data) =>
+  httpResponse(res, HTTP_STATUS_OK, data);
+
 // 400
 export const httpBadRequestResponse = (res, data) =>
   httpResponse(res, HTTP_STATUS_BAD_REQUEST, data);
