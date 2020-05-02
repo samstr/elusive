@@ -5,9 +5,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var client = require('./index-59266c9b.js');
+var client = require('./index-6c0d18da.js');
 require('./defineProperty-ba7cd53d.js');
-require('./utils-1794fb54.js');
 var index = require('./index.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');

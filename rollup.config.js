@@ -14,6 +14,7 @@ export default [
       forms: './src/forms/index.js',
       http: './src/http/index.js',
       models: './src/models/index.js',
+      pages: './src/pages/index.js',
       routes: './src/routes/index.js',
       sessions: './src/sessions/index.js',
       tokens: './src/tokens/index.js',

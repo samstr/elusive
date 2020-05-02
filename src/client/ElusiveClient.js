@@ -1,5 +1,5 @@
 import { SALT_ROUNDS } from '../auth/config';
-import { apiSessionRoute, loginRoute, logoutRoute } from '../routes/utils';
+import { apiSessionRoute, loginRoute, logoutRoute } from '../routes/config';
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   COOKIE_EXPIRY_MINS,

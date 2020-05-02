@@ -3,9 +3,8 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-require('./index-59266c9b.js');
+require('./index-6c0d18da.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
-require('./utils-1794fb54.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 var Sentry = require('@sentry/node');
@@ -13,10 +12,10 @@ var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils$1 = require('./utils-b08f259e.js');
-var utils$2 = require('./utils-c2acb3b2.js');
+var utils = require('./utils-b08f259e.js');
+var utils$1 = require('./utils-e75d8007.js');
 require('jsonwebtoken');
-var utils$3 = require('./utils-c25b9b40.js');
+var utils$2 = require('./utils-b756bb3f.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -38,19 +37,19 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           }
 
           defaultOptions = {
-            allowedMethods: [utils$1.GET],
+            allowedMethods: [utils.GET],
             requireAuth: false,
             setSessionCookies: false,
             reloadSessionUser: false
           };
           options = _objectSpread({}, defaultOptions, {}, options);
           _context.prev = 4;
-          utils$1.validateRequest(req, res, options);
+          utils.validateRequest(req, res, options);
           accessToken = req.cookies[sessionOptions.accessTokenCookieName];
           refreshToken = req.cookies[sessionOptions.refreshTokenCookieName];
           userId = req.cookies[sessionOptions.userIdCookieName];
           _context.next = 11;
-          return index$1._regeneratorRuntime.awrap(utils$2.getSession(accessToken, refreshToken, userId, options.reloadSessionUser));
+          return index$1._regeneratorRuntime.awrap(utils$1.getSession(accessToken, refreshToken, userId, options.reloadSessionUser));
 
         case 11:
           _await$getSession = _context.sent;
@@ -58,7 +57,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           tokens = _await$getSession.tokens;
 
           if (options.setSessionCookies && session.isAuthenticated && tokens) {
-            utils$2.createSessionCookies(res, utils$3.signTokens(session.claims, tokenOptions.secret), userId);
+            utils$1.createSessionCookies(res, utils$2.signTokens(session.claims, tokenOptions.secret), userId);
           }
 
           if (!(options.requireAuth && !session.isAuthenticated)) {
@@ -66,7 +65,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             break;
           }
 
-          return _context.abrupt("return", utils$1.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
+          return _context.abrupt("return", utils.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
 
         case 17:
           data = {};
@@ -88,35 +87,35 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             break;
           }
 
-          return _context.abrupt("return", utils$1.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
+          return _context.abrupt("return", utils.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
 
         case 28:
-          return _context.abrupt("return", utils$1.httpOKResponse(res, data));
+          return _context.abrupt("return", utils.httpOKResponse(res, data));
 
         case 31:
           _context.prev = 31;
           _context.t5 = _context["catch"](4);
 
-          if (!(_context.t5 instanceof utils$1.HttpError)) {
+          if (!(_context.t5 instanceof utils.HttpError)) {
             _context.next = 36;
             break;
           }
 
-          if (!(_context.t5 instanceof utils$1.HttpMethodNotAllowedError)) {
+          if (!(_context.t5 instanceof utils.HttpMethodNotAllowedError)) {
             _context.next = 36;
             break;
           }
 
-          return _context.abrupt("return", utils$1.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
+          return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 36:
-          if (!(_context.t5 instanceof utils$2.SessionError)) {
+          if (!(_context.t5 instanceof utils$1.SessionError)) {
             _context.next = 39;
             break;
           }
 
-          utils$2.deleteSessionCookies(res);
-          return _context.abrupt("return", utils$1.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
+          utils$1.deleteSessionCookies(res);
+          return _context.abrupt("return", utils.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 39:
           if (!(_context.t5 instanceof FormErrors.BaseError)) {
@@ -124,7 +123,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             break;
           }
 
-          return _context.abrupt("return", utils$1.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
+          return _context.abrupt("return", utils.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 41:
           console.error('error in apiWrapper:', _context.t5);
@@ -134,7 +133,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             Sentry.captureException(_context.t5);
           }
 
-          return _context.abrupt("return", utils$1.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
+          return _context.abrupt("return", utils.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
 
         case 44:
         case "end":

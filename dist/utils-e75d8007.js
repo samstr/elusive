@@ -9,7 +9,7 @@ var FormErrors = require('./FormErrors-1539c4dc.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 var PropTypes = _interopDefault(require('prop-types'));
-var utils$3 = require('./utils-c25b9b40.js');
+var utils$2 = require('./utils-b756bb3f.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -174,11 +174,11 @@ var getSession = function getSession(accessToken, refreshToken, userId, reloadSe
           };
 
           if (!(accessToken && refreshToken && userId)) {
-            _context.next = 32;
+            _context.next = 31;
             break;
           }
 
-          _getClaims = utils$3.getClaims(accessToken, tokenOptions.secret), accessTokenClaims = _getClaims.claims, accessTokenExpired = _getClaims.expired, accessTokenInvalid = _getClaims.invalid;
+          _getClaims = utils$2.getClaims(accessToken, tokenOptions.secret), accessTokenClaims = _getClaims.claims, accessTokenExpired = _getClaims.expired, accessTokenInvalid = _getClaims.invalid;
 
           if (!accessTokenInvalid) {
             _context.next = 6;
@@ -208,12 +208,12 @@ var getSession = function getSession(accessToken, refreshToken, userId, reloadSe
 
         case 12:
           if (!accessTokenExpired) {
-            _context.next = 32;
+            _context.next = 31;
             break;
           }
 
           // access token has expired (every 10 mins) so we need to generate a new one from the refreshToken
-          _getClaims2 = utils$3.getClaims(refreshToken, tokenOptions.secret), refreshTokenClaims = _getClaims2.claims, refreshTokenExpired = _getClaims2.expired, refreshTokenInvalid = _getClaims2.invalid;
+          _getClaims2 = utils$2.getClaims(refreshToken, tokenOptions.secret), refreshTokenClaims = _getClaims2.claims, refreshTokenExpired = _getClaims2.expired, refreshTokenInvalid = _getClaims2.invalid;
 
           if (!refreshTokenInvalid) {
             _context.next = 16;
@@ -239,38 +239,36 @@ var getSession = function getSession(accessToken, refreshToken, userId, reloadSe
           throw new UserIdCookieAndTokenMismatchError('User id cookie does not match refresh token');
 
         case 20:
-          console.log('REFRESHING ACCESS TOKEN');
-
           if (!reloadSessionUser) {
-            _context.next = 29;
+            _context.next = 28;
             break;
           }
 
-          console.log('reloading user from session');
-          _context.next = 25;
+          console.log('REFRESHING ACCESS TOKEN by reloading session user');
+          _context.next = 24;
           return index$1._regeneratorRuntime.awrap(sessionOptions.reloadUser(refreshTokenClaims.user.id));
 
-        case 25:
+        case 24:
           user = _context.sent;
           session.claims = tokenOptions.createClaims(user);
-          _context.next = 31;
+          _context.next = 30;
           break;
 
-        case 29:
-          console.log('using refreshTokenClaims');
+        case 28:
+          console.log('returning refreshTokenClaims');
           session.claims = refreshTokenClaims;
 
-        case 31:
-          tokens = utils$3.signTokens(session.claims, tokenOptions.secret);
+        case 30:
+          tokens = utils$2.signTokens(session.claims, tokenOptions.secret);
 
-        case 32:
+        case 31:
           session.isAuthenticated = !!session.claims;
           return _context.abrupt("return", {
             session: session,
             tokens: tokens
           });
 
-        case 34:
+        case 33:
         case "end":
           return _context.stop();
       }

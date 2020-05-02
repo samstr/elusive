@@ -2,7 +2,6 @@
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
-var utils = require('./utils-1794fb54.js');
 
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
@@ -21,6 +20,16 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 var SALT_ROUNDS = 10;
+
+var apiSessionRoute = function apiSessionRoute() {
+  return '/api/session';
+};
+var loginRoute = function loginRoute() {
+  return '/login';
+};
+var logoutRoute = function logoutRoute() {
+  return '/logout';
+};
 
 var ACCESS_TOKEN_COOKIE_NAME = 'at';
 var COOKIE_EXPIRY_MINS = 43800; // 1 month
@@ -43,9 +52,9 @@ var ElusiveClient = /*#__PURE__*/function () {
           saltRounds: SALT_ROUNDS
         },
         routes: {
-          apiSession: utils.apiSessionRoute,
-          login: utils.loginRoute,
-          logout: utils.logoutRoute
+          apiSession: apiSessionRoute,
+          login: loginRoute,
+          logout: logoutRoute
         },
         sessions: {
           accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
@@ -193,3 +202,6 @@ exports.REFRESH_TOKEN_COOKIE_NAME = REFRESH_TOKEN_COOKIE_NAME;
 exports.REFRESH_TOKEN_EXPIRY_MINS = REFRESH_TOKEN_EXPIRY_MINS;
 exports.SALT_ROUNDS = SALT_ROUNDS;
 exports.USER_ID_COOKIE_NAME = USER_ID_COOKIE_NAME;
+exports.apiSessionRoute = apiSessionRoute;
+exports.loginRoute = loginRoute;
+exports.logoutRoute = logoutRoute;

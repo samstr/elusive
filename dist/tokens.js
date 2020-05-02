@@ -3,17 +3,16 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-59266c9b.js');
+var client = require('./index-6c0d18da.js');
 require('./defineProperty-ba7cd53d.js');
-require('./utils-1794fb54.js');
 require('./index.js');
 require('jsonwebtoken');
-var utils$3 = require('./utils-c25b9b40.js');
+var utils$2 = require('./utils-b756bb3f.js');
 
 
 
 exports.ACCESS_TOKEN_EXPIRY_MINS = client.ACCESS_TOKEN_EXPIRY_MINS;
 exports.REFRESH_TOKEN_EXPIRY_MINS = client.REFRESH_TOKEN_EXPIRY_MINS;
-exports.getClaims = utils$3.getClaims;
-exports.signToken = utils$3.signToken;
-exports.signTokens = utils$3.signTokens;
+exports.getClaims = utils$2.getClaims;
+exports.signToken = utils$2.signToken;
+exports.signTokens = utils$2.signTokens;
