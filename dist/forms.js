@@ -5,18 +5,17 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var errors = require('./errors-2aa6e0aa.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var FormErrors = require('./FormErrors-9579dce8.js');
 var sanitizeHtml = _interopDefault(require('sanitize-html'));
 
-function _createSuper(Derived) { return function () { var Super = errors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var FormError = /*#__PURE__*/function (_BaseError) {
-  errors._inherits(FormError, _BaseError);
+  FormErrors._inherits(FormError, _BaseError);
 
   var _super = _createSuper(FormError);
 
@@ -36,9 +35,9 @@ var FormError = /*#__PURE__*/function (_BaseError) {
   }
 
   return FormError;
-}(errors.BaseError);
+}(FormErrors.BaseError);
 var UnknownFormError = /*#__PURE__*/function (_FormError) {
-  errors._inherits(UnknownFormError, _FormError);
+  FormErrors._inherits(UnknownFormError, _FormError);
 
   var _super2 = _createSuper(UnknownFormError);
 
@@ -51,7 +50,7 @@ var UnknownFormError = /*#__PURE__*/function (_FormError) {
   return UnknownFormError;
 }(FormError);
 var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
-  errors._inherits(InvalidFieldValueError, _FormError2);
+  FormErrors._inherits(InvalidFieldValueError, _FormError2);
 
   var _super3 = _createSuper(InvalidFieldValueError);
 
@@ -64,7 +63,7 @@ var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
   return InvalidFieldValueError;
 }(FormError);
 var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
-  errors._inherits(FieldValueTooShortError, _FormError3);
+  FormErrors._inherits(FieldValueTooShortError, _FormError3);
 
   var _super4 = _createSuper(FieldValueTooShortError);
 
@@ -77,7 +76,7 @@ var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
   return FieldValueTooShortError;
 }(FormError);
 var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
-  errors._inherits(FieldValueTooLongError, _FormError4);
+  FormErrors._inherits(FieldValueTooLongError, _FormError4);
 
   var _super5 = _createSuper(FieldValueTooLongError);
 
@@ -90,7 +89,7 @@ var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
   return FieldValueTooLongError;
 }(FormError);
 var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
-  errors._inherits(MissingRequiredFieldError, _FormError5);
+  FormErrors._inherits(MissingRequiredFieldError, _FormError5);
 
   var _super6 = _createSuper(MissingRequiredFieldError);
 

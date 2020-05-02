@@ -9,22 +9,48 @@ require('./index-6c0d18da.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
+require('./FormErrors-1539c4dc.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 require('prop-types');
 require('react-bootstrap');
-require('./FormErrors-9579dce8.js');
+var utils = require('./utils-b08f259e.js');
 var SessionContext = require('./SessionContext-859ea7a9.js');
 require('jsonwebtoken');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
-var router = require('next/router');
-var utils = require('./utils-f7e1f820.js');
+var utils$1 = require('./utils-f7e1f820.js');
+var router$1 = require('next/router');
 
 var useData = function useData() {
+  var _useSessionContext = SessionContext.useSessionContext(),
+      resetSessionContext = _useSessionContext.resetSessionContext;
+
   var _useState = React.useState(),
       data = _useState[0],
       setData = _useState[1];
+
+  var handleError = function handleError(err) {
+    if (axios__default.isCancel(err)) return;
+
+    if (err.response && err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
+      resetSessionContext();
+      var pathname = window.location.pathname;
+
+      if (pathname !== routeOptions.login()) {
+        router.replace(utils$1.loginRouteWithNext());
+      }
+
+      return;
+    }
+
+    if (err.response && err.response.data) {
+      setData(err.response.data);
+      return;
+    }
+
+    console.log('Unknown error in useData: ', err);
+  };
 
   React.useEffect(function () {
     var cancelRequest;
@@ -56,7 +82,7 @@ var useData = function useData() {
             case 10:
               _context.prev = 10;
               _context.t0 = _context["catch"](0);
-              console.log('err', _context.t0);
+              return _context.abrupt("return", handleError(_context.t0));
 
             case 13:
             case "end":
@@ -77,21 +103,21 @@ var useData = function useData() {
 };
 
 var useRedirect = function useRedirect(href, asPath) {
-  var router$1 = router.useRouter();
+  var router = router$1.useRouter();
   React.useEffect(function () {
-    router$1.replace(href, asPath);
+    router.replace(href, asPath);
   }, []);
 };
 
 var useRequireAuth = function useRequireAuth() {
-  var router$1 = router.useRouter();
+  var router = router$1.useRouter();
 
   var _useSessionContext = SessionContext.useSessionContext(),
       sessionContext = _useSessionContext.sessionContext;
 
   React.useEffect(function () {
     if (sessionContext._ready && !sessionContext.isAuthenticated) {
-      router$1.replace(utils.loginRouteWithNext());
+      router.replace(utils$1.loginRouteWithNext());
     }
   }, [sessionContext._ready]);
 };
@@ -103,6 +129,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 var useSession = function useSession() {
   var _useSessionContext = SessionContext.useSessionContext(),
       sessionContext = _useSessionContext.sessionContext,
+      resetSessionContext = _useSessionContext.resetSessionContext,
       setSessionContext = _useSessionContext.setSessionContext;
 
   var _useState = React.useState(sessionContext),
@@ -110,6 +137,24 @@ var useSession = function useSession() {
       setSession = _useState[1];
 
   var routeOptions = index.options.routes;
+
+  var handleError = function handleError(err) {
+    if (axios__default.isCancel(err)) return;
+
+    if (err.response && err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
+      resetSessionContext();
+      var pathname = window.location.pathname;
+
+      if (pathname !== routeOptions.login()) {
+        router.replace(utils$1.loginRouteWithNext());
+      }
+
+      return;
+    }
+
+    console.log('Unknown error in useSession: ', err);
+  };
+
   React.useEffect(function () {
     var cancelRequest;
 
@@ -142,7 +187,7 @@ var useSession = function useSession() {
             case 10:
               _context.prev = 10;
               _context.t0 = _context["catch"](0);
-              console.log('err', _context.t0);
+              return _context.abrupt("return", handleError(_context.t0));
 
             case 13:
             case "end":

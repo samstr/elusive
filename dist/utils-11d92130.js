@@ -3,15 +3,14 @@
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
-var errors = require('./errors-2aa6e0aa.js');
-require('./FormErrors-9579dce8.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 var utils$2 = require('./utils-b756bb3f.js');
 
-function _createSuper(Derived) { return function () { var Super = errors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var SessionError = /*#__PURE__*/function (_BaseError) {
-  errors._inherits(SessionError, _BaseError);
+  FormErrors._inherits(SessionError, _BaseError);
 
   var _super = _createSuper(SessionError);
 
@@ -22,9 +21,9 @@ var SessionError = /*#__PURE__*/function (_BaseError) {
   }
 
   return SessionError;
-}(errors.BaseError);
+}(FormErrors.BaseError);
 var InvalidAccessTokenError = /*#__PURE__*/function (_SessionError) {
-  errors._inherits(InvalidAccessTokenError, _SessionError);
+  FormErrors._inherits(InvalidAccessTokenError, _SessionError);
 
   var _super2 = _createSuper(InvalidAccessTokenError);
 
@@ -37,7 +36,7 @@ var InvalidAccessTokenError = /*#__PURE__*/function (_SessionError) {
   return InvalidAccessTokenError;
 }(SessionError);
 var UserIdCookieAndTokenMismatchError = /*#__PURE__*/function (_SessionError2) {
-  errors._inherits(UserIdCookieAndTokenMismatchError, _SessionError2);
+  FormErrors._inherits(UserIdCookieAndTokenMismatchError, _SessionError2);
 
   var _super3 = _createSuper(UserIdCookieAndTokenMismatchError);
 
@@ -50,7 +49,7 @@ var UserIdCookieAndTokenMismatchError = /*#__PURE__*/function (_SessionError2) {
   return UserIdCookieAndTokenMismatchError;
 }(SessionError);
 var InvalidRefreshTokenError = /*#__PURE__*/function (_SessionError3) {
-  errors._inherits(InvalidRefreshTokenError, _SessionError3);
+  FormErrors._inherits(InvalidRefreshTokenError, _SessionError3);
 
   var _super4 = _createSuper(InvalidRefreshTokenError);
 
@@ -63,7 +62,7 @@ var InvalidRefreshTokenError = /*#__PURE__*/function (_SessionError3) {
   return InvalidRefreshTokenError;
 }(SessionError);
 var RefreshTokenExpiredError = /*#__PURE__*/function (_SessionError4) {
-  errors._inherits(RefreshTokenExpiredError, _SessionError4);
+  FormErrors._inherits(RefreshTokenExpiredError, _SessionError4);
 
   var _super5 = _createSuper(RefreshTokenExpiredError);
 
@@ -76,7 +75,7 @@ var RefreshTokenExpiredError = /*#__PURE__*/function (_SessionError4) {
   return RefreshTokenExpiredError;
 }(SessionError);
 var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError5) {
-  errors._inherits(SessionUserNoLongerExistsError, _SessionError5);
+  FormErrors._inherits(SessionUserNoLongerExistsError, _SessionError5);
 
   var _super6 = _createSuper(SessionUserNoLongerExistsError);
 
@@ -89,7 +88,7 @@ var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError5) {
   return SessionUserNoLongerExistsError;
 }(SessionError);
 var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
-  errors._inherits(SessionUserNotEnabledError, _SessionError6);
+  FormErrors._inherits(SessionUserNotEnabledError, _SessionError6);
 
   var _super7 = _createSuper(SessionUserNotEnabledError);
 

@@ -1,8 +1,35 @@
 import axios, { CancelToken } from 'axios';
 import { useEffect, useState } from 'react';
 
+import { HTTP_STATUS_UNAUTHORIZED } from '../http';
+import { loginRouteWithNext } from '../routes';
+import { useSessionContext } from '../sessions';
+
 const useData = () => {
+  const { resetSessionContext } = useSessionContext();
   const [data, setData] = useState();
+
+  const handleError = (err) => {
+    if (axios.isCancel(err)) return;
+
+    if (err.response && err.response.status === HTTP_STATUS_UNAUTHORIZED) {
+      resetSessionContext();
+
+      const { pathname } = window.location;
+
+      if (pathname !== routeOptions.login()) {
+        router.replace(loginRouteWithNext());
+      }
+      return;
+    }
+
+    if (err.response && err.response.data) {
+      setData(err.response.data);
+      return;
+    }
+
+    console.log('Unknown error in useData: ', err);
+  };
 
   useEffect(() => {
     let cancelRequest;
@@ -21,7 +48,7 @@ const useData = () => {
 
         setData(response.data);
       } catch (err) {
-        console.log('err', err);
+        return handleError(err);
       }
     };
 

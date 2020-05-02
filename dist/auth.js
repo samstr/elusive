@@ -8,18 +8,17 @@ var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var client = require('./index-6c0d18da.js');
 require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
-var errors = require('./errors-2aa6e0aa.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-require('./FormErrors-9579dce8.js');
 var bcrypt = _interopDefault(require('bcryptjs'));
 
-function _createSuper(Derived) { return function () { var Super = errors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var AuthError = /*#__PURE__*/function (_BaseError) {
-  errors._inherits(AuthError, _BaseError);
+  FormErrors._inherits(AuthError, _BaseError);
 
   var _super = _createSuper(AuthError);
 
@@ -30,9 +29,9 @@ var AuthError = /*#__PURE__*/function (_BaseError) {
   }
 
   return AuthError;
-}(errors.BaseError);
+}(FormErrors.BaseError);
 var AlreadyAuthenticatedError = /*#__PURE__*/function (_AuthError) {
-  errors._inherits(AlreadyAuthenticatedError, _AuthError);
+  FormErrors._inherits(AlreadyAuthenticatedError, _AuthError);
 
   var _super2 = _createSuper(AlreadyAuthenticatedError);
 
@@ -45,7 +44,7 @@ var AlreadyAuthenticatedError = /*#__PURE__*/function (_AuthError) {
   return AlreadyAuthenticatedError;
 }(AuthError);
 var UserAlreadyExistsError = /*#__PURE__*/function (_AuthError2) {
-  errors._inherits(UserAlreadyExistsError, _AuthError2);
+  FormErrors._inherits(UserAlreadyExistsError, _AuthError2);
 
   var _super3 = _createSuper(UserAlreadyExistsError);
 
@@ -58,7 +57,7 @@ var UserAlreadyExistsError = /*#__PURE__*/function (_AuthError2) {
   return UserAlreadyExistsError;
 }(AuthError);
 var AuthenticationFailedError = /*#__PURE__*/function (_AuthError3) {
-  errors._inherits(AuthenticationFailedError, _AuthError3);
+  FormErrors._inherits(AuthenticationFailedError, _AuthError3);
 
   var _super4 = _createSuper(AuthenticationFailedError);
 
@@ -71,7 +70,7 @@ var AuthenticationFailedError = /*#__PURE__*/function (_AuthError3) {
   return AuthenticationFailedError;
 }(AuthError);
 var NotAuthenticatedError = /*#__PURE__*/function (_AuthError4) {
-  errors._inherits(NotAuthenticatedError, _AuthError4);
+  FormErrors._inherits(NotAuthenticatedError, _AuthError4);
 
   var _super5 = _createSuper(NotAuthenticatedError);
 

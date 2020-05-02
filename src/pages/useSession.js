@@ -2,12 +2,35 @@ import axios, { CancelToken } from 'axios';
 import { useEffect, useState } from 'react';
 
 import Elusive from '../';
+import { HTTP_STATUS_UNAUTHORIZED } from '../http';
+import { loginRouteWithNext } from '../routes';
 import { useSessionContext } from '../sessions';
 
 const useSession = () => {
-  const { sessionContext, setSessionContext } = useSessionContext();
+  const {
+    sessionContext,
+    resetSessionContext,
+    setSessionContext,
+  } = useSessionContext();
   const [session, setSession] = useState(sessionContext);
   const { routes: routeOptions } = Elusive.options;
+
+  const handleError = (err) => {
+    if (axios.isCancel(err)) return;
+
+    if (err.response && err.response.status === HTTP_STATUS_UNAUTHORIZED) {
+      resetSessionContext();
+
+      const { pathname } = window.location;
+
+      if (pathname !== routeOptions.login()) {
+        router.replace(loginRouteWithNext());
+      }
+      return;
+    }
+
+    console.log('Unknown error in useSession: ', err);
+  };
 
   useEffect(() => {
     let cancelRequest;
@@ -29,7 +52,7 @@ const useSession = () => {
         setSession(_session);
         setSessionContext(_session);
       } catch (err) {
-        console.log('err', err);
+        return handleError(err);
       }
     };
 

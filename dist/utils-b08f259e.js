@@ -1,14 +1,13 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var errors = require('./errors-2aa6e0aa.js');
-require('./FormErrors-9579dce8.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 
-function _createSuper(Derived) { return function () { var Super = errors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var HttpError = /*#__PURE__*/function (_BaseError) {
-  errors._inherits(HttpError, _BaseError);
+  FormErrors._inherits(HttpError, _BaseError);
 
   var _super = _createSuper(HttpError);
 
@@ -19,9 +18,9 @@ var HttpError = /*#__PURE__*/function (_BaseError) {
   }
 
   return HttpError;
-}(errors.BaseError);
+}(FormErrors.BaseError);
 var HttpMethodNotAllowedError = /*#__PURE__*/function (_HttpError) {
-  errors._inherits(HttpMethodNotAllowedError, _HttpError);
+  FormErrors._inherits(HttpMethodNotAllowedError, _HttpError);
 
   var _super2 = _createSuper(HttpMethodNotAllowedError);
 

@@ -3,15 +3,14 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-var errors = require('./errors-2aa6e0aa.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var FormErrors = require('./FormErrors-9579dce8.js');
 
 
 
-exports.BaseError = errors.BaseError;
+exports.BaseError = FormErrors.BaseError;
 exports.FormErrors = FormErrors.FormErrors;
 exports.GenericErrors = FormErrors.GenericErrors;
 exports.errorJson = FormErrors.errorJson;
