@@ -95,6 +95,7 @@ var usePage = function usePage(options) {
           href = _options$redirect.href,
           asPath = _options$redirect.asPath;
       router$1.replace(href, asPath);
+      return;
     }
 
     (function _callee() {
