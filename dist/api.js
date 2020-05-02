@@ -2,19 +2,19 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./wrapNativeSuper-b3646a2a.js');
-require('./index-dbb6645d.js');
+require('./classCallCheck-d2bb402f.js');
+require('./index-08623d88.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
+require('./utils-1794fb54.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 var Sentry = require('@sentry/node');
-var FormErrors = require('./FormErrors-a91e4b79.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('./utils-64956f83.js');
-var utils$1 = require('./utils-adddff79.js');
-require('jsonwebtoken');
+var utils$1 = require('./utils-b08f259e.js');
+var utils$2 = require('./utils-ab1e44de.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -36,13 +36,13 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           }
 
           defaultOptions = {
-            allowedMethods: [utils.GET],
+            allowedMethods: [utils$1.GET],
             requireAuth: false,
             setTokens: false
           };
           options = _objectSpread({}, defaultOptions, {}, options);
           _context.prev = 4;
-          utils.validateRequest(req, res, options);
+          utils$1.validateRequest(req, res, options);
           accessToken = req.cookies[sessions.cookies.accessTokenName];
           refreshToken = req.cookies[sessions.cookies.refreshTokenName];
           userId = req.cookies[sessions.cookies.userIdName];
@@ -63,7 +63,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             break;
           }
 
-          return _context.abrupt("return", utils.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
+          return _context.abrupt("return", utils$1.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
 
         case 17:
           data = {};
@@ -85,35 +85,35 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             break;
           }
 
-          return _context.abrupt("return", utils.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
+          return _context.abrupt("return", utils$1.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
 
         case 28:
-          return _context.abrupt("return", utils.httpOKResponse(res, data));
+          return _context.abrupt("return", utils$1.httpOKResponse(res, data));
 
         case 31:
           _context.prev = 31;
           _context.t5 = _context["catch"](4);
 
-          if (!(_context.t5 instanceof utils.HttpError)) {
+          if (!(_context.t5 instanceof utils$1.HttpError)) {
             _context.next = 36;
             break;
           }
 
-          if (!(_context.t5 instanceof utils.HttpMethodNotAllowedError)) {
+          if (!(_context.t5 instanceof utils$1.HttpMethodNotAllowedError)) {
             _context.next = 36;
             break;
           }
 
-          return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
+          return _context.abrupt("return", utils$1.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 36:
-          if (!(_context.t5 instanceof utils$1.SessionError)) {
+          if (!(_context.t5 instanceof utils$2.SessionError)) {
             _context.next = 39;
             break;
           }
 
-          utils$1.deleteSessionCookies(res);
-          return _context.abrupt("return", utils.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
+          utils$2.deleteSessionCookies(res);
+          return _context.abrupt("return", utils$1.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 39:
           if (!(_context.t5 instanceof FormErrors.BaseError)) {
@@ -121,7 +121,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             break;
           }
 
-          return _context.abrupt("return", utils.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
+          return _context.abrupt("return", utils$1.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 41:
           console.error('error in apiWrapper:', _context.t5);
@@ -131,7 +131,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
             Sentry.captureException(_context.t5);
           }
 
-          return _context.abrupt("return", utils.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
+          return _context.abrupt("return", utils$1.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
 
         case 44:
         case "end":

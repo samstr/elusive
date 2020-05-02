@@ -4,25 +4,25 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
-var FormErrors = require('./FormErrors-a91e4b79.js');
+var classCallCheck = require('./classCallCheck-d2bb402f.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
 var sanitizeHtml = _interopDefault(require('sanitize-html'));
 
-function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var FormError = /*#__PURE__*/function (_BaseError) {
-  wrapNativeSuper._inherits(FormError, _BaseError);
+  FormErrors._inherits(FormError, _BaseError);
 
   var _super = _createSuper(FormError);
 
   function FormError(message, fields) {
     var _this;
 
-    wrapNativeSuper._classCallCheck(this, FormError);
+    classCallCheck._classCallCheck(this, FormError);
 
     _this = _super.call(this, message);
     _this.fields = [];
@@ -37,12 +37,12 @@ var FormError = /*#__PURE__*/function (_BaseError) {
   return FormError;
 }(FormErrors.BaseError);
 var UnknownFormError = /*#__PURE__*/function (_FormError) {
-  wrapNativeSuper._inherits(UnknownFormError, _FormError);
+  FormErrors._inherits(UnknownFormError, _FormError);
 
   var _super2 = _createSuper(UnknownFormError);
 
   function UnknownFormError() {
-    wrapNativeSuper._classCallCheck(this, UnknownFormError);
+    classCallCheck._classCallCheck(this, UnknownFormError);
 
     return _super2.apply(this, arguments);
   }
@@ -50,12 +50,12 @@ var UnknownFormError = /*#__PURE__*/function (_FormError) {
   return UnknownFormError;
 }(FormError);
 var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
-  wrapNativeSuper._inherits(InvalidFieldValueError, _FormError2);
+  FormErrors._inherits(InvalidFieldValueError, _FormError2);
 
   var _super3 = _createSuper(InvalidFieldValueError);
 
   function InvalidFieldValueError() {
-    wrapNativeSuper._classCallCheck(this, InvalidFieldValueError);
+    classCallCheck._classCallCheck(this, InvalidFieldValueError);
 
     return _super3.apply(this, arguments);
   }
@@ -63,12 +63,12 @@ var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
   return InvalidFieldValueError;
 }(FormError);
 var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
-  wrapNativeSuper._inherits(FieldValueTooShortError, _FormError3);
+  FormErrors._inherits(FieldValueTooShortError, _FormError3);
 
   var _super4 = _createSuper(FieldValueTooShortError);
 
   function FieldValueTooShortError() {
-    wrapNativeSuper._classCallCheck(this, FieldValueTooShortError);
+    classCallCheck._classCallCheck(this, FieldValueTooShortError);
 
     return _super4.apply(this, arguments);
   }
@@ -76,12 +76,12 @@ var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
   return FieldValueTooShortError;
 }(FormError);
 var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
-  wrapNativeSuper._inherits(FieldValueTooLongError, _FormError4);
+  FormErrors._inherits(FieldValueTooLongError, _FormError4);
 
   var _super5 = _createSuper(FieldValueTooLongError);
 
   function FieldValueTooLongError() {
-    wrapNativeSuper._classCallCheck(this, FieldValueTooLongError);
+    classCallCheck._classCallCheck(this, FieldValueTooLongError);
 
     return _super5.apply(this, arguments);
   }
@@ -89,12 +89,12 @@ var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
   return FieldValueTooLongError;
 }(FormError);
 var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
-  wrapNativeSuper._inherits(MissingRequiredFieldError, _FormError5);
+  FormErrors._inherits(MissingRequiredFieldError, _FormError5);
 
   var _super6 = _createSuper(MissingRequiredFieldError);
 
   function MissingRequiredFieldError() {
-    wrapNativeSuper._classCallCheck(this, MissingRequiredFieldError);
+    classCallCheck._classCallCheck(this, MissingRequiredFieldError);
 
     return _super6.apply(this, arguments);
   }

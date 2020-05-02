@@ -1,17 +1,15 @@
 import { SALT_ROUNDS } from '../auth/config';
+import { apiSessionRoute, loginRoute, logoutRoute } from '../routes/utils';
 import {
-  COOKIES_ACCESS_TOKEN_NAME,
-  COOKIES_EXPIRY_MINS,
-  COOKIES_REFRESH_TOKEN_NAME,
-  COOKIES_USER_ID_NAME,
-  JWT_ACCESS_TOKEN_EXPIRY_MINS,
-  JWT_REFRESH_TOKEN_EXPIRY_MINS,
-  apiSessionRoute,
-  loginRoute,
-  logoutRoute,
+  ACCESS_TOKEN_COOKIE_NAME,
+  COOKIE_EXPIRY_MINS,
+  REFRESH_TOKEN_COOKIE_NAME,
+  USER_ID_COOKIE_NAME,
 } from '../sessions/config';
-
-import { MissingJWTSecretOptionError } from './errors';
+import {
+  ACCESS_TOKEN_EXPIRY_MINS,
+  REFRESH_TOKEN_EXPIRY_MINS,
+} from '../tokens/config';
 
 class ElusiveClient {
   static instance;
@@ -27,25 +25,21 @@ class ElusiveClient {
         logout: logoutRoute,
       },
       sessions: {
-        cookies: {
-          accessTokenName: COOKIES_ACCESS_TOKEN_NAME,
-          expiryMins: COOKIES_EXPIRY_MINS,
-          refreshTokenName: COOKIES_REFRESH_TOKEN_NAME,
-          userIdName: COOKIES_USER_ID_NAME,
-        },
-        jwt: {
-          accessTokenExpiryMins: JWT_ACCESS_TOKEN_EXPIRY_MINS,
-          refreshTokenExpiryMins: JWT_REFRESH_TOKEN_EXPIRY_MINS,
-          secret: null,
-        },
-        callbacks: {
-          createTokenClaims: null,
-          reloadUser: null,
-        },
+        accessTokenName: ACCESS_TOKEN_COOKIE_NAME,
+        expiryMins: COOKIE_EXPIRY_MINS,
+        refreshTokenName: REFRESH_TOKEN_COOKIE_NAME,
+        reloadUser: null,
+        userIdName: USER_ID_COOKIE_NAME,
       },
       sentry: {
         dsn: null,
         enabled: false,
+      },
+      tokens: {
+        accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
+        createTokenClaims: null,
+        refreshTokenExpiryMins: REFRESH_TOKEN_EXPIRY_MINS,
+        secret: null,
       },
     };
   };
@@ -80,71 +74,32 @@ class ElusiveClient {
     }
 
     if (sessions) {
-      const { bcrypt, callbacks, cookies, jwt } = sessions;
+      const {
+        accessTokenName,
+        expiryMins,
+        refreshTokenName,
+        reloadUser,
+        userIdName,
+      } = sessions;
 
-      if (bcrypt) {
-        const { saltRounds } = bcrypt;
-
-        if (saltRounds) {
-          this.options.sessions.bcrypt.saltRounds = saltRounds;
-        }
+      if (accessTokenName) {
+        this.options.sessions.accessTokenName = accessTokenName;
       }
 
-      if (callbacks) {
-        const { createTokenClaims, reloadUser } = callbacks;
-
-        if (createTokenClaims) {
-          this.options.sessions.callbacks.createTokenClaims = createTokenClaims;
-        }
-
-        if (reloadUser) {
-          this.options.sessions.callbacks.reloadUser = reloadUser;
-        }
+      if (expiryMins) {
+        this.options.sessions.expiryMins = expiryMins;
       }
 
-      if (cookies) {
-        const {
-          accessTokenName,
-          expiryMins,
-          refreshTokenName,
-          userIdName,
-        } = cookies;
-
-        if (accessTokenName) {
-          this.options.sessions.cookies.accessTokenName = accessTokenName;
-        }
-
-        if (expiryMins) {
-          this.options.sessions.cookies.expiryMins = expiryMins;
-        }
-
-        if (refreshTokenName) {
-          this.options.sessions.cookies.refreshTokenName = refreshTokenName;
-        }
-
-        if (userIdName) {
-          this.options.sessions.cookies.userIdName = userIdName;
-        }
+      if (refreshTokenName) {
+        this.options.sessions.refreshTokenName = refreshTokenName;
       }
 
-      if (jwt) {
-        const { accessTokenExpiryMins, refreshTokenExpiryMins, secret } = jwt;
+      if (reloadUser) {
+        this.options.sessions.reloadUser = reloadUser;
+      }
 
-        if (accessTokenExpiryMins) {
-          this.options.sessions.jwt.accessTokenExpiryMins = accessTokenExpiryMins;
-        }
-
-        if (refreshTokenExpiryMins) {
-          this.options.sessions.jwt.refreshTokenExpiryMins = refreshTokenExpiryMins;
-        }
-
-        if (secret) {
-          this.options.sessions.jwt.secret = secret;
-        } else {
-          if (typeof window === 'undefined') {
-            throw new MissingJWTSecretOptionError();
-          }
-        }
+      if (userIdName) {
+        this.options.sessions.userIdName = userIdName;
       }
     }
 
@@ -157,6 +112,31 @@ class ElusiveClient {
 
       if (enabled) {
         this.options.sentry.enabled = enabled;
+      }
+    }
+
+    if (tokens) {
+      const {
+        accessTokenExpiryMins,
+        createTokenClaims,
+        refreshTokenExpiryMins,
+        secret,
+      } = tokens;
+
+      if (accessTokenExpiryMins) {
+        this.options.tokens.accessTokenExpiryMins = accessTokenExpiryMins;
+      }
+
+      if (createTokenClaims) {
+        this.options.tokens.createTokenClaims = createTokenClaims;
+      }
+
+      if (refreshTokenExpiryMins) {
+        this.options.tokens.refreshTokenExpiryMins = refreshTokenExpiryMins;
+      }
+
+      if (secret) {
+        this.options.tokens.secret = secret;
       }
     }
   };

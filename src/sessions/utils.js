@@ -1,5 +1,3 @@
-import jwt, { TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
-
 import Elusive from '../';
 
 export const buildSessionCookieString = (name, value, expiryDate) =>
@@ -36,20 +34,6 @@ export const createSessionCookies = (res, tokens, userId) => {
   res.setHeader('Set-Cookie', createSessionCookieStrings(tokens, userId));
 };
 
-export const signToken = (claims, secret, expiryMins) =>
-  jwt.sign(claims, secret, {
-    expiresIn: expiryMins * 60,
-  });
-
-export const signTokens = (claims, secret) => {
-  const { sessions: options } = Elusive.options;
-
-  return {
-    access: signToken(claims, secret, options.jwt.accessTokenExpiryMins),
-    refresh: signToken(claims, secret, options.jwt.refreshTokenExpiryMins),
-  };
-};
-
 export const deleteSessionCookieStrings = () => {
   const { sessions: options } = Elusive.options;
   const expiryDate = new Date(0).toUTCString(); // set it in the past
@@ -63,38 +47,6 @@ export const deleteSessionCookieStrings = () => {
 
 export const deleteSessionCookies = (res) => {
   res.setHeader('Set-Cookie', deleteSessionCookieStrings());
-};
-
-export const verifyToken = (token, secret) => jwt.verify(token, secret);
-
-export const verifyAccessTokenFromCookie = (accessToken, secret) => {
-  try {
-    const claims = verifyToken(accessToken, secret);
-    return { claims };
-  } catch (err) {
-    if (err instanceof TokenExpiredError) {
-      return { expired: true };
-    } else if (err instanceof JsonWebTokenError) {
-      return { invalid: true };
-    }
-
-    throw err;
-  }
-};
-
-export const verifyRefreshTokenFromCookie = (refreshToken, secret) => {
-  try {
-    const claims = verifyToken(refreshToken, secret);
-    return { claims };
-  } catch (err) {
-    if (err instanceof TokenExpiredError) {
-      return { expired: true };
-    } else if (err instanceof JsonWebTokenError) {
-      return { invalid: true };
-    }
-
-    throw err;
-  }
 };
 
 export const getSession = (accessToken, refreshToken, userId) => {};

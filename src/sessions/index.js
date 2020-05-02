@@ -1,18 +1,14 @@
 import {
-  COOKIES_ACCESS_TOKEN_NAME,
-  COOKIES_REFRESH_TOKEN_NAME,
-  COOKIES_USER_ID_NAME,
-  COOKIES_EXPIRY_MINS,
-  JWT_ACCESS_TOKEN_EXPIRY_MINS,
-  JWT_REFRESH_TOKEN_EXPIRY_MINS,
+  ACCESS_TOKEN_COOKIE_NAME,
+  COOKIE_EXPIRY_MINS,
+  REFRESH_TOKEN_COOKIE_NAME,
+  USER_ID_COOKIE_NAME,
 } from './config';
 export {
-  COOKIES_ACCESS_TOKEN_NAME,
-  COOKIES_REFRESH_TOKEN_NAME,
-  COOKIES_USER_ID_NAME,
-  COOKIES_EXPIRY_MINS,
-  JWT_ACCESS_TOKEN_EXPIRY_MINS,
-  JWT_REFRESH_TOKEN_EXPIRY_MINS,
+  ACCESS_TOKEN_COOKIE_NAME,
+  COOKIE_EXPIRY_MINS,
+  REFRESH_TOKEN_COOKIE_NAME,
+  USER_ID_COOKIE_NAME,
 };
 
 import {
@@ -45,25 +41,15 @@ import {
   buildSessionCookieString,
   createSessionCookieStrings,
   createSessionCookies,
-  signToken,
-  signTokens,
   deleteSessionCookieStrings,
   deleteSessionCookies,
   getSession,
-  verifyToken,
-  verifyAccessTokenFromCookie,
-  verifyRefreshTokenFromCookie,
 } from './utils';
 export {
   buildSessionCookieString,
   createSessionCookieStrings,
   createSessionCookies,
-  signToken,
-  signTokens,
   deleteSessionCookieStrings,
   deleteSessionCookies,
   getSession,
-  verifyToken,
-  verifyAccessTokenFromCookie,
-  verifyRefreshTokenFromCookie,
 };

@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./wrapNativeSuper-b3646a2a.js');
-var FormErrors = require('./FormErrors-a91e4b79.js');
+require('./classCallCheck-d2bb402f.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');

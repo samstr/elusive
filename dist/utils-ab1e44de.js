@@ -2,25 +2,23 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var wrapNativeSuper = require('./wrapNativeSuper-b3646a2a.js');
+var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
-var FormErrors = require('./FormErrors-a91e4b79.js');
+var FormErrors = require('./FormErrors-1539c4dc.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 var PropTypes = _interopDefault(require('prop-types'));
-var jwt = require('jsonwebtoken');
-var jwt__default = _interopDefault(jwt);
 
-function _createSuper(Derived) { return function () { var Super = wrapNativeSuper._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = wrapNativeSuper._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return wrapNativeSuper._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var SessionError = /*#__PURE__*/function (_BaseError) {
-  wrapNativeSuper._inherits(SessionError, _BaseError);
+  FormErrors._inherits(SessionError, _BaseError);
 
   var _super = _createSuper(SessionError);
 
   function SessionError() {
-    wrapNativeSuper._classCallCheck(this, SessionError);
+    classCallCheck._classCallCheck(this, SessionError);
 
     return _super.apply(this, arguments);
   }
@@ -28,12 +26,12 @@ var SessionError = /*#__PURE__*/function (_BaseError) {
   return SessionError;
 }(FormErrors.BaseError);
 var InvalidAccessTokenError = /*#__PURE__*/function (_SessionError) {
-  wrapNativeSuper._inherits(InvalidAccessTokenError, _SessionError);
+  FormErrors._inherits(InvalidAccessTokenError, _SessionError);
 
   var _super2 = _createSuper(InvalidAccessTokenError);
 
   function InvalidAccessTokenError() {
-    wrapNativeSuper._classCallCheck(this, InvalidAccessTokenError);
+    classCallCheck._classCallCheck(this, InvalidAccessTokenError);
 
     return _super2.apply(this, arguments);
   }
@@ -41,12 +39,12 @@ var InvalidAccessTokenError = /*#__PURE__*/function (_SessionError) {
   return InvalidAccessTokenError;
 }(SessionError);
 var UserIdCookieAndTokenMismatchError = /*#__PURE__*/function (_SessionError2) {
-  wrapNativeSuper._inherits(UserIdCookieAndTokenMismatchError, _SessionError2);
+  FormErrors._inherits(UserIdCookieAndTokenMismatchError, _SessionError2);
 
   var _super3 = _createSuper(UserIdCookieAndTokenMismatchError);
 
   function UserIdCookieAndTokenMismatchError() {
-    wrapNativeSuper._classCallCheck(this, UserIdCookieAndTokenMismatchError);
+    classCallCheck._classCallCheck(this, UserIdCookieAndTokenMismatchError);
 
     return _super3.apply(this, arguments);
   }
@@ -54,12 +52,12 @@ var UserIdCookieAndTokenMismatchError = /*#__PURE__*/function (_SessionError2) {
   return UserIdCookieAndTokenMismatchError;
 }(SessionError);
 var InvalidRefreshTokenError = /*#__PURE__*/function (_SessionError3) {
-  wrapNativeSuper._inherits(InvalidRefreshTokenError, _SessionError3);
+  FormErrors._inherits(InvalidRefreshTokenError, _SessionError3);
 
   var _super4 = _createSuper(InvalidRefreshTokenError);
 
   function InvalidRefreshTokenError() {
-    wrapNativeSuper._classCallCheck(this, InvalidRefreshTokenError);
+    classCallCheck._classCallCheck(this, InvalidRefreshTokenError);
 
     return _super4.apply(this, arguments);
   }
@@ -67,12 +65,12 @@ var InvalidRefreshTokenError = /*#__PURE__*/function (_SessionError3) {
   return InvalidRefreshTokenError;
 }(SessionError);
 var RefreshTokenExpiredError = /*#__PURE__*/function (_SessionError4) {
-  wrapNativeSuper._inherits(RefreshTokenExpiredError, _SessionError4);
+  FormErrors._inherits(RefreshTokenExpiredError, _SessionError4);
 
   var _super5 = _createSuper(RefreshTokenExpiredError);
 
   function RefreshTokenExpiredError() {
-    wrapNativeSuper._classCallCheck(this, RefreshTokenExpiredError);
+    classCallCheck._classCallCheck(this, RefreshTokenExpiredError);
 
     return _super5.apply(this, arguments);
   }
@@ -80,12 +78,12 @@ var RefreshTokenExpiredError = /*#__PURE__*/function (_SessionError4) {
   return RefreshTokenExpiredError;
 }(SessionError);
 var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError5) {
-  wrapNativeSuper._inherits(SessionUserNoLongerExistsError, _SessionError5);
+  FormErrors._inherits(SessionUserNoLongerExistsError, _SessionError5);
 
   var _super6 = _createSuper(SessionUserNoLongerExistsError);
 
   function SessionUserNoLongerExistsError() {
-    wrapNativeSuper._classCallCheck(this, SessionUserNoLongerExistsError);
+    classCallCheck._classCallCheck(this, SessionUserNoLongerExistsError);
 
     return _super6.apply(this, arguments);
   }
@@ -93,12 +91,12 @@ var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError5) {
   return SessionUserNoLongerExistsError;
 }(SessionError);
 var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError6) {
-  wrapNativeSuper._inherits(SessionUserNotEnabledError, _SessionError6);
+  FormErrors._inherits(SessionUserNotEnabledError, _SessionError6);
 
   var _super7 = _createSuper(SessionUserNotEnabledError);
 
   function SessionUserNotEnabledError() {
-    wrapNativeSuper._classCallCheck(this, SessionUserNotEnabledError);
+    classCallCheck._classCallCheck(this, SessionUserNotEnabledError);
 
     return _super7.apply(this, arguments);
   }
@@ -151,18 +149,6 @@ var createSessionCookieStrings = function createSessionCookieStrings(tokens, use
 var createSessionCookies = function createSessionCookies(res, tokens, userId) {
   res.setHeader('Set-Cookie', createSessionCookieStrings(tokens, userId));
 };
-var signToken = function signToken(claims, secret, expiryMins) {
-  return jwt__default.sign(claims, secret, {
-    expiresIn: expiryMins * 60
-  });
-};
-var signTokens = function signTokens(claims, secret) {
-  var options = index.options.sessions;
-  return {
-    access: signToken(claims, secret, options.jwt.accessTokenExpiryMins),
-    refresh: signToken(claims, secret, options.jwt.refreshTokenExpiryMins)
-  };
-};
 var deleteSessionCookieStrings = function deleteSessionCookieStrings() {
   var options = index.options.sessions;
   var expiryDate = new Date(0).toUTCString(); // set it in the past
@@ -171,49 +157,6 @@ var deleteSessionCookieStrings = function deleteSessionCookieStrings() {
 };
 var deleteSessionCookies = function deleteSessionCookies(res) {
   res.setHeader('Set-Cookie', deleteSessionCookieStrings());
-};
-var verifyToken = function verifyToken(token, secret) {
-  return jwt__default.verify(token, secret);
-};
-var verifyAccessTokenFromCookie = function verifyAccessTokenFromCookie(accessToken, secret) {
-  try {
-    var claims = verifyToken(accessToken, secret);
-    return {
-      claims: claims
-    };
-  } catch (err) {
-    if (err instanceof jwt.TokenExpiredError) {
-      return {
-        expired: true
-      };
-    } else if (err instanceof jwt.JsonWebTokenError) {
-      return {
-        invalid: true
-      };
-    }
-
-    throw err;
-  }
-};
-var verifyRefreshTokenFromCookie = function verifyRefreshTokenFromCookie(refreshToken, secret) {
-  try {
-    var claims = verifyToken(refreshToken, secret);
-    return {
-      claims: claims
-    };
-  } catch (err) {
-    if (err instanceof jwt.TokenExpiredError) {
-      return {
-        expired: true
-      };
-    } else if (err instanceof jwt.JsonWebTokenError) {
-      return {
-        invalid: true
-      };
-    }
-
-    throw err;
-  }
 };
 var getSession = function getSession(accessToken, refreshToken, userId) {};
 /*export const validateSession = async (req, res) => {
@@ -315,9 +258,4 @@ exports.createSessionCookies = createSessionCookies;
 exports.deleteSessionCookieStrings = deleteSessionCookieStrings;
 exports.deleteSessionCookies = deleteSessionCookies;
 exports.getSession = getSession;
-exports.signToken = signToken;
-exports.signTokens = signTokens;
 exports.useSessionContext = useSessionContext;
-exports.verifyAccessTokenFromCookie = verifyAccessTokenFromCookie;
-exports.verifyRefreshTokenFromCookie = verifyRefreshTokenFromCookie;
-exports.verifyToken = verifyToken;
