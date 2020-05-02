@@ -1,7 +1,8 @@
-import { loginRouteWithNext } from 'elusive/routes';
-import { useSessionContext } from 'elusive/sessions';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+
+import { loginRouteWithNext } from '../routes';
+import { useSessionContext } from '../sessions';
 
 const useRequireAuth = () => {
   const router = useRouter();
