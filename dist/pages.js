@@ -6,9 +6,9 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 require('./classCallCheck-d2bb402f.js');
 require('./index-6c0d18da.js');
-require('./defineProperty-ba7cd53d.js');
-require('./index.js');
-require('./runtime-23611726.js');
+var defineProperty = require('./defineProperty-ba7cd53d.js');
+var index = require('./index.js');
+var index$1 = require('./index-2340470f.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 require('prop-types');
@@ -18,6 +18,8 @@ var SessionContext = require('./SessionContext-859ea7a9.js');
 require('jsonwebtoken');
 var router = require('next/router');
 var utils = require('./utils-f7e1f820.js');
+var axios = require('axios');
+var axios__default = _interopDefault(axios);
 
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();
@@ -39,5 +41,72 @@ var useRequireAuth = function useRequireAuth() {
   }, [sessionContext._ready]);
 };
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var useSession = function useSession() {
+  var _useSessionContext = SessionContext.useSessionContext(),
+      sessionContext = _useSessionContext.sessionContext,
+      setSessionContext = _useSessionContext.setSessionContext;
+
+  var _useState = React.useState(sessionContext),
+      session = _useState[0],
+      setSession = _useState[1];
+
+  var routeOptions = index.options.routes;
+  React.useEffect(function () {
+    var cancelRequest;
+
+    var fetch = function fetch() {
+      var response, _session;
+
+      return index$1._regeneratorRuntime.async(function fetch$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return index$1._regeneratorRuntime.awrap(axios__default(routeOptions.apiSession(), {
+                cancelToken: new axios.CancelToken(function (c) {
+                  cancelRequest = c;
+                })
+              }));
+
+            case 3:
+              response = _context.sent;
+              cancelRequest = null;
+              _session = _objectSpread({}, response.data, {
+                _ready: true
+              });
+              setSession(_session);
+              setSessionContext(_session);
+              _context.next = 13;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](0);
+              console.log('err', _context.t0);
+
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, null, [[0, 10]], Promise);
+    };
+
+    fetch();
+    return function () {
+      if (typeof cancelRequest === 'function') {
+        cancelRequest();
+      }
+    };
+  }, []);
+  return session;
+};
+
 exports.useRedirect = useRedirect;
 exports.useRequireAuth = useRequireAuth;
+exports.useSession = useSession;
