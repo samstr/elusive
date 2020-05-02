@@ -1,3 +1,6 @@
+import useData from './useData';
+export { useData };
+
 import useRedirect from './useRedirect';
 export { useRedirect };
 

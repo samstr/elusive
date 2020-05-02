@@ -16,10 +16,65 @@ require('react-bootstrap');
 require('./FormErrors-9579dce8.js');
 var SessionContext = require('./SessionContext-859ea7a9.js');
 require('jsonwebtoken');
-var router = require('next/router');
-var utils = require('./utils-f7e1f820.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
+var router = require('next/router');
+var utils = require('./utils-f7e1f820.js');
+
+var useData = function useData() {
+  var _useState = React.useState(),
+      data = _useState[0],
+      setData = _useState[1];
+
+  React.useEffect(function () {
+    var cancelRequest;
+
+    var fetch = function fetch() {
+      var _window$location, pathname, search, url, response;
+
+      return index$1._regeneratorRuntime.async(function fetch$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _window$location = window.location, pathname = _window$location.pathname, search = _window$location.search;
+              url = "/api/page".concat(pathname).concat(search);
+              _context.next = 5;
+              return index$1._regeneratorRuntime.awrap(axios__default(url, {
+                cancelToken: new axios.CancelToken(function (c) {
+                  cancelRequest = c;
+                })
+              }));
+
+            case 5:
+              response = _context.sent;
+              cancelRequest = null;
+              setData(response.data);
+              _context.next = 13;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](0);
+              console.log('err', _context.t0);
+
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, null, [[0, 10]], Promise);
+    };
+
+    fetch();
+    return function () {
+      if (typeof cancelRequest === 'function') {
+        cancelRequest();
+      }
+    };
+  }, []);
+  return data;
+};
 
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();
@@ -107,6 +162,7 @@ var useSession = function useSession() {
   return session;
 };
 
+exports.useData = useData;
 exports.useRedirect = useRedirect;
 exports.useRequireAuth = useRequireAuth;
 exports.useSession = useSession;
