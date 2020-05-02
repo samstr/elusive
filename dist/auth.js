@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var client = require('./index-e5dde32c.js');
+var client = require('./index-59266c9b.js');
 require('./defineProperty-ba7cd53d.js');
 require('./utils-1794fb54.js');
 var index = require('./index.js');
@@ -85,8 +85,8 @@ var NotAuthenticatedError = /*#__PURE__*/function (_AuthError4) {
 }(AuthError);
 
 var hashPassword = function hashPassword(password) {
-  var options = index.options.auth;
-  return bcrypt.hashSync(password, options.saltRounds);
+  var authOptions = index.options.auth;
+  return bcrypt.hashSync(password, authOptions.saltRounds);
 };
 var comparePasswordHash = function comparePasswordHash(password, hash) {
   return bcrypt.compareSync(password, hash);

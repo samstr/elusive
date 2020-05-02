@@ -3,9 +3,9 @@ import bcrypt from 'bcryptjs';
 import Elusive from '../';
 
 export const hashPassword = (password) => {
-  const { auth: options } = Elusive.options;
+  const { auth: authOptions } = Elusive.options;
 
-  return bcrypt.hashSync(password, options.saltRounds);
+  return bcrypt.hashSync(password, authOptions.saltRounds);
 };
 
 export const comparePasswordHash = (password, hash) =>

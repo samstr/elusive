@@ -4,10 +4,12 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
+var index$1 = require('./index-2340470f.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 var PropTypes = _interopDefault(require('prop-types'));
+var utils$3 = require('./utils-c25b9b40.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -141,29 +143,139 @@ var buildSessionCookieString = function buildSessionCookieString(name, value, ex
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
 };
 var createSessionCookieStrings = function createSessionCookieStrings(tokens, userId) {
-  var options = index.options.sessions;
-  var dateFuture = Date.now() + 60000 * options.cookies.expiryMins;
+  var sessionOptions = index.options.sessions;
+  var dateFuture = Date.now() + 60000 * sessionOptions.expiryMins;
   var expiryDate = new Date(dateFuture).toUTCString();
-  return [buildSessionCookieString(options.cookies.accessTokenName, tokens.access, expiryDate), buildSessionCookieString(options.cookies.refreshTokenName, tokens.refresh, expiryDate), buildSessionCookieString(options.cookies.userIdName, userId, expiryDate)];
+  return [buildSessionCookieString(sessionOptions.accessTokenCookieName, tokens.access, expiryDate), buildSessionCookieString(sessionOptions.refreshTokenCookieName, tokens.refresh, expiryDate), buildSessionCookieString(sessionOptions.userIdCookieName, userId, expiryDate)];
 };
 var createSessionCookies = function createSessionCookies(res, tokens, userId) {
   res.setHeader('Set-Cookie', createSessionCookieStrings(tokens, userId));
 };
 var deleteSessionCookieStrings = function deleteSessionCookieStrings() {
-  var options = index.options.sessions;
+  var sessionOptions = index.options.sessions;
   var expiryDate = new Date(0).toUTCString(); // set it in the past
 
-  return [buildSessionCookieString(options.cookies.accessTokenName, '', expiryDate), buildSessionCookieString(options.cookies.refreshTokenName, '', expiryDate), buildSessionCookieString(options.cookies.userIdName, '', expiryDate)];
+  return [buildSessionCookieString(sessionOptions.accessTokenCookieName, '', expiryDate), buildSessionCookieString(sessionOptions.refreshTokenCookieName, '', expiryDate), buildSessionCookieString(sessionOptions.userIdCookieName, '', expiryDate)];
 };
 var deleteSessionCookies = function deleteSessionCookies(res) {
   res.setHeader('Set-Cookie', deleteSessionCookieStrings());
 };
-var getSession = function getSession(accessToken, refreshToken, userId) {
-  return {
-    isAuthenticated: false,
-    claims: null,
-    fromElusive: 'hi'
-  };
+var getSession = function getSession(accessToken, refreshToken, userId, reloadSessionUser) {
+  var _Elusive$options, sessionOptions, tokenOptions, session, tokens, _getClaims, accessTokenClaims, accessTokenExpired, accessTokenInvalid, _getClaims2, refreshTokenClaims, refreshTokenExpired, refreshTokenInvalid, user;
+
+  return index$1._regeneratorRuntime.async(function getSession$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _Elusive$options = index.options, sessionOptions = _Elusive$options.sessions, tokenOptions = _Elusive$options.tokens;
+          session = {
+            isAuthenticated: false,
+            claims: null
+          };
+
+          if (!(accessToken && refreshToken && userId)) {
+            _context.next = 32;
+            break;
+          }
+
+          _getClaims = utils$3.getClaims(accessToken, tokenOptions.secret), accessTokenClaims = _getClaims.claims, accessTokenExpired = _getClaims.expired, accessTokenInvalid = _getClaims.invalid;
+
+          if (!accessTokenInvalid) {
+            _context.next = 6;
+            break;
+          }
+
+          throw new InvalidAccessTokenError('Invalid access token');
+
+        case 6:
+          if (!accessTokenClaims) {
+            _context.next = 12;
+            break;
+          }
+
+          if (!(accessTokenClaims.user.id !== userId)) {
+            _context.next = 9;
+            break;
+          }
+
+          throw new UserIdCookieAndTokenMismatchError('User id cookie does not match access token');
+
+        case 9:
+          session.claims = accessTokenClaims; // we don't need these on the object
+
+          delete session.claims.iat;
+          delete session.claims.exp;
+
+        case 12:
+          if (!accessTokenExpired) {
+            _context.next = 32;
+            break;
+          }
+
+          // access token has expired (every 10 mins) so we need to generate a new one from the refreshToken
+          _getClaims2 = utils$3.getClaims(refreshToken, tokenOptions.secret), refreshTokenClaims = _getClaims2.claims, refreshTokenExpired = _getClaims2.expired, refreshTokenInvalid = _getClaims2.invalid;
+
+          if (!refreshTokenInvalid) {
+            _context.next = 16;
+            break;
+          }
+
+          throw new InvalidRefreshTokenError('Invalid refresh token');
+
+        case 16:
+          if (!refreshTokenExpired) {
+            _context.next = 18;
+            break;
+          }
+
+          throw new RefreshTokenExpiredError('Refresh token expired');
+
+        case 18:
+          if (!(refreshTokenClaims.user.id !== userId)) {
+            _context.next = 20;
+            break;
+          }
+
+          throw new UserIdCookieAndTokenMismatchError('User id cookie does not match refresh token');
+
+        case 20:
+          console.log('REFRESHING ACCESS TOKEN');
+
+          if (!reloadSessionUser) {
+            _context.next = 29;
+            break;
+          }
+
+          console.log('reloading user from session');
+          _context.next = 25;
+          return index$1._regeneratorRuntime.awrap(sessionOptions.reloadUser(refreshTokenClaims.user.id));
+
+        case 25:
+          user = _context.sent;
+          session.claims = tokenOptions.createClaims(user);
+          _context.next = 31;
+          break;
+
+        case 29:
+          console.log('using refreshTokenClaims');
+          session.claims = refreshTokenClaims;
+
+        case 31:
+          tokens = utils$3.signTokens(session.claims, tokenOptions.secret);
+
+        case 32:
+          session.isAuthenticated = !!session.claims;
+          return _context.abrupt("return", {
+            session: session,
+            tokens: tokens
+          });
+
+        case 34:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, null, Promise);
 };
 
 exports.InvalidAccessTokenError = InvalidAccessTokenError;

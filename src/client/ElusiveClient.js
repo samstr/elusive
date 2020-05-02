@@ -25,11 +25,11 @@ class ElusiveClient {
         logout: logoutRoute,
       },
       sessions: {
-        accessTokenName: ACCESS_TOKEN_COOKIE_NAME,
-        expiryMins: COOKIE_EXPIRY_MINS,
-        refreshTokenName: REFRESH_TOKEN_COOKIE_NAME,
+        accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
+        cookieExpiryMins: COOKIE_EXPIRY_MINS,
+        refreshTokenCookieName: REFRESH_TOKEN_COOKIE_NAME,
         reloadUser: null,
-        userIdName: USER_ID_COOKIE_NAME,
+        userIdCookieName: USER_ID_COOKIE_NAME,
       },
       sentry: {
         dsn: null,
@@ -47,7 +47,7 @@ class ElusiveClient {
   init = (options) => {
     this.setDefaultOptions();
 
-    const { auth, routes, sentry, sessions } = options;
+    const { auth, routes, sentry, sessions, tokens } = options;
 
     if (auth) {
       const { saltRounds } = auth;
@@ -75,31 +75,31 @@ class ElusiveClient {
 
     if (sessions) {
       const {
-        accessTokenName,
-        expiryMins,
-        refreshTokenName,
+        accessTokenCookieName,
+        cookieExpiryMins,
+        refreshTokenCookieName,
         reloadUser,
-        userIdName,
+        userIdCookieName,
       } = sessions;
 
-      if (accessTokenName) {
-        this.options.sessions.accessTokenName = accessTokenName;
+      if (accessTokenCookieName) {
+        this.options.sessions.accessTokenCookieName = accessTokenCookieName;
       }
 
-      if (expiryMins) {
-        this.options.sessions.expiryMins = expiryMins;
+      if (cookieExpiryMins) {
+        this.options.sessions.cookieExpiryMins = cookieExpiryMins;
       }
 
-      if (refreshTokenName) {
-        this.options.sessions.refreshTokenName = refreshTokenName;
+      if (refreshTokenCookieName) {
+        this.options.sessions.refreshTokenCookieName = refreshTokenCookieName;
       }
 
       if (reloadUser) {
         this.options.sessions.reloadUser = reloadUser;
       }
 
-      if (userIdName) {
-        this.options.sessions.userIdName = userIdName;
+      if (userIdCookieName) {
+        this.options.sessions.userIdCookieName = userIdCookieName;
       }
     }
 

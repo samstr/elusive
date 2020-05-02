@@ -8,11 +8,15 @@ export const signToken = (claims, secret, expiryMins) =>
   });
 
 export const signTokens = (claims, secret) => {
-  const { tokens: options } = Elusive.options;
+  const { tokens: tokenOptions } = Elusive.options;
+
+  // delete these if they exist. not needed
+  delete claims.iat;
+  delete claims.exp;
 
   return {
-    access: signToken(claims, secret, options.accessTokenExpiryMins),
-    refresh: signToken(claims, secret, options.refreshTokenExpiryMins),
+    access: signToken(claims, secret, tokenOptions.accessTokenExpiryMins),
+    refresh: signToken(claims, secret, tokenOptions.refreshTokenExpiryMins),
   };
 };
 

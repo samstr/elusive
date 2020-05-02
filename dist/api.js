@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-require('./index-e5dde32c.js');
+require('./index-59266c9b.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 require('./utils-1794fb54.js');
 var index = require('./index.js');
@@ -14,48 +14,51 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 var utils$1 = require('./utils-b08f259e.js');
-var utils$2 = require('./utils-5adae97c.js');
+var utils$2 = require('./utils-c2acb3b2.js');
+require('jsonwebtoken');
+var utils$3 = require('./utils-c25b9b40.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = function apiWrapper(req, res, fn, options) {
-  var _Elusive$options, sentry, sessions, tokens, defaultOptions, accessToken, refreshToken, userId, _await$getSession, session, newTokens, data;
+  var _Elusive$options, sentryOptions, sessionOptions, tokenOptions, defaultOptions, accessToken, refreshToken, userId, _await$getSession, session, tokens, data;
 
   return index$1._regeneratorRuntime.async(function apiWrapper$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _Elusive$options = index.options, sentry = _Elusive$options.sentry, sessions = _Elusive$options.sessions, tokens = _Elusive$options.tokens;
+          _Elusive$options = index.options, sentryOptions = _Elusive$options.sentry, sessionOptions = _Elusive$options.sessions, tokenOptions = _Elusive$options.tokens;
 
-          if (sentry && sentry.dsn) {
+          if (sentryOptions && sentryOptions.dsn) {
             Sentry.init({
-              dsn: sentry.dsn,
-              enabled: sentry.enabled
+              dsn: sentryOptions.dsn,
+              enabled: sentryOptions.enabled
             });
           }
 
           defaultOptions = {
             allowedMethods: [utils$1.GET],
             requireAuth: false,
-            setTokens: false
+            setSessionCookies: false,
+            reloadSessionUser: false
           };
           options = _objectSpread({}, defaultOptions, {}, options);
           _context.prev = 4;
           utils$1.validateRequest(req, res, options);
-          accessToken = req.cookies[sessions.accessTokenCookieName];
-          refreshToken = req.cookies[sessions.refreshTokenCookieName];
-          userId = req.cookies[sessions.userIdCookieName];
+          accessToken = req.cookies[sessionOptions.accessTokenCookieName];
+          refreshToken = req.cookies[sessionOptions.refreshTokenCookieName];
+          userId = req.cookies[sessionOptions.userIdCookieName];
           _context.next = 11;
-          return index$1._regeneratorRuntime.awrap(getSession(accessToken, refreshToken));
+          return index$1._regeneratorRuntime.awrap(utils$2.getSession(accessToken, refreshToken, userId, options.reloadSessionUser));
 
         case 11:
           _await$getSession = _context.sent;
           session = _await$getSession.session;
-          newTokens = _await$getSession.newTokens;
+          tokens = _await$getSession.tokens;
 
-          if (session.isAuthenticated && newTokens && options.setTokens) {
-            createSessionCookies(res, signTokens(session.claims, tokens.secret), userId);
+          if (options.setSessionCookies && session.isAuthenticated && tokens) {
+            utils$2.createSessionCookies(res, utils$3.signTokens(session.claims, tokenOptions.secret), userId);
           }
 
           if (!(options.requireAuth && !session.isAuthenticated)) {
@@ -126,7 +129,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
         case 41:
           console.error('error in apiWrapper:', _context.t5);
 
-          if (sentry && sentry.dsn) {
+          if (sentryOptions && sentryOptions.dsn) {
             console.log('sending to Sentry');
             Sentry.captureException(_context.t5);
           }

@@ -48,11 +48,11 @@ var ElusiveClient = /*#__PURE__*/function () {
           logout: utils.logoutRoute
         },
         sessions: {
-          accessTokenName: ACCESS_TOKEN_COOKIE_NAME,
-          expiryMins: COOKIE_EXPIRY_MINS,
-          refreshTokenName: REFRESH_TOKEN_COOKIE_NAME,
+          accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
+          cookieExpiryMins: COOKIE_EXPIRY_MINS,
+          refreshTokenCookieName: REFRESH_TOKEN_COOKIE_NAME,
           reloadUser: null,
-          userIdName: USER_ID_COOKIE_NAME
+          userIdCookieName: USER_ID_COOKIE_NAME
         },
         sentry: {
           dsn: null,
@@ -73,7 +73,8 @@ var ElusiveClient = /*#__PURE__*/function () {
       var auth = options.auth,
           routes = options.routes,
           sentry = options.sentry,
-          sessions = options.sessions;
+          sessions = options.sessions,
+          tokens = options.tokens;
 
       if (auth) {
         var saltRounds = auth.saltRounds;
@@ -102,30 +103,30 @@ var ElusiveClient = /*#__PURE__*/function () {
       }
 
       if (sessions) {
-        var accessTokenName = sessions.accessTokenName,
-            expiryMins = sessions.expiryMins,
-            refreshTokenName = sessions.refreshTokenName,
+        var accessTokenCookieName = sessions.accessTokenCookieName,
+            cookieExpiryMins = sessions.cookieExpiryMins,
+            refreshTokenCookieName = sessions.refreshTokenCookieName,
             reloadUser = sessions.reloadUser,
-            userIdName = sessions.userIdName;
+            userIdCookieName = sessions.userIdCookieName;
 
-        if (accessTokenName) {
-          _this.options.sessions.accessTokenName = accessTokenName;
+        if (accessTokenCookieName) {
+          _this.options.sessions.accessTokenCookieName = accessTokenCookieName;
         }
 
-        if (expiryMins) {
-          _this.options.sessions.expiryMins = expiryMins;
+        if (cookieExpiryMins) {
+          _this.options.sessions.cookieExpiryMins = cookieExpiryMins;
         }
 
-        if (refreshTokenName) {
-          _this.options.sessions.refreshTokenName = refreshTokenName;
+        if (refreshTokenCookieName) {
+          _this.options.sessions.refreshTokenCookieName = refreshTokenCookieName;
         }
 
         if (reloadUser) {
           _this.options.sessions.reloadUser = reloadUser;
         }
 
-        if (userIdName) {
-          _this.options.sessions.userIdName = userIdName;
+        if (userIdCookieName) {
+          _this.options.sessions.userIdCookieName = userIdCookieName;
         }
       }
 
@@ -143,11 +144,10 @@ var ElusiveClient = /*#__PURE__*/function () {
       }
 
       if (tokens) {
-        var _tokens = tokens,
-            accessTokenExpiryMins = _tokens.accessTokenExpiryMins,
-            createClaims = _tokens.createClaims,
-            refreshTokenExpiryMins = _tokens.refreshTokenExpiryMins,
-            secret = _tokens.secret;
+        var accessTokenExpiryMins = tokens.accessTokenExpiryMins,
+            createClaims = tokens.createClaims,
+            refreshTokenExpiryMins = tokens.refreshTokenExpiryMins,
+            secret = tokens.secret;
 
         if (accessTokenExpiryMins) {
           _this.options.tokens.accessTokenExpiryMins = accessTokenExpiryMins;

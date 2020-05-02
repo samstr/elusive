@@ -14,22 +14,33 @@ import {
   httpUnauthorizedResponse,
   validateRequest,
 } from '../http';
-import { SessionError, deleteSessionCookies } from '../sessions';
+import {
+  SessionError,
+  createSessionCookies,
+  deleteSessionCookies,
+  getSession,
+} from '../sessions';
+import { signTokens } from '../tokens';
 
 export const apiWrapper = async (req, res, fn, options) => {
-  const { sentry, sessions, tokens } = Elusive.options;
+  const {
+    sentry: sentryOptions,
+    sessions: sessionOptions,
+    tokens: tokenOptions,
+  } = Elusive.options;
 
-  if (sentry && sentry.dsn) {
+  if (sentryOptions && sentryOptions.dsn) {
     Sentry.init({
-      dsn: sentry.dsn,
-      enabled: sentry.enabled,
+      dsn: sentryOptions.dsn,
+      enabled: sentryOptions.enabled,
     });
   }
 
   const defaultOptions = {
     allowedMethods: [GET],
     requireAuth: false,
-    setTokens: false,
+    setSessionCookies: false,
+    reloadSessionUser: false,
   };
 
   options = {
@@ -40,16 +51,21 @@ export const apiWrapper = async (req, res, fn, options) => {
   try {
     validateRequest(req, res, options);
 
-    const accessToken = req.cookies[sessions.accessTokenCookieName];
-    const refreshToken = req.cookies[sessions.refreshTokenCookieName];
-    const userId = req.cookies[sessions.userIdCookieName];
+    const accessToken = req.cookies[sessionOptions.accessTokenCookieName];
+    const refreshToken = req.cookies[sessionOptions.refreshTokenCookieName];
+    const userId = req.cookies[sessionOptions.userIdCookieName];
 
-    const { session, newTokens } = await getSession(accessToken, refreshToken);
+    const { session, tokens } = await getSession(
+      accessToken,
+      refreshToken,
+      userId,
+      options.reloadSessionUser
+    );
 
-    if (session.isAuthenticated && newTokens && options.setTokens) {
+    if (options.setSessionCookies && session.isAuthenticated && tokens) {
       createSessionCookies(
         res,
-        signTokens(session.claims, tokens.secret),
+        signTokens(session.claims, tokenOptions.secret),
         userId
       );
     }
@@ -92,7 +108,7 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     console.error('error in apiWrapper:', err);
 
-    if (sentry && sentry.dsn) {
+    if (sentryOptions && sentryOptions.dsn) {
       console.log('sending to Sentry');
       Sentry.captureException(err);
     }
