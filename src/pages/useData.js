@@ -1,6 +1,8 @@
 import axios, { CancelToken } from 'axios';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import Elusive from '../';
 import { HTTP_STATUS_UNAUTHORIZED } from '../http';
 import { loginRouteWithNext } from '../routes';
 import { useSessionContext } from '../sessions';
@@ -8,6 +10,8 @@ import { useSessionContext } from '../sessions';
 const useData = () => {
   const { resetSessionContext } = useSessionContext();
   const [data, setData] = useState();
+  const router = useRouter();
+  const { routes: routeOptions } = Elusive.options;
 
   const handleError = (err) => {
     if (axios.isCancel(err)) return;

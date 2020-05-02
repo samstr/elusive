@@ -1,4 +1,5 @@
 import axios, { CancelToken } from 'axios';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Elusive from '../';
@@ -13,6 +14,7 @@ const useSession = () => {
     setSessionContext,
   } = useSessionContext();
   const [session, setSession] = useState(sessionContext);
+  const router = useRouter();
   const { routes: routeOptions } = Elusive.options;
 
   const handleError = (err) => {

@@ -19,8 +19,8 @@ var SessionContext = require('./SessionContext-859ea7a9.js');
 require('jsonwebtoken');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
+var router = require('next/router');
 var utils$1 = require('./utils-f7e1f820.js');
-var router$1 = require('next/router');
 
 var useData = function useData() {
   var _useSessionContext = SessionContext.useSessionContext(),
@@ -30,6 +30,9 @@ var useData = function useData() {
       data = _useState[0],
       setData = _useState[1];
 
+  var router$1 = router.useRouter();
+  var routeOptions = index.options.routes;
+
   var handleError = function handleError(err) {
     if (axios__default.isCancel(err)) return;
 
@@ -38,7 +41,7 @@ var useData = function useData() {
       var pathname = window.location.pathname;
 
       if (pathname !== routeOptions.login()) {
-        router.replace(utils$1.loginRouteWithNext());
+        router$1.replace(utils$1.loginRouteWithNext());
       }
 
       return;
@@ -103,21 +106,21 @@ var useData = function useData() {
 };
 
 var useRedirect = function useRedirect(href, asPath) {
-  var router = router$1.useRouter();
+  var router$1 = router.useRouter();
   React.useEffect(function () {
-    router.replace(href, asPath);
+    router$1.replace(href, asPath);
   }, []);
 };
 
 var useRequireAuth = function useRequireAuth() {
-  var router = router$1.useRouter();
+  var router$1 = router.useRouter();
 
   var _useSessionContext = SessionContext.useSessionContext(),
       sessionContext = _useSessionContext.sessionContext;
 
   React.useEffect(function () {
     if (sessionContext._ready && !sessionContext.isAuthenticated) {
-      router.replace(utils$1.loginRouteWithNext());
+      router$1.replace(utils$1.loginRouteWithNext());
     }
   }, [sessionContext._ready]);
 };
@@ -136,6 +139,7 @@ var useSession = function useSession() {
       session = _useState[0],
       setSession = _useState[1];
 
+  var router$1 = router.useRouter();
   var routeOptions = index.options.routes;
 
   var handleError = function handleError(err) {
@@ -146,7 +150,7 @@ var useSession = function useSession() {
       var pathname = window.location.pathname;
 
       if (pathname !== routeOptions.login()) {
-        router.replace(utils$1.loginRouteWithNext());
+        router$1.replace(utils$1.loginRouteWithNext());
       }
 
       return;
