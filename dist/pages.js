@@ -15,7 +15,7 @@ var React__default = _interopDefault(React);
 require('prop-types');
 require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
-var SessionContext = require('./SessionContext-95b100c7.js');
+var SessionContext = require('./SessionContext-efd795c9.js');
 require('jsonwebtoken');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
