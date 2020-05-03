@@ -8,6 +8,7 @@ import {
   signTokens,
 } from '../tokens';
 import {
+  MissingSessionCookiesError,
   SessionUserIdMismatchError,
   SessionUserNoLongerExistsError,
   SessionUserNotEnabledError,
@@ -82,10 +83,12 @@ export const getSession = async (req, reloadSessionUser) => {
   const userId = req.cookies[sessionOptions.userIdCookieName];
 
   // all 3 cookies must exist if 1 does
-  if (accessToken && (!refreshToken || !userId)) {
-    throw new MissingRequiredSessionCookieError(
-      'Missing one or more session cookies'
-    );
+  if (
+    (accessToken && (!refreshToken || !userId)) ||
+    (refreshToken && (!accessToken || !userId)) ||
+    (userId && (!accessToken || !refreshToken))
+  ) {
+    throw new MissingSessionCookiesError('Missing one or more session cookies');
   }
 
   let session = {

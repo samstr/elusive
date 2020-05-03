@@ -22,41 +22,54 @@ var SessionError = /*#__PURE__*/function (_BaseError) {
 
   return SessionError;
 }(FormErrors.BaseError);
-var SessionUserIdMismatchError = /*#__PURE__*/function (_SessionError) {
-  FormErrors._inherits(SessionUserIdMismatchError, _SessionError);
+var MissingSessionCookiesError = /*#__PURE__*/function (_SessionError) {
+  FormErrors._inherits(MissingSessionCookiesError, _SessionError);
 
-  var _super2 = _createSuper(SessionUserIdMismatchError);
+  var _super2 = _createSuper(MissingSessionCookiesError);
 
-  function SessionUserIdMismatchError() {
-    classCallCheck._classCallCheck(this, SessionUserIdMismatchError);
+  function MissingSessionCookiesError() {
+    classCallCheck._classCallCheck(this, MissingSessionCookiesError);
 
     return _super2.apply(this, arguments);
   }
 
-  return SessionUserIdMismatchError;
+  return MissingSessionCookiesError;
 }(SessionError);
-var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError2) {
-  FormErrors._inherits(SessionUserNoLongerExistsError, _SessionError2);
+var SessionUserIdMismatchError = /*#__PURE__*/function (_SessionError2) {
+  FormErrors._inherits(SessionUserIdMismatchError, _SessionError2);
 
-  var _super3 = _createSuper(SessionUserNoLongerExistsError);
+  var _super3 = _createSuper(SessionUserIdMismatchError);
 
-  function SessionUserNoLongerExistsError() {
-    classCallCheck._classCallCheck(this, SessionUserNoLongerExistsError);
+  function SessionUserIdMismatchError() {
+    classCallCheck._classCallCheck(this, SessionUserIdMismatchError);
 
     return _super3.apply(this, arguments);
   }
 
+  return SessionUserIdMismatchError;
+}(SessionError);
+var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError3) {
+  FormErrors._inherits(SessionUserNoLongerExistsError, _SessionError3);
+
+  var _super4 = _createSuper(SessionUserNoLongerExistsError);
+
+  function SessionUserNoLongerExistsError() {
+    classCallCheck._classCallCheck(this, SessionUserNoLongerExistsError);
+
+    return _super4.apply(this, arguments);
+  }
+
   return SessionUserNoLongerExistsError;
 }(SessionError);
-var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError3) {
-  FormErrors._inherits(SessionUserNotEnabledError, _SessionError3);
+var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError4) {
+  FormErrors._inherits(SessionUserNotEnabledError, _SessionError4);
 
-  var _super4 = _createSuper(SessionUserNotEnabledError);
+  var _super5 = _createSuper(SessionUserNotEnabledError);
 
   function SessionUserNotEnabledError() {
     classCallCheck._classCallCheck(this, SessionUserNotEnabledError);
 
-    return _super4.apply(this, arguments);
+    return _super5.apply(this, arguments);
   }
 
   return SessionUserNotEnabledError;
@@ -95,12 +108,12 @@ var getSession = function getSession(req, reloadSessionUser) {
           refreshToken = req.cookies[sessionOptions.refreshTokenCookieName];
           userId = req.cookies[sessionOptions.userIdCookieName]; // all 3 cookies must exist if 1 does
 
-          if (!(accessToken && (!refreshToken || !userId))) {
+          if (!(accessToken && (!refreshToken || !userId) || refreshToken && (!accessToken || !userId) || userId && (!accessToken || !refreshToken))) {
             _context.next = 6;
             break;
           }
 
-          throw new MissingRequiredSessionCookieError('Missing one or more session cookies');
+          throw new MissingSessionCookiesError('Missing one or more session cookies');
 
         case 6:
           session = {
