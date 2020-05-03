@@ -12,7 +12,7 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 var utils$1 = require('./utils-14cb2445.js');
-var SessionContext = require('./SessionContext-859ea7a9.js');
+var SessionContext = require('./SessionContext-95b100c7.js');
 require('./utils-eecac740.js');
 require('jsonwebtoken');
 
