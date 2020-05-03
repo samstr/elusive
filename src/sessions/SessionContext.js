@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 const defaultValue = {
   isAuthenticated: false,
   claims: null,
+  _ready: false,
 };
 
 export const SessionContext = createContext(defaultValue);
@@ -11,8 +12,11 @@ export const SessionContext = createContext(defaultValue);
 export const SessionContextProvider = ({ children }) => {
   const [sessionContext, setSessionContext] = useState(defaultValue);
 
-  const resetSessionContext = () => {
-    setSessionContext(defaultValue);
+  const resetSessionContext = (_ready) => {
+    setSessionContext({
+      ...defaultValue,
+      _ready,
+    });
   };
 
   const context = {
