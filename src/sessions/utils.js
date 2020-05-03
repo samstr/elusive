@@ -91,7 +91,7 @@ export const getSession = async (req, reloadSessionUser) => {
     throw new MissingSessionCookiesError('Missing one or more session cookies');
   }
 
-  let session = {
+  const session = {
     isAuthenticated: false,
     claims: null,
   };

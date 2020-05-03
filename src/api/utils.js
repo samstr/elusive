@@ -23,11 +23,7 @@ import {
 import { signTokens } from '../tokens';
 
 export const apiWrapper = async (req, res, fn, options) => {
-  const {
-    sentry: sentryOptions,
-    sessions: sessionOptions,
-    tokens: tokenOptions,
-  } = Elusive.options;
+  const { sentry: sentryOptions, tokens: tokenOptions } = Elusive.options;
 
   if (sentryOptions && sentryOptions.dsn) {
     Sentry.init({
@@ -60,7 +56,7 @@ export const apiWrapper = async (req, res, fn, options) => {
       createSessionCookies(
         res,
         signTokens(session.claims, tokenOptions.secret),
-        userId
+        session.claims.user.id
       );
     }
 

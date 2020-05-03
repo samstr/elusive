@@ -22,13 +22,13 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = function apiWrapper(req, res, fn, options) {
-  var _Elusive$options, sentryOptions, sessionOptions, tokenOptions, defaultOptions, _await$getSession, session, tokens, data;
+  var _Elusive$options, sentryOptions, tokenOptions, defaultOptions, _await$getSession, session, tokens, data;
 
   return index$1._regeneratorRuntime.async(function apiWrapper$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _Elusive$options = index.options, sentryOptions = _Elusive$options.sentry, sessionOptions = _Elusive$options.sessions, tokenOptions = _Elusive$options.tokens;
+          _Elusive$options = index.options, sentryOptions = _Elusive$options.sentry, tokenOptions = _Elusive$options.tokens;
 
           if (sentryOptions && sentryOptions.dsn) {
             Sentry.init({
@@ -55,7 +55,7 @@ var apiWrapper = function apiWrapper(req, res, fn, options) {
           tokens = _await$getSession.tokens;
 
           if (options.setSessionCookies && session.isAuthenticated && tokens) {
-            utils$1.createSessionCookies(res, utils$2.signTokens(session.claims, tokenOptions.secret), userId);
+            utils$1.createSessionCookies(res, utils$2.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
           }
 
           if (!(options.requireAuth && !session.isAuthenticated)) {
