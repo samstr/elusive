@@ -51,14 +51,8 @@ export const apiWrapper = async (req, res, fn, options) => {
   try {
     validateRequest(req, res, options);
 
-    const accessToken = req.cookies[sessionOptions.accessTokenCookieName];
-    const refreshToken = req.cookies[sessionOptions.refreshTokenCookieName];
-    const userId = req.cookies[sessionOptions.userIdCookieName];
-
     const { session, tokens } = await getSession(
-      accessToken,
-      refreshToken,
-      userId,
+      req,
       options.reloadSessionUser
     );
 

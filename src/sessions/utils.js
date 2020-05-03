@@ -1,11 +1,16 @@
 import Elusive from '../';
 
-import { getClaims, signTokens } from '../tokens';
 import {
   InvalidAccessTokenError,
   InvalidRefreshTokenError,
   RefreshTokenExpiredError,
-  UserIdCookieAndTokenMismatchError,
+  getClaims,
+  signTokens,
+} from '../tokens';
+import {
+  SessionUserIdMismatchError,
+  SessionUserNoLongerExistsError,
+  SessionUserNotEnabledError,
 } from './errors';
 
 export const buildSessionCookieString = (name, value, expiryDate) =>
@@ -69,13 +74,19 @@ export const deleteSessionCookies = (res) => {
   res.setHeader('Set-Cookie', deleteSessionCookieStrings());
 };
 
-export const getSession = async (
-  accessToken,
-  refreshToken,
-  userId,
-  reloadSessionUser
-) => {
+export const getSession = async (req, reloadSessionUser) => {
   const { sessions: sessionOptions, tokens: tokenOptions } = Elusive.options;
+
+  const accessToken = req.cookies[sessionOptions.accessTokenCookieName];
+  const refreshToken = req.cookies[sessionOptions.refreshTokenCookieName];
+  const userId = req.cookies[sessionOptions.userIdCookieName];
+
+  // all 3 cookies must exist if 1 does
+  if (accessToken && (!refreshToken || !userId)) {
+    throw new MissingRequiredSessionCookieError(
+      'Missing one or more session cookies'
+    );
+  }
 
   let session = {
     isAuthenticated: false,
@@ -96,7 +107,7 @@ export const getSession = async (
 
     if (accessTokenClaims) {
       if (accessTokenClaims.user.id !== userId) {
-        throw new UserIdCookieAndTokenMismatchError(
+        throw new SessionUserIdMismatchError(
           'User id cookie does not match access token'
         );
       }
@@ -126,7 +137,7 @@ export const getSession = async (
       }
 
       if (refreshTokenClaims.user.id !== userId) {
-        throw new UserIdCookieAndTokenMismatchError(
+        throw new SessionUserIdMismatchError(
           'User id cookie does not match refresh token'
         );
       }
@@ -137,6 +148,17 @@ export const getSession = async (
         const user = await sessionOptions.reloadUser(
           refreshTokenClaims.user.id
         );
+
+        if (!user) {
+          throw new SessionUserNoLongerExistsError(
+            'Session user no longer exists.'
+          );
+        }
+
+        if (!user.enabled) {
+          throw new SessionUserNotEnabledError('Session user not enabled.');
+        }
+
         session.claims = tokenOptions.createClaims(user);
       } else {
         console.log('returning refreshTokenClaims');
