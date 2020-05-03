@@ -106,7 +106,7 @@ var buildSessionCookieString = function buildSessionCookieString(name, value, ex
 };
 var createSessionCookieStrings = function createSessionCookieStrings(tokens, userId) {
   var sessionOptions = index.options.sessions;
-  var dateFuture = Date.now() + 60000 * sessionOptions.expiryMins;
+  var dateFuture = Date.now() + 60000 * sessionOptions.cookieExpiryMins;
   var expiryDate = new Date(dateFuture).toUTCString();
   return [buildSessionCookieString(sessionOptions.accessTokenCookieName, tokens.access, expiryDate), buildSessionCookieString(sessionOptions.refreshTokenCookieName, tokens.refresh, expiryDate), buildSessionCookieString(sessionOptions.userIdCookieName, userId, expiryDate)];
 };

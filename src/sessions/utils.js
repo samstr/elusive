@@ -20,7 +20,7 @@ export const buildSessionCookieString = (name, value, expiryDate) =>
 
 export const createSessionCookieStrings = (tokens, userId) => {
   const { sessions: sessionOptions } = Elusive.options;
-  const dateFuture = Date.now() + 60000 * sessionOptions.expiryMins;
+  const dateFuture = Date.now() + 60000 * sessionOptions.cookieExpiryMins;
   const expiryDate = new Date(dateFuture).toUTCString();
 
   return [
