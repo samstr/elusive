@@ -47,8 +47,8 @@ var useData = function useData() {
       return;
     }
 
-    if (err.response && err.response.data && err.response.data.data) {
-      setData(err.response.data.data);
+    if (err.response && err.response.data) {
+      setData(err.response.data);
       return;
     }
 
@@ -78,7 +78,7 @@ var useData = function useData() {
             case 5:
               response = _context.sent;
               cancelRequest = null;
-              setData(response.data.data);
+              setData(response.data);
               _context.next = 13;
               break;
 
@@ -180,7 +180,7 @@ var useSession = function useSession() {
             case 3:
               response = _context.sent;
               cancelRequest = null;
-              _session = _objectSpread({}, response.data.session, {
+              _session = _objectSpread({}, response.data, {
                 _ready: true
               });
               setSession(_session);

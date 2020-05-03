@@ -47,7 +47,7 @@ const useSession = () => {
         cancelRequest = null;
 
         const _session = {
-          ...response.data.session,
+          ...response.data,
           _ready: true,
         };
 

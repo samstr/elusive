@@ -27,8 +27,8 @@ const useData = () => {
       return;
     }
 
-    if (err.response && err.response.data && err.response.data.data) {
-      setData(err.response.data.data);
+    if (err.response && err.response.data) {
+      setData(err.response.data);
       return;
     }
 
@@ -50,7 +50,7 @@ const useData = () => {
         });
         cancelRequest = null;
 
-        setData(response.data.data);
+        setData(response.data);
       } catch (err) {
         return handleError(err);
       }
