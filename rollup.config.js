@@ -6,6 +6,7 @@ export default [
   {
     input: {
       index: './src/index.js',
+      api: './src/api/index.js',
       auth: './src/auth/index.js',
       client: './src/client/index.js',
       components: './src/components/index.js',
@@ -13,8 +14,7 @@ export default [
       forms: './src/forms/index.js',
       http: './src/http/index.js',
       models: './src/models/index.js',
-      'pages/index': './src/pages/index.js',
-      'pages/api': './src/pages/api/index.js',
+      pages: './src/pages/index.js',
       routes: './src/routes/index.js',
       sessions: './src/sessions/index.js',
       tokens: './src/tokens/index.js',
