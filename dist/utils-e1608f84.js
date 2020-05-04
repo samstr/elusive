@@ -2,8 +2,8 @@
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
-var index$1 = require('./index-2340470f.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
+var index$1 = require('./index-2340470f.js');
 var utils$2 = require('./utils-eecac740.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }

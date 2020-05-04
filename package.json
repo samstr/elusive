@@ -1,11 +1,10 @@
 {
   "name": "elusive",
-  "version": "1.4.19",
+  "version": "1.4.30",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
     "dist",
-    "api.js",
     "auth.js",
     "client.js",
     "components.js",
@@ -13,7 +12,8 @@
     "forms.js",
     "http.js",
     "models.js",
-    "pages.js",
+    "pages/index.js",
+    "pages/api.js",
     "routes.js",
     "sessions.js",
     "tokens.js"

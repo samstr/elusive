@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node';
 
-import Elusive from '../';
-import { BaseError, errorJson } from '../errors';
+import Elusive from '../../';
+import { BaseError, errorJson } from '../../errors';
 import {
   GET,
   HttpError,
@@ -13,16 +13,16 @@ import {
   httpOKResponse,
   httpUnauthorizedResponse,
   validateRequest,
-} from '../http';
+} from '../../http';
 import {
   SessionError,
   createSessionCookies,
   deleteSessionCookies,
   getSession,
-} from '../sessions';
-import { signTokens } from '../tokens';
+} from '../../sessions';
+import { signTokens } from '../../tokens';
 
-export const apiWrapper = async (req, res, fn, options) => {
+export const apiWrapper = async (req, res, api) => {
   const { sentry: sentryOptions, tokens: tokenOptions } = Elusive.options;
 
   if (sentryOptions && sentryOptions.dsn) {
@@ -32,16 +32,12 @@ export const apiWrapper = async (req, res, fn, options) => {
     });
   }
 
-  const defaultOptions = {
+  const options = {
     allowedMethods: [GET],
     requireAuth: false,
     setSessionCookies: false,
     reloadSessionUser: false,
-  };
-
-  options = {
-    ...defaultOptions,
-    ...options,
+    ...api.options,
   };
 
   try {
@@ -71,7 +67,7 @@ export const apiWrapper = async (req, res, fn, options) => {
 
     data = {
       ...data,
-      ...(await fn({ session })),
+      ...(await api({ session })),
     };
 
     if (data.errors && data.errors.length) {
