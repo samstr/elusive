@@ -19,6 +19,9 @@ class ElusiveClient {
       auth: {
         saltRounds: SALT_ROUNDS,
       },
+      firebase: {
+        instance: null,
+      },
       routes: {
         apiSession: apiSessionRoute,
         login: loginRoute,
@@ -47,13 +50,21 @@ class ElusiveClient {
   init = (options) => {
     this.setDefaultOptions();
 
-    const { auth, routes, sentry, sessions, tokens } = options;
+    const { auth, firebase, routes, sentry, sessions, tokens } = options;
 
     if (auth) {
       const { saltRounds } = auth;
 
       if (saltRounds) {
         this.options.auth.saltRounds = saltRounds;
+      }
+    }
+
+    if (firebase) {
+      const { instance } = firebase;
+
+      if (instance) {
+        this.options.firebase.instance = instance;
       }
     }
 

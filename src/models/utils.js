@@ -1,5 +1,6 @@
-import admin from 'firebase-admin';
 import { v4 as uuidv4 } from 'uuid';
+
+import Elusive from '../';
 
 export const createModel = (data) => {
   const model = {};
@@ -16,26 +17,21 @@ export const createModel = (data) => {
   return model;
 };
 
-export const createService = (firestore, model, collection) => {
-  return {
-    getObject: async (id) => getObject(firestore, model, collection, id),
-    createObject: async (createProps) =>
-      createObject(firestore, model, collection, createProps),
-    updateObject: async (doc, updateProps) =>
-      updateObject(firestore, model, collection, doc, updateProps),
-    listObjects: async () => listObjects(firestore, model, collection),
-  };
-};
+export const createService = (model, collection) => ({
+  getObject: async (id) => getObject(model, collection, id),
+  createObject: async (createProps) =>
+    createObject(model, collection, createProps),
+  updateObject: async (doc, updateProps) =>
+    updateObject(model, collection, doc, updateProps),
+  listObjects: async () => listObjects(model, collection),
+});
 
-export const createObject = async (
-  firestore,
-  model,
-  collection,
-  createProps
-) => {
+export const createObject = async (model, collection, createProps) => {
+  const firebase = Elusive.options.firebase.instance;
+  const firestore = firebase.firestore();
   const id = uuidv4();
 
-  const dateNow = admin.firestore.Timestamp.now();
+  const dateNow = firebase.firestore.Timestamp.now();
   const doc = {
     ...createProps,
     dateCreated: dateNow,
@@ -50,7 +46,8 @@ export const createObject = async (
   });
 };
 
-export const getObject = async (firestore, model, collection, id) => {
+export const getObject = async (model, collection, id) => {
+  const firestore = Elusive.options.firebase.instance.firestore();
   const doc = await firestore.collection(collection).doc(id).get();
 
   if (doc.exists) {
@@ -63,27 +60,29 @@ export const getObject = async (firestore, model, collection, id) => {
   }
 };
 
-export const updateObject = async (
-  firestore,
-  model,
-  collection,
-  doc,
-  updateProps
-) => {
-  updateProps.dateUpdated = admin.firestore.Timestamp.now();
+export const updateObject = async (model, collection, doc, updateProps) => {
+  const firebase = Elusive.options.firebase.instance;
+  const firestore = firebase.firestore();
+
+  updateProps.dateUpdated = firebase.firestore.Timestamp.now();
 
   const newDoc = {
     ...doc,
     ...updateProps,
   };
 
-  await firestore.collection(collection).doc(doc.id).update(updateProps);
+  await firebase.firestore
+    .collection(collection)
+    .doc(doc.id)
+    .update(updateProps);
 
   return model(newDoc);
 };
 
-export const listObjects = async (firestore, model, collection) => {
-  const docs = await firestore.collection(collection).get();
+export const listObjects = async (model, collection) => {
+  const firestore = Elusive.options.firebase.instance.firestore();
+
+  const docs = await firebase.firestore.collection(collection).get();
 
   const objects = [];
 

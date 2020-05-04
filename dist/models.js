@@ -2,16 +2,15 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var defineProperty = require('./defineProperty-ba7cd53d.js');
+require('./classCallCheck-d2bb402f.js');
+var client = require('./index-7e627aef.js');
+var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
-var admin = _interopDefault(require('firebase-admin'));
 var uuid = require('uuid');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var createModel = function createModel(data) {
   var model = {};
   Object.keys(data).forEach(function (key) {
@@ -24,14 +23,14 @@ var createModel = function createModel(data) {
   });
   return model;
 };
-var createService = function createService(firestore, model, collection) {
+var createService = function createService(model, collection) {
   return {
     getObject: function getObject(id) {
       return index$1._regeneratorRuntime.async(function getObject$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", _getObject(firestore, model, collection, id));
+              return _context.abrupt("return", _getObject(model, collection, id));
 
             case 1:
             case "end":
@@ -45,7 +44,7 @@ var createService = function createService(firestore, model, collection) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              return _context2.abrupt("return", _createObject(firestore, model, collection, createProps));
+              return _context2.abrupt("return", _createObject(model, collection, createProps));
 
             case 1:
             case "end":
@@ -59,7 +58,7 @@ var createService = function createService(firestore, model, collection) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              return _context3.abrupt("return", _updateObject(firestore, model, collection, doc, updateProps));
+              return _context3.abrupt("return", _updateObject(model, collection, doc, updateProps));
 
             case 1:
             case "end":
@@ -73,7 +72,7 @@ var createService = function createService(firestore, model, collection) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              return _context4.abrupt("return", _listObjects(firestore, model, collection));
+              return _context4.abrupt("return", _listObjects(model, collection));
 
             case 1:
             case "end":
@@ -85,27 +84,29 @@ var createService = function createService(firestore, model, collection) {
   };
 };
 
-var _createObject = function _createObject(firestore, model, collection, createProps) {
-  var id, dateNow, doc;
+var _createObject = function _createObject(model, collection, createProps) {
+  var firebase, firestore, id, dateNow, doc;
   return index$1._regeneratorRuntime.async(function _createObject$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
+          firebase = index.options.firebase.instance;
+          firestore = firebase.firestore();
           id = uuid.v4();
-          dateNow = admin.firestore.Timestamp.now();
+          dateNow = firebase.firestore.Timestamp.now();
           doc = _objectSpread({}, createProps, {
             dateCreated: dateNow,
             dateUpdated: dateNow
           });
-          _context5.next = 5;
+          _context5.next = 7;
           return index$1._regeneratorRuntime.awrap(firestore.collection(collection).doc(id).set(doc));
 
-        case 5:
+        case 7:
           return _context5.abrupt("return", model(_objectSpread({}, doc, {
             id: id
           })));
 
-        case 6:
+        case 8:
         case "end":
           return _context5.stop();
       }
@@ -113,20 +114,21 @@ var _createObject = function _createObject(firestore, model, collection, createP
   }, null, null, null, Promise);
 };
 
-var _getObject = function _getObject(firestore, model, collection, id) {
-  var doc;
+var _getObject = function _getObject(model, collection, id) {
+  var firestore, doc;
   return index$1._regeneratorRuntime.async(function _getObject$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
-          _context6.next = 2;
+          firestore = index.options.firebase.instance.firestore();
+          _context6.next = 3;
           return index$1._regeneratorRuntime.awrap(firestore.collection(collection).doc(id).get());
 
-        case 2:
+        case 3:
           doc = _context6.sent;
 
           if (!doc.exists) {
-            _context6.next = 7;
+            _context6.next = 8;
             break;
           }
 
@@ -134,10 +136,10 @@ var _getObject = function _getObject(firestore, model, collection, id) {
             id: doc.id
           }, doc.data())));
 
-        case 7:
+        case 8:
           return _context6.abrupt("return", null);
 
-        case 8:
+        case 9:
         case "end":
           return _context6.stop();
       }
@@ -145,21 +147,23 @@ var _getObject = function _getObject(firestore, model, collection, id) {
   }, null, null, null, Promise);
 };
 
-var _updateObject = function _updateObject(firestore, model, collection, doc, updateProps) {
-  var newDoc;
+var _updateObject = function _updateObject(model, collection, doc, updateProps) {
+  var firebase, firestore, newDoc;
   return index$1._regeneratorRuntime.async(function _updateObject$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
-          updateProps.dateUpdated = admin.firestore.Timestamp.now();
+          firebase = index.options.firebase.instance;
+          firestore = firebase.firestore();
+          updateProps.dateUpdated = firebase.firestore.Timestamp.now();
           newDoc = _objectSpread({}, doc, {}, updateProps);
-          _context7.next = 4;
-          return index$1._regeneratorRuntime.awrap(firestore.collection(collection).doc(doc.id).update(updateProps));
+          _context7.next = 6;
+          return index$1._regeneratorRuntime.awrap(firebase.firestore.collection(collection).doc(doc.id).update(updateProps));
 
-        case 4:
+        case 6:
           return _context7.abrupt("return", model(newDoc));
 
-        case 5:
+        case 7:
         case "end":
           return _context7.stop();
       }
@@ -167,16 +171,17 @@ var _updateObject = function _updateObject(firestore, model, collection, doc, up
   }, null, null, null, Promise);
 };
 
-var _listObjects = function _listObjects(firestore, model, collection) {
-  var docs, objects;
+var _listObjects = function _listObjects(model, collection) {
+  var firestore, docs, objects;
   return index$1._regeneratorRuntime.async(function _listObjects$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
         case 0:
-          _context8.next = 2;
-          return index$1._regeneratorRuntime.awrap(firestore.collection(collection).get());
+          firestore = index.options.firebase.instance.firestore();
+          _context8.next = 3;
+          return index$1._regeneratorRuntime.awrap(firebase.firestore.collection(collection).get());
 
-        case 2:
+        case 3:
           docs = _context8.sent;
           objects = [];
           docs.forEach(function (doc) {
@@ -186,7 +191,7 @@ var _listObjects = function _listObjects(firestore, model, collection) {
           });
           return _context8.abrupt("return", objects);
 
-        case 6:
+        case 7:
         case "end":
           return _context8.stop();
       }

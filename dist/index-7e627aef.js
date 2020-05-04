@@ -1,7 +1,6 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var defineProperty = require('./defineProperty-ba7cd53d.js');
 
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
@@ -17,6 +16,21 @@ function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
 }
 
 var SALT_ROUNDS = 10;
@@ -46,10 +60,13 @@ var ElusiveClient = /*#__PURE__*/function () {
 
     classCallCheck._classCallCheck(this, ElusiveClient);
 
-    defineProperty._defineProperty(this, "setDefaultOptions", function () {
+    _defineProperty(this, "setDefaultOptions", function () {
       _this.options = {
         auth: {
           saltRounds: SALT_ROUNDS
+        },
+        firebase: {
+          instance: null
         },
         routes: {
           apiSession: apiSessionRoute,
@@ -76,10 +93,11 @@ var ElusiveClient = /*#__PURE__*/function () {
       };
     });
 
-    defineProperty._defineProperty(this, "init", function (options) {
+    _defineProperty(this, "init", function (options) {
       _this.setDefaultOptions();
 
       var auth = options.auth,
+          firebase = options.firebase,
           routes = options.routes,
           sentry = options.sentry,
           sessions = options.sessions,
@@ -90,6 +108,14 @@ var ElusiveClient = /*#__PURE__*/function () {
 
         if (saltRounds) {
           _this.options.auth.saltRounds = saltRounds;
+        }
+      }
+
+      if (firebase) {
+        var instance = firebase.instance;
+
+        if (instance) {
+          _this.options.firebase.instance = instance;
         }
       }
 
@@ -192,7 +218,7 @@ var ElusiveClient = /*#__PURE__*/function () {
   return ElusiveClient;
 }();
 
-defineProperty._defineProperty(ElusiveClient, "instance", void 0);
+_defineProperty(ElusiveClient, "instance", void 0);
 
 exports.ACCESS_TOKEN_COOKIE_NAME = ACCESS_TOKEN_COOKIE_NAME;
 exports.ACCESS_TOKEN_EXPIRY_MINS = ACCESS_TOKEN_EXPIRY_MINS;
@@ -202,6 +228,7 @@ exports.REFRESH_TOKEN_COOKIE_NAME = REFRESH_TOKEN_COOKIE_NAME;
 exports.REFRESH_TOKEN_EXPIRY_MINS = REFRESH_TOKEN_EXPIRY_MINS;
 exports.SALT_ROUNDS = SALT_ROUNDS;
 exports.USER_ID_COOKIE_NAME = USER_ID_COOKIE_NAME;
+exports._defineProperty = _defineProperty;
 exports.apiSessionRoute = apiSessionRoute;
 exports.loginRoute = loginRoute;
 exports.logoutRoute = logoutRoute;
