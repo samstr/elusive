@@ -10,6 +10,7 @@ class ElusiveClient {
 
     this.options = {
       auth: {
+        passwordMinLength: 3,
         passwordResetExpiryHours: 24,
         saltRounds: 10,
       },
@@ -62,7 +63,19 @@ class ElusiveClient {
       const { auth, routes, mail, sessions, tokens } = options;
 
       if (auth) {
-        const { saltRounds } = auth;
+        const {
+          passwordMinLength,
+          passwordResetExpiryHours,
+          saltRounds,
+        } = auth;
+
+        if (passwordMinLength) {
+          this.options.auth.passwordMinLength = passwordMinLength;
+        }
+
+        if (passwordResetExpiryHours) {
+          this.options.auth.passwordResetExpiryHours = passwordResetExpiryHours;
+        }
 
         if (saltRounds) {
           this.options.auth.saltRounds = saltRounds;

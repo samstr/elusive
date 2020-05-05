@@ -15,6 +15,9 @@ export {
   UnknownFormError,
 };
 
+import loginForm from './login';
+export { loginForm };
+
 import {
   booleanField,
   clearFormFieldErrors,

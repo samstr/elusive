@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-require('./index-31e4b72c.js');
+require('./index-61c82eb7.js');
 var index = require('./index.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
@@ -289,6 +289,33 @@ var getOnChangeValue = function getOnChangeValue(event) {
   };
 };
 
+var login = (function () {
+  var authOptions = Elusive.options.auth;
+  return createForm({
+    fields: {
+      email: emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your email'
+        },
+        invalid: {
+          errorMessage: 'Your email is invalid'
+        }
+      }),
+      password: textField('password', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your password'
+        },
+        minLength: {
+          value: authOptions.passwordMinLength,
+          errorMessage: 'Your password is too short'
+        }
+      })
+    }
+  });
+});
+
 exports.FieldValueTooLongError = FieldValueTooLongError;
 exports.FieldValueTooShortError = FieldValueTooShortError;
 exports.FormError = FormError;
@@ -301,4 +328,5 @@ exports.createForm = createForm;
 exports.emailField = emailField;
 exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
+exports.loginForm = login;
 exports.textField = textField;

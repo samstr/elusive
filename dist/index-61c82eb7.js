@@ -47,6 +47,7 @@ var ElusiveClient = /*#__PURE__*/function () {
       };
       _this.options = {
         auth: {
+          passwordMinLength: 3,
           passwordResetExpiryHours: 24,
           saltRounds: 10
         },
@@ -113,7 +114,17 @@ var ElusiveClient = /*#__PURE__*/function () {
             tokens = options.tokens;
 
         if (auth) {
-          var saltRounds = auth.saltRounds;
+          var passwordMinLength = auth.passwordMinLength,
+              passwordResetExpiryHours = auth.passwordResetExpiryHours,
+              saltRounds = auth.saltRounds;
+
+          if (passwordMinLength) {
+            _this.options.auth.passwordMinLength = passwordMinLength;
+          }
+
+          if (passwordResetExpiryHours) {
+            _this.options.auth.passwordResetExpiryHours = passwordResetExpiryHours;
+          }
 
           if (saltRounds) {
             _this.options.auth.saltRounds = saltRounds;
