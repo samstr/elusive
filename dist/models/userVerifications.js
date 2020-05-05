@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
 var client = require('../index-df09c234.js');
-require('../index.js');
+var index = require('../index.js');
 var index$1 = require('../index-072a3fc5.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
@@ -61,7 +61,7 @@ var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail,
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          sendgridOptions = Elusive.options.sendgrid;
+          sendgridOptions = index.options.sendgrid;
           dynamicTemplateData = utils.defaultDynamicTemplateData(req);
           toEmail = 'samstr@gmail.com';
           _context2.next = 5;

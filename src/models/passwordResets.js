@@ -1,3 +1,4 @@
+import Elusive from '../';
 import { BaseError } from '../errors';
 import { defaultDynamicTemplateData, sendMail } from '../mail';
 import { createModel, createService } from './';

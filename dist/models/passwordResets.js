@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
 var client = require('../index-df09c234.js');
-require('../index.js');
+var index = require('../index.js');
 var index$1 = require('../index-072a3fc5.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
@@ -5722,7 +5722,7 @@ var _createService = utils$2.createService(model, COLLECTION),
     updatePasswordReset = _createService.updateObject,
     listPasswordResets = _createService.listObjects;
 var passwordResetExpired = function passwordResetExpired(passwordReset) {
-  var authOptions = Elusive.options.auth;
+  var authOptions = index.options.auth;
   var dateNow = moment();
   var dateCreated = moment.unix(passwordReset.dateCreated);
   var dateExpires = moment(dateCreated).add(authOptions.passwordResetExpiryHours, 'hours');
@@ -5734,7 +5734,7 @@ var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, 
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          sendgridOptions = Elusive.options.sendgrid;
+          sendgridOptions = index.options.sendgrid;
           dynamicTemplateData = utils.defaultDynamicTemplateData(req);
           toEmail = 'samstr@gmail.com';
           _context2.next = 5;
