@@ -24,6 +24,9 @@ export { registerForm };
 import resetPasswordRequestForm from './reset-password-request';
 export { resetPasswordRequestForm };
 
+import resetPasswordConfirmForm from './reset-password-confirm';
+export { resetPasswordConfirmForm };
+
 import {
   booleanField,
   clearFormFieldErrors,

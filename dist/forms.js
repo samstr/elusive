@@ -365,6 +365,30 @@ var resetPasswordRequest = (function () {
   });
 });
 
+var resetPasswordConfirm = (function () {
+  var authOptions = index.options.auth;
+  return createForm({
+    fields: {
+      passwordResetId: textField('passwordResetId', {
+        required: {
+          value: true,
+          errorMessage: 'Missing password reset key'
+        }
+      }),
+      password: textField('password', {
+        required: {
+          value: true,
+          errorMessage: 'Your password is required'
+        },
+        minLength: {
+          value: authOptions.passwordMinLength,
+          errorMessage: 'Your password is too short'
+        }
+      })
+    }
+  });
+});
+
 exports.FieldValueTooLongError = FieldValueTooLongError;
 exports.FieldValueTooShortError = FieldValueTooShortError;
 exports.FormError = FormError;
@@ -379,5 +403,6 @@ exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
 exports.loginForm = login;
 exports.registerForm = register;
+exports.resetPasswordConfirmForm = resetPasswordConfirm;
 exports.resetPasswordRequestForm = resetPasswordRequest;
 exports.textField = textField;
