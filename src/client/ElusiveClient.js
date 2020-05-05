@@ -1,30 +1,16 @@
-import { SALT_ROUNDS } from '../auth/config';
-import { PASSWORD_RESET_EXPIRY_HOURS } from '../models/passwordResets/config';
-import { apiSessionRoute, loginRoute, logoutRoute } from '../routes/config';
-import {
-  ACCESS_TOKEN_COOKIE_NAME,
-  COOKIE_EXPIRY_MINS,
-  REFRESH_TOKEN_COOKIE_NAME,
-  USER_ID_COOKIE_NAME,
-} from '../sessions/config';
-import {
-  ACCESS_TOKEN_EXPIRY_MINS,
-  REFRESH_TOKEN_EXPIRY_MINS,
-} from '../tokens/config';
-
 class ElusiveClient {
   static instance;
 
   setDefaultOptions = () => {
     this.options = {
       auth: {
-        passwordResetExpiryHours: PASSWORD_RESET_EXPIRY_HOURS,
-        saltRounds: SALT_ROUNDS,
+        passwordResetExpiryHours: 24,
+        saltRounds: 10,
       },
       routes: {
-        apiSession: apiSessionRoute,
-        login: loginRoute,
-        logout: logoutRoute,
+        apiSession: () => '/api/session',
+        login: () => '/login',
+        logout: () => '/logout',
       },
       firebase: {
         instance: null,
@@ -40,15 +26,15 @@ class ElusiveClient {
         instance: null,
       },
       sessions: {
-        accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
-        cookieExpiryMins: COOKIE_EXPIRY_MINS,
-        refreshTokenCookieName: REFRESH_TOKEN_COOKIE_NAME,
-        userIdCookieName: USER_ID_COOKIE_NAME,
+        accessTokenCookieName: 'at',
+        cookieExpiryMins: 43800, // 1 month
+        refreshTokenCookieName: 'rt',
+        userIdCookieName: 'uid',
       },
       tokens: {
-        accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
+        accessTokenExpiryMins: 10,
         createClaims: null,
-        refreshTokenExpiryMins: REFRESH_TOKEN_EXPIRY_MINS,
+        refreshTokenExpiryMins: 43800, // 1 month
         secret: null,
       },
     };
