@@ -21,6 +21,9 @@ export { loginForm };
 import registerForm from './register';
 export { registerForm };
 
+import resetPasswordRequestForm from './reset-password-request';
+export { resetPasswordRequestForm };
+
 import {
   booleanField,
   clearFormFieldErrors,
