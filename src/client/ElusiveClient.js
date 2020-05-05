@@ -31,7 +31,6 @@ class ElusiveClient {
         accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
         cookieExpiryMins: COOKIE_EXPIRY_MINS,
         refreshTokenCookieName: REFRESH_TOKEN_COOKIE_NAME,
-        reloadUser: null,
         userIdCookieName: USER_ID_COOKIE_NAME,
       },
       sentry: {
@@ -88,7 +87,6 @@ class ElusiveClient {
         accessTokenCookieName,
         cookieExpiryMins,
         refreshTokenCookieName,
-        reloadUser,
         userIdCookieName,
       } = sessions;
 
@@ -102,10 +100,6 @@ class ElusiveClient {
 
       if (refreshTokenCookieName) {
         this.options.sessions.refreshTokenCookieName = refreshTokenCookieName;
-      }
-
-      if (reloadUser) {
-        this.options.sessions.reloadUser = reloadUser;
       }
 
       if (userIdCookieName) {

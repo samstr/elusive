@@ -5,6 +5,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
+require('./index-0ad00f18.js');
+var index = require('./index.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
@@ -109,7 +111,7 @@ function _readOnlyError(name) {
 var createForm = function createForm(_ref) {
   var fields = _ref.fields,
       _validate = _ref.validate;
-  var sentryOptions = Elusive.options.sentry;
+  var sentryOptions = index.options.sentry;
   return {
     fields: fields,
     validate: function validate(values) {

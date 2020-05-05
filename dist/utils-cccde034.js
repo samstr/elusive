@@ -1,9 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
-require('./classCallCheck-d2bb402f.js');
-var client = require('./index-904aef43.js');
+var client = require('./index-0ad00f18.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 var uuid = require('uuid');
@@ -199,9 +196,9 @@ var _listObjects = function _listObjects(model, collection) {
   }, null, null, null, Promise);
 };
 
+exports._createObject = _createObject;
+exports._getObject = _getObject;
+exports._listObjects = _listObjects;
+exports._updateObject = _updateObject;
 exports.createModel = createModel;
-exports.createObject = _createObject;
 exports.createService = createService;
-exports.getObject = _getObject;
-exports.listObjects = _listObjects;
-exports.updateObject = _updateObject;

@@ -3,23 +3,23 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-904aef43.js');
+var client = require('./index-0ad00f18.js');
 require('./index.js');
 require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils$2 = require('./utils-f0c08734.js');
+var utils$3 = require('./utils-0862192f.js');
 require('jsonwebtoken');
 
 
 
 exports.ACCESS_TOKEN_EXPIRY_MINS = client.ACCESS_TOKEN_EXPIRY_MINS;
 exports.REFRESH_TOKEN_EXPIRY_MINS = client.REFRESH_TOKEN_EXPIRY_MINS;
-exports.InvalidAccessTokenError = utils$2.InvalidAccessTokenError;
-exports.InvalidRefreshTokenError = utils$2.InvalidRefreshTokenError;
-exports.RefreshTokenExpiredError = utils$2.RefreshTokenExpiredError;
-exports.TokenError = utils$2.TokenError;
-exports.getClaims = utils$2.getClaims;
-exports.signToken = utils$2.signToken;
-exports.signTokens = utils$2.signTokens;
+exports.InvalidAccessTokenError = utils$3.InvalidAccessTokenError;
+exports.InvalidRefreshTokenError = utils$3.InvalidRefreshTokenError;
+exports.RefreshTokenExpiredError = utils$3.RefreshTokenExpiredError;
+exports.TokenError = utils$3.TokenError;
+exports.getClaims = utils$3.getClaims;
+exports.signToken = utils$3.signToken;
+exports.signTokens = utils$3.signTokens;

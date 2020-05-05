@@ -1,5 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 
+import Elusive from '../';
 import { errorJson } from '../errors';
 
 import {

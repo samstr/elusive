@@ -1,5 +1,6 @@
 import Elusive from '../';
 
+import { getUser } from '../models/users';
 import {
   InvalidAccessTokenError,
   InvalidRefreshTokenError,
@@ -148,9 +149,7 @@ export const getSession = async (req, reloadSessionUser) => {
       if (reloadSessionUser) {
         console.log('REFRESHING ACCESS TOKEN by reloading session user');
 
-        const user = await sessionOptions.reloadUser(
-          refreshTokenClaims.user.id
-        );
+        const user = await getUser(refreshTokenClaims.user.id);
 
         if (!user) {
           throw new SessionUserNoLongerExistsError(

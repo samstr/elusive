@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-904aef43.js');
+var client = require('./index-0ad00f18.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
@@ -11,9 +11,12 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
-var utils$1 = require('./utils-a718df71.js');
+var utils$1 = require('./utils-0092133e.js');
 require('./SessionContext-efd795c9.js');
-var utils$2 = require('./utils-f0c08734.js');
+require('uuid');
+require('./utils-cccde034.js');
+require('./models/users.js');
+var utils$3 = require('./utils-0862192f.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -44,7 +47,7 @@ var apiWrapper = function apiWrapper(req, res, api) {
           tokens = _await$getSession.tokens;
 
           if (options.setSessionCookies && session.isAuthenticated && tokens) {
-            utils$1.createSessionCookies(res, utils$2.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+            utils$1.createSessionCookies(res, utils$3.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
           }
 
           if (!(options.requireAuth && !session.isAuthenticated)) {

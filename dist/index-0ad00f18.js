@@ -77,7 +77,6 @@ var ElusiveClient = /*#__PURE__*/function () {
           accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
           cookieExpiryMins: COOKIE_EXPIRY_MINS,
           refreshTokenCookieName: REFRESH_TOKEN_COOKIE_NAME,
-          reloadUser: null,
           userIdCookieName: USER_ID_COOKIE_NAME
         },
         sentry: {
@@ -140,7 +139,6 @@ var ElusiveClient = /*#__PURE__*/function () {
         var accessTokenCookieName = sessions.accessTokenCookieName,
             cookieExpiryMins = sessions.cookieExpiryMins,
             refreshTokenCookieName = sessions.refreshTokenCookieName,
-            reloadUser = sessions.reloadUser,
             userIdCookieName = sessions.userIdCookieName;
 
         if (accessTokenCookieName) {
@@ -153,10 +151,6 @@ var ElusiveClient = /*#__PURE__*/function () {
 
         if (refreshTokenCookieName) {
           _this.options.sessions.refreshTokenCookieName = refreshTokenCookieName;
-        }
-
-        if (reloadUser) {
-          _this.options.sessions.reloadUser = reloadUser;
         }
 
         if (userIdCookieName) {
