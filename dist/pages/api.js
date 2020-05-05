@@ -142,14 +142,14 @@ var apiWrapper = function apiWrapper(req, res, api) {
 };
 
 var registerApi = function registerApi(_ref) {
-  var session, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, user, userVerification, claims;
+  var req, res, session, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, user, userVerification, claims;
 
   return index$1._regeneratorRuntime.async(function registerApi$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          session = _ref.session;
-          tokenOptions = Elusive.options.tokens;
+          req = _ref.req, res = _ref.res, session = _ref.session;
+          tokenOptions = index.options.tokens;
 
           if (!session.isAuthenticated) {
             _context.next = 4;
@@ -191,7 +191,7 @@ var registerApi = function registerApi(_ref) {
 
         case 13:
           _context.next = 15;
-          return index$1._regeneratorRuntime.awrap(createUser({
+          return index$1._regeneratorRuntime.awrap(users.createUser({
             email: cleanValues.email,
             password: utils.hashPassword(cleanValues.password),
             imageUrl: '',

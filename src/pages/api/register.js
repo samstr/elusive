@@ -1,3 +1,4 @@
+import Elusive from '../../';
 import {
   AlreadyAuthenticatedError,
   UserAlreadyExistsError,
@@ -5,7 +6,7 @@ import {
 } from '../../auth';
 import { registerForm } from '../../forms';
 import { POST } from '../../http';
-import { getUserByEmail } from '../../models/users';
+import { createUser, getUserByEmail } from '../../models/users';
 import {
   TYPE_EMAIL,
   createUserVerification,
@@ -14,7 +15,7 @@ import {
 import { createSessionCookies } from '../../sessions';
 import { signTokens } from '../..//tokens';
 
-const registerApi = async ({ session }) => {
+const registerApi = async ({ req, res, session }) => {
   const { tokens: tokenOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
