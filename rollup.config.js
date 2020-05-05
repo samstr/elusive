@@ -26,11 +26,9 @@ export default [
       },
     ],
     external: [
-      '@sentry/node',
       'axios',
       'bcryptjs',
       'bootstrap',
-      'firebase-admin',
       'jsonwebtoken',
       'next',
       'next/router',

@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/node';
-
 import Elusive from '../';
 import { BaseError, errorJson } from '../errors';
 import {
@@ -87,9 +85,8 @@ export const apiWrapper = async (req, res, api) => {
 
     console.error('error in apiWrapper:', err);
 
-    if (sentryOptions && sentryOptions.dsn) {
-      console.log('sending to Sentry');
-      Sentry.captureException(err);
+    if (sentryOptions.instance) {
+      sentryOptions.instance.captureException(err);
     }
 
     return httpInternalServerErrorResponse(

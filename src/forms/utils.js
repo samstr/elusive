@@ -11,54 +11,66 @@ import {
   UnknownFormError,
 } from './errors';
 
-export const createForm = ({ fields, validate }) => ({
-  fields,
-  validate: (values) => {
-    const cleanValues = {};
-    let errors = [];
+export const createForm = ({ fields, validate }) => {
+  const { sentry: sentryOptions } = Elusive.options;
 
-    // validate each field
-    Object.keys(fields).forEach((field) => {
-      const value = values[field];
+  return {
+    fields,
+    validate: (values) => {
+      const cleanValues = {};
+      let errors = [];
 
-      try {
-        cleanValues[field] = fields[field].validate(value);
-      } catch (err) {
-        if (err instanceof FormError) {
-          errors.push(err);
-        } else {
-          // TODO Sentry?
-          console.log(err);
-          errors = [new UnknownFormError('An unknown form error occured.')];
+      // validate each field
+      Object.keys(fields).forEach((field) => {
+        const value = values[field];
+
+        try {
+          cleanValues[field] = fields[field].validate(value);
+        } catch (err) {
+          if (err instanceof FormError) {
+            errors.push(err);
+          } else {
+            console.log(err);
+
+            if (sentryOptions.instance) {
+              sentryOptions.instance.captureException(err);
+            }
+
+            errors = [new UnknownFormError('An unknown form error occured.')];
+          }
+        }
+      });
+
+      if (!errors.length && typeof validate === 'function') {
+        try {
+          // additional validation
+          validate(cleanValues);
+        } catch (err) {
+          if (err instanceof FormError) {
+            errors.push(err);
+          } else {
+            console.log(err);
+
+            if (sentryOptions.instance) {
+              sentryOptions.instance.captureException(err);
+            }
+
+            errors = [new UnknownFormError('An unknown form error occured.')];
+          }
         }
       }
-    });
 
-    if (!errors.length && typeof validate === 'function') {
-      try {
-        // additional validation
-        validate(cleanValues);
-      } catch (err) {
-        if (err instanceof FormError) {
-          errors.push(err);
-        } else {
-          // TODO Sentry?
-          console.log(err);
-          errors = [new UnknownFormError('An unknown form error occured.')];
-        }
+      if (errors.length) {
+        return errorJson(errors);
       }
-    }
 
-    if (errors.length) {
-      return errorJson(errors);
-    }
-
-    return {
-      valid: true,
-      cleanValues,
-    };
-  },
-});
+      return {
+        valid: true,
+        cleanValues,
+      };
+    },
+  };
+};
 
 export const field = (name, options, validate) => ({
   validate: (value) => {

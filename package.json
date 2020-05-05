@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "1.4.60",
+  "version": "1.4.61",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -24,11 +24,9 @@
     "lint": "eslint ./src"
   },
   "dependencies": {
-    "@sentry/node": "^5.15.5",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.4.1",
-    "firebase-admin": "^8.11.0",
     "jsonwebtoken": "^8.5.1",
     "next": "^9.3.6",
     "prop-types": "^15.7.2",

@@ -109,6 +109,7 @@ function _readOnlyError(name) {
 var createForm = function createForm(_ref) {
   var fields = _ref.fields,
       _validate = _ref.validate;
+  var sentryOptions = Elusive.options.sentry;
   return {
     fields: fields,
     validate: function validate(values) {
@@ -124,8 +125,12 @@ var createForm = function createForm(_ref) {
           if (err instanceof FormError) {
             errors.push(err);
           } else {
-            // TODO Sentry?
             console.log(err);
+
+            if (sentryOptions.instance) {
+              sentryOptions.instance.captureException(err);
+            }
+
             errors = [new UnknownFormError('An unknown form error occured.')];
           }
         }
@@ -139,8 +144,12 @@ var createForm = function createForm(_ref) {
           if (err instanceof FormError) {
             errors.push(err);
           } else {
-            // TODO Sentry?
             console.log(err);
+
+            if (sentryOptions.instance) {
+              sentryOptions.instance.captureException(err);
+            }
+
             errors = [new UnknownFormError('An unknown form error occured.')];
           }
         }

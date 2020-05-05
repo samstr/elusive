@@ -35,8 +35,7 @@ class ElusiveClient {
         userIdCookieName: USER_ID_COOKIE_NAME,
       },
       sentry: {
-        dsn: null,
-        enabled: false,
+        instance: null,
       },
       tokens: {
         accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
@@ -115,14 +114,10 @@ class ElusiveClient {
     }
 
     if (sentry) {
-      const { dsn, enabled } = sentry;
+      const { instance } = sentry;
 
-      if (dsn) {
-        this.options.sentry.dsn = dsn;
-      }
-
-      if (enabled) {
-        this.options.sentry.enabled = enabled;
+      if (instance) {
+        this.options.sentry.instance = instance;
       }
     }
 

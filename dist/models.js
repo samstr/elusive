@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-7e627aef.js');
+var client = require('./index-904aef43.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 var uuid = require('uuid');

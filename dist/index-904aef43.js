@@ -81,8 +81,7 @@ var ElusiveClient = /*#__PURE__*/function () {
           userIdCookieName: USER_ID_COOKIE_NAME
         },
         sentry: {
-          dsn: null,
-          enabled: false
+          instance: null
         },
         tokens: {
           accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
@@ -166,15 +165,10 @@ var ElusiveClient = /*#__PURE__*/function () {
       }
 
       if (sentry) {
-        var dsn = sentry.dsn,
-            enabled = sentry.enabled;
+        var _instance = sentry.instance;
 
-        if (dsn) {
-          _this.options.sentry.dsn = dsn;
-        }
-
-        if (enabled) {
-          _this.options.sentry.enabled = enabled;
+        if (_instance) {
+          _this.options.sentry.instance = _instance;
         }
       }
 
