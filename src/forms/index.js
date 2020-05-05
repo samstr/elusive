@@ -18,6 +18,9 @@ export {
 import loginForm from './login';
 export { loginForm };
 
+import registerForm from './register';
+export { registerForm };
+
 import {
   booleanField,
   clearFormFieldErrors,

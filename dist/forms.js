@@ -290,7 +290,7 @@ var getOnChangeValue = function getOnChangeValue(event) {
 };
 
 var login = (function () {
-  var authOptions = Elusive.options.auth;
+  var authOptions = index.options.auth;
   return createForm({
     fields: {
       email: emailField('email', {
@@ -316,6 +316,39 @@ var login = (function () {
   });
 });
 
+var register = (function () {
+  var authOptions = index.options.auth;
+  return createForm({
+    fields: {
+      email: emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Your email is required'
+        },
+        invalid: {
+          errorMessage: 'Your email address is invalid'
+        }
+      }),
+      password: textField('password', {
+        required: {
+          value: true,
+          errorMessage: 'Your password is required'
+        },
+        minLength: {
+          value: authOptions.passwordMinLength,
+          errorMessage: 'Your password is too short'
+        }
+      }),
+      termsAgreed: booleanField('termsAgreed', {
+        required: {
+          value: true,
+          errorMessage: 'You must agree to the Terms of Service'
+        }
+      })
+    }
+  });
+});
+
 exports.FieldValueTooLongError = FieldValueTooLongError;
 exports.FieldValueTooShortError = FieldValueTooShortError;
 exports.FormError = FormError;
@@ -329,4 +362,5 @@ exports.emailField = emailField;
 exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
 exports.loginForm = login;
+exports.registerForm = register;
 exports.textField = textField;
