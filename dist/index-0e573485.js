@@ -39,7 +39,12 @@ var ElusiveClient = /*#__PURE__*/function () {
 
     classCallCheck._classCallCheck(this, ElusiveClient);
 
-    _defineProperty(this, "setDefaultOptions", function () {
+    _defineProperty(this, "setDefaults", function () {
+      _this.services = {
+        firebase: null,
+        sendgrid: null,
+        sentry: null
+      };
       _this.options = {
         auth: {
           passwordResetExpiryHours: 24,
@@ -56,18 +61,11 @@ var ElusiveClient = /*#__PURE__*/function () {
             return '/logout';
           }
         },
-        firebase: {
-          instance: null
-        },
-        sendgrid: {
+        mail: {
           fromEmail: 'no-reply@example.com',
           fromName: 'Example',
-          instance: null,
           resetPasswordRequestTemplateId: null,
           verifyEmailTemplateId: null
-        },
-        sentry: {
-          instance: null
         },
         sessions: {
           accessTokenCookieName: 'at',
@@ -86,14 +84,28 @@ var ElusiveClient = /*#__PURE__*/function () {
       };
     });
 
-    _defineProperty(this, "init", function (options) {
-      _this.setDefaultOptions();
+    _defineProperty(this, "init", function (services, options) {
+      _this.setDefaults();
+
+      var firebase = services.firebase,
+          sendgrid = services.sendgrid,
+          sentry = services.sentry;
+
+      if (firebase) {
+        _this.services.firebase = firebase;
+      }
+
+      if (sendgrid) {
+        _this.services.sendgrid = sendgrid;
+      }
+
+      if (sentry) {
+        _this.services.sentry = sentry;
+      }
 
       var auth = options.auth,
-          firebase = options.firebase,
           routes = options.routes,
-          sendgrid = options.sendgrid,
-          sentry = options.sentry,
+          mail = options.mail,
           sessions = options.sessions,
           tokens = options.tokens;
 
@@ -123,47 +135,26 @@ var ElusiveClient = /*#__PURE__*/function () {
         }
       }
 
-      if (firebase) {
-        var instance = firebase.instance;
-
-        if (instance) {
-          _this.options.firebase.instance = instance;
-        }
-      }
-
-      if (sendgrid) {
-        var fromEmail = sendgrid.fromEmail,
-            fromName = sendgrid.fromName,
-            _instance = sendgrid.instance,
-            resetPasswordRequestTemplateId = sendgrid.resetPasswordRequestTemplateId,
-            verifyEmailTemplateId = sendgrid.verifyEmailTemplateId;
+      if (mail) {
+        var fromEmail = mail.fromEmail,
+            fromName = mail.fromName,
+            resetPasswordRequestTemplateId = mail.resetPasswordRequestTemplateId,
+            verifyEmailTemplateId = mail.verifyEmailTemplateId;
 
         if (fromEmail) {
-          _this.options.sendgrid.fromEmail = fromEmail;
+          _this.options.mail.fromEmail = fromEmail;
         }
 
         if (fromName) {
-          _this.options.sendgrid.fromName = fromName;
-        }
-
-        if (_instance) {
-          _this.options.sendgrid.instance = _instance;
+          _this.options.mail.fromName = fromName;
         }
 
         if (resetPasswordRequestTemplateId) {
-          _this.options.sendgrid.resetPasswordRequestTemplateId = resetPasswordRequestTemplateId;
+          _this.options.mail.resetPasswordRequestTemplateId = resetPasswordRequestTemplateId;
         }
 
         if (verifyEmailTemplateId) {
-          _this.options.sendgrid.verifyEmailTemplateId = verifyEmailTemplateId;
-        }
-      }
-
-      if (sentry) {
-        var _instance2 = sentry.instance;
-
-        if (_instance2) {
-          _this.options.sentry.instance = _instance2;
+          _this.options.mail.verifyEmailTemplateId = verifyEmailTemplateId;
         }
       }
 

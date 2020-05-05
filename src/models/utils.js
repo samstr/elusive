@@ -27,7 +27,7 @@ export const createService = (model, collection) => ({
 });
 
 export const createObject = async (model, collection, createProps) => {
-  const firebase = Elusive.options.firebase.instance;
+  const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
   const id = uuidv4();
 
@@ -47,7 +47,8 @@ export const createObject = async (model, collection, createProps) => {
 };
 
 export const getObject = async (model, collection, id) => {
-  const firestore = Elusive.options.firebase.instance.firestore();
+  const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
   const doc = await firestore.collection(collection).doc(id).get();
 
   if (doc.exists) {
@@ -61,8 +62,7 @@ export const getObject = async (model, collection, id) => {
 };
 
 export const updateObject = async (model, collection, doc, updateProps) => {
-  const firebase = Elusive.options.firebase.instance;
-  const firestore = firebase.firestore();
+  const { firebase } = Elusive.services;
 
   updateProps.dateUpdated = firebase.firestore.Timestamp.now();
 
@@ -80,9 +80,10 @@ export const updateObject = async (model, collection, doc, updateProps) => {
 };
 
 export const listObjects = async (model, collection) => {
-  const firestore = Elusive.options.firebase.instance.firestore();
+  const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
 
-  const docs = await firebase.firestore.collection(collection).get();
+  const docs = await firestore.collection(collection).get();
 
   const objects = [];
 

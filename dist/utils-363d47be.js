@@ -1,6 +1,6 @@
 'use strict';
 
-var client = require('./index-df09c234.js');
+var client = require('./index-0e573485.js');
 var index = require('./index.js');
 var index$1 = require('./index-072a3fc5.js');
 var uuid = require('uuid');
@@ -87,7 +87,7 @@ var _createObject = function _createObject(model, collection, createProps) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          firebase = index.options.firebase.instance;
+          firebase = index.services.firebase;
           firestore = firebase.firestore();
           id = uuid.v4();
           dateNow = firebase.firestore.Timestamp.now();
@@ -112,20 +112,21 @@ var _createObject = function _createObject(model, collection, createProps) {
 };
 
 var _getObject = function _getObject(model, collection, id) {
-  var firestore, doc;
+  var firebase, firestore, doc;
   return index$1._regeneratorRuntime.async(function _getObject$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
-          firestore = index.options.firebase.instance.firestore();
-          _context6.next = 3;
+          firebase = index.services.firebase;
+          firestore = firebase.firestore();
+          _context6.next = 4;
           return index$1._regeneratorRuntime.awrap(firestore.collection(collection).doc(id).get());
 
-        case 3:
+        case 4:
           doc = _context6.sent;
 
           if (!doc.exists) {
-            _context6.next = 8;
+            _context6.next = 9;
             break;
           }
 
@@ -133,10 +134,10 @@ var _getObject = function _getObject(model, collection, id) {
             id: doc.id
           }, doc.data())));
 
-        case 8:
+        case 9:
           return _context6.abrupt("return", null);
 
-        case 9:
+        case 10:
         case "end":
           return _context6.stop();
       }
@@ -145,22 +146,21 @@ var _getObject = function _getObject(model, collection, id) {
 };
 
 var _updateObject = function _updateObject(model, collection, doc, updateProps) {
-  var firebase, firestore, newDoc;
+  var firebase, newDoc;
   return index$1._regeneratorRuntime.async(function _updateObject$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
-          firebase = index.options.firebase.instance;
-          firestore = firebase.firestore();
+          firebase = index.services.firebase;
           updateProps.dateUpdated = firebase.firestore.Timestamp.now();
           newDoc = _objectSpread({}, doc, {}, updateProps);
-          _context7.next = 6;
+          _context7.next = 5;
           return index$1._regeneratorRuntime.awrap(firebase.firestore.collection(collection).doc(doc.id).update(updateProps));
 
-        case 6:
+        case 5:
           return _context7.abrupt("return", model(newDoc));
 
-        case 7:
+        case 6:
         case "end":
           return _context7.stop();
       }
@@ -169,16 +169,17 @@ var _updateObject = function _updateObject(model, collection, doc, updateProps) 
 };
 
 var _listObjects = function _listObjects(model, collection) {
-  var firestore, docs, objects;
+  var firebase, firestore, docs, objects;
   return index$1._regeneratorRuntime.async(function _listObjects$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
         case 0:
-          firestore = index.options.firebase.instance.firestore();
-          _context8.next = 3;
-          return index$1._regeneratorRuntime.awrap(firebase.firestore.collection(collection).get());
+          firebase = index.services.firebase;
+          firestore = firebase.firestore();
+          _context8.next = 4;
+          return index$1._regeneratorRuntime.awrap(firestore.collection(collection).get());
 
-        case 3:
+        case 4:
           docs = _context8.sent;
           objects = [];
           docs.forEach(function (doc) {
@@ -188,7 +189,7 @@ var _listObjects = function _listObjects(model, collection) {
           });
           return _context8.abrupt("return", objects);
 
-        case 7:
+        case 8:
         case "end":
           return _context8.stop();
       }

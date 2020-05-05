@@ -10,13 +10,13 @@ var defaultDynamicTemplateData = function defaultDynamicTemplateData(req) {
   };
 };
 var sendMail = function sendMail(message) {
-  var _Elusive$options, sendgrid, sentry;
+  var _Elusive$services, sendgrid, sentry;
 
   return index$1._regeneratorRuntime.async(function sendMail$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _Elusive$options = index.options, sendgrid = _Elusive$options.sendgrid, sentry = _Elusive$options.sentry; // XXX if (process.env.NODE_ENV !== 'production') return;
+          _Elusive$services = index.services, sendgrid = _Elusive$services.sendgrid, sentry = _Elusive$services.sentry; // XXX if (process.env.NODE_ENV !== 'production') return;
 
           _context.prev = 1;
           _context.next = 4;

@@ -1,7 +1,13 @@
 class ElusiveClient {
   static instance;
 
-  setDefaultOptions = () => {
+  setDefaults = () => {
+    this.services = {
+      firebase: null,
+      sendgrid: null,
+      sentry: null,
+    };
+
     this.options = {
       auth: {
         passwordResetExpiryHours: 24,
@@ -12,18 +18,11 @@ class ElusiveClient {
         login: () => '/login',
         logout: () => '/logout',
       },
-      firebase: {
-        instance: null,
-      },
-      sendgrid: {
+      mail: {
         fromEmail: 'no-reply@example.com',
         fromName: 'Example',
-        instance: null,
         resetPasswordRequestTemplateId: null,
         verifyEmailTemplateId: null,
-      },
-      sentry: {
-        instance: null,
       },
       sessions: {
         accessTokenCookieName: 'at',
@@ -40,18 +39,24 @@ class ElusiveClient {
     };
   };
 
-  init = (options) => {
-    this.setDefaultOptions();
+  init = (services, options) => {
+    this.setDefaults();
 
-    const {
-      auth,
-      firebase,
-      routes,
-      sendgrid,
-      sentry,
-      sessions,
-      tokens,
-    } = options;
+    const { firebase, sendgrid, sentry } = services;
+
+    if (firebase) {
+      this.services.firebase = firebase;
+    }
+
+    if (sendgrid) {
+      this.services.sendgrid = sendgrid;
+    }
+
+    if (sentry) {
+      this.services.sentry = sentry;
+    }
+
+    const { auth, routes, mail, sessions, tokens } = options;
 
     if (auth) {
       const { saltRounds } = auth;
@@ -77,49 +82,28 @@ class ElusiveClient {
       }
     }
 
-    if (firebase) {
-      const { instance } = firebase;
-
-      if (instance) {
-        this.options.firebase.instance = instance;
-      }
-    }
-
-    if (sendgrid) {
+    if (mail) {
       const {
         fromEmail,
         fromName,
-        instance,
         resetPasswordRequestTemplateId,
         verifyEmailTemplateId,
-      } = sendgrid;
+      } = mail;
 
       if (fromEmail) {
-        this.options.sendgrid.fromEmail = fromEmail;
+        this.options.mail.fromEmail = fromEmail;
       }
 
       if (fromName) {
-        this.options.sendgrid.fromName = fromName;
-      }
-
-      if (instance) {
-        this.options.sendgrid.instance = instance;
+        this.options.mail.fromName = fromName;
       }
 
       if (resetPasswordRequestTemplateId) {
-        this.options.sendgrid.resetPasswordRequestTemplateId = resetPasswordRequestTemplateId;
+        this.options.mail.resetPasswordRequestTemplateId = resetPasswordRequestTemplateId;
       }
 
       if (verifyEmailTemplateId) {
-        this.options.sendgrid.verifyEmailTemplateId = verifyEmailTemplateId;
-      }
-    }
-
-    if (sentry) {
-      const { instance } = sentry;
-
-      if (instance) {
-        this.options.sentry.instance = instance;
+        this.options.mail.verifyEmailTemplateId = verifyEmailTemplateId;
       }
     }
 

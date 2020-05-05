@@ -11,7 +11,7 @@ export const defaultDynamicTemplateData = (req) => {
 };
 
 export const sendMail = async (message) => {
-  const { sendgrid, sentry } = Elusive.options;
+  const { sendgrid, sentry } = Elusive.services;
 
   // XXX if (process.env.NODE_ENV !== 'production') return;
 

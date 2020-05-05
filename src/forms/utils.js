@@ -13,7 +13,7 @@ import {
 } from './errors';
 
 export const createForm = ({ fields, validate }) => {
-  const { sentry: sentryOptions } = Elusive.options;
+  const { sentry } = Elusive.services;
 
   return {
     fields,
@@ -33,8 +33,8 @@ export const createForm = ({ fields, validate }) => {
           } else {
             console.log(err);
 
-            if (sentryOptions.instance) {
-              sentryOptions.instance.captureException(err);
+            if (sentry) {
+              sentry.captureException(err);
             }
 
             errors = [new UnknownFormError('An unknown form error occured.')];
@@ -52,8 +52,8 @@ export const createForm = ({ fields, validate }) => {
           } else {
             console.log(err);
 
-            if (sentryOptions.instance) {
-              sentryOptions.instance.captureException(err);
+            if (sentry) {
+              sentry.captureException(err);
             }
 
             errors = [new UnknownFormError('An unknown form error occured.')];

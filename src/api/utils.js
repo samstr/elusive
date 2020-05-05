@@ -21,7 +21,8 @@ import {
 import { signTokens } from '../tokens';
 
 export const apiWrapper = async (req, res, api) => {
-  const { sentry: sentryOptions, tokens: tokenOptions } = Elusive.options;
+  const { sentry } = Elusive.services;
+  const { tokens: tokenOptions } = Elusive.options;
 
   const options = {
     allowedMethods: [GET],
@@ -85,8 +86,8 @@ export const apiWrapper = async (req, res, api) => {
 
     console.error('error in apiWrapper:', err);
 
-    if (sentryOptions.instance) {
-      sentryOptions.instance.captureException(err);
+    if (sentry) {
+      sentry.captureException(err);
     }
 
     return httpInternalServerErrorResponse(

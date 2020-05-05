@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-require('./index-df09c234.js');
+require('./index-0e573485.js');
 var index = require('./index.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
 require('react');
@@ -111,7 +111,7 @@ function _readOnlyError(name) {
 var createForm = function createForm(_ref) {
   var fields = _ref.fields,
       _validate = _ref.validate;
-  var sentryOptions = index.options.sentry;
+  var sentry = index.services.sentry;
   return {
     fields: fields,
     validate: function validate(values) {
@@ -129,8 +129,8 @@ var createForm = function createForm(_ref) {
           } else {
             console.log(err);
 
-            if (sentryOptions.instance) {
-              sentryOptions.instance.captureException(err);
+            if (sentry) {
+              sentry.captureException(err);
             }
 
             errors = [new UnknownFormError('An unknown form error occured.')];
@@ -148,8 +148,8 @@ var createForm = function createForm(_ref) {
           } else {
             console.log(err);
 
-            if (sentryOptions.instance) {
-              sentryOptions.instance.captureException(err);
+            if (sentry) {
+              sentry.captureException(err);
             }
 
             errors = [new UnknownFormError('An unknown form error occured.')];
