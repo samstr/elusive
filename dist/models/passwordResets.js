@@ -5,15 +5,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
 var client = require('../index-61c82eb7.js');
 var index = require('../index.js');
-var index$1 = require('../index-072a3fc5.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-require('uuid');
-var utils$2 = require('../utils-385a9005.js');
-var users = require('./users.js');
+var index$1 = require('../index-072a3fc5.js');
 var utils = require('../utils-00b86ca6.js');
+require('uuid');
+var utils$1 = require('../utils-385a9005.js');
+var users = require('./users.js');
 
 var moment = index$1.createCommonjsModule(function (module, exports) {
 (function (global, factory) {
@@ -5688,7 +5688,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var COLLECTION = 'passwordResets';
 var model = function model(data) {
-  var model = utils$2.createModel(data);
+  var model = utils$1.createModel(data);
 
   model.hasExpired = function () {
     return passwordResetExpired(model);
@@ -5716,7 +5716,7 @@ var model = function model(data) {
   return model;
 };
 
-var _createService = utils$2.createService(model, COLLECTION),
+var _createService = utils$1.createService(model, COLLECTION),
     getPasswordReset = _createService.getObject,
     createPasswordReset = _createService.createObject,
     updatePasswordReset = _createService.updateObject,

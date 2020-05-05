@@ -1,5 +1,5 @@
-import Elusive from '../';
-import { BaseError, errorJson } from '../errors';
+import Elusive from '../../';
+import { BaseError, errorJson } from '../../errors';
 import {
   GET,
   HttpError,
@@ -11,14 +11,14 @@ import {
   httpOKResponse,
   httpUnauthorizedResponse,
   validateRequest,
-} from '../http';
+} from '../../http';
 import {
   SessionError,
   createSessionCookies,
   deleteSessionCookies,
   getSession,
-} from '../sessions';
-import { TokenError, signTokens } from '../tokens';
+} from '../../sessions';
+import { TokenError, signTokens } from '../../tokens';
 
 export const apiWrapper = async (req, res, api) => {
   const { sentry } = Elusive.services;

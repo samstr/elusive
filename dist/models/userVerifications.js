@@ -5,15 +5,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
 var client = require('../index-61c82eb7.js');
 var index = require('../index.js');
-var index$1 = require('../index-072a3fc5.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-require('uuid');
-var utils$2 = require('../utils-385a9005.js');
-var users = require('./users.js');
+var index$1 = require('../index-072a3fc5.js');
 var utils = require('../utils-00b86ca6.js');
+require('uuid');
+var utils$1 = require('../utils-385a9005.js');
+var users = require('./users.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -26,7 +26,7 @@ var COLLECTION = 'userVerifications';
 var TYPE_EMAIL = 'email';
 var TYPE_PHONE = 'phone';
 var model = function model(data) {
-  var model = utils$2.createModel(data);
+  var model = utils$1.createModel(data);
 
   model.getUser = function _callee(_) {
     return index$1._regeneratorRuntime.async(function _callee$(_context) {
@@ -50,7 +50,7 @@ var model = function model(data) {
   return model;
 };
 
-var _createService = utils$2.createService(model, COLLECTION),
+var _createService = utils$1.createService(model, COLLECTION),
     getUserVerification = _createService.getObject,
     createUserVerification = _createService.createObject,
     updateUserVerification = _createService.updateObject,

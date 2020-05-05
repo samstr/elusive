@@ -2,21 +2,21 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./classCallCheck-d2bb402f.js');
-var client = require('./index-61c82eb7.js');
-var index = require('./index.js');
-var index$1 = require('./index-072a3fc5.js');
-var FormErrors = require('./FormErrors-1539c4dc.js');
+require('../classCallCheck-d2bb402f.js');
+var client = require('../index-61c82eb7.js');
+var index = require('../index.js');
+var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('./utils-b08f259e.js');
-var utils$1 = require('./utils-95cdaf5d.js');
-require('./SessionContext-efd795c9.js');
+var utils = require('../utils-b08f259e.js');
+var index$1 = require('../index-072a3fc5.js');
 require('uuid');
-require('./utils-385a9005.js');
-require('./models/users.js');
-var utils$3 = require('./utils-5469b2c7.js');
+require('../utils-385a9005.js');
+require('../models/users.js');
+var utils$2 = require('../utils-cc6875a7.js');
+require('../SessionContext-efd795c9.js');
+var utils$3 = require('../utils-5469b2c7.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -40,7 +40,7 @@ var apiWrapper = function apiWrapper(req, res, api) {
           _context.prev = 3;
           utils.validateRequest(req, res, options);
           _context.next = 7;
-          return index$1._regeneratorRuntime.awrap(utils$1.getSession(req, options.reloadSessionUser));
+          return index$1._regeneratorRuntime.awrap(utils$2.getSession(req, options.reloadSessionUser));
 
         case 7:
           _await$getSession = _context.sent;
@@ -48,7 +48,7 @@ var apiWrapper = function apiWrapper(req, res, api) {
           tokens = _await$getSession.tokens;
 
           if (options.setSessionCookies && session.isAuthenticated && tokens) {
-            utils$1.createSessionCookies(res, utils$3.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+            utils$2.createSessionCookies(res, utils$3.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
           }
 
           if (!(options.requireAuth && !session.isAuthenticated)) {
@@ -102,12 +102,12 @@ var apiWrapper = function apiWrapper(req, res, api) {
           return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 32:
-          if (!(_context.t5 instanceof utils$1.SessionError || _context.t5 instanceof utils$3.TokenError)) {
+          if (!(_context.t5 instanceof utils$2.SessionError || _context.t5 instanceof utils$3.TokenError)) {
             _context.next = 35;
             break;
           }
 
-          utils$1.deleteSessionCookies(res);
+          utils$2.deleteSessionCookies(res);
           return _context.abrupt("return", utils.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 35:

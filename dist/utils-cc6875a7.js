@@ -2,8 +2,8 @@
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
-var index$1 = require('./index-072a3fc5.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
+var index$1 = require('./index-072a3fc5.js');
 var users = require('./models/users.js');
 var utils$3 = require('./utils-5469b2c7.js');
 
