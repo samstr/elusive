@@ -16,8 +16,8 @@ export const sendMail = async (message) => {
   // XXX if (process.env.NODE_ENV !== 'production') return;
 
   try {
-    return await sendgrid.instance.send(message);
+    return await sendgrid.send(message);
   } catch (err) {
-    sentry.instance.captureException(err);
+    sentry.captureException(err);
   }
 };

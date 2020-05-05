@@ -14,7 +14,8 @@ export const {
 } = createService(model, COLLECTION);
 
 export const getUserByEmail = async (email) => {
-  const firestore = Elusive.options.firebase.instance.firestore();
+  const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
 
   const docs = await firestore
     .collection(COLLECTION)
@@ -38,7 +39,8 @@ export const getUserByEmail = async (email) => {
 };
 
 export const getUserByUsername = async (username) => {
-  const firestore = Elusive.options.firebase.instance.firestore();
+  const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
 
   const docs = await firestore
     .collection(COLLECTION)

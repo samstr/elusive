@@ -20,7 +20,7 @@ var sendMail = function sendMail(message) {
 
           _context.prev = 1;
           _context.next = 4;
-          return index$1._regeneratorRuntime.awrap(sendgrid.instance.send(message));
+          return index$1._regeneratorRuntime.awrap(sendgrid.send(message));
 
         case 4:
           return _context.abrupt("return", _context.sent);
@@ -28,7 +28,7 @@ var sendMail = function sendMail(message) {
         case 7:
           _context.prev = 7;
           _context.t0 = _context["catch"](1);
-          sentry.instance.captureException(_context.t0);
+          sentry.captureException(_context.t0);
 
         case 10:
         case "end":

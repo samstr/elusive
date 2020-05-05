@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-0e573485.js');
+var client = require('../index-31e4b72c.js');
 var index = require('../index.js');
 var index$1 = require('../index-072a3fc5.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
@@ -11,7 +11,7 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 require('uuid');
-var utils$2 = require('../utils-363d47be.js');
+var utils$2 = require('../utils-edb129cc.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -31,26 +31,27 @@ var _createService = utils$2.createService(model, COLLECTION),
     updateUser = _createService.updateObject,
     listUsers = _createService.listObjects;
 var getUserByEmail = function getUserByEmail(email) {
-  var firestore, docs, user;
+  var firebase, firestore, docs, user;
   return index$1._regeneratorRuntime.async(function getUserByEmail$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          firestore = index.options.firebase.instance.firestore();
-          _context.next = 3;
+          firebase = index.services.firebase;
+          firestore = firebase.firestore();
+          _context.next = 4;
           return index$1._regeneratorRuntime.awrap(firestore.collection(COLLECTION).where('email', '==', email).get());
 
-        case 3:
+        case 4:
           docs = _context.sent;
 
           if (!(docs.size === 0)) {
-            _context.next = 6;
+            _context.next = 7;
             break;
           }
 
           return _context.abrupt("return", null);
 
-        case 6:
+        case 7:
           docs.forEach(function (doc) {
             user = model(_objectSpread({
               id: doc.id
@@ -58,7 +59,7 @@ var getUserByEmail = function getUserByEmail(email) {
           });
           return _context.abrupt("return", user);
 
-        case 8:
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -66,26 +67,27 @@ var getUserByEmail = function getUserByEmail(email) {
   }, null, null, null, Promise);
 };
 var getUserByUsername = function getUserByUsername(username) {
-  var firestore, docs, user;
+  var firebase, firestore, docs, user;
   return index$1._regeneratorRuntime.async(function getUserByUsername$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          firestore = index.options.firebase.instance.firestore();
-          _context2.next = 3;
+          firebase = index.services.firebase;
+          firestore = firebase.firestore();
+          _context2.next = 4;
           return index$1._regeneratorRuntime.awrap(firestore.collection(COLLECTION).where('username', '==', username).get());
 
-        case 3:
+        case 4:
           docs = _context2.sent;
 
           if (!(docs.size === 0)) {
-            _context2.next = 6;
+            _context2.next = 7;
             break;
           }
 
           return _context2.abrupt("return", null);
 
-        case 6:
+        case 7:
           docs.forEach(function (doc) {
             user = model(_objectSpread({
               id: doc.id
@@ -93,7 +95,7 @@ var getUserByUsername = function getUserByUsername(username) {
           });
           return _context2.abrupt("return", user);
 
-        case 8:
+        case 9:
         case "end":
           return _context2.stop();
       }
