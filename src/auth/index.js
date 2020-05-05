@@ -1,6 +1,3 @@
-import { SALT_ROUNDS } from './config';
-export { SALT_ROUNDS };
-
 import {
   AlreadyAuthenticatedError,
   AuthenticationFailedError,

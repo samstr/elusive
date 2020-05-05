@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-14401048.js');
+var client = require('./index-df09c234.js');
 var index = require('./index.js');
 var index$1 = require('./index-072a3fc5.js');
 require('./FormErrors-1539c4dc.js');
@@ -20,7 +20,7 @@ require('jsonwebtoken');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var utils$1 = require('./utils-c14b2f0e.js');
+var utils$1 = require('./utils-669f5706.js');
 
 var useData = function useData() {
   var _useSessionContext = SessionContext.useSessionContext(),

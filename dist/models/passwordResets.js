@@ -3,60 +3,17 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-14401048.js');
-var index = require('../index.js');
+var client = require('../index-df09c234.js');
+require('../index.js');
 var index$1 = require('../index-072a3fc5.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var service = require('../service-19d76d04.js');
 require('uuid');
-var utils$2 = require('../utils-dbb053a5.js');
-var utils = require('../utils-88ee7b9a.js');
-
-function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-var PasswordResetAlreadyUsedError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(PasswordResetAlreadyUsedError, _BaseError);
-
-  var _super = _createSuper(PasswordResetAlreadyUsedError);
-
-  function PasswordResetAlreadyUsedError() {
-    classCallCheck._classCallCheck(this, PasswordResetAlreadyUsedError);
-
-    return _super.apply(this, arguments);
-  }
-
-  return PasswordResetAlreadyUsedError;
-}(FormErrors.BaseError);
-var PasswordResetExpiredError = /*#__PURE__*/function (_BaseError2) {
-  FormErrors._inherits(PasswordResetExpiredError, _BaseError2);
-
-  var _super2 = _createSuper(PasswordResetExpiredError);
-
-  function PasswordResetExpiredError() {
-    classCallCheck._classCallCheck(this, PasswordResetExpiredError);
-
-    return _super2.apply(this, arguments);
-  }
-
-  return PasswordResetExpiredError;
-}(FormErrors.BaseError);
-var PasswordResetNotFoundError = /*#__PURE__*/function (_BaseError3) {
-  FormErrors._inherits(PasswordResetNotFoundError, _BaseError3);
-
-  var _super3 = _createSuper(PasswordResetNotFoundError);
-
-  function PasswordResetNotFoundError() {
-    classCallCheck._classCallCheck(this, PasswordResetNotFoundError);
-
-    return _super3.apply(this, arguments);
-  }
-
-  return PasswordResetNotFoundError;
-}(FormErrors.BaseError);
+var utils$2 = require('../utils-31eea914.js');
+var users = require('./users.js');
+var utils = require('../utils-029837cb.js');
 
 var moment = index$1.createCommonjsModule(function (module, exports) {
 (function (global, factory) {
@@ -5722,49 +5679,15 @@ var moment = index$1.createCommonjsModule(function (module, exports) {
 })));
 });
 
+function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var passwordResetExpired = function passwordResetExpired(passwordReset) {
-  var dateNow = moment();
-  var dateCreated = moment.unix(passwordReset.dateCreated);
-  var dateExpires = moment(dateCreated).add(client.PASSWORD_RESET_EXPIRY_HOURS, 'hours');
-  return dateNow.isAfter(dateExpires);
-};
-var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, toEmail, passwordResetId) {
-  var sendgridOptions, dynamicTemplateData;
-  return index$1._regeneratorRuntime.async(function sendPasswordResetRequestEmail$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          sendgridOptions = index.options.sendgrid;
-          dynamicTemplateData = utils.defaultDynamicTemplateData(req);
-          toEmail = 'samstr@gmail.com';
-          _context.next = 5;
-          return index$1._regeneratorRuntime.awrap(sendMail({
-            to: toEmail,
-            from: {
-              email: sendgridOptions.fromEmail,
-              name: sendgridOptions.fromName
-            },
-            template_id: sendgridOptions.resetPasswordRequestTemplateId,
-            dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
-              resetPasswordConfirmUrl: "".concat(dynamicTemplateData.baseUrl, "/reset/").concat(passwordResetId)
-            })
-          }));
-
-        case 5:
-          return _context.abrupt("return", _context.sent);
-
-        case 6:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, null, null, null, Promise);
-};
-
-var model = (function (data) {
+var COLLECTION = 'passwordResets';
+var model = function model(data) {
   var model = utils$2.createModel(data);
 
   model.hasExpired = function () {
@@ -5777,7 +5700,7 @@ var model = (function (data) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return index$1._regeneratorRuntime.awrap(service.getUser(model.userId));
+            return index$1._regeneratorRuntime.awrap(users.getUser(model.userId));
 
           case 2:
             model.user = _context.sent;
@@ -5791,16 +5714,93 @@ var model = (function (data) {
   };
 
   return model;
-});
+};
 
-var _createService = utils$2.createService(model, client.COLLECTION),
+var _createService = utils$2.createService(model, COLLECTION),
     getPasswordReset = _createService.getObject,
     createPasswordReset = _createService.createObject,
     updatePasswordReset = _createService.updateObject,
     listPasswordResets = _createService.listObjects;
+var passwordResetExpired = function passwordResetExpired(passwordReset) {
+  var authOptions = Elusive.options.auth;
+  var dateNow = moment();
+  var dateCreated = moment.unix(passwordReset.dateCreated);
+  var dateExpires = moment(dateCreated).add(authOptions.passwordResetExpiryHours, 'hours');
+  return dateNow.isAfter(dateExpires);
+};
+var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, toEmail, passwordResetId) {
+  var sendgridOptions, dynamicTemplateData;
+  return index$1._regeneratorRuntime.async(function sendPasswordResetRequestEmail$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          sendgridOptions = Elusive.options.sendgrid;
+          dynamicTemplateData = utils.defaultDynamicTemplateData(req);
+          toEmail = 'samstr@gmail.com';
+          _context2.next = 5;
+          return index$1._regeneratorRuntime.awrap(utils.sendMail({
+            to: toEmail,
+            from: {
+              email: sendgridOptions.fromEmail,
+              name: sendgridOptions.fromName
+            },
+            template_id: sendgridOptions.resetPasswordRequestTemplateId,
+            dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
+              resetPasswordConfirmUrl: "".concat(dynamicTemplateData.baseUrl, "/reset/").concat(passwordResetId)
+            })
+          }));
 
-exports.COLLECTION = client.COLLECTION;
-exports.PASSWORD_RESET_EXPIRY_HOURS = client.PASSWORD_RESET_EXPIRY_HOURS;
+        case 5:
+          return _context2.abrupt("return", _context2.sent);
+
+        case 6:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, null, null, null, Promise);
+};
+var PasswordResetAlreadyUsedError = /*#__PURE__*/function (_BaseError) {
+  FormErrors._inherits(PasswordResetAlreadyUsedError, _BaseError);
+
+  var _super = _createSuper(PasswordResetAlreadyUsedError);
+
+  function PasswordResetAlreadyUsedError() {
+    classCallCheck._classCallCheck(this, PasswordResetAlreadyUsedError);
+
+    return _super.apply(this, arguments);
+  }
+
+  return PasswordResetAlreadyUsedError;
+}(FormErrors.BaseError);
+var PasswordResetExpiredError = /*#__PURE__*/function (_BaseError2) {
+  FormErrors._inherits(PasswordResetExpiredError, _BaseError2);
+
+  var _super2 = _createSuper(PasswordResetExpiredError);
+
+  function PasswordResetExpiredError() {
+    classCallCheck._classCallCheck(this, PasswordResetExpiredError);
+
+    return _super2.apply(this, arguments);
+  }
+
+  return PasswordResetExpiredError;
+}(FormErrors.BaseError);
+var PasswordResetNotFoundError = /*#__PURE__*/function (_BaseError3) {
+  FormErrors._inherits(PasswordResetNotFoundError, _BaseError3);
+
+  var _super3 = _createSuper(PasswordResetNotFoundError);
+
+  function PasswordResetNotFoundError() {
+    classCallCheck._classCallCheck(this, PasswordResetNotFoundError);
+
+    return _super3.apply(this, arguments);
+  }
+
+  return PasswordResetNotFoundError;
+}(FormErrors.BaseError);
+
+exports.COLLECTION = COLLECTION;
 exports.PasswordResetAlreadyUsedError = PasswordResetAlreadyUsedError;
 exports.PasswordResetExpiredError = PasswordResetExpiredError;
 exports.PasswordResetNotFoundError = PasswordResetNotFoundError;

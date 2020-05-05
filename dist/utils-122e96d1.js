@@ -4,9 +4,8 @@ var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
 var index$1 = require('./index-072a3fc5.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
-var service = require('./service-19d76d04.js');
-require('uuid');
-var utils$3 = require('./utils-4a41b34a.js');
+var users = require('./models/users.js');
+var utils$3 = require('./utils-43dece31.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -196,7 +195,7 @@ var getSession = function getSession(req, reloadSessionUser) {
 
           console.log('REFRESHING ACCESS TOKEN by reloading session user');
           _context.next = 29;
-          return index$1._regeneratorRuntime.awrap(service.getUser(refreshTokenClaims.user.id));
+          return index$1._regeneratorRuntime.awrap(users.getUser(refreshTokenClaims.user.id));
 
         case 29:
           user = _context.sent;

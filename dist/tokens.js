@@ -3,19 +3,17 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-14401048.js');
+require('./index-df09c234.js');
 require('./index.js');
 require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils$3 = require('./utils-4a41b34a.js');
+var utils$3 = require('./utils-43dece31.js');
 require('jsonwebtoken');
 
 
 
-exports.ACCESS_TOKEN_EXPIRY_MINS = client.ACCESS_TOKEN_EXPIRY_MINS;
-exports.REFRESH_TOKEN_EXPIRY_MINS = client.REFRESH_TOKEN_EXPIRY_MINS;
 exports.InvalidAccessTokenError = utils$3.InvalidAccessTokenError;
 exports.InvalidRefreshTokenError = utils$3.InvalidRefreshTokenError;
 exports.RefreshTokenExpiredError = utils$3.RefreshTokenExpiredError;

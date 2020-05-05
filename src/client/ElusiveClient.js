@@ -19,7 +19,7 @@ class ElusiveClient {
         fromEmail: 'no-reply@example.com',
         fromName: 'Example',
         instance: null,
-        resetPasswordConfirmTemplateId: null,
+        resetPasswordRequestTemplateId: null,
         verifyEmailTemplateId: null,
       },
       sentry: {
@@ -86,7 +86,13 @@ class ElusiveClient {
     }
 
     if (sendgrid) {
-      const { fromEmail, fromName, instance } = sendgrid;
+      const {
+        fromEmail,
+        fromName,
+        instance,
+        resetPasswordRequestTemplateId,
+        verifyEmailTemplateId,
+      } = sendgrid;
 
       if (fromEmail) {
         this.options.sendgrid.fromEmail = fromEmail;
@@ -98,6 +104,14 @@ class ElusiveClient {
 
       if (instance) {
         this.options.sendgrid.instance = instance;
+      }
+
+      if (resetPasswordRequestTemplateId) {
+        this.options.sendgrid.resetPasswordRequestTemplateId = resetPasswordRequestTemplateId;
+      }
+
+      if (verifyEmailTemplateId) {
+        this.options.sendgrid.verifyEmailTemplateId = verifyEmailTemplateId;
       }
     }
 

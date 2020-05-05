@@ -33,30 +33,6 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-var SALT_ROUNDS = 10;
-
-var COLLECTION = 'passwordResets';
-var PASSWORD_RESET_EXPIRY_HOURS = 24;
-
-var apiSessionRoute = function apiSessionRoute() {
-  return '/api/session';
-};
-var loginRoute = function loginRoute() {
-  return '/login';
-};
-var logoutRoute = function logoutRoute() {
-  return '/logout';
-};
-
-var ACCESS_TOKEN_COOKIE_NAME = 'at';
-var COOKIE_EXPIRY_MINS = 43800; // 1 month
-
-var REFRESH_TOKEN_COOKIE_NAME = 'rt';
-var USER_ID_COOKIE_NAME = 'uid';
-
-var ACCESS_TOKEN_EXPIRY_MINS = 10;
-var REFRESH_TOKEN_EXPIRY_MINS = 43800; // 1 month
-
 var ElusiveClient = /*#__PURE__*/function () {
   function ElusiveClient() {
     var _this = this;
@@ -66,13 +42,19 @@ var ElusiveClient = /*#__PURE__*/function () {
     _defineProperty(this, "setDefaultOptions", function () {
       _this.options = {
         auth: {
-          passwordResetExpiryHours: PASSWORD_RESET_EXPIRY_HOURS,
-          saltRounds: SALT_ROUNDS
+          passwordResetExpiryHours: 24,
+          saltRounds: 10
         },
         routes: {
-          apiSession: apiSessionRoute,
-          login: loginRoute,
-          logout: logoutRoute
+          apiSession: function apiSession() {
+            return '/api/session';
+          },
+          login: function login() {
+            return '/login';
+          },
+          logout: function logout() {
+            return '/logout';
+          }
         },
         firebase: {
           instance: null
@@ -81,22 +63,24 @@ var ElusiveClient = /*#__PURE__*/function () {
           fromEmail: 'no-reply@example.com',
           fromName: 'Example',
           instance: null,
-          resetPasswordConfirmTemplateId: null,
+          resetPasswordRequestTemplateId: null,
           verifyEmailTemplateId: null
         },
         sentry: {
           instance: null
         },
         sessions: {
-          accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
-          cookieExpiryMins: COOKIE_EXPIRY_MINS,
-          refreshTokenCookieName: REFRESH_TOKEN_COOKIE_NAME,
-          userIdCookieName: USER_ID_COOKIE_NAME
+          accessTokenCookieName: 'at',
+          cookieExpiryMins: 43800,
+          // 1 month
+          refreshTokenCookieName: 'rt',
+          userIdCookieName: 'uid'
         },
         tokens: {
-          accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
+          accessTokenExpiryMins: 10,
           createClaims: null,
-          refreshTokenExpiryMins: REFRESH_TOKEN_EXPIRY_MINS,
+          refreshTokenExpiryMins: 43800,
+          // 1 month
           secret: null
         }
       };
@@ -150,7 +134,9 @@ var ElusiveClient = /*#__PURE__*/function () {
       if (sendgrid) {
         var fromEmail = sendgrid.fromEmail,
             fromName = sendgrid.fromName,
-            _instance = sendgrid.instance;
+            _instance = sendgrid.instance,
+            resetPasswordRequestTemplateId = sendgrid.resetPasswordRequestTemplateId,
+            verifyEmailTemplateId = sendgrid.verifyEmailTemplateId;
 
         if (fromEmail) {
           _this.options.sendgrid.fromEmail = fromEmail;
@@ -162,6 +148,14 @@ var ElusiveClient = /*#__PURE__*/function () {
 
         if (_instance) {
           _this.options.sendgrid.instance = _instance;
+        }
+
+        if (resetPasswordRequestTemplateId) {
+          _this.options.sendgrid.resetPasswordRequestTemplateId = resetPasswordRequestTemplateId;
+        }
+
+        if (verifyEmailTemplateId) {
+          _this.options.sendgrid.verifyEmailTemplateId = verifyEmailTemplateId;
         }
       }
 
@@ -238,17 +232,5 @@ var ElusiveClient = /*#__PURE__*/function () {
 
 _defineProperty(ElusiveClient, "instance", void 0);
 
-exports.ACCESS_TOKEN_COOKIE_NAME = ACCESS_TOKEN_COOKIE_NAME;
-exports.ACCESS_TOKEN_EXPIRY_MINS = ACCESS_TOKEN_EXPIRY_MINS;
-exports.COLLECTION = COLLECTION;
-exports.COOKIE_EXPIRY_MINS = COOKIE_EXPIRY_MINS;
 exports.ElusiveClient = ElusiveClient;
-exports.PASSWORD_RESET_EXPIRY_HOURS = PASSWORD_RESET_EXPIRY_HOURS;
-exports.REFRESH_TOKEN_COOKIE_NAME = REFRESH_TOKEN_COOKIE_NAME;
-exports.REFRESH_TOKEN_EXPIRY_MINS = REFRESH_TOKEN_EXPIRY_MINS;
-exports.SALT_ROUNDS = SALT_ROUNDS;
-exports.USER_ID_COOKIE_NAME = USER_ID_COOKIE_NAME;
 exports._defineProperty = _defineProperty;
-exports.apiSessionRoute = apiSessionRoute;
-exports.loginRoute = loginRoute;
-exports.logoutRoute = logoutRoute;

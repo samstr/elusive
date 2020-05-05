@@ -3,27 +3,23 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-14401048.js');
+require('./index-df09c234.js');
 require('./index.js');
 require('./index-072a3fc5.js');
 require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils$1 = require('./utils-eded331d.js');
+var utils$1 = require('./utils-122e96d1.js');
 var SessionContext = require('./SessionContext-efd795c9.js');
-require('./service-19d76d04.js');
 require('uuid');
-require('./utils-dbb053a5.js');
-require('./utils-4a41b34a.js');
+require('./utils-31eea914.js');
+require('./models/users.js');
+require('./utils-43dece31.js');
 require('jsonwebtoken');
 
 
 
-exports.ACCESS_TOKEN_COOKIE_NAME = client.ACCESS_TOKEN_COOKIE_NAME;
-exports.COOKIE_EXPIRY_MINS = client.COOKIE_EXPIRY_MINS;
-exports.REFRESH_TOKEN_COOKIE_NAME = client.REFRESH_TOKEN_COOKIE_NAME;
-exports.USER_ID_COOKIE_NAME = client.USER_ID_COOKIE_NAME;
 exports.SessionError = utils$1.SessionError;
 exports.SessionUserIdMismatchError = utils$1.SessionUserIdMismatchError;
 exports.SessionUserNoLongerExistsError = utils$1.SessionUserNoLongerExistsError;

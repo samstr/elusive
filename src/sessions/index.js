@@ -1,17 +1,4 @@
 import {
-  ACCESS_TOKEN_COOKIE_NAME,
-  COOKIE_EXPIRY_MINS,
-  REFRESH_TOKEN_COOKIE_NAME,
-  USER_ID_COOKIE_NAME,
-} from './config';
-export {
-  ACCESS_TOKEN_COOKIE_NAME,
-  COOKIE_EXPIRY_MINS,
-  REFRESH_TOKEN_COOKIE_NAME,
-  USER_ID_COOKIE_NAME,
-};
-
-import {
   SessionError,
   SessionUserIdMismatchError,
   SessionUserNoLongerExistsError,
