@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "1.5.6",
+  "version": "1.5.8",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -12,7 +12,9 @@
     "errors.js",
     "forms.js",
     "http.js",
+    "mail.js",
     "models/index.js",
+    "models/passwordResets.js",
     "models/users.js",
     "pages.js",
     "routes.js",
@@ -29,6 +31,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.25.3",
     "next": "^9.3.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

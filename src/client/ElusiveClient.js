@@ -1,4 +1,5 @@
 import { SALT_ROUNDS } from '../auth/config';
+import { PASSWORD_RESET_EXPIRY_HOURS } from '../models/passwordResets/config';
 import { apiSessionRoute, loginRoute, logoutRoute } from '../routes/config';
 import {
   ACCESS_TOKEN_COOKIE_NAME,
@@ -17,24 +18,32 @@ class ElusiveClient {
   setDefaultOptions = () => {
     this.options = {
       auth: {
+        passwordResetExpiryHours: PASSWORD_RESET_EXPIRY_HOURS,
         saltRounds: SALT_ROUNDS,
-      },
-      firebase: {
-        instance: null,
       },
       routes: {
         apiSession: apiSessionRoute,
         login: loginRoute,
         logout: logoutRoute,
       },
+      firebase: {
+        instance: null,
+      },
+      sendgrid: {
+        fromEmail: 'no-reply@example.com',
+        fromName: 'Example',
+        instance: null,
+        resetPasswordConfirmTemplateId: null,
+        verifyEmailTemplateId: null,
+      },
+      sentry: {
+        instance: null,
+      },
       sessions: {
         accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
         cookieExpiryMins: COOKIE_EXPIRY_MINS,
         refreshTokenCookieName: REFRESH_TOKEN_COOKIE_NAME,
         userIdCookieName: USER_ID_COOKIE_NAME,
-      },
-      sentry: {
-        instance: null,
       },
       tokens: {
         accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
@@ -48,21 +57,21 @@ class ElusiveClient {
   init = (options) => {
     this.setDefaultOptions();
 
-    const { auth, firebase, routes, sentry, sessions, tokens } = options;
+    const {
+      auth,
+      firebase,
+      routes,
+      sendgrid,
+      sentry,
+      sessions,
+      tokens,
+    } = options;
 
     if (auth) {
       const { saltRounds } = auth;
 
       if (saltRounds) {
         this.options.auth.saltRounds = saltRounds;
-      }
-    }
-
-    if (firebase) {
-      const { instance } = firebase;
-
-      if (instance) {
-        this.options.firebase.instance = instance;
       }
     }
 
@@ -79,6 +88,38 @@ class ElusiveClient {
 
       if (logout) {
         this.options.routes.logout = logout;
+      }
+    }
+
+    if (firebase) {
+      const { instance } = firebase;
+
+      if (instance) {
+        this.options.firebase.instance = instance;
+      }
+    }
+
+    if (sendgrid) {
+      const { fromEmail, fromName, instance } = sendgrid;
+
+      if (fromEmail) {
+        this.options.sendgrid.fromEmail = fromEmail;
+      }
+
+      if (fromName) {
+        this.options.sendgrid.fromName = fromName;
+      }
+
+      if (instance) {
+        this.options.sendgrid.instance = instance;
+      }
+    }
+
+    if (sentry) {
+      const { instance } = sentry;
+
+      if (instance) {
+        this.options.sentry.instance = instance;
       }
     }
 
@@ -104,14 +145,6 @@ class ElusiveClient {
 
       if (userIdCookieName) {
         this.options.sessions.userIdCookieName = userIdCookieName;
-      }
-    }
-
-    if (sentry) {
-      const { instance } = sentry;
-
-      if (instance) {
-        this.options.sentry.instance = instance;
       }
     }
 

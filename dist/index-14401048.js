@@ -35,6 +35,9 @@ function _defineProperty(obj, key, value) {
 
 var SALT_ROUNDS = 10;
 
+var COLLECTION = 'passwordResets';
+var PASSWORD_RESET_EXPIRY_HOURS = 24;
+
 var apiSessionRoute = function apiSessionRoute() {
   return '/api/session';
 };
@@ -63,24 +66,32 @@ var ElusiveClient = /*#__PURE__*/function () {
     _defineProperty(this, "setDefaultOptions", function () {
       _this.options = {
         auth: {
+          passwordResetExpiryHours: PASSWORD_RESET_EXPIRY_HOURS,
           saltRounds: SALT_ROUNDS
-        },
-        firebase: {
-          instance: null
         },
         routes: {
           apiSession: apiSessionRoute,
           login: loginRoute,
           logout: logoutRoute
         },
+        firebase: {
+          instance: null
+        },
+        sendgrid: {
+          fromEmail: 'no-reply@example.com',
+          fromName: 'Example',
+          instance: null,
+          resetPasswordConfirmTemplateId: null,
+          verifyEmailTemplateId: null
+        },
+        sentry: {
+          instance: null
+        },
         sessions: {
           accessTokenCookieName: ACCESS_TOKEN_COOKIE_NAME,
           cookieExpiryMins: COOKIE_EXPIRY_MINS,
           refreshTokenCookieName: REFRESH_TOKEN_COOKIE_NAME,
           userIdCookieName: USER_ID_COOKIE_NAME
-        },
-        sentry: {
-          instance: null
         },
         tokens: {
           accessTokenExpiryMins: ACCESS_TOKEN_EXPIRY_MINS,
@@ -97,6 +108,7 @@ var ElusiveClient = /*#__PURE__*/function () {
       var auth = options.auth,
           firebase = options.firebase,
           routes = options.routes,
+          sendgrid = options.sendgrid,
           sentry = options.sentry,
           sessions = options.sessions,
           tokens = options.tokens;
@@ -106,14 +118,6 @@ var ElusiveClient = /*#__PURE__*/function () {
 
         if (saltRounds) {
           _this.options.auth.saltRounds = saltRounds;
-        }
-      }
-
-      if (firebase) {
-        var instance = firebase.instance;
-
-        if (instance) {
-          _this.options.firebase.instance = instance;
         }
       }
 
@@ -132,6 +136,40 @@ var ElusiveClient = /*#__PURE__*/function () {
 
         if (logout) {
           _this.options.routes.logout = logout;
+        }
+      }
+
+      if (firebase) {
+        var instance = firebase.instance;
+
+        if (instance) {
+          _this.options.firebase.instance = instance;
+        }
+      }
+
+      if (sendgrid) {
+        var fromEmail = sendgrid.fromEmail,
+            fromName = sendgrid.fromName,
+            _instance = sendgrid.instance;
+
+        if (fromEmail) {
+          _this.options.sendgrid.fromEmail = fromEmail;
+        }
+
+        if (fromName) {
+          _this.options.sendgrid.fromName = fromName;
+        }
+
+        if (_instance) {
+          _this.options.sendgrid.instance = _instance;
+        }
+      }
+
+      if (sentry) {
+        var _instance2 = sentry.instance;
+
+        if (_instance2) {
+          _this.options.sentry.instance = _instance2;
         }
       }
 
@@ -155,14 +193,6 @@ var ElusiveClient = /*#__PURE__*/function () {
 
         if (userIdCookieName) {
           _this.options.sessions.userIdCookieName = userIdCookieName;
-        }
-      }
-
-      if (sentry) {
-        var _instance = sentry.instance;
-
-        if (_instance) {
-          _this.options.sentry.instance = _instance;
         }
       }
 
@@ -210,8 +240,10 @@ _defineProperty(ElusiveClient, "instance", void 0);
 
 exports.ACCESS_TOKEN_COOKIE_NAME = ACCESS_TOKEN_COOKIE_NAME;
 exports.ACCESS_TOKEN_EXPIRY_MINS = ACCESS_TOKEN_EXPIRY_MINS;
+exports.COLLECTION = COLLECTION;
 exports.COOKIE_EXPIRY_MINS = COOKIE_EXPIRY_MINS;
 exports.ElusiveClient = ElusiveClient;
+exports.PASSWORD_RESET_EXPIRY_HOURS = PASSWORD_RESET_EXPIRY_HOURS;
 exports.REFRESH_TOKEN_COOKIE_NAME = REFRESH_TOKEN_COOKIE_NAME;
 exports.REFRESH_TOKEN_EXPIRY_MINS = REFRESH_TOKEN_EXPIRY_MINS;
 exports.SALT_ROUNDS = SALT_ROUNDS;
