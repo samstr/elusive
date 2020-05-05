@@ -135,4 +135,31 @@ var apiWrapper = function apiWrapper(req, res, api) {
   }, null, null, [[3, 27]], Promise);
 };
 
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var sessionApi = function sessionApi(_ref) {
+  var session;
+  return index$1._regeneratorRuntime.async(function sessionApi$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          session = _ref.session;
+          return _context.abrupt("return", _objectSpread$1({}, session));
+
+        case 2:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, null, Promise);
+};
+
+sessionApi.options = {
+  reloadSessionUser: true,
+  setSessionCookies: true
+};
+
 exports.apiWrapper = apiWrapper;
+exports.sessionApi = sessionApi;
