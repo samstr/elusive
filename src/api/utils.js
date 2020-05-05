@@ -18,7 +18,7 @@ import {
   deleteSessionCookies,
   getSession,
 } from '../sessions';
-import { signTokens } from '../tokens';
+import { TokenError, signTokens } from '../tokens';
 
 export const apiWrapper = async (req, res, api) => {
   const { sentry } = Elusive.services;
@@ -74,7 +74,7 @@ export const apiWrapper = async (req, res, api) => {
       }
     }
 
-    if (err instanceof SessionError) {
+    if (err instanceof SessionError || err instanceof TokenError) {
       deleteSessionCookies(res);
 
       return httpUnauthorizedResponse(res, errorJson(err));

@@ -146,21 +146,22 @@ var _getObject = function _getObject(model, collection, id) {
 };
 
 var _updateObject = function _updateObject(model, collection, doc, updateProps) {
-  var firebase, newDoc;
+  var firebase, firestore, newDoc;
   return index$1._regeneratorRuntime.async(function _updateObject$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
           firebase = index.services.firebase;
+          firestore = firebase.firestore();
           updateProps.dateUpdated = firebase.firestore.Timestamp.now();
           newDoc = _objectSpread({}, doc, {}, updateProps);
-          _context7.next = 5;
-          return index$1._regeneratorRuntime.awrap(firebase.firestore.collection(collection).doc(doc.id).update(updateProps));
-
-        case 5:
-          return _context7.abrupt("return", model(newDoc));
+          _context7.next = 6;
+          return index$1._regeneratorRuntime.awrap(firestore.collection(collection).doc(doc.id).update(updateProps));
 
         case 6:
+          return _context7.abrupt("return", model(newDoc));
+
+        case 7:
         case "end":
           return _context7.stop();
       }

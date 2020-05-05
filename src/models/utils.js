@@ -63,6 +63,7 @@ export const getObject = async (model, collection, id) => {
 
 export const updateObject = async (model, collection, doc, updateProps) => {
   const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
 
   updateProps.dateUpdated = firebase.firestore.Timestamp.now();
 
@@ -71,10 +72,7 @@ export const updateObject = async (model, collection, doc, updateProps) => {
     ...updateProps,
   };
 
-  await firebase.firestore
-    .collection(collection)
-    .doc(doc.id)
-    .update(updateProps);
+  await firestore.collection(collection).doc(doc.id).update(updateProps);
 
   return model(newDoc);
 };

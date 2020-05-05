@@ -11,10 +11,10 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
-var utils$1 = require('./utils-1935ea7c.js');
+var utils$1 = require('./utils-95cdaf5d.js');
 require('./SessionContext-efd795c9.js');
 require('uuid');
-require('./utils-d1f9e96d.js');
+require('./utils-385a9005.js');
 require('./models/users.js');
 var utils$3 = require('./utils-5469b2c7.js');
 require('jsonwebtoken');
@@ -102,7 +102,7 @@ var apiWrapper = function apiWrapper(req, res, api) {
           return _context.abrupt("return", utils.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 32:
-          if (!(_context.t5 instanceof utils$1.SessionError)) {
+          if (!(_context.t5 instanceof utils$1.SessionError || _context.t5 instanceof utils$3.TokenError)) {
             _context.next = 35;
             break;
           }
