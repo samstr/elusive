@@ -31,7 +31,7 @@ export const sendUserVerificationEmail = async (
   toEmail,
   userVerificationId
 ) => {
-  const { sendgrid: sendgridOptions } = Elusive.options;
+  const { mail: mailOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
 
   toEmail = 'samstr@gmail.com';
@@ -39,10 +39,10 @@ export const sendUserVerificationEmail = async (
   return await sendMail({
     to: toEmail,
     from: {
-      email: sendgridOptions.fromEmail,
-      name: sendgridOptions.fromName,
+      email: mailOptions.fromEmail,
+      name: mailOptions.fromName,
     },
-    template_id: sendgridOptions.verifyEmailTemplateId,
+    template_id: mailOptions.verifyEmailTemplateId,
     dynamic_template_data: {
       ...dynamicTemplateData,
       verifyEmailUrl: `${dynamicTemplateData.baseUrl}/verify/${userVerificationId}`,

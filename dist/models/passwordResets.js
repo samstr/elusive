@@ -5729,22 +5729,22 @@ var passwordResetExpired = function passwordResetExpired(passwordReset) {
   return dateNow.isAfter(dateExpires);
 };
 var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, toEmail, passwordResetId) {
-  var sendgridOptions, dynamicTemplateData;
+  var mailOptions, dynamicTemplateData;
   return index$1._regeneratorRuntime.async(function sendPasswordResetRequestEmail$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          sendgridOptions = index.options.sendgrid;
+          mailOptions = index.options.mail;
           dynamicTemplateData = utils.defaultDynamicTemplateData(req);
           toEmail = 'samstr@gmail.com';
           _context2.next = 5;
           return index$1._regeneratorRuntime.awrap(utils.sendMail({
             to: toEmail,
             from: {
-              email: sendgridOptions.fromEmail,
-              name: sendgridOptions.fromName
+              email: mailOptions.fromEmail,
+              name: mailOptions.fromName
             },
-            template_id: sendgridOptions.resetPasswordRequestTemplateId,
+            template_id: mailOptions.resetPasswordRequestTemplateId,
             dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
               resetPasswordConfirmUrl: "".concat(dynamicTemplateData.baseUrl, "/reset/").concat(passwordResetId)
             })

@@ -43,7 +43,7 @@ export const sendPasswordResetRequestEmail = async (
   toEmail,
   passwordResetId
 ) => {
-  const { sendgrid: sendgridOptions } = Elusive.options;
+  const { mail: mailOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
 
   toEmail = 'samstr@gmail.com';
@@ -51,10 +51,10 @@ export const sendPasswordResetRequestEmail = async (
   return await sendMail({
     to: toEmail,
     from: {
-      email: sendgridOptions.fromEmail,
-      name: sendgridOptions.fromName,
+      email: mailOptions.fromEmail,
+      name: mailOptions.fromName,
     },
-    template_id: sendgridOptions.resetPasswordRequestTemplateId,
+    template_id: mailOptions.resetPasswordRequestTemplateId,
     dynamic_template_data: {
       ...dynamicTemplateData,
       resetPasswordConfirmUrl: `${dynamicTemplateData.baseUrl}/reset/${passwordResetId}`,

@@ -56,22 +56,22 @@ var _createService = utils$2.createService(model, COLLECTION),
     updateUserVerification = _createService.updateObject,
     listUserVerifications = _createService.listObjects;
 var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail, userVerificationId) {
-  var sendgridOptions, dynamicTemplateData;
+  var mailOptions, dynamicTemplateData;
   return index$1._regeneratorRuntime.async(function sendUserVerificationEmail$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          sendgridOptions = index.options.sendgrid;
+          mailOptions = index.options.mail;
           dynamicTemplateData = utils.defaultDynamicTemplateData(req);
           toEmail = 'samstr@gmail.com';
           _context2.next = 5;
           return index$1._regeneratorRuntime.awrap(utils.sendMail({
             to: toEmail,
             from: {
-              email: sendgridOptions.fromEmail,
-              name: sendgridOptions.fromName
+              email: mailOptions.fromEmail,
+              name: mailOptions.fromName
             },
-            template_id: sendgridOptions.verifyEmailTemplateId,
+            template_id: mailOptions.verifyEmailTemplateId,
             dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
               verifyEmailUrl: "".concat(dynamicTemplateData.baseUrl, "/verify/").concat(userVerificationId)
             })
