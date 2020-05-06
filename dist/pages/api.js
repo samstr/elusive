@@ -11,7 +11,7 @@ require('prop-types');
 require('react-bootstrap');
 var utils = require('../utils-b31a2049.js');
 require('bcryptjs');
-var resetPasswordRequest = require('../reset-password-request-82ea0636.js');
+var resetPasswordConfirm = require('../reset-password-confirm-e3abc9ad.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-072a3fc5.js');
@@ -161,7 +161,7 @@ var loginApi = function loginApi(_ref) {
 
         case 4:
           _req$body = req.body, email = _req$body.email, password = _req$body.password;
-          _loginForm$validate = resetPasswordRequest.loginForm().validate({
+          _loginForm$validate = resetPasswordConfirm.loginForm().validate({
             email: email,
             password: password
           }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
@@ -277,7 +277,7 @@ var registerApi = function registerApi(_ref) {
 
         case 4:
           _req$body = req.body, email = _req$body.email, password = _req$body.password, termsAgreed = _req$body.termsAgreed;
-          _registerForm$validat = resetPasswordRequest.registerForm().validate({
+          _registerForm$validat = resetPasswordConfirm.registerForm().validate({
             email: email,
             password: password,
             termsAgreed: termsAgreed
@@ -353,6 +353,112 @@ registerApi.options = {
   allowedMethods: [utils$1.POST]
 };
 
+var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
+  var req, res, session, tokenOptions, _req$body, passwordResetId, password, _resetPasswordConfirm, cleanValues, errors, passwordReset, claims;
+
+  return index$1._regeneratorRuntime.async(function resetPasswordConfirmApi$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          req = _ref.req, res = _ref.res, session = _ref.session;
+          tokenOptions = index.options.tokens;
+          _req$body = req.body, passwordResetId = _req$body.passwordResetId, password = _req$body.password;
+          _resetPasswordConfirm = resetPasswordConfirm.resetPasswordConfirmForm().validate({
+            passwordResetId: passwordResetId,
+            password: password
+          }), cleanValues = _resetPasswordConfirm.cleanValues, errors = _resetPasswordConfirm.errors;
+
+          if (!(errors && errors.length)) {
+            _context.next = 6;
+            break;
+          }
+
+          return _context.abrupt("return", {
+            errors: errors
+          });
+
+        case 6:
+          _context.next = 8;
+          return index$1._regeneratorRuntime.awrap(passwordResets.getPasswordReset(passwordResetId));
+
+        case 8:
+          passwordReset = _context.sent;
+
+          if (passwordReset) {
+            _context.next = 11;
+            break;
+          }
+
+          throw new passwordResets.PasswordResetNotFoundError('Password reset key not found');
+
+        case 11:
+          if (!passwordReset.used) {
+            _context.next = 13;
+            break;
+          }
+
+          throw new passwordResets.PasswordResetAlreadyUsedError('Password reset key already used');
+
+        case 13:
+          if (!passwordReset.hasExpired()) {
+            _context.next = 15;
+            break;
+          }
+
+          throw new passwordResets.PasswordResetExpiredError('Password reset key has expired');
+
+        case 15:
+          _context.next = 17;
+          return index$1._regeneratorRuntime.awrap(passwordReset.getUser());
+
+        case 17:
+          if (passwordReset.user) {
+            _context.next = 19;
+            break;
+          }
+
+          throw new users.UserNotFoundError('User not found');
+
+        case 19:
+          if (passwordReset.user.enabled) {
+            _context.next = 21;
+            break;
+          }
+
+          throw new users.UserNotEnabledError('User not enabled');
+
+        case 21:
+          _context.next = 23;
+          return index$1._regeneratorRuntime.awrap(passwordResets.updatePasswordReset(passwordReset, {
+            used: true
+          }));
+
+        case 23:
+          _context.next = 25;
+          return index$1._regeneratorRuntime.awrap(users.updateUser(passwordReset.user, {
+            password: utils.hashPassword(cleanValues.password)
+          }));
+
+        case 25:
+          claims = tokenOptions.createClaims(passwordReset.user);
+          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), passwordReset.user.id);
+          return _context.abrupt("return", {
+            isAuthenticated: true,
+            claims: claims
+          });
+
+        case 28:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, null, Promise);
+};
+
+resetPasswordConfirmApi.options = {
+  allowedMethods: [utils$1.POST]
+};
+
 var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
   var req, email, _resetPasswordRequest, cleanValues, errors, user, passwordReset;
 
@@ -362,7 +468,7 @@ var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
         case 0:
           req = _ref.req;
           email = req.body.email;
-          _resetPasswordRequest = resetPasswordRequest.resetPasswordRequestForm().validate({
+          _resetPasswordRequest = resetPasswordConfirm.resetPasswordRequestForm().validate({
             email: email
           }), cleanValues = _resetPasswordRequest.cleanValues, errors = _resetPasswordRequest.errors;
 
@@ -439,5 +545,6 @@ exports.apiWrapper = apiWrapper;
 exports.loginApi = loginApi;
 exports.logoutApi = logoutApi;
 exports.registerApi = registerApi;
+exports.resetPasswordConfirmApi = resetPasswordConfirmApi;
 exports.resetPasswordRequestApi = resetPasswordRequestApi;
 exports.sessionApi = sessionApi;
