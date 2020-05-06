@@ -1,6 +1,6 @@
 'use strict';
 
-var client = require('./index-e304a026.js');
+var client = require('./index-79fa448e.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 var uuid = require('uuid');

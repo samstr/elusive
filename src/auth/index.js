@@ -3,6 +3,7 @@ import {
   AuthenticationFailedError,
   AuthError,
   NotAuthenticatedError,
+  TooManyLoginAttemptsError,
   TooManyRegistrationsError,
   UserAlreadyExistsError,
 } from './errors';
@@ -11,6 +12,7 @@ export {
   AuthenticationFailedError,
   AuthError,
   NotAuthenticatedError,
+  TooManyLoginAttemptsError,
   TooManyRegistrationsError,
   UserAlreadyExistsError,
 };

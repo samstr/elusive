@@ -1,11 +1,19 @@
+import moment from 'moment';
+
 import Elusive from '../../';
 import {
   AlreadyAuthenticatedError,
   AuthenticationFailedError,
+  TooManyLoginAttemptsError,
   comparePasswordHash,
 } from '../../auth';
 import { loginForm } from '../../forms';
 import { POST } from '../../http';
+import {
+  createLoginAttempt,
+  getLoginAttemptsByAccountSinceDate,
+  getLoginAttemptsByIPSinceDate,
+} from '../../models/loginAttempts';
 import {
   UserNotFoundError,
   UserNotEnabledError,
@@ -15,13 +23,48 @@ import { createSessionCookies } from '../../sessions';
 import { signTokens } from '../../tokens';
 
 export const loginApi = async ({ req, res, session }) => {
-  const { tokens: tokenOptions } = Elusive.options;
+  const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
     throw new AlreadyAuthenticatedError('You are already logged in');
   }
 
+  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  const date1HourAgo = moment().subtract(1, 'hour');
+
+  const recentLoginAttemptsByIP = await getLoginAttemptsByIPSinceDate(
+    ip,
+    date1HourAgo
+  );
+
+  if (
+    recentLoginAttemptsByIP.length >= authOptions.loginMaxAttemptsPerIPPerHour
+  ) {
+    throw new TooManyLoginAttemptsError(
+      'You have attempted to login too many times. Try again later.'
+    );
+  }
+
   const { email, password } = req.body;
+
+  const recentLoginAttemptsByAccount = await getLoginAttemptsByAccountSinceDate(
+    ip,
+    email,
+    date1HourAgo
+  );
+  if (
+    recentLoginAttemptsByAccount.length >=
+    authOptions.loginMaxAttemptsPerAccountPerHour
+  ) {
+    throw new TooManyLoginAttemptsError(
+      'You have attempted to login too many times. Try again later.'
+    );
+  }
+
+  await createLoginAttempt({
+    ip,
+    email,
+  });
 
   const { cleanValues, errors } = loginForm().validate({ email, password });
 
@@ -38,8 +81,6 @@ export const loginApi = async ({ req, res, session }) => {
   if (!user.enabled) {
     throw new UserNotEnabledError('Authentication failed');
   }
-
-  // TODO: throttle this endpoint by IP using TooManyAuthenticationAttemptsError
 
   if (!comparePasswordHash(cleanValues.password, user.password)) {
     throw new AuthenticationFailedError('Authentication failed');

@@ -41,12 +41,6 @@ const registerApi = async ({ req, res, session }) => {
     return { errors };
   }
 
-  let user = await getUserByEmail(cleanValues.email);
-
-  if (user) {
-    throw new UserAlreadyExistsError('User already exists');
-  }
-
   const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   const date1DayAgo = moment().subtract(1, 'day');
   const recentUsersByIP = await getUsersByIPSinceDate(ip, date1DayAgo);
@@ -55,6 +49,12 @@ const registerApi = async ({ req, res, session }) => {
     throw new TooManyRegistrationsError(
       'You have created too many accounts recently.'
     );
+  }
+
+  let user = await getUserByEmail(cleanValues.email);
+
+  if (user) {
+    throw new UserAlreadyExistsError('User already exists');
   }
 
   user = await createUser({

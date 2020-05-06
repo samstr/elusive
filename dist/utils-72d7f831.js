@@ -62,28 +62,41 @@ var NotAuthenticatedError = /*#__PURE__*/function (_AuthError3) {
 
   return NotAuthenticatedError;
 }(AuthError);
-var TooManyRegistrationsError = /*#__PURE__*/function (_AuthError4) {
-  FormErrors._inherits(TooManyRegistrationsError, _AuthError4);
+var TooManyLoginAttemptsError = /*#__PURE__*/function (_AuthError4) {
+  FormErrors._inherits(TooManyLoginAttemptsError, _AuthError4);
 
-  var _super5 = _createSuper(TooManyRegistrationsError);
+  var _super5 = _createSuper(TooManyLoginAttemptsError);
 
-  function TooManyRegistrationsError() {
-    classCallCheck._classCallCheck(this, TooManyRegistrationsError);
+  function TooManyLoginAttemptsError() {
+    classCallCheck._classCallCheck(this, TooManyLoginAttemptsError);
 
     return _super5.apply(this, arguments);
   }
 
+  return TooManyLoginAttemptsError;
+}(AuthError);
+var TooManyRegistrationsError = /*#__PURE__*/function (_AuthError5) {
+  FormErrors._inherits(TooManyRegistrationsError, _AuthError5);
+
+  var _super6 = _createSuper(TooManyRegistrationsError);
+
+  function TooManyRegistrationsError() {
+    classCallCheck._classCallCheck(this, TooManyRegistrationsError);
+
+    return _super6.apply(this, arguments);
+  }
+
   return TooManyRegistrationsError;
 }(AuthError);
-var UserAlreadyExistsError = /*#__PURE__*/function (_AuthError5) {
-  FormErrors._inherits(UserAlreadyExistsError, _AuthError5);
+var UserAlreadyExistsError = /*#__PURE__*/function (_AuthError6) {
+  FormErrors._inherits(UserAlreadyExistsError, _AuthError6);
 
-  var _super6 = _createSuper(UserAlreadyExistsError);
+  var _super7 = _createSuper(UserAlreadyExistsError);
 
   function UserAlreadyExistsError() {
     classCallCheck._classCallCheck(this, UserAlreadyExistsError);
 
-    return _super6.apply(this, arguments);
+    return _super7.apply(this, arguments);
   }
 
   return UserAlreadyExistsError;
@@ -101,6 +114,7 @@ exports.AlreadyAuthenticatedError = AlreadyAuthenticatedError;
 exports.AuthError = AuthError;
 exports.AuthenticationFailedError = AuthenticationFailedError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
+exports.TooManyLoginAttemptsError = TooManyLoginAttemptsError;
 exports.TooManyRegistrationsError = TooManyRegistrationsError;
 exports.UserAlreadyExistsError = UserAlreadyExistsError;
 exports.comparePasswordHash = comparePasswordHash;

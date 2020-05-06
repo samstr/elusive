@@ -26,6 +26,9 @@ export const {
   listObjects: listUserVerifications,
 } = createService(model, COLLECTION);
 
+export class UserVerificationAlreadyVerifiedError extends BaseError {}
+export class UserVerificationNotFoundError extends BaseError {}
+
 export const sendUserVerificationEmail = async (
   req,
   toEmail,
@@ -49,6 +52,3 @@ export const sendUserVerificationEmail = async (
     },
   });
 };
-
-export class UserVerificationAlreadyVerifiedError extends BaseError {}
-export class UserVerificationNotFoundError extends BaseError {}

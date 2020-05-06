@@ -3,25 +3,25 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-e304a026.js');
+var client = require('../index-79fa448e.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
 var index$1 = require('../index-2340470f.js');
-var utils = require('../utils-ab79aa7c.js');
+var utils = require('../utils-88766450.js');
 require('uuid');
-var utils$1 = require('../utils-c34f61d5.js');
+var utils$1 = require('../utils-2e3310dc.js');
 var users = require('./users.js');
-
-function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'userVerifications';
 var TYPE_EMAIL = 'email';
 var TYPE_PHONE = 'phone';
@@ -55,6 +55,32 @@ var _createService = utils$1.createService(model, COLLECTION),
     createUserVerification = _createService.createObject,
     updateUserVerification = _createService.updateObject,
     listUserVerifications = _createService.listObjects;
+var UserVerificationAlreadyVerifiedError = /*#__PURE__*/function (_BaseError) {
+  FormErrors._inherits(UserVerificationAlreadyVerifiedError, _BaseError);
+
+  var _super = _createSuper(UserVerificationAlreadyVerifiedError);
+
+  function UserVerificationAlreadyVerifiedError() {
+    classCallCheck._classCallCheck(this, UserVerificationAlreadyVerifiedError);
+
+    return _super.apply(this, arguments);
+  }
+
+  return UserVerificationAlreadyVerifiedError;
+}(FormErrors.BaseError);
+var UserVerificationNotFoundError = /*#__PURE__*/function (_BaseError2) {
+  FormErrors._inherits(UserVerificationNotFoundError, _BaseError2);
+
+  var _super2 = _createSuper(UserVerificationNotFoundError);
+
+  function UserVerificationNotFoundError() {
+    classCallCheck._classCallCheck(this, UserVerificationNotFoundError);
+
+    return _super2.apply(this, arguments);
+  }
+
+  return UserVerificationNotFoundError;
+}(FormErrors.BaseError);
 var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail, userVerificationId) {
   var mailOptions, dynamicTemplateData;
   return index$1._regeneratorRuntime.async(function sendUserVerificationEmail$(_context2) {
@@ -87,32 +113,6 @@ var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail,
     }
   }, null, null, null, Promise);
 };
-var UserVerificationAlreadyVerifiedError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(UserVerificationAlreadyVerifiedError, _BaseError);
-
-  var _super = _createSuper(UserVerificationAlreadyVerifiedError);
-
-  function UserVerificationAlreadyVerifiedError() {
-    classCallCheck._classCallCheck(this, UserVerificationAlreadyVerifiedError);
-
-    return _super.apply(this, arguments);
-  }
-
-  return UserVerificationAlreadyVerifiedError;
-}(FormErrors.BaseError);
-var UserVerificationNotFoundError = /*#__PURE__*/function (_BaseError2) {
-  FormErrors._inherits(UserVerificationNotFoundError, _BaseError2);
-
-  var _super2 = _createSuper(UserVerificationNotFoundError);
-
-  function UserVerificationNotFoundError() {
-    classCallCheck._classCallCheck(this, UserVerificationNotFoundError);
-
-    return _super2.apply(this, arguments);
-  }
-
-  return UserVerificationNotFoundError;
-}(FormErrors.BaseError);
 
 exports.COLLECTION = COLLECTION;
 exports.TYPE_EMAIL = TYPE_EMAIL;

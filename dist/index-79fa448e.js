@@ -47,7 +47,8 @@ var ElusiveClient = /*#__PURE__*/function () {
       };
       _this.options = {
         auth: {
-          loginMaxAttemptsPerHour: 10,
+          loginMaxAttemptsPerAccountPerHour: 8,
+          loginMaxAttemptsPerIPPerHour: 16,
           passwordMinLength: 3,
           passwordResetExpiryHours: 24,
           registrationMaxAccountsPerDay: 5,
@@ -117,15 +118,20 @@ var ElusiveClient = /*#__PURE__*/function () {
             tokens = options.tokens;
 
         if (auth) {
-          var loginMaxAttemptsPerHour = auth.loginMaxAttemptsPerHour,
+          var loginMaxAttemptsPerAccountPerHour = auth.loginMaxAttemptsPerAccountPerHour,
+              loginMaxAttemptsPerIPPerHour = auth.loginMaxAttemptsPerIPPerHour,
               passwordMinLength = auth.passwordMinLength,
               passwordResetExpiryHours = auth.passwordResetExpiryHours,
               registrationMaxAccountsPerDay = auth.registrationMaxAccountsPerDay,
               resetPasswordMaxRequestsPerHour = auth.resetPasswordMaxRequestsPerHour,
               saltRounds = auth.saltRounds;
 
-          if (loginMaxAttemptsPerHour) {
-            _this.options.auth.loginMaxAttemptsPerHour = loginMaxAttemptsPerHour;
+          if (loginMaxAttemptsPerAccountPerHour) {
+            _this.options.auth.loginMaxAttemptsPerAccountPerHour = loginMaxAttemptsPerAccountPerHour;
+          }
+
+          if (loginMaxAttemptsPerIPPerHour) {
+            _this.options.auth.loginMaxAttemptsPerIPPerHour = loginMaxAttemptsPerIPPerHour;
           }
 
           if (passwordMinLength) {

@@ -13,6 +13,9 @@ export const {
   listObjects: listUsers,
 } = createService(model, COLLECTION);
 
+export class UserNotEnabledError extends BaseError {}
+export class UserNotFoundError extends BaseError {}
+
 export const getUserByEmail = async (email) => {
   const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
@@ -67,8 +70,6 @@ export const getUsersByIPSinceDate = async (ip, date) => {
   const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
 
-  console.log(`getting where ip is ${ip} and dateCreated > ${date}`);
-
   const docs = await firestore
     .collection(COLLECTION)
     .where('registrationIP', '==', ip)
@@ -86,10 +87,5 @@ export const getUsersByIPSinceDate = async (ip, date) => {
     );
   });
 
-  console.log(`found ${objects.length} users with IP`);
-
   return objects;
 };
-
-export class UserNotEnabledError extends BaseError {}
-export class UserNotFoundError extends BaseError {}

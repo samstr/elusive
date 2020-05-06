@@ -25,6 +25,10 @@ export const {
   listObjects: listPasswordResets,
 } = createService(model, COLLECTION);
 
+export class PasswordResetAlreadyUsedError extends BaseError {}
+export class PasswordResetExpiredError extends BaseError {}
+export class PasswordResetNotFoundError extends BaseError {}
+
 export const passwordResetExpired = (passwordReset) => {
   const { auth: authOptions } = Elusive.options;
 
@@ -61,7 +65,3 @@ export const sendPasswordResetRequestEmail = async (
     },
   });
 };
-
-export class PasswordResetAlreadyUsedError extends BaseError {}
-export class PasswordResetExpiredError extends BaseError {}
-export class PasswordResetNotFoundError extends BaseError {}

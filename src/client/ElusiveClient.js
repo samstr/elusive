@@ -10,7 +10,8 @@ class ElusiveClient {
 
     this.options = {
       auth: {
-        loginMaxAttemptsPerHour: 10,
+        loginMaxAttemptsPerAccountPerHour: 8,
+        loginMaxAttemptsPerIPPerHour: 16,
         passwordMinLength: 3,
         passwordResetExpiryHours: 24,
         registrationMaxAccountsPerDay: 5,
@@ -67,7 +68,8 @@ class ElusiveClient {
 
       if (auth) {
         const {
-          loginMaxAttemptsPerHour,
+          loginMaxAttemptsPerAccountPerHour,
+          loginMaxAttemptsPerIPPerHour,
           passwordMinLength,
           passwordResetExpiryHours,
           registrationMaxAccountsPerDay,
@@ -75,8 +77,12 @@ class ElusiveClient {
           saltRounds,
         } = auth;
 
-        if (loginMaxAttemptsPerHour) {
-          this.options.auth.loginMaxAttemptsPerHour = loginMaxAttemptsPerHour;
+        if (loginMaxAttemptsPerAccountPerHour) {
+          this.options.auth.loginMaxAttemptsPerAccountPerHour = loginMaxAttemptsPerAccountPerHour;
+        }
+
+        if (loginMaxAttemptsPerIPPerHour) {
+          this.options.auth.loginMaxAttemptsPerIPPerHour = loginMaxAttemptsPerIPPerHour;
         }
 
         if (passwordMinLength) {
