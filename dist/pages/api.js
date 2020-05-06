@@ -11,7 +11,7 @@ require('prop-types');
 require('react-bootstrap');
 var utils = require('../utils-b31a2049.js');
 require('bcryptjs');
-var register = require('../register-1ffce60d.js');
+var resetPasswordRequest = require('../reset-password-request-82ea0636.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-072a3fc5.js');
@@ -19,6 +19,7 @@ require('../utils-00b86ca6.js');
 require('uuid');
 require('../utils-385a9005.js');
 var users = require('../models/users.js');
+var passwordResets = require('../models/passwordResets.js');
 var userVerifications = require('../models/userVerifications.js');
 var utils$3 = require('../utils-050f73b7.js');
 require('../SessionContext-efd795c9.js');
@@ -160,7 +161,7 @@ var loginApi = function loginApi(_ref) {
 
         case 4:
           _req$body = req.body, email = _req$body.email, password = _req$body.password;
-          _loginForm$validate = register.loginForm().validate({
+          _loginForm$validate = resetPasswordRequest.loginForm().validate({
             email: email,
             password: password
           }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
@@ -276,7 +277,7 @@ var registerApi = function registerApi(_ref) {
 
         case 4:
           _req$body = req.body, email = _req$body.email, password = _req$body.password, termsAgreed = _req$body.termsAgreed;
-          _registerForm$validat = register.registerForm().validate({
+          _registerForm$validat = resetPasswordRequest.registerForm().validate({
             email: email,
             password: password,
             termsAgreed: termsAgreed
@@ -352,6 +353,62 @@ registerApi.options = {
   allowedMethods: [utils$1.POST]
 };
 
+var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
+  var req, email, _resetPasswordRequest, cleanValues, errors, user, passwordReset;
+
+  return index$1._regeneratorRuntime.async(function resetPasswordRequestApi$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          req = _ref.req;
+          email = req.body.email;
+          _resetPasswordRequest = resetPasswordRequest.resetPasswordRequestForm().validate({
+            email: email
+          }), cleanValues = _resetPasswordRequest.cleanValues, errors = _resetPasswordRequest.errors;
+
+          if (!(errors && errors.length)) {
+            _context.next = 5;
+            break;
+          }
+
+          return _context.abrupt("return", {
+            errors: errors
+          });
+
+        case 5:
+          _context.next = 7;
+          return index$1._regeneratorRuntime.awrap(users.getUserByEmail(cleanValues.email));
+
+        case 7:
+          user = _context.sent;
+
+          if (!(user && user.enabled)) {
+            _context.next = 14;
+            break;
+          }
+
+          _context.next = 11;
+          return index$1._regeneratorRuntime.awrap(passwordResets.createPasswordReset({
+            userId: user.id
+          }));
+
+        case 11:
+          passwordReset = _context.sent;
+          _context.next = 14;
+          return index$1._regeneratorRuntime.awrap(passwordResets.sendPasswordResetRequestEmail(req, user.email, passwordReset.id));
+
+        case 14:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, null, Promise);
+};
+
+resetPasswordRequestApi.options = {
+  allowedMethods: [utils$1.POST]
+};
+
 function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -382,4 +439,5 @@ exports.apiWrapper = apiWrapper;
 exports.loginApi = loginApi;
 exports.logoutApi = logoutApi;
 exports.registerApi = registerApi;
+exports.resetPasswordRequestApi = resetPasswordRequestApi;
 exports.sessionApi = sessionApi;

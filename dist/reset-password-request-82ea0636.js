@@ -343,6 +343,22 @@ var registerForm = (function () {
   });
 });
 
+var resetPasswordRequestForm = (function () {
+  return createForm({
+    fields: {
+      email: emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Your email is required'
+        },
+        invalid: {
+          errorMessage: 'Your email address is invalid'
+        }
+      })
+    }
+  });
+});
+
 exports.FieldValueTooLongError = FieldValueTooLongError;
 exports.FieldValueTooShortError = FieldValueTooShortError;
 exports.FormError = FormError;
@@ -357,4 +373,5 @@ exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
 exports.loginForm = loginForm;
 exports.registerForm = registerForm;
+exports.resetPasswordRequestForm = resetPasswordRequestForm;
 exports.textField = textField;

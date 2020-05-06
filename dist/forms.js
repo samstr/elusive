@@ -9,36 +9,20 @@ require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var register = require('./register-1ffce60d.js');
+var resetPasswordRequest = require('./reset-password-request-82ea0636.js');
 require('sanitize-html');
-
-var resetPasswordRequest = (function () {
-  return register.createForm({
-    fields: {
-      email: register.emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Your email is required'
-        },
-        invalid: {
-          errorMessage: 'Your email address is invalid'
-        }
-      })
-    }
-  });
-});
 
 var resetPasswordConfirm = (function () {
   var authOptions = index.options.auth;
-  return register.createForm({
+  return resetPasswordRequest.createForm({
     fields: {
-      passwordResetId: register.textField('passwordResetId', {
+      passwordResetId: resetPasswordRequest.textField('passwordResetId', {
         required: {
           value: true,
           errorMessage: 'Missing password reset key'
         }
       }),
-      password: register.textField('password', {
+      password: resetPasswordRequest.textField('password', {
         required: {
           value: true,
           errorMessage: 'Your password is required'
@@ -52,20 +36,20 @@ var resetPasswordConfirm = (function () {
   });
 });
 
-exports.FieldValueTooLongError = register.FieldValueTooLongError;
-exports.FieldValueTooShortError = register.FieldValueTooShortError;
-exports.FormError = register.FormError;
-exports.InvalidFieldValueError = register.InvalidFieldValueError;
-exports.MissingRequiredFieldError = register.MissingRequiredFieldError;
-exports.UnknownFormError = register.UnknownFormError;
-exports.booleanField = register.booleanField;
-exports.clearFormFieldErrors = register.clearFormFieldErrors;
-exports.createForm = register.createForm;
-exports.emailField = register.emailField;
-exports.field = register.field;
-exports.getOnChangeValue = register.getOnChangeValue;
-exports.loginForm = register.loginForm;
-exports.registerForm = register.registerForm;
-exports.textField = register.textField;
+exports.FieldValueTooLongError = resetPasswordRequest.FieldValueTooLongError;
+exports.FieldValueTooShortError = resetPasswordRequest.FieldValueTooShortError;
+exports.FormError = resetPasswordRequest.FormError;
+exports.InvalidFieldValueError = resetPasswordRequest.InvalidFieldValueError;
+exports.MissingRequiredFieldError = resetPasswordRequest.MissingRequiredFieldError;
+exports.UnknownFormError = resetPasswordRequest.UnknownFormError;
+exports.booleanField = resetPasswordRequest.booleanField;
+exports.clearFormFieldErrors = resetPasswordRequest.clearFormFieldErrors;
+exports.createForm = resetPasswordRequest.createForm;
+exports.emailField = resetPasswordRequest.emailField;
+exports.field = resetPasswordRequest.field;
+exports.getOnChangeValue = resetPasswordRequest.getOnChangeValue;
+exports.loginForm = resetPasswordRequest.loginForm;
+exports.registerForm = resetPasswordRequest.registerForm;
+exports.resetPasswordRequestForm = resetPasswordRequest.resetPasswordRequestForm;
+exports.textField = resetPasswordRequest.textField;
 exports.resetPasswordConfirmForm = resetPasswordConfirm;
-exports.resetPasswordRequestForm = resetPasswordRequest;

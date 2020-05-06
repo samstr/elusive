@@ -10,5 +10,8 @@ export { logoutApi };
 import registerApi from './register';
 export { registerApi };
 
+import resetPasswordRequestApi from './reset-password-request';
+export { resetPasswordRequestApi };
+
 import sessionApi from './session';
 export { sessionApi };
