@@ -1,12 +1,19 @@
+import moment from 'moment';
+
 import Elusive from '../../';
 import {
   AlreadyAuthenticatedError,
+  TooManyRegistrationsError,
   UserAlreadyExistsError,
   hashPassword,
 } from '../../auth';
 import { registerForm } from '../../forms';
 import { POST } from '../../http';
-import { createUser, getUserByEmail } from '../../models/users';
+import {
+  createUser,
+  getUserByEmail,
+  getUsersByIPSinceDate,
+} from '../../models/users';
 import {
   TYPE_EMAIL,
   createUserVerification,
@@ -16,7 +23,7 @@ import { createSessionCookies } from '../../sessions';
 import { signTokens } from '../..//tokens';
 
 const registerApi = async ({ req, res, session }) => {
-  const { tokens: tokenOptions } = Elusive.options;
+  const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
     throw new AlreadyAuthenticatedError('You are already logged in');
@@ -40,7 +47,15 @@ const registerApi = async ({ req, res, session }) => {
     throw new UserAlreadyExistsError('User already exists');
   }
 
-  // TODO: throttle this endpoint (TooManyRegistrationsError)
+  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  const date1DayAgo = moment().subtract(1, 'day');
+  const recentUsersByIP = await getUsersByIPSinceDate(ip, date1DayAgo);
+
+  if (recentUsersByIP.length >= authOptions.registrationMaxAccountsPerDay) {
+    throw new TooManyRegistrationsError(
+      'You have created too many accounts recently.'
+    );
+  }
 
   user = await createUser({
     email: cleanValues.email,
@@ -48,6 +63,7 @@ const registerApi = async ({ req, res, session }) => {
     imageUrl: '',
     enabled: true,
     termsAgreed,
+    registrationIP: ip,
     verifications: {
       email: false,
       phone: false,

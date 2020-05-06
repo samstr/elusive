@@ -3,15 +3,15 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-61c82eb7.js');
+var client = require('../index-e304a026.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var index$1 = require('../index-072a3fc5.js');
+var index$1 = require('../index-2340470f.js');
 require('uuid');
-var utils$1 = require('../utils-385a9005.js');
+var utils$1 = require('../utils-c34f61d5.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -102,6 +102,36 @@ var getUserByUsername = function getUserByUsername(username) {
     }
   }, null, null, null, Promise);
 };
+var getUsersByIPSinceDate = function getUsersByIPSinceDate(ip, date) {
+  var firebase, firestore, docs, objects;
+  return index$1._regeneratorRuntime.async(function getUsersByIPSinceDate$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          firebase = index.services.firebase;
+          firestore = firebase.firestore();
+          console.log("getting where ip is ".concat(ip, " and dateCreated > ").concat(date));
+          _context3.next = 5;
+          return index$1._regeneratorRuntime.awrap(firestore.collection(COLLECTION).where('registrationIP', '==', ip).where('dateCreated', '>', date).get());
+
+        case 5:
+          docs = _context3.sent;
+          objects = [];
+          docs.forEach(function (doc) {
+            objects.push(model(_objectSpread({
+              id: doc.id
+            }, doc.data())));
+          });
+          console.log("found ".concat(objects.length, " users with IP"));
+          return _context3.abrupt("return", objects);
+
+        case 10:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, null, null, null, Promise);
+};
 var UserNotEnabledError = /*#__PURE__*/function (_BaseError) {
   FormErrors._inherits(UserNotEnabledError, _BaseError);
 
@@ -136,6 +166,7 @@ exports.createUser = createUser;
 exports.getUser = getUser;
 exports.getUserByEmail = getUserByEmail;
 exports.getUserByUsername = getUserByUsername;
+exports.getUsersByIPSinceDate = getUsersByIPSinceDate;
 exports.listUsers = listUsers;
 exports.model = model;
 exports.updateUser = updateUser;

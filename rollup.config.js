@@ -35,6 +35,7 @@ export default [
       'bcryptjs',
       'bootstrap',
       'jsonwebtoken',
+      'moment',
       'next',
       'next/router',
       'prop-types',

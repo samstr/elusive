@@ -63,5 +63,33 @@ export const getUserByUsername = async (username) => {
   return user;
 };
 
+export const getUsersByIPSinceDate = async (ip, date) => {
+  const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
+
+  console.log(`getting where ip is ${ip} and dateCreated > ${date}`);
+
+  const docs = await firestore
+    .collection(COLLECTION)
+    .where('registrationIP', '==', ip)
+    .where('dateCreated', '>', date)
+    .get();
+
+  const objects = [];
+
+  docs.forEach((doc) => {
+    objects.push(
+      model({
+        id: doc.id,
+        ...doc.data(),
+      })
+    );
+  });
+
+  console.log(`found ${objects.length} users with IP`);
+
+  return objects;
+};
+
 export class UserNotEnabledError extends BaseError {}
 export class UserNotFoundError extends BaseError {}

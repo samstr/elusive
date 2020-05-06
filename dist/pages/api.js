@@ -2,28 +2,31 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
 require('../classCallCheck-d2bb402f.js');
-var client = require('../index-61c82eb7.js');
+var client = require('../index-e304a026.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('../utils-b31a2049.js');
+var utils = require('../utils-78c5e054.js');
 require('bcryptjs');
-var resetPasswordConfirm = require('../reset-password-confirm-e3abc9ad.js');
+var resetPasswordConfirm = require('../reset-password-confirm-e0a0d0e5.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
-var index$1 = require('../index-072a3fc5.js');
-require('../utils-00b86ca6.js');
+var index$1 = require('../index-2340470f.js');
+require('../utils-ab79aa7c.js');
 require('uuid');
-require('../utils-385a9005.js');
+require('../utils-c34f61d5.js');
 var users = require('../models/users.js');
+var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
 var userVerifications = require('../models/userVerifications.js');
-var utils$3 = require('../utils-050f73b7.js');
+var utils$3 = require('../utils-1e44271e.js');
 require('../SessionContext-efd795c9.js');
-var utils$4 = require('../utils-5469b2c7.js');
+var utils$4 = require('../utils-587b1755.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -259,14 +262,14 @@ logoutApi.options = {
 };
 
 var registerApi = function registerApi(_ref) {
-  var req, res, session, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, user, userVerification, claims;
+  var req, res, session, _Elusive$options, authOptions, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, user, ip, date1DayAgo, recentUsersByIP, userVerification, claims;
 
   return index$1._regeneratorRuntime.async(function registerApi$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           req = _ref.req, res = _ref.res, session = _ref.session;
-          tokenOptions = index.options.tokens;
+          _Elusive$options = index.options, authOptions = _Elusive$options.auth, tokenOptions = _Elusive$options.tokens;
 
           if (!session.isAuthenticated) {
             _context.next = 4;
@@ -307,41 +310,58 @@ var registerApi = function registerApi(_ref) {
           throw new utils.UserAlreadyExistsError('User already exists');
 
         case 13:
-          _context.next = 15;
+          ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+          date1DayAgo = moment().subtract(1, 'day');
+          _context.next = 17;
+          return index$1._regeneratorRuntime.awrap(users.getUsersByIPSinceDate(ip, date1DayAgo));
+
+        case 17:
+          recentUsersByIP = _context.sent;
+
+          if (!(recentUsersByIP.length >= authOptions.registrationMaxAccountsPerDay)) {
+            _context.next = 20;
+            break;
+          }
+
+          throw new utils.TooManyRegistrationsError('You have created too many accounts recently.');
+
+        case 20:
+          _context.next = 22;
           return index$1._regeneratorRuntime.awrap(users.createUser({
             email: cleanValues.email,
             password: utils.hashPassword(cleanValues.password),
             imageUrl: '',
             enabled: true,
             termsAgreed: termsAgreed,
+            registrationIP: ip,
             verifications: {
               email: false,
               phone: false
             }
           }));
 
-        case 15:
+        case 22:
           user = _context.sent;
-          _context.next = 18;
+          _context.next = 25;
           return index$1._regeneratorRuntime.awrap(userVerifications.createUserVerification({
             userId: user.id,
             type: userVerifications.TYPE_EMAIL
           }));
 
-        case 18:
+        case 25:
           userVerification = _context.sent;
           claims = tokenOptions.createClaims(user);
           utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), user.id);
-          _context.next = 23;
+          _context.next = 30;
           return index$1._regeneratorRuntime.awrap(userVerifications.sendUserVerificationEmail(req, user.email, userVerification.id));
 
-        case 23:
+        case 30:
           return _context.abrupt("return", {
             isAuthenticated: true,
             claims: claims
           });
 
-        case 24:
+        case 31:
         case "end":
           return _context.stop();
       }

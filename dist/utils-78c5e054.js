@@ -36,44 +36,57 @@ var AlreadyAuthenticatedError = /*#__PURE__*/function (_AuthError) {
 
   return AlreadyAuthenticatedError;
 }(AuthError);
-var UserAlreadyExistsError = /*#__PURE__*/function (_AuthError2) {
-  FormErrors._inherits(UserAlreadyExistsError, _AuthError2);
+var AuthenticationFailedError = /*#__PURE__*/function (_AuthError2) {
+  FormErrors._inherits(AuthenticationFailedError, _AuthError2);
 
-  var _super3 = _createSuper(UserAlreadyExistsError);
-
-  function UserAlreadyExistsError() {
-    classCallCheck._classCallCheck(this, UserAlreadyExistsError);
-
-    return _super3.apply(this, arguments);
-  }
-
-  return UserAlreadyExistsError;
-}(AuthError);
-var AuthenticationFailedError = /*#__PURE__*/function (_AuthError3) {
-  FormErrors._inherits(AuthenticationFailedError, _AuthError3);
-
-  var _super4 = _createSuper(AuthenticationFailedError);
+  var _super3 = _createSuper(AuthenticationFailedError);
 
   function AuthenticationFailedError() {
     classCallCheck._classCallCheck(this, AuthenticationFailedError);
 
-    return _super4.apply(this, arguments);
+    return _super3.apply(this, arguments);
   }
 
   return AuthenticationFailedError;
 }(AuthError);
-var NotAuthenticatedError = /*#__PURE__*/function (_AuthError4) {
-  FormErrors._inherits(NotAuthenticatedError, _AuthError4);
+var NotAuthenticatedError = /*#__PURE__*/function (_AuthError3) {
+  FormErrors._inherits(NotAuthenticatedError, _AuthError3);
 
-  var _super5 = _createSuper(NotAuthenticatedError);
+  var _super4 = _createSuper(NotAuthenticatedError);
 
   function NotAuthenticatedError() {
     classCallCheck._classCallCheck(this, NotAuthenticatedError);
 
-    return _super5.apply(this, arguments);
+    return _super4.apply(this, arguments);
   }
 
   return NotAuthenticatedError;
+}(AuthError);
+var TooManyRegistrationsError = /*#__PURE__*/function (_AuthError4) {
+  FormErrors._inherits(TooManyRegistrationsError, _AuthError4);
+
+  var _super5 = _createSuper(TooManyRegistrationsError);
+
+  function TooManyRegistrationsError() {
+    classCallCheck._classCallCheck(this, TooManyRegistrationsError);
+
+    return _super5.apply(this, arguments);
+  }
+
+  return TooManyRegistrationsError;
+}(AuthError);
+var UserAlreadyExistsError = /*#__PURE__*/function (_AuthError5) {
+  FormErrors._inherits(UserAlreadyExistsError, _AuthError5);
+
+  var _super6 = _createSuper(UserAlreadyExistsError);
+
+  function UserAlreadyExistsError() {
+    classCallCheck._classCallCheck(this, UserAlreadyExistsError);
+
+    return _super6.apply(this, arguments);
+  }
+
+  return UserAlreadyExistsError;
 }(AuthError);
 
 var hashPassword = function hashPassword(password) {
@@ -88,6 +101,7 @@ exports.AlreadyAuthenticatedError = AlreadyAuthenticatedError;
 exports.AuthError = AuthError;
 exports.AuthenticationFailedError = AuthenticationFailedError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
+exports.TooManyRegistrationsError = TooManyRegistrationsError;
 exports.UserAlreadyExistsError = UserAlreadyExistsError;
 exports.comparePasswordHash = comparePasswordHash;
 exports.hashPassword = hashPassword;

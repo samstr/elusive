@@ -1,7 +1,7 @@
 'use strict';
 
 var index = require('./index.js');
-var index$1 = require('./index-072a3fc5.js');
+var index$1 = require('./index-2340470f.js');
 
 var defaultDynamicTemplateData = function defaultDynamicTemplateData(req) {
   var baseUrl = "".concat(process.env.NODE_ENV === 'production' ? 'https' : 'http', "://").concat(req.headers.host);
