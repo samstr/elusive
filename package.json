@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "1.6.23",
+  "version": "1.6.26",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -17,7 +17,8 @@
     "models/users.js",
     "models/userVerifications.js",
     "pages/index.js",
-    "pages/api.js",
+    "pages/api/index.js",
+    "pages/api/data/index.js",
     "routes.js",
     "sessions.js",
     "tokens.js"

@@ -19,6 +19,7 @@ export default [
       'models/userVerifications': './src/models/userVerifications.js',
       pages: './src/pages/index.js',
       'pages/api': './src/pages/api/index.js',
+      'pages/api/data': './src/pages/api/data/index.js',
       routes: './src/routes/index.js',
       sessions: './src/sessions/index.js',
       tokens: './src/tokens/index.js',
