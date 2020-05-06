@@ -11,7 +11,7 @@ require('prop-types');
 require('react-bootstrap');
 var utils = require('../utils-b31a2049.js');
 require('bcryptjs');
-var register = require('../register-fa52ffb5.js');
+var register = require('../register-1ffce60d.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-072a3fc5.js');
@@ -141,6 +141,88 @@ var apiWrapper = function apiWrapper(req, res, api) {
   }, null, null, [[3, 27]], Promise);
 };
 
+var loginApi = function loginApi(_ref) {
+  var req, res, session, tokenOptions, _req$body, email, password, _loginForm$validate, cleanValues, errors, user, claims;
+
+  return index$1._regeneratorRuntime.async(function loginApi$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          req = _ref.req, res = _ref.res, session = _ref.session;
+          tokenOptions = index.options.tokens;
+
+          if (!session.isAuthenticated) {
+            _context.next = 4;
+            break;
+          }
+
+          throw new utils.AlreadyAuthenticatedError('You are already logged in');
+
+        case 4:
+          _req$body = req.body, email = _req$body.email, password = _req$body.password;
+          _loginForm$validate = register.loginForm().validate({
+            email: email,
+            password: password
+          }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
+
+          if (!(errors && errors.length)) {
+            _context.next = 8;
+            break;
+          }
+
+          return _context.abrupt("return", {
+            errors: errors
+          });
+
+        case 8:
+          _context.next = 10;
+          return index$1._regeneratorRuntime.awrap(users.getUserByEmail(cleanValues.email));
+
+        case 10:
+          user = _context.sent;
+
+          if (user) {
+            _context.next = 13;
+            break;
+          }
+
+          throw new users.UserNotFoundError('Authentication failed');
+
+        case 13:
+          if (user.enabled) {
+            _context.next = 15;
+            break;
+          }
+
+          throw new users.UserNotEnabledError('Authentication failed');
+
+        case 15:
+          if (utils.comparePasswordHash(cleanValues.password, user.password)) {
+            _context.next = 17;
+            break;
+          }
+
+          throw new utils.AuthenticationFailedError('Authentication failed');
+
+        case 17:
+          claims = tokenOptions.createClaims(user);
+          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), user.id);
+          return _context.abrupt("return", {
+            isAuthenticated: true,
+            claims: claims
+          });
+
+        case 20:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, null, Promise);
+};
+loginApi.options = {
+  allowedMethods: [utils$1.POST]
+};
+
 var registerApi = function registerApi(_ref) {
   var req, res, session, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, user, userVerification, claims;
 
@@ -233,8 +315,7 @@ var registerApi = function registerApi(_ref) {
 };
 
 registerApi.options = {
-  allowedMethods: [utils$1.POST],
-  useSession: true
+  allowedMethods: [utils$1.POST]
 };
 
 function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -264,5 +345,6 @@ sessionApi.options = {
 };
 
 exports.apiWrapper = apiWrapper;
+exports.loginApi = loginApi;
 exports.registerApi = registerApi;
 exports.sessionApi = sessionApi;

@@ -73,7 +73,6 @@ const registerApi = async ({ req, res, session }) => {
 
 registerApi.options = {
   allowedMethods: [POST],
-  useSession: true,
 };
 
 export default registerApi;

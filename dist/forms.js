@@ -9,35 +9,8 @@ require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var register = require('./register-fa52ffb5.js');
+var register = require('./register-1ffce60d.js');
 require('sanitize-html');
-
-var login = (function () {
-  var authOptions = index.options.auth;
-  return register.createForm({
-    fields: {
-      email: register.emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Please enter your email'
-        },
-        invalid: {
-          errorMessage: 'Your email is invalid'
-        }
-      }),
-      password: register.textField('password', {
-        required: {
-          value: true,
-          errorMessage: 'Please enter your password'
-        },
-        minLength: {
-          value: authOptions.passwordMinLength,
-          errorMessage: 'Your password is too short'
-        }
-      })
-    }
-  });
-});
 
 var resetPasswordRequest = (function () {
   return register.createForm({
@@ -91,8 +64,8 @@ exports.createForm = register.createForm;
 exports.emailField = register.emailField;
 exports.field = register.field;
 exports.getOnChangeValue = register.getOnChangeValue;
+exports.loginForm = register.loginForm;
 exports.registerForm = register.registerForm;
 exports.textField = register.textField;
-exports.loginForm = login;
 exports.resetPasswordConfirmForm = resetPasswordConfirm;
 exports.resetPasswordRequestForm = resetPasswordRequest;
