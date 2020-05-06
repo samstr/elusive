@@ -3,16 +3,16 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-79fa448e.js');
+var client = require('../index-26463b7f.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
 var index$1 = require('../index-2340470f.js');
-var utils = require('../utils-88766450.js');
+var utils = require('../utils-459eee4d.js');
 require('uuid');
-var utils$1 = require('../utils-2e3310dc.js');
+var utils$1 = require('../utils-4521964b.js');
 var users = require('./users.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -51,6 +51,8 @@ var model = function model(data) {
 };
 
 var _createService = utils$1.createService(model, COLLECTION),
+    userVerificationsCollection = _createService.collection,
+    getUserVerificationByID = _createService.getObjectByID,
     getUserVerification = _createService.getObject,
     createUserVerification = _createService.createObject,
     updateUserVerification = _createService.updateObject,
@@ -114,14 +116,15 @@ var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail,
   }, null, null, null, Promise);
 };
 
-exports.COLLECTION = COLLECTION;
 exports.TYPE_EMAIL = TYPE_EMAIL;
 exports.TYPE_PHONE = TYPE_PHONE;
 exports.UserVerificationAlreadyVerifiedError = UserVerificationAlreadyVerifiedError;
 exports.UserVerificationNotFoundError = UserVerificationNotFoundError;
 exports.createUserVerification = createUserVerification;
 exports.getUserVerification = getUserVerification;
+exports.getUserVerificationByID = getUserVerificationByID;
 exports.listUserVerifications = listUserVerifications;
 exports.model = model;
 exports.sendUserVerificationEmail = sendUserVerificationEmail;
 exports.updateUserVerification = updateUserVerification;
+exports.userVerificationsCollection = userVerificationsCollection;

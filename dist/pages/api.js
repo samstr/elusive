@@ -5,28 +5,28 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-var client = require('../index-79fa448e.js');
+var client = require('../index-26463b7f.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('../utils-72d7f831.js');
+var utils = require('../utils-0c245d4a.js');
 require('bcryptjs');
-var resetPasswordConfirm = require('../reset-password-confirm-9f294f97.js');
+var resetPasswordConfirm = require('../reset-password-confirm-4bfceb3a.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-2340470f.js');
-require('../utils-88766450.js');
+require('../utils-459eee4d.js');
 require('uuid');
-var utils$1$1 = require('../utils-2e3310dc.js');
+require('../utils-4521964b.js');
 var users = require('../models/users.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
 var userVerifications = require('../models/userVerifications.js');
-var utils$3 = require('../utils-df2433b8.js');
+var utils$3 = require('../utils-cd7a1e2e.js');
 require('../SessionContext-efd795c9.js');
-var utils$4 = require('../utils-1febabb4.js');
+var utils$4 = require('../utils-3208ebd5.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -145,182 +145,15 @@ var apiWrapper = function apiWrapper(req, res, api) {
   }, null, null, [[3, 27]], Promise);
 };
 
-function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var COLLECTION = 'loginAttempts';
-var model = function model(data) {
-  return utils$1$1.createModel(data);
-};
-
-var _createService = utils$1$1.createService(model, COLLECTION),
-    createLoginAttempt = _createService.createObject;
-var getLoginAttemptsByIPSinceDate = function getLoginAttemptsByIPSinceDate(ip, date) {
-  var firebase, firestore, docs, objects;
-  return index$1._regeneratorRuntime.async(function getLoginAttemptsByIPSinceDate$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          firebase = index.services.firebase;
-          firestore = firebase.firestore();
-          _context.next = 4;
-          return index$1._regeneratorRuntime.awrap(firestore.collection(COLLECTION).where('ip', '==', ip).where('dateCreated', '>', date).get());
-
-        case 4:
-          docs = _context.sent;
-          objects = [];
-          docs.forEach(function (doc) {
-            objects.push(model(_objectSpread$1({
-              id: doc.id
-            }, doc.data())));
-          });
-          return _context.abrupt("return", objects);
-
-        case 8:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, null, null, null, Promise);
-};
-var getLoginAttemptsByAccountSinceDate = function getLoginAttemptsByAccountSinceDate(ip, email, date) {
-  var firebase, firestore, docs, objects;
-  return index$1._regeneratorRuntime.async(function getLoginAttemptsByAccountSinceDate$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          firebase = index.services.firebase;
-          firestore = firebase.firestore();
-          _context2.next = 4;
-          return index$1._regeneratorRuntime.awrap(firestore.collection(COLLECTION).where('ip', '==', ip).where('email', '==', email).where('dateCreated', '>', date).get());
-
-        case 4:
-          docs = _context2.sent;
-          objects = [];
-          docs.forEach(function (doc) {
-            objects.push(model(_objectSpread$1({
-              id: doc.id
-            }, doc.data())));
-          });
-          return _context2.abrupt("return", objects);
-
-        case 8:
-        case "end":
-          return _context2.stop();
-      }
-    }
-  }, null, null, null, Promise);
-};
-
 var loginApi = function loginApi(_ref) {
-  var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, recentLoginAttemptsByAccount, _loginForm$validate, cleanValues, errors, user, claims;
-
+  var req, res, session;
   return index$1._regeneratorRuntime.async(function loginApi$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           req = _ref.req, res = _ref.res, session = _ref.session;
-          _Elusive$options = index.options, authOptions = _Elusive$options.auth, tokenOptions = _Elusive$options.tokens;
 
-          if (!session.isAuthenticated) {
-            _context.next = 4;
-            break;
-          }
-
-          throw new utils.AlreadyAuthenticatedError('You are already logged in');
-
-        case 4:
-          ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
-          date1HourAgo = moment().subtract(1, 'hour');
-          _context.next = 8;
-          return index$1._regeneratorRuntime.awrap(getLoginAttemptsByIPSinceDate(ip, date1HourAgo));
-
-        case 8:
-          recentLoginAttemptsByIP = _context.sent;
-
-          if (!(recentLoginAttemptsByIP.length >= authOptions.loginMaxAttemptsPerIPPerHour)) {
-            _context.next = 11;
-            break;
-          }
-
-          throw new utils.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
-
-        case 11:
-          _req$body = req.body, email = _req$body.email, password = _req$body.password;
-          _context.next = 14;
-          return index$1._regeneratorRuntime.awrap(getLoginAttemptsByAccountSinceDate(ip, email, date1HourAgo));
-
-        case 14:
-          recentLoginAttemptsByAccount = _context.sent;
-
-          if (!(recentLoginAttemptsByAccount.length >= authOptions.loginMaxAttemptsPerAccountPerHour)) {
-            _context.next = 17;
-            break;
-          }
-
-          throw new utils.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
-
-        case 17:
-          _context.next = 19;
-          return index$1._regeneratorRuntime.awrap(createLoginAttempt({
-            ip: ip,
-            email: email
-          }));
-
-        case 19:
-          _loginForm$validate = resetPasswordConfirm.loginForm().validate({
-            email: email,
-            password: password
-          }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
-
-          if (!(errors && errors.length)) {
-            _context.next = 22;
-            break;
-          }
-
-          return _context.abrupt("return", {
-            errors: errors
-          });
-
-        case 22:
-          _context.next = 24;
-          return index$1._regeneratorRuntime.awrap(users.getUserByEmail(cleanValues.email));
-
-        case 24:
-          user = _context.sent;
-
-          if (user) {
-            _context.next = 27;
-            break;
-          }
-
-          throw new users.UserNotFoundError('Authentication failed');
-
-        case 27:
-          if (user.enabled) {
-            _context.next = 29;
-            break;
-          }
-
-          throw new users.UserNotEnabledError('Authentication failed');
-
-        case 29:
-          if (utils.comparePasswordHash(cleanValues.password, user.password)) {
-            _context.next = 31;
-            break;
-          }
-
-          throw new utils.AuthenticationFailedError('Authentication failed');
-
-        case 31:
-          claims = tokenOptions.createClaims(user);
-          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), user.id);
-          return _context.abrupt("return", {
-            isAuthenticated: true,
-            claims: claims
-          });
-
-        case 34:
+        case 1:
         case "end":
           return _context.stop();
       }
@@ -403,12 +236,12 @@ var registerApi = function registerApi(_ref) {
           ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
           date1DayAgo = moment().subtract(1, 'day');
           _context.next = 12;
-          return index$1._regeneratorRuntime.awrap(users.getUsersByIPSinceDate(ip, date1DayAgo));
+          return index$1._regeneratorRuntime.awrap(users.listUsers(users.usersCollection().where('registrationIP', '==', ip).where('dateCreated', '>=', date1DayAgo).limit(authOptions.maxRegistrationsPerDay)));
 
         case 12:
           recentUsersByIP = _context.sent;
 
-          if (!(recentUsersByIP.length >= authOptions.registrationMaxAccountsPerDay)) {
+          if (!(recentUsersByIP.length >= authOptions.maxRegistrationsPerDay)) {
             _context.next = 15;
             break;
           }
@@ -417,7 +250,7 @@ var registerApi = function registerApi(_ref) {
 
         case 15:
           _context.next = 17;
-          return index$1._regeneratorRuntime.awrap(users.getUserByEmail(cleanValues.email));
+          return index$1._regeneratorRuntime.awrap(users.getUser(users.usersCollection().where('email', '==', cleanValues.email)));
 
         case 17:
           user = _context.sent;
@@ -583,21 +416,28 @@ resetPasswordConfirmApi.options = {
   allowedMethods: [utils$1.POST]
 };
 
+//  createPasswordReset,
+//  getPasswordResetsByIPSinceDate,
+//  sendPasswordResetRequestEmail,
+//} from '../../models/passwordResets';
+// import { getUserByEmail } from '../../models/users';
+
 var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
-  var req, email, _resetPasswordRequest, cleanValues, errors, user, passwordReset;
+  var req, authOptions, email, _resetPasswordRequest, cleanValues, errors;
 
   return index$1._regeneratorRuntime.async(function resetPasswordRequestApi$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           req = _ref.req;
+          authOptions = index.options.auth;
           email = req.body.email;
           _resetPasswordRequest = resetPasswordConfirm.resetPasswordRequestForm().validate({
             email: email
           }), cleanValues = _resetPasswordRequest.cleanValues, errors = _resetPasswordRequest.errors;
 
           if (!(errors && errors.length)) {
-            _context.next = 5;
+            _context.next = 6;
             break;
           }
 
@@ -605,29 +445,7 @@ var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
             errors: errors
           });
 
-        case 5:
-          _context.next = 7;
-          return index$1._regeneratorRuntime.awrap(users.getUserByEmail(cleanValues.email));
-
-        case 7:
-          user = _context.sent;
-
-          if (!(user && user.enabled)) {
-            _context.next = 14;
-            break;
-          }
-
-          _context.next = 11;
-          return index$1._regeneratorRuntime.awrap(passwordResets.createPasswordReset({
-            userId: user.id
-          }));
-
-        case 11:
-          passwordReset = _context.sent;
-          _context.next = 14;
-          return index$1._regeneratorRuntime.awrap(passwordResets.sendPasswordResetRequestEmail(req, user.email, passwordReset.id));
-
-        case 14:
+        case 6:
         case "end":
           return _context.stop();
       }
@@ -639,9 +457,9 @@ resetPasswordRequestApi.options = {
   allowedMethods: [utils$1.POST]
 };
 
-function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var sessionApi = function sessionApi(_ref) {
   var session;
@@ -650,7 +468,7 @@ var sessionApi = function sessionApi(_ref) {
       switch (_context.prev = _context.next) {
         case 0:
           session = _ref.session;
-          return _context.abrupt("return", _objectSpread$2({}, session));
+          return _context.abrupt("return", _objectSpread$1({}, session));
 
         case 2:
         case "end":

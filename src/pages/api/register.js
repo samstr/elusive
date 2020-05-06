@@ -11,8 +11,9 @@ import { registerForm } from '../../forms';
 import { POST } from '../../http';
 import {
   createUser,
-  getUserByEmail,
-  getUsersByIPSinceDate,
+  getUser,
+  listUsers,
+  usersCollection,
 } from '../../models/users';
 import {
   TYPE_EMAIL,
@@ -20,7 +21,7 @@ import {
   sendUserVerificationEmail,
 } from '../../models/userVerifications';
 import { createSessionCookies } from '../../sessions';
-import { signTokens } from '../..//tokens';
+import { signTokens } from '../../tokens';
 
 const registerApi = async ({ req, res, session }) => {
   const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
@@ -43,15 +44,22 @@ const registerApi = async ({ req, res, session }) => {
 
   const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   const date1DayAgo = moment().subtract(1, 'day');
-  const recentUsersByIP = await getUsersByIPSinceDate(ip, date1DayAgo);
+  const recentUsersByIP = await listUsers(
+    usersCollection()
+      .where('registrationIP', '==', ip)
+      .where('dateCreated', '>=', date1DayAgo)
+      .limit(authOptions.maxRegistrationsPerDay)
+  );
 
-  if (recentUsersByIP.length >= authOptions.registrationMaxAccountsPerDay) {
+  if (recentUsersByIP.length >= authOptions.maxRegistrationsPerDay) {
     throw new TooManyRegistrationsError(
       'You have created too many accounts recently.'
     );
   }
 
-  let user = await getUserByEmail(cleanValues.email);
+  let user = await getUser(
+    usersCollection().where('email', '==', cleanValues.email)
+  );
 
   if (user) {
     throw new UserAlreadyExistsError('User already exists');

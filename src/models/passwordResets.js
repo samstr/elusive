@@ -5,7 +5,7 @@ import { createModel, createService } from './';
 import { getUser } from './users';
 import moment from 'moment';
 
-export const COLLECTION = 'passwordResets';
+const COLLECTION = 'passwordResets';
 
 export const model = (data) => {
   const model = createModel(data);
@@ -19,6 +19,8 @@ export const model = (data) => {
 };
 
 export const {
+  collection: passwordResetsCollection,
+  getObjectByID: getPasswordResetByID,
   getObject: getPasswordReset,
   createObject: createPasswordReset,
   updateObject: updatePasswordReset,
@@ -35,11 +37,35 @@ export const passwordResetExpired = (passwordReset) => {
   const dateNow = moment();
   const dateCreated = moment.unix(passwordReset.dateCreated);
   const dateExpires = moment(dateCreated).add(
-    authOptions.passwordResetExpiryHours,
+    authOptions.resetPasswordExpiryHours,
     'hours'
   );
 
   return dateNow.isAfter(dateExpires);
+};
+
+/* export const getPasswordResetsByIPSinceDate = async (ip, date) => {
+  const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
+
+  const docs = await firestore
+    .collection(COLLECTION)
+    .where('ip', '==', ip)
+    .where('dateCreated', '>', date)
+    .get();
+
+  const objects = [];
+
+  docs.forEach((doc) => {
+    objects.push(
+      model({
+        id: doc.id,
+        ...doc.data(),
+      })
+    );
+  });
+
+  return objects;
 };
 
 export const sendPasswordResetRequestEmail = async (
@@ -65,3 +91,4 @@ export const sendPasswordResetRequestEmail = async (
     },
   });
 };
+*/

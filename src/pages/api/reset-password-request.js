@@ -1,12 +1,18 @@
+//import moment from 'moment';
+
+import Elusive from '../../';
+//import { TooManyResetPasswordRequestsError } from '../../auth';
 import { resetPasswordRequestForm } from '../../forms';
 import { POST } from '../../http';
-import {
-  createPasswordReset,
-  sendPasswordResetRequestEmail,
-} from '../../models/passwordResets';
-import { getUserByEmail } from '../../models/users';
+//import {
+//  createPasswordReset,
+//  getPasswordResetsByIPSinceDate,
+//  sendPasswordResetRequestEmail,
+//} from '../../models/passwordResets';
+// import { getUserByEmail } from '../../models/users';
 
 const resetPasswordRequestApi = async ({ req }) => {
+  const { auth: authOptions } = Elusive.options;
   const { email } = req.body;
 
   const { cleanValues, errors } = resetPasswordRequestForm().validate({
@@ -17,18 +23,32 @@ const resetPasswordRequestApi = async ({ req }) => {
     return { errors };
   }
 
-  // TODO: throttle number of password reset requests that can be made in 1 day
-  // throw new TooManyPasswordResetRequestsError
+  /*const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  const date1HourAgo = moment().subtract(1, 'hour');
+  const recentPasswordResetsByIP = await getPasswordResetsByIPSinceDate(
+    ip,
+    date1HourAgo
+  );
 
-  const user = await getUserByEmail(cleanValues.email);
+  if (
+    recentPasswordResetsByIP.length >=
+    authOptions.resetPasswordMaxRequestsPerHour
+  ) {
+    throw new TooManyResetPasswordRequestsError(
+      'You have requested too many password resets. Try again later.'
+    );
+  }
+*/
+  /* const user = await getUserByEmail(cleanValues.email);
 
   if (user && user.enabled) {
     const passwordReset = await createPasswordReset({
       userId: user.id,
+      ip: ip,
     });
 
     await sendPasswordResetRequestEmail(req, user.email, passwordReset.id);
-  }
+  }*/
 };
 
 resetPasswordRequestApi.options = {

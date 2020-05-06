@@ -1,12 +1,13 @@
-import Elusive from '../';
 import { BaseError } from '../errors';
 import { createModel, createService } from './';
 
-export const COLLECTION = 'loginAttempts';
+const COLLECTION = 'loginAttempts';
 
 export const model = (data) => createModel(data);
 
 export const {
+  collection: loginAttemptsCollection,
+  getObjectByID: getLoginAttemptByID,
   getObject: getLoginAttempt,
   createObject: createLoginAttempt,
   updateObject: updateLoginAttempt,
@@ -15,12 +16,17 @@ export const {
 
 export class LoginAttemptNotFoundError extends BaseError {}
 
-export const getLoginAttemptsByIPSinceDate = async (ip, date) => {
+/*export const getRateLimitableActionsByTypeAndIPSinceDate = async (
+  type,
+  ip,
+  date
+) => {
   const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
 
   const docs = await firestore
     .collection(COLLECTION)
+    .where('type', '==', type)
     .where('ip', '==', ip)
     .where('dateCreated', '>', date)
     .get();
@@ -37,9 +43,14 @@ export const getLoginAttemptsByIPSinceDate = async (ip, date) => {
   });
 
   return objects;
-};
-
-export const getLoginAttemptsByAccountSinceDate = async (ip, email, date) => {
+};*/
+/*
+export const getRateLimitableActionsByTypeAndIPAndFormDataSinceData = async (
+  ip,
+  email,
+  date,
+  fields = {}
+) => {
   const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
 
@@ -62,4 +73,4 @@ export const getLoginAttemptsByAccountSinceDate = async (ip, email, date) => {
   });
 
   return objects;
-};
+};*/

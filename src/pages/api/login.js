@@ -9,21 +9,12 @@ import {
 } from '../../auth';
 import { loginForm } from '../../forms';
 import { POST } from '../../http';
-import {
-  createLoginAttempt,
-  getLoginAttemptsByAccountSinceDate,
-  getLoginAttemptsByIPSinceDate,
-} from '../../models/loginAttempts';
-import {
-  UserNotFoundError,
-  UserNotEnabledError,
-  getUserByEmail,
-} from '../../models/users';
+import { UserNotFoundError, UserNotEnabledError } from '../../models/users';
 import { createSessionCookies } from '../../sessions';
 import { signTokens } from '../../tokens';
 
 export const loginApi = async ({ req, res, session }) => {
-  const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
+  /*const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
     throw new AlreadyAuthenticatedError('You are already logged in');
@@ -31,8 +22,8 @@ export const loginApi = async ({ req, res, session }) => {
 
   const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   const date1HourAgo = moment().subtract(1, 'hour');
-
-  const recentLoginAttemptsByIP = await getLoginAttemptsByIPSinceDate(
+*/
+  /*const recentLoginAttemptsByIP = await getLoginAttemptsByIPSinceDate(
     ip,
     date1HourAgo
   );
@@ -43,11 +34,9 @@ export const loginApi = async ({ req, res, session }) => {
     throw new TooManyLoginAttemptsError(
       'You have attempted to login too many times. Try again later.'
     );
-  }
-
-  const { email, password } = req.body;
-
-  const recentLoginAttemptsByAccount = await getLoginAttemptsByAccountSinceDate(
+  }*/
+  // const { email, password } = req.body;
+  /*const recentLoginAttemptsByAccount = await getLoginAttemptsByAccountSinceDate(
     ip,
     email,
     date1HourAgo
@@ -59,13 +48,12 @@ export const loginApi = async ({ req, res, session }) => {
     throw new TooManyLoginAttemptsError(
       'You have attempted to login too many times. Try again later.'
     );
-  }
-
-  await createLoginAttempt({
+  }*/
+  /*await createLoginAttempt({
     ip,
     email,
-  });
-
+  });*/
+  /*
   const { cleanValues, errors } = loginForm().validate({ email, password });
 
   if (errors && errors.length) {
@@ -93,7 +81,7 @@ export const loginApi = async ({ req, res, session }) => {
   return {
     isAuthenticated: true,
     claims,
-  };
+  };*/
 };
 
 loginApi.options = {

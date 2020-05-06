@@ -14,6 +14,7 @@ export default [
       http: './src/http/index.js',
       mail: './src/mail/index.js',
       'models/index': './src/models/index.js',
+      'models/loginAttempts': './src/models/loginAttempts.js',
       'models/passwordResets': './src/models/passwordResets.js',
       'models/users': './src/models/users.js',
       'models/userVerifications': './src/models/userVerifications.js',

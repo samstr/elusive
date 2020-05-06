@@ -4,7 +4,7 @@ import { defaultDynamicTemplateData, sendMail } from '../mail';
 import { createModel, createService } from './';
 import { getUser } from './users';
 
-export const COLLECTION = 'userVerifications';
+const COLLECTION = 'userVerifications';
 
 export const TYPE_EMAIL = 'email';
 export const TYPE_PHONE = 'phone';
@@ -20,6 +20,8 @@ export const model = (data) => {
 };
 
 export const {
+  collection: userVerificationsCollection,
+  getObjectByID: getUserVerificationByID,
   getObject: getUserVerification,
   createObject: createUserVerification,
   updateObject: updateUserVerification,

@@ -17,16 +17,25 @@ export const createModel = (data) => {
   return model;
 };
 
-export const createService = (model, collection) => ({
-  getObject: async (id) => getObject(model, collection, id),
+export const createService = (model, collectionName) => ({
+  collection: () => collection(collectionName),
+  getObjectByID: async (id) => getObjectByID(model, collectionName, id),
+  getObject: async (query) => getObject(model, query),
   createObject: async (createProps) =>
-    createObject(model, collection, createProps),
+    createObject(model, collectionName, createProps),
   updateObject: async (doc, updateProps) =>
-    updateObject(model, collection, doc, updateProps),
-  listObjects: async () => listObjects(model, collection),
+    updateObject(model, collectionName, doc, updateProps),
+  listObjects: async (query) => listObjects(model, query),
 });
 
-export const createObject = async (model, collection, createProps) => {
+export const collection = (collectionName) => {
+  const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
+
+  return firestore.collection(collectionName);
+};
+
+export const createObject = async (model, collectionName, createProps) => {
   const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
   const id = uuidv4();
@@ -38,7 +47,7 @@ export const createObject = async (model, collection, createProps) => {
     dateUpdated: dateNow,
   };
 
-  await firestore.collection(collection).doc(id).set(doc);
+  await firestore.collection(collectionName).doc(id).set(doc);
 
   return model({
     ...doc,
@@ -46,10 +55,10 @@ export const createObject = async (model, collection, createProps) => {
   });
 };
 
-export const getObject = async (model, collection, id) => {
+export const getObjectByID = async (model, collectionName, id) => {
   const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
-  const doc = await firestore.collection(collection).doc(id).get();
+  const doc = await firestore.collection(collectionName).doc(id).get();
 
   if (doc.exists) {
     return model({
@@ -61,7 +70,24 @@ export const getObject = async (model, collection, id) => {
   }
 };
 
-export const updateObject = async (model, collection, doc, updateProps) => {
+export const getObject = async (model, query) => {
+  query.limit(1);
+
+  const docs = await query.get();
+
+  let object;
+
+  docs.forEach((doc) => {
+    object = model({
+      id: doc.id,
+      ...doc.data(),
+    });
+  });
+
+  return object;
+};
+
+export const updateObject = async (model, collectionName, doc, updateProps) => {
   const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
 
@@ -72,16 +98,13 @@ export const updateObject = async (model, collection, doc, updateProps) => {
     ...updateProps,
   };
 
-  await firestore.collection(collection).doc(doc.id).update(updateProps);
+  await firestore.collection(collectionName).doc(doc.id).update(updateProps);
 
   return model(newDoc);
 };
 
-export const listObjects = async (model, collection) => {
-  const { firebase } = Elusive.services;
-  const firestore = firebase.firestore();
-
-  const docs = await firestore.collection(collection).get();
+export const listObjects = async (model, query) => {
+  const docs = await query.get();
 
   const objects = [];
 

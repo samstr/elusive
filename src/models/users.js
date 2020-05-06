@@ -1,12 +1,13 @@
-import Elusive from '../';
 import { BaseError } from '../errors';
 import { createModel, createService } from './';
 
-export const COLLECTION = 'users';
+const COLLECTION = 'users';
 
 export const model = (data) => createModel(data);
 
 export const {
+  collection: usersCollection,
+  getObjectByID: getUserByID,
   getObject: getUser,
   createObject: createUser,
   updateObject: updateUser,
@@ -16,30 +17,7 @@ export const {
 export class UserNotEnabledError extends BaseError {}
 export class UserNotFoundError extends BaseError {}
 
-export const getUserByEmail = async (email) => {
-  const { firebase } = Elusive.services;
-  const firestore = firebase.firestore();
-
-  const docs = await firestore
-    .collection(COLLECTION)
-    .where('email', '==', email)
-    .get();
-
-  if (docs.size === 0) {
-    return null;
-  }
-
-  let user;
-
-  docs.forEach((doc) => {
-    user = model({
-      id: doc.id,
-      ...doc.data(),
-    });
-  });
-
-  return user;
-};
+/*
 
 export const getUserByUsername = async (username) => {
   const { firebase } = Elusive.services;
@@ -89,3 +67,5 @@ export const getUsersByIPSinceDate = async (ip, date) => {
 
   return objects;
 };
+
+*/

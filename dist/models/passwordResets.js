@@ -5,29 +5,24 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-79fa448e.js');
+require('../index-26463b7f.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
 var index$1 = require('../index-2340470f.js');
-var utils = require('../utils-88766450.js');
 require('uuid');
-var utils$1 = require('../utils-2e3310dc.js');
+var utils = require('../utils-4521964b.js');
 var users = require('./users.js');
 var moment = _interopDefault(require('moment'));
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'passwordResets';
 var model = function model(data) {
-  var model = utils$1.createModel(data);
+  var model = utils.createModel(data);
 
   model.hasExpired = function () {
     return passwordResetExpired(model);
@@ -55,7 +50,9 @@ var model = function model(data) {
   return model;
 };
 
-var _createService = utils$1.createService(model, COLLECTION),
+var _createService = utils.createService(model, COLLECTION),
+    passwordResetsCollection = _createService.collection,
+    getPasswordResetByID = _createService.getObjectByID,
     getPasswordReset = _createService.getObject,
     createPasswordReset = _createService.createObject,
     updatePasswordReset = _createService.updateObject,
@@ -103,50 +100,66 @@ var passwordResetExpired = function passwordResetExpired(passwordReset) {
   var authOptions = index.options.auth;
   var dateNow = moment();
   var dateCreated = moment.unix(passwordReset.dateCreated);
-  var dateExpires = moment(dateCreated).add(authOptions.passwordResetExpiryHours, 'hours');
+  var dateExpires = moment(dateCreated).add(authOptions.resetPasswordExpiryHours, 'hours');
   return dateNow.isAfter(dateExpires);
 };
-var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, toEmail, passwordResetId) {
-  var mailOptions, dynamicTemplateData;
-  return index$1._regeneratorRuntime.async(function sendPasswordResetRequestEmail$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          mailOptions = index.options.mail;
-          dynamicTemplateData = utils.defaultDynamicTemplateData(req);
-          toEmail = 'samstr@gmail.com';
-          _context2.next = 5;
-          return index$1._regeneratorRuntime.awrap(utils.sendMail({
-            to: toEmail,
-            from: {
-              email: mailOptions.fromEmail,
-              name: mailOptions.fromName
-            },
-            template_id: mailOptions.resetPasswordRequestTemplateId,
-            dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
-              resetPasswordConfirmUrl: "".concat(dynamicTemplateData.baseUrl, "/reset/").concat(passwordResetId)
-            })
-          }));
+/* export const getPasswordResetsByIPSinceDate = async (ip, date) => {
+  const { firebase } = Elusive.services;
+  const firestore = firebase.firestore();
 
-        case 5:
-          return _context2.abrupt("return", _context2.sent);
+  const docs = await firestore
+    .collection(COLLECTION)
+    .where('ip', '==', ip)
+    .where('dateCreated', '>', date)
+    .get();
 
-        case 6:
-        case "end":
-          return _context2.stop();
-      }
-    }
-  }, null, null, null, Promise);
+  const objects = [];
+
+  docs.forEach((doc) => {
+    objects.push(
+      model({
+        id: doc.id,
+        ...doc.data(),
+      })
+    );
+  });
+
+  return objects;
 };
 
-exports.COLLECTION = COLLECTION;
+export const sendPasswordResetRequestEmail = async (
+  req,
+  toEmail,
+  passwordResetId
+) => {
+  const { mail: mailOptions } = Elusive.options;
+  const dynamicTemplateData = defaultDynamicTemplateData(req);
+
+  toEmail = 'samstr@gmail.com';
+
+  return await sendMail({
+    to: toEmail,
+    from: {
+      email: mailOptions.fromEmail,
+      name: mailOptions.fromName,
+    },
+    template_id: mailOptions.resetPasswordRequestTemplateId,
+    dynamic_template_data: {
+      ...dynamicTemplateData,
+      resetPasswordConfirmUrl: `${dynamicTemplateData.baseUrl}/reset/${passwordResetId}`,
+    },
+  });
+};
+*/
+
 exports.PasswordResetAlreadyUsedError = PasswordResetAlreadyUsedError;
 exports.PasswordResetExpiredError = PasswordResetExpiredError;
 exports.PasswordResetNotFoundError = PasswordResetNotFoundError;
 exports.createPasswordReset = createPasswordReset;
 exports.getPasswordReset = getPasswordReset;
+exports.getPasswordResetByID = getPasswordResetByID;
 exports.listPasswordResets = listPasswordResets;
 exports.model = model;
 exports.passwordResetExpired = passwordResetExpired;
-exports.sendPasswordResetRequestEmail = sendPasswordResetRequestEmail;
+exports.passwordResetsCollection = passwordResetsCollection;
 exports.updatePasswordReset = updatePasswordReset;

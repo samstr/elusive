@@ -10,12 +10,12 @@ class ElusiveClient {
 
     this.options = {
       auth: {
-        loginMaxAttemptsPerAccountPerHour: 8,
-        loginMaxAttemptsPerIPPerHour: 16,
+        maxLoginAttemptsPerAccountPerHour: 8,
+        maxLoginAttemptsPerIPPerHour: 16,
+        maxResetPasswordRequestsPerHour: 4,
+        maxRegistrationsPerDay: 5,
         passwordMinLength: 3,
-        passwordResetExpiryHours: 24,
-        registrationMaxAccountsPerDay: 5,
-        resetPasswordMaxRequestsPerHour: 5,
+        resetPasswordExpiryHours: 24,
         saltRounds: 10,
       },
       routes: {
@@ -68,37 +68,37 @@ class ElusiveClient {
 
       if (auth) {
         const {
-          loginMaxAttemptsPerAccountPerHour,
-          loginMaxAttemptsPerIPPerHour,
+          maxLoginAttemptsPerAccountPerHour,
+          maxLoginAttemptsPerIPPerHour,
+          maxResetPasswordRequestsPerHour,
+          maxRegistrationsPerDay,
           passwordMinLength,
-          passwordResetExpiryHours,
-          registrationMaxAccountsPerDay,
-          resetPasswordMaxRequestsPerHour,
+          resetPasswordExpiryHours,
           saltRounds,
         } = auth;
 
-        if (loginMaxAttemptsPerAccountPerHour) {
-          this.options.auth.loginMaxAttemptsPerAccountPerHour = loginMaxAttemptsPerAccountPerHour;
+        if (maxLoginAttemptsPerAccountPerHour) {
+          this.options.auth.maxLoginAttemptsPerAccountPerHour = maxLoginAttemptsPerAccountPerHour;
         }
 
-        if (loginMaxAttemptsPerIPPerHour) {
-          this.options.auth.loginMaxAttemptsPerIPPerHour = loginMaxAttemptsPerIPPerHour;
+        if (maxLoginAttemptsPerIPPerHour) {
+          this.options.auth.maxLoginAttemptsPerIPPerHour = maxLoginAttemptsPerIPPerHour;
+        }
+
+        if (maxResetPasswordRequestsPerHour) {
+          this.options.auth.maxResetPasswordRequestsPerHour = maxResetPasswordRequestsPerHour;
+        }
+
+        if (maxRegistrationsPerDay) {
+          this.options.auth.maxRegistrationsPerDay = maxRegistrationsPerDay;
         }
 
         if (passwordMinLength) {
           this.options.auth.passwordMinLength = passwordMinLength;
         }
 
-        if (passwordResetExpiryHours) {
-          this.options.auth.passwordResetExpiryHours = passwordResetExpiryHours;
-        }
-
-        if (registrationMaxAccountsPerDay) {
-          this.options.auth.registrationMaxAccountsPerDay = registrationMaxAccountsPerDay;
-        }
-
-        if (resetPasswordMaxRequestsPerHour) {
-          this.options.auth.resetPasswordMaxRequestsPerHour = resetPasswordMaxRequestsPerHour;
+        if (resetPasswordExpiryHours) {
+          this.options.auth.resetPasswordExpiryHours = resetPasswordExpiryHours;
         }
 
         if (saltRounds) {
