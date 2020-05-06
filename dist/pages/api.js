@@ -223,6 +223,40 @@ loginApi.options = {
   allowedMethods: [utils$1.POST]
 };
 
+var logoutApi = function logoutApi(_ref) {
+  var req, res, session;
+  return index$1._regeneratorRuntime.async(function logoutApi$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          req = _ref.req, res = _ref.res, session = _ref.session;
+
+          if (session.isAuthenticated) {
+            _context.next = 3;
+            break;
+          }
+
+          throw new utils.NotAuthenticatedError('You are not logged in');
+
+        case 3:
+          utils$3.deleteSessionCookies(res);
+          return _context.abrupt("return", {
+            isAuthenticated: false,
+            claims: null
+          });
+
+        case 5:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, null, Promise);
+};
+
+logoutApi.options = {
+  allowedMethods: [utils$1.POST]
+};
+
 var registerApi = function registerApi(_ref) {
   var req, res, session, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, user, userVerification, claims;
 
@@ -346,5 +380,6 @@ sessionApi.options = {
 
 exports.apiWrapper = apiWrapper;
 exports.loginApi = loginApi;
+exports.logoutApi = logoutApi;
 exports.registerApi = registerApi;
 exports.sessionApi = sessionApi;
