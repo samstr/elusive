@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "1.7.37",
+  "version": "1.7.40",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [

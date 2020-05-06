@@ -9,12 +9,22 @@ import {
 } from '../../auth';
 import { loginForm } from '../../forms';
 import { POST } from '../../http';
-import { UserNotFoundError, UserNotEnabledError } from '../../models/users';
+import {
+  createLoginAttempt,
+  loginAttemptsCollection,
+  listLoginAttempts,
+} from '../../models/loginAttempts';
+import {
+  UserNotFoundError,
+  UserNotEnabledError,
+  getUser,
+  usersCollection,
+} from '../../models/users';
 import { createSessionCookies } from '../../sessions';
 import { signTokens } from '../../tokens';
 
 export const loginApi = async ({ req, res, session }) => {
-  /*const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
+  const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
     throw new AlreadyAuthenticatedError('You are already logged in');
@@ -22,45 +32,59 @@ export const loginApi = async ({ req, res, session }) => {
 
   const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   const date1HourAgo = moment().subtract(1, 'hour');
-*/
-  /*const recentLoginAttemptsByIP = await getLoginAttemptsByIPSinceDate(
-    ip,
-    date1HourAgo
+
+  const recentLoginAttemptsByIP = await listLoginAttempts(
+    loginAttemptsCollection()
+      .where('ip', '==', ip)
+      .where('dateCreated', '>', date1HourAgo)
+      .limit(authOptions.maxLoginAttemptsPerIPPerHour)
   );
 
+  console.log('recentLoginAttemptsByIP', recentLoginAttemptsByIP);
+
   if (
-    recentLoginAttemptsByIP.length >= authOptions.loginMaxAttemptsPerIPPerHour
+    recentLoginAttemptsByIP.length >= authOptions.maxLoginAttemptsPerIPPerHour
   ) {
     throw new TooManyLoginAttemptsError(
       'You have attempted to login too many times. Try again later.'
     );
-  }*/
-  // const { email, password } = req.body;
-  /*const recentLoginAttemptsByAccount = await getLoginAttemptsByAccountSinceDate(
-    ip,
-    email,
-    date1HourAgo
+  }
+
+  const { email, password } = req.body;
+
+  const recentLoginAttemptsByAccount = await listLoginAttempts(
+    loginAttemptsCollection()
+      .where('ip', '==', ip)
+      .where('email', '==', email)
+      .where('dateCreated', '>', date1HourAgo)
+      .limit(authOptions.maxLoginAttemptsPerAccountPerHour)
   );
+
+  console.log('recentLoginAttemptsByAccount', recentLoginAttemptsByAccount);
+
   if (
     recentLoginAttemptsByAccount.length >=
-    authOptions.loginMaxAttemptsPerAccountPerHour
+    authOptions.maxLoginAttemptsPerAccountPerHour
   ) {
     throw new TooManyLoginAttemptsError(
       'You have attempted to login too many times. Try again later.'
     );
-  }*/
-  /*await createLoginAttempt({
+  }
+
+  await createLoginAttempt({
     ip,
     email,
-  });*/
-  /*
+  });
+
   const { cleanValues, errors } = loginForm().validate({ email, password });
 
   if (errors && errors.length) {
     return { errors };
   }
 
-  const user = await getUserByEmail(cleanValues.email);
+  const user = await getUser(
+    usersCollection().where('email', '==', cleanValues.email)
+  );
 
   if (!user) {
     throw new UserNotFoundError('Authentication failed');
@@ -81,7 +105,7 @@ export const loginApi = async ({ req, res, session }) => {
   return {
     isAuthenticated: true,
     claims,
-  };*/
+  };
 };
 
 loginApi.options = {

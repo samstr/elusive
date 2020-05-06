@@ -283,6 +283,33 @@ var getOnChangeValue = function getOnChangeValue(event) {
   };
 };
 
+var loginForm = (function () {
+  var authOptions = index.options.auth;
+  return createForm({
+    fields: {
+      email: emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your email'
+        },
+        invalid: {
+          errorMessage: 'Your email is invalid'
+        }
+      }),
+      password: textField('password', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your password'
+        },
+        minLength: {
+          value: authOptions.passwordMinLength,
+          errorMessage: 'Your password is too short'
+        }
+      })
+    }
+  });
+});
+
 var registerForm = (function () {
   var authOptions = index.options.auth;
   return createForm({
@@ -368,6 +395,7 @@ exports.createForm = createForm;
 exports.emailField = emailField;
 exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
+exports.loginForm = loginForm;
 exports.registerForm = registerForm;
 exports.resetPasswordConfirmForm = resetPasswordConfirmForm;
 exports.resetPasswordRequestForm = resetPasswordRequestForm;

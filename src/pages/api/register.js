@@ -47,7 +47,7 @@ const registerApi = async ({ req, res, session }) => {
   const recentUsersByIP = await listUsers(
     usersCollection()
       .where('registrationIP', '==', ip)
-      .where('dateCreated', '>=', date1DayAgo)
+      .where('dateCreated', '>', date1DayAgo)
       .limit(authOptions.maxRegistrationsPerDay)
   );
 

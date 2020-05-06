@@ -13,18 +13,19 @@ require('prop-types');
 require('react-bootstrap');
 var utils = require('../utils-0c245d4a.js');
 require('bcryptjs');
-var resetPasswordConfirm = require('../reset-password-confirm-4bfceb3a.js');
+var resetPasswordConfirm = require('../reset-password-confirm-f317f8c3.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-2340470f.js');
 require('../utils-459eee4d.js');
 require('uuid');
-require('../utils-4521964b.js');
+require('../utils-8d461900.js');
+var loginAttempts = require('../models/loginAttempts.js');
 var users = require('../models/users.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
 var userVerifications = require('../models/userVerifications.js');
-var utils$3 = require('../utils-cd7a1e2e.js');
+var utils$3 = require('../utils-815e328d.js');
 require('../SessionContext-efd795c9.js');
 var utils$4 = require('../utils-3208ebd5.js');
 require('jsonwebtoken');
@@ -146,14 +147,116 @@ var apiWrapper = function apiWrapper(req, res, api) {
 };
 
 var loginApi = function loginApi(_ref) {
-  var req, res, session;
+  var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, recentLoginAttemptsByAccount, _loginForm$validate, cleanValues, errors, user, claims;
+
   return index$1._regeneratorRuntime.async(function loginApi$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           req = _ref.req, res = _ref.res, session = _ref.session;
+          _Elusive$options = index.options, authOptions = _Elusive$options.auth, tokenOptions = _Elusive$options.tokens;
 
-        case 1:
+          if (!session.isAuthenticated) {
+            _context.next = 4;
+            break;
+          }
+
+          throw new utils.AlreadyAuthenticatedError('You are already logged in');
+
+        case 4:
+          ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+          date1HourAgo = moment().subtract(1, 'hour');
+          _context.next = 8;
+          return index$1._regeneratorRuntime.awrap(loginAttempts.listLoginAttempts(loginAttempts.loginAttemptsCollection().where('ip', '==', ip).where('dateCreated', '>', date1HourAgo).limit(authOptions.maxLoginAttemptsPerIPPerHour)));
+
+        case 8:
+          recentLoginAttemptsByIP = _context.sent;
+          console.log('recentLoginAttemptsByIP', recentLoginAttemptsByIP);
+
+          if (!(recentLoginAttemptsByIP.length >= authOptions.maxLoginAttemptsPerIPPerHour)) {
+            _context.next = 12;
+            break;
+          }
+
+          throw new utils.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
+
+        case 12:
+          _req$body = req.body, email = _req$body.email, password = _req$body.password;
+          _context.next = 15;
+          return index$1._regeneratorRuntime.awrap(loginAttempts.listLoginAttempts(loginAttempts.loginAttemptsCollection().where('ip', '==', ip).where('email', '==', email).where('dateCreated', '>', date1HourAgo).limit(authOptions.maxLoginAttemptsPerAccountPerHour)));
+
+        case 15:
+          recentLoginAttemptsByAccount = _context.sent;
+          console.log('recentLoginAttemptsByAccount', recentLoginAttemptsByAccount);
+
+          if (!(recentLoginAttemptsByAccount.length >= authOptions.maxLoginAttemptsPerAccountPerHour)) {
+            _context.next = 19;
+            break;
+          }
+
+          throw new utils.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
+
+        case 19:
+          _context.next = 21;
+          return index$1._regeneratorRuntime.awrap(loginAttempts.createLoginAttempt({
+            ip: ip,
+            email: email
+          }));
+
+        case 21:
+          _loginForm$validate = resetPasswordConfirm.loginForm().validate({
+            email: email,
+            password: password
+          }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
+
+          if (!(errors && errors.length)) {
+            _context.next = 24;
+            break;
+          }
+
+          return _context.abrupt("return", {
+            errors: errors
+          });
+
+        case 24:
+          _context.next = 26;
+          return index$1._regeneratorRuntime.awrap(users.getUser(users.usersCollection().where('email', '==', cleanValues.email)));
+
+        case 26:
+          user = _context.sent;
+
+          if (user) {
+            _context.next = 29;
+            break;
+          }
+
+          throw new users.UserNotFoundError('Authentication failed');
+
+        case 29:
+          if (user.enabled) {
+            _context.next = 31;
+            break;
+          }
+
+          throw new users.UserNotEnabledError('Authentication failed');
+
+        case 31:
+          if (utils.comparePasswordHash(cleanValues.password, user.password)) {
+            _context.next = 33;
+            break;
+          }
+
+          throw new utils.AuthenticationFailedError('Authentication failed');
+
+        case 33:
+          claims = tokenOptions.createClaims(user);
+          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), user.id);
+          return _context.abrupt("return", {
+            isAuthenticated: true,
+            claims: claims
+          });
+
+        case 36:
         case "end":
           return _context.stop();
       }
@@ -236,7 +339,7 @@ var registerApi = function registerApi(_ref) {
           ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
           date1DayAgo = moment().subtract(1, 'day');
           _context.next = 12;
-          return index$1._regeneratorRuntime.awrap(users.listUsers(users.usersCollection().where('registrationIP', '==', ip).where('dateCreated', '>=', date1DayAgo).limit(authOptions.maxRegistrationsPerDay)));
+          return index$1._regeneratorRuntime.awrap(users.listUsers(users.usersCollection().where('registrationIP', '==', ip).where('dateCreated', '>', date1DayAgo).limit(authOptions.maxRegistrationsPerDay)));
 
         case 12:
           recentUsersByIP = _context.sent;

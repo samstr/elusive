@@ -118,16 +118,15 @@ var _createObject = function _createObject(model, collectionName, createProps) {
             dateCreated: dateNow,
             dateUpdated: dateNow
           });
-          console.log('setting doc', doc);
-          _context6.next = 8;
+          _context6.next = 7;
           return index$1._regeneratorRuntime.awrap(firestore.collection(collectionName).doc(id).set(doc));
 
-        case 8:
+        case 7:
           return _context6.abrupt("return", model(_objectSpread({}, doc, {
             id: id
           })));
 
-        case 9:
+        case 8:
         case "end":
           return _context6.stop();
       }
