@@ -17,7 +17,7 @@ import {
 import { createSessionCookies } from '../../sessions';
 import { signTokens } from '../../tokens';
 
-const resetPasswordConfirmApi = async ({ req, res, session }) => {
+const resetPasswordConfirmApi = async ({ req, res }) => {
   const { tokens: tokenOptions } = Elusive.options;
   const { passwordResetId, password } = req.body;
 

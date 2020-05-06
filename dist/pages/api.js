@@ -225,12 +225,12 @@ loginApi.options = {
 };
 
 var logoutApi = function logoutApi(_ref) {
-  var req, res, session;
+  var res, session;
   return index$1._regeneratorRuntime.async(function logoutApi$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          req = _ref.req, res = _ref.res, session = _ref.session;
+          res = _ref.res, session = _ref.session;
 
           if (session.isAuthenticated) {
             _context.next = 3;
@@ -354,13 +354,13 @@ registerApi.options = {
 };
 
 var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
-  var req, res, session, tokenOptions, _req$body, passwordResetId, password, _resetPasswordConfirm, cleanValues, errors, passwordReset, claims;
+  var req, res, tokenOptions, _req$body, passwordResetId, password, _resetPasswordConfirm, cleanValues, errors, passwordReset, claims;
 
   return index$1._regeneratorRuntime.async(function resetPasswordConfirmApi$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          req = _ref.req, res = _ref.res, session = _ref.session;
+          req = _ref.req, res = _ref.res;
           tokenOptions = index.options.tokens;
           _req$body = req.body, passwordResetId = _req$body.passwordResetId, password = _req$body.password;
           _resetPasswordConfirm = resetPasswordConfirm.resetPasswordConfirmForm().validate({

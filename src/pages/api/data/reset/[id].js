@@ -3,10 +3,13 @@ import {
   PasswordResetExpiredError,
   PasswordResetNotFoundError,
   getPasswordReset,
-} from '../../../models/passwordResets';
-import { UserNotEnabledError, UserNotFoundError } from '../../../models/users';
+} from '../../../../models/passwordResets';
+import {
+  UserNotEnabledError,
+  UserNotFoundError,
+} from '../../../../models/users';
 
-const resetPasswordConfirmDataApi = async ({ req, res, session }) => {
+const resetPasswordConfirmDataApi = async ({ req }) => {
   const passwordReset = await getPasswordReset(req.query.id);
 
   if (!passwordReset) {

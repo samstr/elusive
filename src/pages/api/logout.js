@@ -2,7 +2,7 @@ import { NotAuthenticatedError } from '../../auth';
 import { POST } from '../../http';
 import { deleteSessionCookies } from '../../sessions';
 
-const logoutApi = async ({ req, res, session }) => {
+const logoutApi = async ({ res, session }) => {
   if (!session.isAuthenticated) {
     throw new NotAuthenticatedError('You are not logged in');
   }
