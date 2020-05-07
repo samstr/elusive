@@ -69,8 +69,8 @@ var ElusiveClient = /*#__PURE__*/function () {
         mail: {
           fromEmail: 'no-reply@example.com',
           fromName: 'Example',
-          resetPasswordRequestTemplateId: null,
-          verifyEmailTemplateId: null
+          resetPasswordRequestTemplateID: null,
+          verifyEmailTemplateID: null
         },
         sessions: {
           accessTokenCookieName: 'at',
@@ -176,8 +176,8 @@ var ElusiveClient = /*#__PURE__*/function () {
         if (mail) {
           var fromEmail = mail.fromEmail,
               fromName = mail.fromName,
-              resetPasswordRequestTemplateId = mail.resetPasswordRequestTemplateId,
-              verifyEmailTemplateId = mail.verifyEmailTemplateId;
+              resetPasswordRequestTemplateID = mail.resetPasswordRequestTemplateID,
+              verifyEmailTemplateID = mail.verifyEmailTemplateID;
 
           if (fromEmail) {
             _this.options.mail.fromEmail = fromEmail;
@@ -187,12 +187,12 @@ var ElusiveClient = /*#__PURE__*/function () {
             _this.options.mail.fromName = fromName;
           }
 
-          if (resetPasswordRequestTemplateId) {
-            _this.options.mail.resetPasswordRequestTemplateId = resetPasswordRequestTemplateId;
+          if (resetPasswordRequestTemplateID) {
+            _this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
           }
 
-          if (verifyEmailTemplateId) {
-            _this.options.mail.verifyEmailTemplateId = verifyEmailTemplateId;
+          if (verifyEmailTemplateID) {
+            _this.options.mail.verifyEmailTemplateID = verifyEmailTemplateID;
           }
         }
 

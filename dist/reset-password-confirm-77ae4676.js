@@ -363,7 +363,7 @@ var resetPasswordConfirmForm = (function () {
   var authOptions = index.options.auth;
   return createForm({
     fields: {
-      passwordResetId: textField('passwordResetId', {
+      passwordResetID: textField('passwordResetID', {
         required: {
           value: true,
           errorMessage: 'Missing password reset key'

@@ -3,16 +3,16 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-832c7a28.js');
+var client = require('../index-7c1a0ac8.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
 var index$1 = require('../index-2340470f.js');
-var utils = require('../utils-c66da574.js');
+var utils = require('../utils-e51b02df.js');
 require('uuid');
-var utils$1 = require('../utils-ca780ba6.js');
+var utils$1 = require('../utils-29097260.js');
 var users = require('./users.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -95,14 +95,12 @@ var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail,
           _context2.next = 5;
           return index$1._regeneratorRuntime.awrap(utils.sendMail({
             to: toEmail,
-            from: {
-              email: mailOptions.fromEmail,
-              name: mailOptions.fromName
-            },
-            template_id: mailOptions.verifyEmailTemplateId,
+            template_id: mailOptions.verifyEmailTemplateID,
             dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
-              reasonForAction: 'you signed up for a Fanned account',
-              verifyEmailUrl: "".concat(dynamicTemplateData.baseUrl, "/verify/").concat(userVerificationId)
+              subject: 'Please verify your email address',
+              preheader: 'Verify your email address on Fanned by clicking here',
+              reasonForEmail: 'you signed up for a Fanned account',
+              verifyEmailURL: "".concat(dynamicTemplateData.baseURL, "/verify/").concat(userVerificationId)
             })
           }));
 

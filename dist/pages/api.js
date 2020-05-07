@@ -5,30 +5,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-var client = require('../index-832c7a28.js');
+var client = require('../index-7c1a0ac8.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('../utils-5e63d6ba.js');
+var utils = require('../utils-81999b66.js');
 require('bcryptjs');
-var resetPasswordConfirm = require('../reset-password-confirm-2b278ec6.js');
+var resetPasswordConfirm = require('../reset-password-confirm-77ae4676.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-2340470f.js');
-require('../utils-c66da574.js');
+require('../utils-e51b02df.js');
 require('uuid');
-require('../utils-ca780ba6.js');
+require('../utils-29097260.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var passwordResetAttempts = require('../models/passwordResetAttempts.js');
 var users = require('../models/users.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
 var userVerifications = require('../models/userVerifications.js');
-var utils$3 = require('../utils-503c85bc.js');
+var utils$3 = require('../utils-b01e5041.js');
 require('../SessionContext-efd795c9.js');
-var utils$4 = require('../utils-3c5f0d11.js');
+var utils$4 = require('../utils-e68f0155.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -313,7 +313,7 @@ logoutApi.options = {
 };
 
 var registerApi = function registerApi(_ref) {
-  var req, res, session, _Elusive$options, authOptions, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, _ip, date1DayAgo, recentUsersByIP, user, userVerification, claims;
+  var req, res, session, _Elusive$options, authOptions, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, ip, date1DayAgo, recentUsersByIP, user, userVerification, claims;
 
   return index$1._regeneratorRuntime.async(function registerApi$(_context) {
     while (1) {
@@ -347,15 +347,16 @@ var registerApi = function registerApi(_ref) {
           });
 
         case 8:
+          ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+
           if (!(process.env.NODE_ENV === 'production')) {
             _context.next = 16;
             break;
           }
 
-          _ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
           date1DayAgo = moment().subtract(1, 'day');
           _context.next = 13;
-          return index$1._regeneratorRuntime.awrap(users.listUsers(users.usersCollection().where('registrationIP', '==', _ip).where('dateCreated', '>', date1DayAgo).limit(authOptions.maxRegistrationsPerDay)));
+          return index$1._regeneratorRuntime.awrap(users.listUsers(users.usersCollection().where('registrationIP', '==', ip).where('dateCreated', '>', date1DayAgo).limit(authOptions.maxRegistrationsPerDay)));
 
         case 13:
           recentUsersByIP = _context.sent;
@@ -430,7 +431,7 @@ registerApi.options = {
 };
 
 var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
-  var req, res, tokenOptions, _req$body, passwordResetId, password, _resetPasswordConfirm, cleanValues, errors, passwordReset, claims;
+  var req, res, tokenOptions, _req$body, passwordResetID, password, _resetPasswordConfirm, cleanValues, errors, passwordReset, claims;
 
   return index$1._regeneratorRuntime.async(function resetPasswordConfirmApi$(_context) {
     while (1) {
@@ -438,9 +439,9 @@ var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
         case 0:
           req = _ref.req, res = _ref.res;
           tokenOptions = index.options.tokens;
-          _req$body = req.body, passwordResetId = _req$body.passwordResetId, password = _req$body.password;
+          _req$body = req.body, passwordResetID = _req$body.passwordResetID, password = _req$body.password;
           _resetPasswordConfirm = resetPasswordConfirm.resetPasswordConfirmForm().validate({
-            passwordResetId: passwordResetId,
+            passwordResetID: passwordResetID,
             password: password
           }), cleanValues = _resetPasswordConfirm.cleanValues, errors = _resetPasswordConfirm.errors;
 
@@ -455,7 +456,7 @@ var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
 
         case 6:
           _context.next = 8;
-          return index$1._regeneratorRuntime.awrap(passwordResets.getPasswordResetByID(passwordResetId));
+          return index$1._regeneratorRuntime.awrap(passwordResets.getPasswordResetByID(passwordResetID));
 
         case 8:
           passwordReset = _context.sent;

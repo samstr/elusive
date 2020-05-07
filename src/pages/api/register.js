@@ -42,8 +42,9 @@ const registerApi = async ({ req, res, session }) => {
     return { errors };
   }
 
+  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+
   if (process.env.NODE_ENV === 'production') {
-    const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
     const date1DayAgo = moment().subtract(1, 'day');
     const recentUsersByIP = await listUsers(
       usersCollection()

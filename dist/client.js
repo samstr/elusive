@@ -1,7 +1,7 @@
 'use strict';
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-832c7a28.js');
+var client = require('./index-7c1a0ac8.js');
 
 
 

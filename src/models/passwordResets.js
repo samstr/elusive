@@ -47,7 +47,7 @@ export const passwordResetExpired = (passwordReset) => {
 export const sendPasswordResetRequestEmail = async (
   req,
   toEmail,
-  passwordResetId
+  passwordResetID
 ) => {
   const { mail: mailOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
@@ -56,18 +56,14 @@ export const sendPasswordResetRequestEmail = async (
 
   return await sendMail({
     to: toEmail,
-    from: {
-      email: mailOptions.fromEmail,
-      name: mailOptions.fromName,
-    },
-    template_id: mailOptions.resetPasswordRequestTemplateId,
+    template_id: mailOptions.resetPasswordRequestTemplateID,
     dynamic_template_data: {
       ...dynamicTemplateData,
       subject: 'Reset your Fanned password',
       preheader:
         'Someone recently requested a password change for your Fanned account. If this was you, you can set a new password here',
-      reasonForAction: 'we received a request for a password reset',
-      resetPasswordConfirmUrl: `${dynamicTemplateData.baseUrl}/reset/${passwordResetId}`,
+      reasonForEmail: 'we received a request for a password reset',
+      resetPasswordConfirmURL: `${dynamicTemplateData.baseURL}/reset/${passwordResetID}`,
     },
   });
 };

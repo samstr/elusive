@@ -43,15 +43,13 @@ export const sendUserVerificationEmail = async (
 
   return await sendMail({
     to: toEmail,
-    from: {
-      email: mailOptions.fromEmail,
-      name: mailOptions.fromName,
-    },
-    template_id: mailOptions.verifyEmailTemplateId,
+    template_id: mailOptions.verifyEmailTemplateID,
     dynamic_template_data: {
       ...dynamicTemplateData,
-      reasonForAction: 'you signed up for a Fanned account',
-      verifyEmailUrl: `${dynamicTemplateData.baseUrl}/verify/${userVerificationId}`,
+      subject: 'Please verify your email address',
+      preheader: 'Verify your email address on Fanned by clicking here',
+      reasonForEmail: 'you signed up for a Fanned account',
+      verifyEmailURL: `${dynamicTemplateData.baseURL}/verify/${userVerificationId}`,
     },
   });
 };

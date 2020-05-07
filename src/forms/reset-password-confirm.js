@@ -6,7 +6,7 @@ export default () => {
 
   return createForm({
     fields: {
-      passwordResetId: textField('passwordResetId', {
+      passwordResetID: textField('passwordResetID', {
         required: {
           value: true,
           errorMessage: 'Missing password reset key',

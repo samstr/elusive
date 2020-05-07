@@ -19,10 +19,10 @@ import { signTokens } from '../../tokens';
 
 const resetPasswordConfirmApi = async ({ req, res }) => {
   const { tokens: tokenOptions } = Elusive.options;
-  const { passwordResetId, password } = req.body;
+  const { passwordResetID, password } = req.body;
 
   const { cleanValues, errors } = resetPasswordConfirmForm().validate({
-    passwordResetId,
+    passwordResetID,
     password,
   });
 
@@ -30,7 +30,7 @@ const resetPasswordConfirmApi = async ({ req, res }) => {
     return { errors };
   }
 
-  const passwordReset = await getPasswordResetByID(passwordResetId);
+  const passwordReset = await getPasswordResetByID(passwordResetID);
 
   if (!passwordReset) {
     throw new PasswordResetNotFoundError('Password reset key not found');

@@ -1,19 +1,28 @@
 import Elusive from '../';
 
 export const defaultDynamicTemplateData = (req) => {
-  const baseUrl = `${
+  const baseURL = `${
     process.env.NODE_ENV === 'production' ? 'https' : 'http'
   }://${req.headers.host}`;
 
   return {
-    baseUrl,
+    baseURL,
   };
 };
 
 export const sendMail = async (message) => {
   const { sendgrid, sentry } = Elusive.services;
+  const { mail: mailOptions } = Elusive.options;
 
-  // XXX if (process.env.NODE_ENV !== 'production') return;
+  message = {
+    ...message,
+    from: {
+      email: mailOptions.fromEmail,
+      name: mailOptions.fromName,
+    },
+  };
+
+  if (process.env.NODE_ENV !== 'production') return;
 
   try {
     return await sendgrid.send(message);
