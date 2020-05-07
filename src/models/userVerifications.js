@@ -50,6 +50,7 @@ export const sendUserVerificationEmail = async (
     template_id: mailOptions.verifyEmailTemplateId,
     dynamic_template_data: {
       ...dynamicTemplateData,
+      reasonForAction: 'you signed up for a Fanned account',
       verifyEmailUrl: `${dynamicTemplateData.baseUrl}/verify/${userVerificationId}`,
     },
   });
