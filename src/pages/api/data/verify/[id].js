@@ -6,12 +6,12 @@ import {
 import {
   UserVerificationAlreadyVerifiedError,
   UserVerificationNotFoundError,
-  getUserVerification,
+  getUserVerificationByID,
   updateUserVerification,
 } from '../../../../models/userVerifications';
 
 const verifyEmailApi = async ({ req }) => {
-  const userVerification = await getUserVerification(req.query.id);
+  const userVerification = await getUserVerificationByID(req.query.id);
 
   if (!userVerification) {
     throw new UserVerificationNotFoundError('User verification key not found');

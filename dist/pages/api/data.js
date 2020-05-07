@@ -97,7 +97,7 @@ var verifyEmailApi = function verifyEmailApi(_ref) {
         case 0:
           req = _ref.req;
           _context.next = 3;
-          return index$1._regeneratorRuntime.awrap(userVerifications.getUserVerification(req.query.id));
+          return index$1._regeneratorRuntime.awrap(userVerifications.getUserVerificationByID(req.query.id));
 
         case 3:
           userVerification = _context.sent;
