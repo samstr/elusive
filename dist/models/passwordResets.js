@@ -105,7 +105,7 @@ var passwordResetExpired = function passwordResetExpired(passwordReset) {
   var authOptions = index.options.auth;
   var dateNow = moment();
   var dateCreated = moment.unix(passwordReset.dateCreated);
-  var dateExpires = moment(dateCreated).add(authOptions.resetPasswordExpiryHours, 'hours');
+  var dateExpires = moment(dateCreated).add(authOptions.passwordResetExpiryHours, 'hours');
   return dateNow.isAfter(dateExpires);
 };
 var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, toEmail, passwordResetId) {

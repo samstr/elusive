@@ -37,7 +37,7 @@ export const passwordResetExpired = (passwordReset) => {
   const dateNow = moment();
   const dateCreated = moment.unix(passwordReset.dateCreated);
   const dateExpires = moment(dateCreated).add(
-    authOptions.resetPasswordExpiryHours,
+    authOptions.passwordResetExpiryHours,
     'hours'
   );
 
