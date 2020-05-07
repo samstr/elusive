@@ -63,7 +63,8 @@ export const sendPasswordResetRequestEmail = async (
     template_id: mailOptions.resetPasswordRequestTemplateId,
     dynamic_template_data: {
       ...dynamicTemplateData,
-      reasonForAction: 'we received a request for a password reset',
+      reasonForAction:
+        'we received a request for a password reset for your account',
       resetPasswordConfirmUrl: `${dynamicTemplateData.baseUrl}/reset/${passwordResetId}`,
     },
   });
