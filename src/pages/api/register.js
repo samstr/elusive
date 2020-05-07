@@ -42,19 +42,21 @@ const registerApi = async ({ req, res, session }) => {
     return { errors };
   }
 
-  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
-  const date1DayAgo = moment().subtract(1, 'day');
-  const recentUsersByIP = await listUsers(
-    usersCollection()
-      .where('registrationIP', '==', ip)
-      .where('dateCreated', '>', date1DayAgo)
-      .limit(authOptions.maxRegistrationsPerDay)
-  );
-
-  if (recentUsersByIP.length >= authOptions.maxRegistrationsPerDay) {
-    throw new TooManyRegistrationsError(
-      'You have created too many accounts recently.'
+  if (process.env.NODE_ENV === 'production') {
+    const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+    const date1DayAgo = moment().subtract(1, 'day');
+    const recentUsersByIP = await listUsers(
+      usersCollection()
+        .where('registrationIP', '==', ip)
+        .where('dateCreated', '>', date1DayAgo)
+        .limit(authOptions.maxRegistrationsPerDay)
     );
+
+    if (recentUsersByIP.length >= authOptions.maxRegistrationsPerDay) {
+      throw new TooManyRegistrationsError(
+        'You have created too many accounts recently.'
+      );
+    }
   }
 
   let user = await getUser(

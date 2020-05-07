@@ -22,20 +22,22 @@ const resetPasswordRequestApi = async ({ req }) => {
   const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   const date1HourAgo = moment().subtract(1, 'hour');
 
-  const recentPasswordResetAttemptsByIP = await listPasswordResetAttempts(
-    passwordResetAttemptsCollection()
-      .where('ip', '==', ip)
-      .where('dateCreated', '>', date1HourAgo)
-      .limit(authOptions.maxPasswordResetAttemptsPerHour)
-  );
-
-  if (
-    recentPasswordResetAttemptsByIP.length >=
-    authOptions.maxPasswordResetAttemptsPerHour
-  ) {
-    throw new TooManyResetPasswordRequestsError(
-      'You have requested too many password resets. Try again later.'
+  if (process.env.NODE_ENV === 'production') {
+    const recentPasswordResetAttemptsByIP = await listPasswordResetAttempts(
+      passwordResetAttemptsCollection()
+        .where('ip', '==', ip)
+        .where('dateCreated', '>', date1HourAgo)
+        .limit(authOptions.maxPasswordResetAttemptsPerHour)
     );
+
+    if (
+      recentPasswordResetAttemptsByIP.length >=
+      authOptions.maxPasswordResetAttemptsPerHour
+    ) {
+      throw new TooManyResetPasswordRequestsError(
+        'You have requested too many password resets. Try again later.'
+      );
+    }
   }
 
   await createPasswordResetAttempt({

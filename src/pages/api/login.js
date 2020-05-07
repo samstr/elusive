@@ -33,38 +33,42 @@ export const loginApi = async ({ req, res, session }) => {
   const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
   const date1HourAgo = moment().subtract(1, 'hour');
 
-  const recentLoginAttemptsByIP = await listLoginAttempts(
-    loginAttemptsCollection()
-      .where('ip', '==', ip)
-      .where('dateCreated', '>', date1HourAgo)
-      .limit(authOptions.maxLoginAttemptsPerIPPerHour)
-  );
-
-  if (
-    recentLoginAttemptsByIP.length >= authOptions.maxLoginAttemptsPerIPPerHour
-  ) {
-    throw new TooManyLoginAttemptsError(
-      'You have attempted to login too many times. Try again later.'
+  if (process.env.NODE_ENV === 'production') {
+    const recentLoginAttemptsByIP = await listLoginAttempts(
+      loginAttemptsCollection()
+        .where('ip', '==', ip)
+        .where('dateCreated', '>', date1HourAgo)
+        .limit(authOptions.maxLoginAttemptsPerIPPerHour)
     );
+
+    if (
+      recentLoginAttemptsByIP.length >= authOptions.maxLoginAttemptsPerIPPerHour
+    ) {
+      throw new TooManyLoginAttemptsError(
+        'You have attempted to login too many times. Try again later.'
+      );
+    }
   }
 
   const { email, password } = req.body;
 
-  const recentLoginAttemptsByAccount = await listLoginAttempts(
-    loginAttemptsCollection()
-      .where('ip', '==', ip)
-      .where('email', '==', email)
-      .where('dateCreated', '>', date1HourAgo)
-      .limit(authOptions.maxLoginAttemptsPerAccountPerHour)
-  );
-
-  if (
-    recentLoginAttemptsByAccount.length >=
-    authOptions.maxLoginAttemptsPerAccountPerHour
-  ) {
-    throw new TooManyLoginAttemptsError(
-      'You have attempted to login too many times. Try again later.'
+  if (process.env.NODE_ENV === 'production') {
+    const recentLoginAttemptsByAccount = await listLoginAttempts(
+      loginAttemptsCollection()
+        .where('ip', '==', ip)
+        .where('email', '==', email)
+        .where('dateCreated', '>', date1HourAgo)
+        .limit(authOptions.maxLoginAttemptsPerAccountPerHour)
     );
+
+    if (
+      recentLoginAttemptsByAccount.length >=
+      authOptions.maxLoginAttemptsPerAccountPerHour
+    ) {
+      throw new TooManyLoginAttemptsError(
+        'You have attempted to login too many times. Try again later.'
+      );
+    }
   }
 
   await createLoginAttempt({
