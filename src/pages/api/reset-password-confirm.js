@@ -6,7 +6,7 @@ import {
   PasswordResetNotFoundError,
   PasswordResetAlreadyUsedError,
   PasswordResetExpiredError,
-  getPasswordReset,
+  getPasswordResetByID,
   updatePasswordReset,
 } from '../../models/passwordResets';
 import {
@@ -30,7 +30,7 @@ const resetPasswordConfirmApi = async ({ req, res }) => {
     return { errors };
   }
 
-  const passwordReset = await getPasswordReset(passwordResetId);
+  const passwordReset = await getPasswordResetByID(passwordResetId);
 
   if (!passwordReset) {
     throw new PasswordResetNotFoundError('Password reset key not found');

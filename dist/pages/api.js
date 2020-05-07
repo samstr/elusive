@@ -438,7 +438,7 @@ var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
 
         case 6:
           _context.next = 8;
-          return index$1._regeneratorRuntime.awrap(passwordResets.getPasswordReset(passwordResetId));
+          return index$1._regeneratorRuntime.awrap(passwordResets.getPasswordResetByID(passwordResetId));
 
         case 8:
           passwordReset = _context.sent;
