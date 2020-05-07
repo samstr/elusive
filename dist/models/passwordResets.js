@@ -126,6 +126,9 @@ var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, 
             },
             template_id: mailOptions.resetPasswordRequestTemplateId,
             dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
+              subject: 'Reset your Fanned password',
+              preheader: 'Someone recently requested a password change for your Fanned account. If this was you, you can set a new password here',
+              reasonForAction: 'we received a request for a password reset',
               resetPasswordConfirmUrl: "".concat(dynamicTemplateData.baseUrl, "/reset/").concat(passwordResetId)
             })
           }));

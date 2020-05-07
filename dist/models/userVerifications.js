@@ -101,6 +101,7 @@ var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail,
             },
             template_id: mailOptions.verifyEmailTemplateId,
             dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
+              reasonForAction: 'you signed up for a Fanned account',
               verifyEmailUrl: "".concat(dynamicTemplateData.baseUrl, "/verify/").concat(userVerificationId)
             })
           }));
