@@ -195,7 +195,7 @@ var getSession = function getSession(req, reloadSessionUser) {
 
           console.log('REFRESHING ACCESS TOKEN by reloading session user');
           _context.next = 29;
-          return index$1._regeneratorRuntime.awrap(users.getUser(refreshTokenClaims.user.id));
+          return index$1._regeneratorRuntime.awrap(users.getUserByID(refreshTokenClaims.user.id));
 
         case 29:
           user = _context.sent;
