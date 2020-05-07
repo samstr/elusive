@@ -49,10 +49,10 @@ var ElusiveClient = /*#__PURE__*/function () {
         auth: {
           maxLoginAttemptsPerAccountPerHour: 8,
           maxLoginAttemptsPerIPPerHour: 16,
-          maxResetPasswordRequestsPerHour: 4,
+          maxPasswordResetAttemptsPerHour: 4,
           maxRegistrationsPerDay: 5,
           passwordMinLength: 3,
-          resetPasswordExpiryHours: 24,
+          passwordResetExpiryHours: 24,
           saltRounds: 10
         },
         routes: {
@@ -120,10 +120,10 @@ var ElusiveClient = /*#__PURE__*/function () {
         if (auth) {
           var maxLoginAttemptsPerAccountPerHour = auth.maxLoginAttemptsPerAccountPerHour,
               maxLoginAttemptsPerIPPerHour = auth.maxLoginAttemptsPerIPPerHour,
-              maxResetPasswordRequestsPerHour = auth.maxResetPasswordRequestsPerHour,
+              maxPasswordResetAttemptsPerHour = auth.maxPasswordResetAttemptsPerHour,
               maxRegistrationsPerDay = auth.maxRegistrationsPerDay,
               passwordMinLength = auth.passwordMinLength,
-              resetPasswordExpiryHours = auth.resetPasswordExpiryHours,
+              passwordResetExpiryHours = auth.passwordResetExpiryHours,
               saltRounds = auth.saltRounds;
 
           if (maxLoginAttemptsPerAccountPerHour) {
@@ -134,8 +134,8 @@ var ElusiveClient = /*#__PURE__*/function () {
             _this.options.auth.maxLoginAttemptsPerIPPerHour = maxLoginAttemptsPerIPPerHour;
           }
 
-          if (maxResetPasswordRequestsPerHour) {
-            _this.options.auth.maxResetPasswordRequestsPerHour = maxResetPasswordRequestsPerHour;
+          if (maxPasswordResetAttemptsPerHour) {
+            _this.options.auth.maxPasswordResetAttemptsPerHour = maxPasswordResetAttemptsPerHour;
           }
 
           if (maxRegistrationsPerDay) {
@@ -146,8 +146,8 @@ var ElusiveClient = /*#__PURE__*/function () {
             _this.options.auth.passwordMinLength = passwordMinLength;
           }
 
-          if (resetPasswordExpiryHours) {
-            _this.options.auth.resetPasswordExpiryHours = resetPasswordExpiryHours;
+          if (passwordResetExpiryHours) {
+            _this.options.auth.passwordResetExpiryHours = passwordResetExpiryHours;
           }
 
           if (saltRounds) {

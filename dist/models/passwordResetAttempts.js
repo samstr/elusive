@@ -16,37 +16,37 @@ var utils = require('../utils-ca780ba6.js');
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-var COLLECTION = 'loginAttempts';
+var COLLECTION = 'passwordResetAttempts';
 var model = function model(data) {
   return utils.createModel(data);
 };
 
 var _createService = utils.createService(model, COLLECTION),
-    loginAttemptsCollection = _createService.collection,
-    getLoginAttemptByID = _createService.getObjectByID,
-    getLoginAttempt = _createService.getObject,
-    createLoginAttempt = _createService.createObject,
-    updateLoginAttempt = _createService.updateObject,
-    listLoginAttempts = _createService.listObjects;
-var LoginAttemptNotFoundError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(LoginAttemptNotFoundError, _BaseError);
+    passwordResetAttemptsCollection = _createService.collection,
+    getPasswordResetAttemptByID = _createService.getObjectByID,
+    getPasswordResetAttempt = _createService.getObject,
+    createPasswordResetAttempt = _createService.createObject,
+    updatePasswordResetAttempt = _createService.updateObject,
+    listPasswordResetAttempts = _createService.listObjects;
+var PasswordResetAttemptNotFoundError = /*#__PURE__*/function (_BaseError) {
+  FormErrors._inherits(PasswordResetAttemptNotFoundError, _BaseError);
 
-  var _super = _createSuper(LoginAttemptNotFoundError);
+  var _super = _createSuper(PasswordResetAttemptNotFoundError);
 
-  function LoginAttemptNotFoundError() {
-    classCallCheck._classCallCheck(this, LoginAttemptNotFoundError);
+  function PasswordResetAttemptNotFoundError() {
+    classCallCheck._classCallCheck(this, PasswordResetAttemptNotFoundError);
 
     return _super.apply(this, arguments);
   }
 
-  return LoginAttemptNotFoundError;
+  return PasswordResetAttemptNotFoundError;
 }(FormErrors.BaseError);
 
-exports.LoginAttemptNotFoundError = LoginAttemptNotFoundError;
-exports.createLoginAttempt = createLoginAttempt;
-exports.getLoginAttempt = getLoginAttempt;
-exports.getLoginAttemptByID = getLoginAttemptByID;
-exports.listLoginAttempts = listLoginAttempts;
-exports.loginAttemptsCollection = loginAttemptsCollection;
+exports.PasswordResetAttemptNotFoundError = PasswordResetAttemptNotFoundError;
+exports.createPasswordResetAttempt = createPasswordResetAttempt;
+exports.getPasswordResetAttempt = getPasswordResetAttempt;
+exports.getPasswordResetAttemptByID = getPasswordResetAttemptByID;
+exports.listPasswordResetAttempts = listPasswordResetAttempts;
 exports.model = model;
-exports.updateLoginAttempt = updateLoginAttempt;
+exports.passwordResetAttemptsCollection = passwordResetAttemptsCollection;
+exports.updatePasswordResetAttempt = updatePasswordResetAttempt;

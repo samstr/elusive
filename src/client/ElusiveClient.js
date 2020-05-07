@@ -12,10 +12,10 @@ class ElusiveClient {
       auth: {
         maxLoginAttemptsPerAccountPerHour: 8,
         maxLoginAttemptsPerIPPerHour: 16,
-        maxResetPasswordRequestsPerHour: 4,
+        maxPasswordResetAttemptsPerHour: 4,
         maxRegistrationsPerDay: 5,
         passwordMinLength: 3,
-        resetPasswordExpiryHours: 24,
+        passwordResetExpiryHours: 24,
         saltRounds: 10,
       },
       routes: {
@@ -70,10 +70,10 @@ class ElusiveClient {
         const {
           maxLoginAttemptsPerAccountPerHour,
           maxLoginAttemptsPerIPPerHour,
-          maxResetPasswordRequestsPerHour,
+          maxPasswordResetAttemptsPerHour,
           maxRegistrationsPerDay,
           passwordMinLength,
-          resetPasswordExpiryHours,
+          passwordResetExpiryHours,
           saltRounds,
         } = auth;
 
@@ -85,8 +85,8 @@ class ElusiveClient {
           this.options.auth.maxLoginAttemptsPerIPPerHour = maxLoginAttemptsPerIPPerHour;
         }
 
-        if (maxResetPasswordRequestsPerHour) {
-          this.options.auth.maxResetPasswordRequestsPerHour = maxResetPasswordRequestsPerHour;
+        if (maxPasswordResetAttemptsPerHour) {
+          this.options.auth.maxPasswordResetAttemptsPerHour = maxPasswordResetAttemptsPerHour;
         }
 
         if (maxRegistrationsPerDay) {
@@ -97,8 +97,8 @@ class ElusiveClient {
           this.options.auth.passwordMinLength = passwordMinLength;
         }
 
-        if (resetPasswordExpiryHours) {
-          this.options.auth.resetPasswordExpiryHours = resetPasswordExpiryHours;
+        if (passwordResetExpiryHours) {
+          this.options.auth.passwordResetExpiryHours = passwordResetExpiryHours;
         }
 
         if (saltRounds) {

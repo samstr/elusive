@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "1.7.40",
+  "version": "1.7.42",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -14,6 +14,7 @@
     "mail.js",
     "models/index.js",
     "models/loginAttempts.js",
+    "models/passwordResetAttempts.js",
     "models/passwordResets.js",
     "models/users.js",
     "models/userVerifications.js",

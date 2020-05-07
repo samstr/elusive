@@ -40,8 +40,6 @@ export const loginApi = async ({ req, res, session }) => {
       .limit(authOptions.maxLoginAttemptsPerIPPerHour)
   );
 
-  console.log('recentLoginAttemptsByIP', recentLoginAttemptsByIP);
-
   if (
     recentLoginAttemptsByIP.length >= authOptions.maxLoginAttemptsPerIPPerHour
   ) {
@@ -59,8 +57,6 @@ export const loginApi = async ({ req, res, session }) => {
       .where('dateCreated', '>', date1HourAgo)
       .limit(authOptions.maxLoginAttemptsPerAccountPerHour)
   );
-
-  console.log('recentLoginAttemptsByAccount', recentLoginAttemptsByAccount);
 
   if (
     recentLoginAttemptsByAccount.length >=

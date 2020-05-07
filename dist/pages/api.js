@@ -5,29 +5,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-var client = require('../index-26463b7f.js');
+var client = require('../index-832c7a28.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('../utils-0c245d4a.js');
+var utils = require('../utils-5e63d6ba.js');
 require('bcryptjs');
-var resetPasswordConfirm = require('../reset-password-confirm-f317f8c3.js');
+var resetPasswordConfirm = require('../reset-password-confirm-2b278ec6.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-2340470f.js');
-require('../utils-459eee4d.js');
+require('../utils-c66da574.js');
 require('uuid');
-require('../utils-8d461900.js');
+require('../utils-ca780ba6.js');
 var loginAttempts = require('../models/loginAttempts.js');
+var passwordResetAttempts = require('../models/passwordResetAttempts.js');
 var users = require('../models/users.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
 var userVerifications = require('../models/userVerifications.js');
-var utils$3 = require('../utils-815e328d.js');
+var utils$3 = require('../utils-a95a297a.js');
 require('../SessionContext-efd795c9.js');
-var utils$4 = require('../utils-3208ebd5.js');
+var utils$4 = require('../utils-3c5f0d11.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -171,46 +172,44 @@ var loginApi = function loginApi(_ref) {
 
         case 8:
           recentLoginAttemptsByIP = _context.sent;
-          console.log('recentLoginAttemptsByIP', recentLoginAttemptsByIP);
 
           if (!(recentLoginAttemptsByIP.length >= authOptions.maxLoginAttemptsPerIPPerHour)) {
-            _context.next = 12;
+            _context.next = 11;
             break;
           }
 
           throw new utils.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
 
-        case 12:
+        case 11:
           _req$body = req.body, email = _req$body.email, password = _req$body.password;
-          _context.next = 15;
+          _context.next = 14;
           return index$1._regeneratorRuntime.awrap(loginAttempts.listLoginAttempts(loginAttempts.loginAttemptsCollection().where('ip', '==', ip).where('email', '==', email).where('dateCreated', '>', date1HourAgo).limit(authOptions.maxLoginAttemptsPerAccountPerHour)));
 
-        case 15:
+        case 14:
           recentLoginAttemptsByAccount = _context.sent;
-          console.log('recentLoginAttemptsByAccount', recentLoginAttemptsByAccount);
 
           if (!(recentLoginAttemptsByAccount.length >= authOptions.maxLoginAttemptsPerAccountPerHour)) {
-            _context.next = 19;
+            _context.next = 17;
             break;
           }
 
           throw new utils.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
 
-        case 19:
-          _context.next = 21;
+        case 17:
+          _context.next = 19;
           return index$1._regeneratorRuntime.awrap(loginAttempts.createLoginAttempt({
             ip: ip,
             email: email
           }));
 
-        case 21:
+        case 19:
           _loginForm$validate = resetPasswordConfirm.loginForm().validate({
             email: email,
             password: password
           }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
 
           if (!(errors && errors.length)) {
-            _context.next = 24;
+            _context.next = 22;
             break;
           }
 
@@ -218,37 +217,37 @@ var loginApi = function loginApi(_ref) {
             errors: errors
           });
 
-        case 24:
-          _context.next = 26;
+        case 22:
+          _context.next = 24;
           return index$1._regeneratorRuntime.awrap(users.getUser(users.usersCollection().where('email', '==', cleanValues.email)));
 
-        case 26:
+        case 24:
           user = _context.sent;
 
           if (user) {
-            _context.next = 29;
+            _context.next = 27;
             break;
           }
 
           throw new users.UserNotFoundError('Authentication failed');
 
-        case 29:
+        case 27:
           if (user.enabled) {
-            _context.next = 31;
+            _context.next = 29;
             break;
           }
 
           throw new users.UserNotEnabledError('Authentication failed');
 
-        case 31:
+        case 29:
           if (utils.comparePasswordHash(cleanValues.password, user.password)) {
-            _context.next = 33;
+            _context.next = 31;
             break;
           }
 
           throw new utils.AuthenticationFailedError('Authentication failed');
 
-        case 33:
+        case 31:
           claims = tokenOptions.createClaims(user);
           utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), user.id);
           return _context.abrupt("return", {
@@ -256,7 +255,7 @@ var loginApi = function loginApi(_ref) {
             claims: claims
           });
 
-        case 36:
+        case 34:
         case "end":
           return _context.stop();
       }
@@ -519,14 +518,8 @@ resetPasswordConfirmApi.options = {
   allowedMethods: [utils$1.POST]
 };
 
-//  createPasswordReset,
-//  getPasswordResetsByIPSinceDate,
-//  sendPasswordResetRequestEmail,
-//} from '../../models/passwordResets';
-// import { getUserByEmail } from '../../models/users';
-
 var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
-  var req, authOptions, email, _resetPasswordRequest, cleanValues, errors;
+  var req, authOptions, email, ip, date1HourAgo, recentPasswordResetAttemptsByIP, _resetPasswordRequest, cleanValues, errors, user, passwordReset;
 
   return index$1._regeneratorRuntime.async(function resetPasswordRequestApi$(_context) {
     while (1) {
@@ -535,12 +528,35 @@ var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
           req = _ref.req;
           authOptions = index.options.auth;
           email = req.body.email;
+          ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+          date1HourAgo = moment().subtract(1, 'hour');
+          _context.next = 7;
+          return index$1._regeneratorRuntime.awrap(passwordResetAttempts.listPasswordResetAttempts(passwordResetAttempts.passwordResetAttemptsCollection().where('ip', '==', ip).where('dateCreated', '>', date1HourAgo).limit(authOptions.maxPasswordResetAttemptsPerHour)));
+
+        case 7:
+          recentPasswordResetAttemptsByIP = _context.sent;
+
+          if (!(recentPasswordResetAttemptsByIP.length >= authOptions.maxPasswordResetAttemptsPerHour)) {
+            _context.next = 10;
+            break;
+          }
+
+          throw new utils.TooManyResetPasswordRequestsError('You have requested too many password resets. Try again later.');
+
+        case 10:
+          _context.next = 12;
+          return index$1._regeneratorRuntime.awrap(passwordResetAttempts.createPasswordResetAttempt({
+            ip: ip,
+            email: email
+          }));
+
+        case 12:
           _resetPasswordRequest = resetPasswordConfirm.resetPasswordRequestForm().validate({
             email: email
           }), cleanValues = _resetPasswordRequest.cleanValues, errors = _resetPasswordRequest.errors;
 
           if (!(errors && errors.length)) {
-            _context.next = 6;
+            _context.next = 15;
             break;
           }
 
@@ -548,7 +564,30 @@ var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
             errors: errors
           });
 
-        case 6:
+        case 15:
+          _context.next = 17;
+          return index$1._regeneratorRuntime.awrap(users.getUser(users.usersCollection().where('email', '==', cleanValues.email)));
+
+        case 17:
+          user = _context.sent;
+
+          if (!(user && user.enabled)) {
+            _context.next = 24;
+            break;
+          }
+
+          _context.next = 21;
+          return index$1._regeneratorRuntime.awrap(passwordResets.createPasswordReset({
+            userId: user.id,
+            ip: ip
+          }));
+
+        case 21:
+          passwordReset = _context.sent;
+          _context.next = 24;
+          return index$1._regeneratorRuntime.awrap(passwordResets.sendPasswordResetRequestEmail(req, user.email, passwordReset.id));
+
+        case 24:
         case "end":
           return _context.stop();
       }

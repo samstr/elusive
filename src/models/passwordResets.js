@@ -44,30 +44,6 @@ export const passwordResetExpired = (passwordReset) => {
   return dateNow.isAfter(dateExpires);
 };
 
-/* export const getPasswordResetsByIPSinceDate = async (ip, date) => {
-  const { firebase } = Elusive.services;
-  const firestore = firebase.firestore();
-
-  const docs = await firestore
-    .collection(COLLECTION)
-    .where('ip', '==', ip)
-    .where('dateCreated', '>', date)
-    .get();
-
-  const objects = [];
-
-  docs.forEach((doc) => {
-    objects.push(
-      model({
-        id: doc.id,
-        ...doc.data(),
-      })
-    );
-  });
-
-  return objects;
-};
-
 export const sendPasswordResetRequestEmail = async (
   req,
   toEmail,
@@ -91,4 +67,3 @@ export const sendPasswordResetRequestEmail = async (
     },
   });
 };
-*/
