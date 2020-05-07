@@ -2,7 +2,7 @@ import Elusive from '../';
 import { BaseError } from '../errors';
 import { defaultDynamicTemplateData, sendMail } from '../mail';
 import { createModel, createService } from './';
-import { getUser } from './users';
+import { getUserByID } from './users';
 
 const COLLECTION = 'userVerifications';
 
@@ -13,7 +13,7 @@ export const model = (data) => {
   const model = createModel(data);
 
   model.getUser = async (_) => {
-    model.user = await getUser(model.userId);
+    model.user = await getUserByID(model.userId);
   };
 
   return model;

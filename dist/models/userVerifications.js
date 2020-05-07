@@ -34,7 +34,7 @@ var model = function model(data) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return index$1._regeneratorRuntime.awrap(users.getUser(model.userId));
+            return index$1._regeneratorRuntime.awrap(users.getUserByID(model.userId));
 
           case 2:
             model.user = _context.sent;
