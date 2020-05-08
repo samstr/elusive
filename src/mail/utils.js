@@ -22,11 +22,14 @@ export const sendMail = async (message) => {
     },
   };
 
-  if (process.env.NODE_ENV !== 'production') return;
-
-  try {
-    return await sendgrid.send(message);
-  } catch (err) {
-    sentry.captureException(err);
+  if (
+    process.env.NODE_ENV === 'production' ||
+    mailOptions.sendMailOnDevServer
+  ) {
+    try {
+      return await sendgrid.send(message);
+    } catch (err) {
+      sentry.captureException(err);
+    }
   }
 };

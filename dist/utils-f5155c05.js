@@ -1,6 +1,6 @@
 'use strict';
 
-var client = require('./index-76076325.js');
+var client = require('./index-d091022a.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 
@@ -29,32 +29,29 @@ var sendMail = function sendMail(message) {
             }
           });
 
-          if (!(process.env.NODE_ENV !== 'production')) {
-            _context.next = 5;
+          if (!(process.env.NODE_ENV === 'production' || mailOptions.sendMailOnDevServer)) {
+            _context.next = 13;
             break;
           }
 
-          return _context.abrupt("return");
-
-        case 5:
-          _context.prev = 5;
-          _context.next = 8;
+          _context.prev = 4;
+          _context.next = 7;
           return index$1._regeneratorRuntime.awrap(sendgrid.send(message));
 
-        case 8:
+        case 7:
           return _context.abrupt("return", _context.sent);
 
-        case 11:
-          _context.prev = 11;
-          _context.t0 = _context["catch"](5);
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](4);
           sentry.captureException(_context.t0);
 
-        case 14:
+        case 13:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[5, 11]], Promise);
+  }, null, null, [[4, 10]], Promise);
 };
 
 exports.defaultDynamicTemplateData = defaultDynamicTemplateData;

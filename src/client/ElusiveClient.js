@@ -22,6 +22,7 @@ class ElusiveClient {
         fromEmail: 'no-reply@example.com',
         fromName: 'Example',
         resetPasswordRequestTemplateID: null,
+        sendMailOnDevServer: false,
         verifyEmailTemplateID: null,
       },
       sessions: {
@@ -106,6 +107,7 @@ class ElusiveClient {
           fromEmail,
           fromName,
           resetPasswordRequestTemplateID,
+          sendMailOnDevServer,
           verifyEmailTemplateID,
         } = mail;
 
@@ -119,6 +121,10 @@ class ElusiveClient {
 
         if (resetPasswordRequestTemplateID) {
           this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
+        }
+
+        if (sendMailOnDevServer) {
+          this.options.mail.sendMailOnDevServer = sendMailOnDevServer;
         }
 
         if (verifyEmailTemplateID) {

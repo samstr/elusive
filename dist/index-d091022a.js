@@ -59,6 +59,7 @@ var ElusiveClient = /*#__PURE__*/function () {
           fromEmail: 'no-reply@example.com',
           fromName: 'Example',
           resetPasswordRequestTemplateID: null,
+          sendMailOnDevServer: false,
           verifyEmailTemplateID: null
         },
         sessions: {
@@ -147,6 +148,7 @@ var ElusiveClient = /*#__PURE__*/function () {
           var fromEmail = mail.fromEmail,
               fromName = mail.fromName,
               resetPasswordRequestTemplateID = mail.resetPasswordRequestTemplateID,
+              sendMailOnDevServer = mail.sendMailOnDevServer,
               verifyEmailTemplateID = mail.verifyEmailTemplateID;
 
           if (fromEmail) {
@@ -159,6 +161,10 @@ var ElusiveClient = /*#__PURE__*/function () {
 
           if (resetPasswordRequestTemplateID) {
             _this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
+          }
+
+          if (sendMailOnDevServer) {
+            _this.options.mail.sendMailOnDevServer = sendMailOnDevServer;
           }
 
           if (verifyEmailTemplateID) {
