@@ -1,2 +1,32 @@
-import { loginRouteWithNext } from './utils';
-export { loginRouteWithNext };
+import {
+  apiLoginRoute,
+  apiLogoutRoute,
+  apiRegisterRoute,
+  apiResetPasswordConfirmRoute,
+  apiResetPasswordRequestRoute,
+  apiSessionRoute,
+  indexRoute,
+  loginRoute,
+  loginRouteWithNext,
+  logoutRoute,
+  registerRoute,
+  resetPasswordConfirmRoute,
+  resetPasswordRequestRoute,
+  verifyEmailRoute,
+} from './utils';
+export {
+  apiLoginRoute,
+  apiLogoutRoute,
+  apiRegisterRoute,
+  apiResetPasswordConfirmRoute,
+  apiResetPasswordRequestRoute,
+  apiSessionRoute,
+  indexRoute,
+  loginRoute,
+  loginRouteWithNext,
+  logoutRoute,
+  registerRoute,
+  resetPasswordConfirmRoute,
+  resetPasswordRequestRoute,
+  verifyEmailRoute,
+};

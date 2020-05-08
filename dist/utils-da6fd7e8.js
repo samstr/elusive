@@ -1,6 +1,6 @@
 'use strict';
 
-var client = require('./index-7c1a0ac8.js');
+var client = require('./index-76076325.js');
 var index = require('./index.js');
 var index$1 = require('./index-2340470f.js');
 

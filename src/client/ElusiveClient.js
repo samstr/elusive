@@ -18,11 +18,6 @@ class ElusiveClient {
         passwordResetExpiryHours: 24,
         saltRounds: 10,
       },
-      routes: {
-        apiSession: () => '/api/session',
-        login: () => '/login',
-        logout: () => '/logout',
-      },
       mail: {
         fromEmail: 'no-reply@example.com',
         fromName: 'Example',
@@ -64,7 +59,7 @@ class ElusiveClient {
     }
 
     if (options) {
-      const { auth, routes, mail, sessions, tokens } = options;
+      const { auth, mail, sessions, tokens } = options;
 
       if (auth) {
         const {
@@ -103,22 +98,6 @@ class ElusiveClient {
 
         if (saltRounds) {
           this.options.auth.saltRounds = saltRounds;
-        }
-      }
-
-      if (routes) {
-        const { apiSession, login, logout } = routes;
-
-        if (apiSession) {
-          this.options.routes.apiSession = apiSession;
-        }
-
-        if (login) {
-          this.options.routes.login = login;
-        }
-
-        if (logout) {
-          this.options.routes.logout = logout;
         }
       }
 

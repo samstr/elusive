@@ -55,17 +55,6 @@ var ElusiveClient = /*#__PURE__*/function () {
           passwordResetExpiryHours: 24,
           saltRounds: 10
         },
-        routes: {
-          apiSession: function apiSession() {
-            return '/api/session';
-          },
-          login: function login() {
-            return '/login';
-          },
-          logout: function logout() {
-            return '/logout';
-          }
-        },
         mail: {
           fromEmail: 'no-reply@example.com',
           fromName: 'Example',
@@ -112,7 +101,6 @@ var ElusiveClient = /*#__PURE__*/function () {
 
       if (options) {
         var auth = options.auth,
-            routes = options.routes,
             mail = options.mail,
             sessions = options.sessions,
             tokens = options.tokens;
@@ -152,24 +140,6 @@ var ElusiveClient = /*#__PURE__*/function () {
 
           if (saltRounds) {
             _this.options.auth.saltRounds = saltRounds;
-          }
-        }
-
-        if (routes) {
-          var apiSession = routes.apiSession,
-              login = routes.login,
-              logout = routes.logout;
-
-          if (apiSession) {
-            _this.options.routes.apiSession = apiSession;
-          }
-
-          if (login) {
-            _this.options.routes.login = login;
-          }
-
-          if (logout) {
-            _this.options.routes.logout = logout;
           }
         }
 

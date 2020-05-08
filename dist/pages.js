@@ -5,8 +5,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-7c1a0ac8.js');
-var index = require('./index.js');
+var client = require('./index-76076325.js');
+require('./index.js');
 require('./FormErrors-1539c4dc.js');
 var React = require('react');
 var React__default = _interopDefault(React);
@@ -18,7 +18,7 @@ require('uuid');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var utils$1 = require('./utils-ff83caac.js');
+var utils$1 = require('./utils-631b27d2.js');
 var SessionContext = require('./SessionContext-efd795c9.js');
 require('jsonwebtoken');
 
@@ -31,7 +31,6 @@ var useData = function useData() {
       setData = _useState[1];
 
   var router$1 = router.useRouter();
-  var routeOptions = index.options.routes;
 
   var handleError = function handleError(err) {
     if (axios__default.isCancel(err)) return;
@@ -40,7 +39,7 @@ var useData = function useData() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== routeOptions.login()) {
+      if (pathname !== utils$1.loginRoute()) {
         router$1.replace(utils$1.loginRouteWithNext());
       }
 
@@ -140,7 +139,6 @@ var useSession = function useSession() {
       setSession = _useState[1];
 
   var router$1 = router.useRouter();
-  var routeOptions = index.options.routes;
 
   var handleError = function handleError(err) {
     if (axios__default.isCancel(err)) return;
@@ -149,7 +147,7 @@ var useSession = function useSession() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== routeOptions.login()) {
+      if (pathname !== utils$1.loginRoute()) {
         router$1.replace(utils$1.loginRouteWithNext());
       }
 
