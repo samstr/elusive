@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { HTTP_STATUS_UNAUTHORIZED } from '../http';
-import { loginRoute, loginRouteWithNext } from '../routes';
+import { apiSessionRoute, loginRoute, loginRouteWithNext } from '../routes';
 import { useSessionContext } from '../sessions';
 
 const useSession = () => {
@@ -37,7 +37,7 @@ const useSession = () => {
 
     const fetch = async () => {
       try {
-        const response = await axios(routeOptions.apiSession(), {
+        const response = await axios(apiSessionRoute(), {
           cancelToken: new CancelToken((c) => {
             cancelRequest = c;
           }),
