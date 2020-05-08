@@ -29,6 +29,7 @@ export const sendMail = async (message) => {
     try {
       return await sendgrid.send(message);
     } catch (err) {
+      console.log(err);
       sentry.captureException(err);
     }
   }

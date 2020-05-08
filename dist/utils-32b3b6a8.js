@@ -30,7 +30,7 @@ var sendMail = function sendMail(message) {
           });
 
           if (!(process.env.NODE_ENV === 'production' || mailOptions.sendMailOnDevServer)) {
-            _context.next = 13;
+            _context.next = 14;
             break;
           }
 
@@ -44,9 +44,10 @@ var sendMail = function sendMail(message) {
         case 10:
           _context.prev = 10;
           _context.t0 = _context["catch"](4);
+          console.log(_context.t0);
           sentry.captureException(_context.t0);
 
-        case 13:
+        case 14:
         case "end":
           return _context.stop();
       }
