@@ -169,7 +169,7 @@ var useSession = function useSession() {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return index$1._regeneratorRuntime.awrap(axios__default(routeOptions.apiSession(), {
+              return index$1._regeneratorRuntime.awrap(axios__default(utils$1.apiSessionRoute(), {
                 cancelToken: new axios.CancelToken(function (c) {
                   cancelRequest = c;
                 })

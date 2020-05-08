@@ -116,8 +116,7 @@ var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, 
         case 0:
           mailOptions = index.options.mail;
           dynamicTemplateData = utils.defaultDynamicTemplateData(req);
-          toEmail = 'samstr@gmail.com';
-          _context2.next = 5;
+          _context2.next = 4;
           return index$1._regeneratorRuntime.awrap(utils.sendMail({
             to: toEmail,
             template_id: mailOptions.resetPasswordRequestTemplateID,
@@ -129,10 +128,10 @@ var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, 
             })
           }));
 
-        case 5:
+        case 4:
           return _context2.abrupt("return", _context2.sent);
 
-        case 6:
+        case 5:
         case "end":
           return _context2.stop();
       }

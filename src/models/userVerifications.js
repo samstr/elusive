@@ -39,8 +39,6 @@ export const sendUserVerificationEmail = async (
   const { mail: mailOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
 
-  toEmail = 'samstr@gmail.com';
-
   return await sendMail({
     to: toEmail,
     template_id: mailOptions.verifyEmailTemplateID,
