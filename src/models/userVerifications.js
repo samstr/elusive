@@ -36,7 +36,7 @@ export const sendUserVerificationEmail = async (
   toEmail,
   userVerificationId
 ) => {
-  const { mail: mailOptions } = Elusive.options;
+  const { mail: mailOptions, site: siteOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
 
   return await sendMail({
@@ -45,8 +45,8 @@ export const sendUserVerificationEmail = async (
     dynamic_template_data: {
       ...dynamicTemplateData,
       subject: 'Please verify your email address',
-      preheader: 'Verify your email address on Fanned by clicking here',
-      reasonForEmail: 'you signed up for a Fanned account',
+      preheader: `Verify your email address on ${siteOptions.name} by clicking here`,
+      reasonForEmail: `you signed up for a ${siteOptions.name} account`,
       verifyEmailURL: `${dynamicTemplateData.baseURL}/verify/${userVerificationId}`,
     },
   });

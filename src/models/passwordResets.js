@@ -49,7 +49,7 @@ export const sendPasswordResetRequestEmail = async (
   toEmail,
   passwordResetID
 ) => {
-  const { mail: mailOptions } = Elusive.options;
+  const { mail: mailOptions, site: siteOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
 
   return await sendMail({
@@ -57,9 +57,9 @@ export const sendPasswordResetRequestEmail = async (
     template_id: mailOptions.resetPasswordRequestTemplateID,
     dynamic_template_data: {
       ...dynamicTemplateData,
-      subject: 'Reset your Fanned password',
+      subject: `Reset your ${siteOptions.name} password`,
       preheader:
-        'Someone recently requested a password change for your Fanned account. If this was you, you can set a new password here',
+        'Someone recently requested a password change for your account. If this was you, you can set a new password here',
       reasonForEmail: 'we received a request for a password reset',
       resetPasswordConfirmURL: `${dynamicTemplateData.baseURL}/reset/${passwordResetID}`,
     },

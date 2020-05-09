@@ -31,6 +31,9 @@ class ElusiveClient {
         refreshTokenCookieName: 'rt',
         userIdCookieName: 'uid',
       },
+      site: {
+        name: 'Site name',
+      },
       tokens: {
         accessTokenExpiryMins: 10,
         createClaims: null,
@@ -60,7 +63,7 @@ class ElusiveClient {
     }
 
     if (options) {
-      const { auth, mail, sessions, tokens } = options;
+      const { auth, mail, sessions, site, tokens } = options;
 
       if (auth) {
         const {
@@ -154,6 +157,14 @@ class ElusiveClient {
 
         if (userIdCookieName) {
           this.options.sessions.userIdCookieName = userIdCookieName;
+        }
+      }
+
+      if (site) {
+        const { name } = site;
+
+        if (name) {
+          this.options.site.name = name;
         }
       }
 
