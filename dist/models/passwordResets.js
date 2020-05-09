@@ -5,16 +5,16 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-d091022a.js');
+var client = require('../index-44fecfcf.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
 var index$1 = require('../index-2340470f.js');
-var utils = require('../utils-32b3b6a8.js');
+var utils = require('../utils-8766c95d.js');
 require('uuid');
-var utils$1 = require('../utils-a7fb730a.js');
+var utils$1 = require('../utils-f4788b10.js');
 var users = require('./users.js');
 var moment = _interopDefault(require('moment'));
 
@@ -109,20 +109,21 @@ var passwordResetExpired = function passwordResetExpired(passwordReset) {
   return dateNow.isAfter(dateExpires);
 };
 var sendPasswordResetRequestEmail = function sendPasswordResetRequestEmail(req, toEmail, passwordResetID) {
-  var mailOptions, dynamicTemplateData;
+  var _Elusive$options, mailOptions, siteOptions, dynamicTemplateData;
+
   return index$1._regeneratorRuntime.async(function sendPasswordResetRequestEmail$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          mailOptions = index.options.mail;
+          _Elusive$options = index.options, mailOptions = _Elusive$options.mail, siteOptions = _Elusive$options.site;
           dynamicTemplateData = utils.defaultDynamicTemplateData(req);
           _context2.next = 4;
           return index$1._regeneratorRuntime.awrap(utils.sendMail({
             to: toEmail,
             template_id: mailOptions.resetPasswordRequestTemplateID,
             dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
-              subject: 'Reset your Fanned password',
-              preheader: 'Someone recently requested a password change for your Fanned account. If this was you, you can set a new password here',
+              subject: "Reset your ".concat(siteOptions.name, " password"),
+              preheader: 'Someone recently requested a password change for your account. If this was you, you can set a new password here',
               reasonForEmail: 'we received a request for a password reset',
               resetPasswordConfirmURL: "".concat(dynamicTemplateData.baseURL, "/reset/").concat(passwordResetID)
             })

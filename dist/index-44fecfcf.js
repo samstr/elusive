@@ -69,6 +69,9 @@ var ElusiveClient = /*#__PURE__*/function () {
           refreshTokenCookieName: 'rt',
           userIdCookieName: 'uid'
         },
+        site: {
+          name: 'Site name'
+        },
         tokens: {
           accessTokenExpiryMins: 10,
           createClaims: null,
@@ -104,6 +107,7 @@ var ElusiveClient = /*#__PURE__*/function () {
         var auth = options.auth,
             mail = options.mail,
             sessions = options.sessions,
+            site = options.site,
             tokens = options.tokens;
 
         if (auth) {
@@ -192,6 +196,14 @@ var ElusiveClient = /*#__PURE__*/function () {
 
           if (userIdCookieName) {
             _this.options.sessions.userIdCookieName = userIdCookieName;
+          }
+        }
+
+        if (site) {
+          var name = site.name;
+
+          if (name) {
+            _this.options.site.name = name;
           }
         }
 
