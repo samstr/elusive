@@ -30,12 +30,10 @@ const registerApi = async ({ req, res, session }) => {
     throw new AlreadyAuthenticatedError('You are already logged in');
   }
 
-  const { email, password, termsAgreed } = req.body;
+  const { email } = req.body;
 
   const { cleanValues, errors } = registerForm().validate({
     email,
-    password,
-    termsAgreed,
   });
 
   if (errors && errors.length) {
@@ -64,27 +62,27 @@ const registerApi = async ({ req, res, session }) => {
     usersCollection().where('email', '==', cleanValues.email)
   );
 
-  if (user) {
+  if (user && user.password) {
     throw new UserAlreadyExistsError('User already exists');
   }
 
-  user = await createUser({
-    email: cleanValues.email,
-    password: hashPassword(cleanValues.password),
-    imageUrl: '',
-    enabled: true,
-    termsAgreed,
-    registrationIP: ip,
-    verifications: {
-      email: false,
-      phone: false,
-    },
-  });
+  if (!user) {
+    user = await createUser({
+      email: cleanValues.email,
+      imageUrl: '', // TODO: set a default image from public/static
+      enabled: true,
+      registrationIP: ip,
+      verifications: {
+        email: false,
+        phone: false,
+      },
+    });
 
-  const userVerification = await createUserVerification({
-    userId: user.id,
-    type: TYPE_EMAIL,
-  });
+    // const userVerification = await createUserVerification({
+    //  userId: user.id,
+    //  type: TYPE_EMAIL,
+    // });
+  }
 
   const claims = tokenOptions.createClaims(user);
 
