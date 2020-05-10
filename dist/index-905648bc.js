@@ -47,7 +47,6 @@ var ElusiveClient = /*#__PURE__*/function () {
       };
       _this.options = {
         auth: {
-          defaultDisplayName: 'User',
           maxLoginAttemptsPerAccountPerHour: 8,
           maxLoginAttemptsPerIPPerHour: 16,
           maxPasswordResetAttemptsPerHour: 4,

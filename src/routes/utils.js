@@ -8,10 +8,7 @@ export const resetPasswordConfirmRoute = (id) => ({
   href: '/reset/[id]',
   asPath: `/reset/${id}`,
 });
-export const verifyEmailRoute = (id) => ({
-  href: '/verify/[id]',
-  asPath: `/verify/${id}`,
-});
+export const onboardingRoute = () => '/welcome';
 
 export const loginRouteWithNext = () => {
   const { pathname, search } = window.location;
@@ -26,9 +23,9 @@ export const loginRouteWithNext = () => {
 };
 
 // API routes
-export const apiSessionRoute = () => '/api/session';
-export const apiRegisterRoute = () => '/api/register';
-export const apiLoginRoute = () => '/api/login';
-export const apiLogoutRoute = () => '/api/logout';
-export const apiResetPasswordRequestRoute = () => '/api/reset-password-request';
-export const apiResetPasswordConfirmRoute = () => '/api/reset-password-confirm';
+export const sessionAPIRoute = () => '/api/session';
+export const registerAPIRoute = () => '/api/register';
+export const loginAPIRoute = () => '/api/login';
+export const logoutAPIRoute = () => '/api/logout';
+export const resetPasswordRequestAPIRoute = () => '/api/reset-password-request';
+export const resetPasswordConfirmAPIRoute = () => '/api/reset-password-confirm';

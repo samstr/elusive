@@ -22,11 +22,8 @@ var resetPasswordConfirmRoute = function resetPasswordConfirmRoute(id) {
     asPath: "/reset/".concat(id)
   };
 };
-var verifyEmailRoute = function verifyEmailRoute(id) {
-  return {
-    href: '/verify/[id]',
-    asPath: "/verify/".concat(id)
-  };
+var onboardingRoute = function onboardingRoute() {
+  return '/welcome';
 };
 var loginRouteWithNext = function loginRouteWithNext() {
   var _window$location = window.location,
@@ -42,36 +39,36 @@ var loginRouteWithNext = function loginRouteWithNext() {
   return href;
 }; // API routes
 
-var apiSessionRoute = function apiSessionRoute() {
+var sessionAPIRoute = function sessionAPIRoute() {
   return '/api/session';
 };
-var apiRegisterRoute = function apiRegisterRoute() {
+var registerAPIRoute = function registerAPIRoute() {
   return '/api/register';
 };
-var apiLoginRoute = function apiLoginRoute() {
+var loginAPIRoute = function loginAPIRoute() {
   return '/api/login';
 };
-var apiLogoutRoute = function apiLogoutRoute() {
+var logoutAPIRoute = function logoutAPIRoute() {
   return '/api/logout';
 };
-var apiResetPasswordRequestRoute = function apiResetPasswordRequestRoute() {
+var resetPasswordRequestAPIRoute = function resetPasswordRequestAPIRoute() {
   return '/api/reset-password-request';
 };
-var apiResetPasswordConfirmRoute = function apiResetPasswordConfirmRoute() {
+var resetPasswordConfirmAPIRoute = function resetPasswordConfirmAPIRoute() {
   return '/api/reset-password-confirm';
 };
 
-exports.apiLoginRoute = apiLoginRoute;
-exports.apiLogoutRoute = apiLogoutRoute;
-exports.apiRegisterRoute = apiRegisterRoute;
-exports.apiResetPasswordConfirmRoute = apiResetPasswordConfirmRoute;
-exports.apiResetPasswordRequestRoute = apiResetPasswordRequestRoute;
-exports.apiSessionRoute = apiSessionRoute;
 exports.indexRoute = indexRoute;
+exports.loginAPIRoute = loginAPIRoute;
 exports.loginRoute = loginRoute;
 exports.loginRouteWithNext = loginRouteWithNext;
+exports.logoutAPIRoute = logoutAPIRoute;
 exports.logoutRoute = logoutRoute;
+exports.onboardingRoute = onboardingRoute;
+exports.registerAPIRoute = registerAPIRoute;
 exports.registerRoute = registerRoute;
+exports.resetPasswordConfirmAPIRoute = resetPasswordConfirmAPIRoute;
 exports.resetPasswordConfirmRoute = resetPasswordConfirmRoute;
+exports.resetPasswordRequestAPIRoute = resetPasswordRequestAPIRoute;
 exports.resetPasswordRequestRoute = resetPasswordRequestRoute;
-exports.verifyEmailRoute = verifyEmailRoute;
+exports.sessionAPIRoute = sessionAPIRoute;

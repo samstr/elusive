@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-37c59d88.js');
+var client = require('./index-905648bc.js');
 require('./index.js');
 require('./FormErrors-1539c4dc.js');
 var React = require('react');
@@ -18,7 +18,7 @@ require('uuid');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var utils$1 = require('./utils-631b27d2.js');
+var utils$1 = require('./utils-88e48cad.js');
 var SessionContext = require('./SessionContext-efd795c9.js');
 require('jsonwebtoken');
 
@@ -161,7 +161,7 @@ var useSession = function useSession() {
     var cancelRequest;
 
     var fetch = function fetch() {
-      var response, _session;
+      var _session$claims, _session$claims$user, response, _session;
 
       return index$1._regeneratorRuntime.async(function fetch$(_context) {
         while (1) {
@@ -169,7 +169,7 @@ var useSession = function useSession() {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return index$1._regeneratorRuntime.awrap(axios__default(utils$1.apiSessionRoute(), {
+              return index$1._regeneratorRuntime.awrap(axios__default(utils$1.sessionAPIRoute(), {
                 cancelToken: new axios.CancelToken(function (c) {
                   cancelRequest = c;
                 })
@@ -180,23 +180,33 @@ var useSession = function useSession() {
               cancelRequest = null;
               _session = _objectSpread({}, response.data, {
                 _ready: true
-              });
+              }); // if user still needs onboarding
+
+              if (!((_session === null || _session === void 0 ? void 0 : _session.isAuthenticated) && (_session === null || _session === void 0 ? void 0 : (_session$claims = _session.claims) === null || _session$claims === void 0 ? void 0 : (_session$claims$user = _session$claims.user) === null || _session$claims$user === void 0 ? void 0 : _session$claims$user.needsPassword))) {
+                _context.next = 9;
+                break;
+              }
+
+              router$1.replace(utils$1.onboardingRoute());
+              return _context.abrupt("return");
+
+            case 9:
               setSession(_session);
               setSessionContext(_session);
-              _context.next = 13;
+              _context.next = 16;
               break;
 
-            case 10:
-              _context.prev = 10;
+            case 13:
+              _context.prev = 13;
               _context.t0 = _context["catch"](0);
               return _context.abrupt("return", handleError(_context.t0));
 
-            case 13:
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, null, null, [[0, 10]], Promise);
+      }, null, null, [[0, 13]], Promise);
     };
 
     fetch();

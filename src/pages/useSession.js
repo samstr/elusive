@@ -3,7 +3,12 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { HTTP_STATUS_UNAUTHORIZED } from '../http';
-import { apiSessionRoute, loginRoute, loginRouteWithNext } from '../routes';
+import {
+  loginRoute,
+  loginRouteWithNext,
+  onboardingRoute,
+  sessionAPIRoute,
+} from '../routes';
 import { useSessionContext } from '../sessions';
 
 const useSession = () => {
@@ -37,7 +42,7 @@ const useSession = () => {
 
     const fetch = async () => {
       try {
-        const response = await axios(apiSessionRoute(), {
+        const response = await axios(sessionAPIRoute(), {
           cancelToken: new CancelToken((c) => {
             cancelRequest = c;
           }),
@@ -48,6 +53,15 @@ const useSession = () => {
           ...response.data,
           _ready: true,
         };
+
+        // if user still needs onboarding
+        if (
+          _session?.isAuthenticated &&
+          _session?.claims?.user?.needsPassword
+        ) {
+          router.replace(onboardingRoute());
+          return;
+        }
 
         setSession(_session);
         setSessionContext(_session);

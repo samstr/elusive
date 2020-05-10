@@ -5,30 +5,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-var client = require('../index-37c59d88.js');
+var client = require('../index-905648bc.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('../utils-2966bd10.js');
+var utils = require('../utils-7e8cb237.js');
 require('bcryptjs');
-var resetPasswordConfirm = require('../reset-password-confirm-25c9160a.js');
+var resetPasswordConfirm = require('../reset-password-confirm-942bd2d7.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-2340470f.js');
-require('../utils-97f4e668.js');
+require('../utils-b8aefd19.js');
 require('uuid');
-require('../utils-a7c6b530.js');
+require('../utils-3fbf90f8.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var passwordResetAttempts = require('../models/passwordResetAttempts.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
-var utils$3 = require('../utils-ae5fb9e6.js');
+var utils$3 = require('../utils-9cbd9924.js');
 require('../SessionContext-efd795c9.js');
-var utils$4 = require('../utils-8488b29d.js');
+var utils$4 = require('../utils-c61a436b.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -399,11 +399,8 @@ var registerApi = function registerApi(_ref) {
             email: cleanValues.email,
             enabled: true,
             registrationIP: ip,
-            imageUrl: '',
-            // TODO: set a default image from public/static
             verifications: {
-              email: false,
-              phone: false
+              email: false
             }
           }));
 

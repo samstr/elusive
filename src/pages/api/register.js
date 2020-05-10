@@ -72,10 +72,8 @@ const registerApi = async ({ req, res, session }) => {
       email: cleanValues.email,
       enabled: true,
       registrationIP: ip,
-      imageUrl: '', // TODO: set a default image from public/static
       verifications: {
         email: false,
-        phone: false,
       },
     });
   }
