@@ -3,16 +3,16 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-44fecfcf.js');
+var client = require('../index-37c59d88.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
 var index$1 = require('../index-2340470f.js');
-var utils = require('../utils-8766c95d.js');
+var utils = require('../utils-97f4e668.js');
 require('uuid');
-var utils$1 = require('../utils-f4788b10.js');
+var utils$1 = require('../utils-a7c6b530.js');
 var users = require('./users.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -22,9 +22,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-var COLLECTION = 'userVerifications';
-var TYPE_EMAIL = 'email';
-var TYPE_PHONE = 'phone';
+var COLLECTION = 'magicLogins';
 var model = function model(data) {
   var model = utils$1.createModel(data);
 
@@ -51,42 +49,42 @@ var model = function model(data) {
 };
 
 var _createService = utils$1.createService(model, COLLECTION),
-    userVerificationsCollection = _createService.collection,
-    getUserVerificationByID = _createService.getObjectByID,
-    getUserVerification = _createService.getObject,
-    createUserVerification = _createService.createObject,
-    updateUserVerification = _createService.updateObject,
-    listUserVerifications = _createService.listObjects;
-var UserVerificationAlreadyVerifiedError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(UserVerificationAlreadyVerifiedError, _BaseError);
+    magicLoginsCollection = _createService.collection,
+    getMagicLoginByID = _createService.getObjectByID,
+    getMagicLogin = _createService.getObject,
+    createMagicLogin = _createService.createObject,
+    updateMagicLogin = _createService.updateObject,
+    listMagicLogins = _createService.listObjects;
+var MagicLoginAlreadyUsedError = /*#__PURE__*/function (_BaseError) {
+  FormErrors._inherits(MagicLoginAlreadyUsedError, _BaseError);
 
-  var _super = _createSuper(UserVerificationAlreadyVerifiedError);
+  var _super = _createSuper(MagicLoginAlreadyUsedError);
 
-  function UserVerificationAlreadyVerifiedError() {
-    classCallCheck._classCallCheck(this, UserVerificationAlreadyVerifiedError);
+  function MagicLoginAlreadyUsedError() {
+    classCallCheck._classCallCheck(this, MagicLoginAlreadyUsedError);
 
     return _super.apply(this, arguments);
   }
 
-  return UserVerificationAlreadyVerifiedError;
+  return MagicLoginAlreadyUsedError;
 }(FormErrors.BaseError);
-var UserVerificationNotFoundError = /*#__PURE__*/function (_BaseError2) {
-  FormErrors._inherits(UserVerificationNotFoundError, _BaseError2);
+var MagicLoginNotFoundError = /*#__PURE__*/function (_BaseError2) {
+  FormErrors._inherits(MagicLoginNotFoundError, _BaseError2);
 
-  var _super2 = _createSuper(UserVerificationNotFoundError);
+  var _super2 = _createSuper(MagicLoginNotFoundError);
 
-  function UserVerificationNotFoundError() {
-    classCallCheck._classCallCheck(this, UserVerificationNotFoundError);
+  function MagicLoginNotFoundError() {
+    classCallCheck._classCallCheck(this, MagicLoginNotFoundError);
 
     return _super2.apply(this, arguments);
   }
 
-  return UserVerificationNotFoundError;
+  return MagicLoginNotFoundError;
 }(FormErrors.BaseError);
-var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail, userVerificationId) {
+var sendMagicSignUpEmail = function sendMagicSignUpEmail(req, toEmail, magicLoginID) {
   var _Elusive$options, mailOptions, siteOptions, dynamicTemplateData;
 
-  return index$1._regeneratorRuntime.async(function sendUserVerificationEmail$(_context2) {
+  return index$1._regeneratorRuntime.async(function sendMagicSignUpEmail$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
@@ -95,12 +93,12 @@ var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail,
           _context2.next = 4;
           return index$1._regeneratorRuntime.awrap(utils.sendMail({
             to: toEmail,
-            template_id: mailOptions.verifyEmailTemplateID,
+            template_id: mailOptions.magicSignUpTemplateID,
             dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
-              subject: 'Please verify your email address',
-              preheader: "Verify your email address on ".concat(siteOptions.name, " by clicking here"),
+              subject: "Confirm your ".concat(siteOptions.name, " account"),
+              preheader: "Welcome to ".concat(siteOptions.name, ". Thank you for confirming your email address. Click here to create your account. "),
               reasonForEmail: "you signed up for a ".concat(siteOptions.name, " account"),
-              verifyEmailURL: "".concat(dynamicTemplateData.baseURL, "/verify/").concat(userVerificationId)
+              magicLoginURL: "".concat(dynamicTemplateData.baseURL, "/login/").concat(magicLoginID)
             })
           }));
 
@@ -115,15 +113,13 @@ var sendUserVerificationEmail = function sendUserVerificationEmail(req, toEmail,
   }, null, null, null, Promise);
 };
 
-exports.TYPE_EMAIL = TYPE_EMAIL;
-exports.TYPE_PHONE = TYPE_PHONE;
-exports.UserVerificationAlreadyVerifiedError = UserVerificationAlreadyVerifiedError;
-exports.UserVerificationNotFoundError = UserVerificationNotFoundError;
-exports.createUserVerification = createUserVerification;
-exports.getUserVerification = getUserVerification;
-exports.getUserVerificationByID = getUserVerificationByID;
-exports.listUserVerifications = listUserVerifications;
+exports.MagicLoginAlreadyUsedError = MagicLoginAlreadyUsedError;
+exports.MagicLoginNotFoundError = MagicLoginNotFoundError;
+exports.createMagicLogin = createMagicLogin;
+exports.getMagicLogin = getMagicLogin;
+exports.getMagicLoginByID = getMagicLoginByID;
+exports.listMagicLogins = listMagicLogins;
+exports.magicLoginsCollection = magicLoginsCollection;
 exports.model = model;
-exports.sendUserVerificationEmail = sendUserVerificationEmail;
-exports.updateUserVerification = updateUserVerification;
-exports.userVerificationsCollection = userVerificationsCollection;
+exports.sendMagicSignUpEmail = sendMagicSignUpEmail;
+exports.updateMagicLogin = updateMagicLogin;

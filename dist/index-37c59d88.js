@@ -47,6 +47,7 @@ var ElusiveClient = /*#__PURE__*/function () {
       };
       _this.options = {
         auth: {
+          defaultDisplayName: 'User',
           maxLoginAttemptsPerAccountPerHour: 8,
           maxLoginAttemptsPerIPPerHour: 16,
           maxPasswordResetAttemptsPerHour: 4,
@@ -58,9 +59,10 @@ var ElusiveClient = /*#__PURE__*/function () {
         mail: {
           fromEmail: 'no-reply@example.com',
           fromName: 'Example',
+          magicLoginTemplateID: null,
+          magicSignUpTemplateID: null,
           resetPasswordRequestTemplateID: null,
-          sendMailOnDevServer: false,
-          verifyEmailTemplateID: null
+          sendMailOnDevServer: false
         },
         sessions: {
           accessTokenCookieName: 'at',
@@ -151,9 +153,10 @@ var ElusiveClient = /*#__PURE__*/function () {
         if (mail) {
           var fromEmail = mail.fromEmail,
               fromName = mail.fromName,
+              magicLoginTemplateID = mail.magicLoginTemplateID,
+              magicSignUpTemplateID = mail.magicSignUpTemplateID,
               resetPasswordRequestTemplateID = mail.resetPasswordRequestTemplateID,
-              sendMailOnDevServer = mail.sendMailOnDevServer,
-              verifyEmailTemplateID = mail.verifyEmailTemplateID;
+              sendMailOnDevServer = mail.sendMailOnDevServer;
 
           if (fromEmail) {
             _this.options.mail.fromEmail = fromEmail;
@@ -163,16 +166,20 @@ var ElusiveClient = /*#__PURE__*/function () {
             _this.options.mail.fromName = fromName;
           }
 
+          if (magicLoginTemplateID) {
+            _this.options.mail.magicLoginTemplateID = magicLoginTemplateID;
+          }
+
+          if (magicSignUpTemplateID) {
+            _this.options.mail.magicSignUpTemplateID = magicSignUpTemplateID;
+          }
+
           if (resetPasswordRequestTemplateID) {
             _this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
           }
 
           if (sendMailOnDevServer) {
             _this.options.mail.sendMailOnDevServer = sendMailOnDevServer;
-          }
-
-          if (verifyEmailTemplateID) {
-            _this.options.mail.verifyEmailTemplateID = verifyEmailTemplateID;
           }
         }
 

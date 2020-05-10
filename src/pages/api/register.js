@@ -5,36 +5,31 @@ import {
   AlreadyAuthenticatedError,
   TooManyRegistrationsError,
   UserAlreadyExistsError,
-  hashPassword,
 } from '../../auth';
 import { registerForm } from '../../forms';
 import { POST } from '../../http';
 import {
+  createMagicLogin,
+  sendMagicSignUpEmail,
+} from '../../models/magicLogins';
+import {
+  UserNotEnabledError,
   createUser,
   getUser,
   listUsers,
   usersCollection,
 } from '../../models/users';
-import {
-  TYPE_EMAIL,
-  createUserVerification,
-  sendUserVerificationEmail,
-} from '../../models/userVerifications';
-import { createSessionCookies } from '../../sessions';
-import { signTokens } from '../../tokens';
 
 const registerApi = async ({ req, res, session }) => {
-  const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
+  const { auth: authOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
-    throw new AlreadyAuthenticatedError('You are already logged in');
+    throw new AlreadyAuthenticatedError('You are already logged in.');
   }
 
   const { email } = req.body;
 
-  const { cleanValues, errors } = registerForm().validate({
-    email,
-  });
+  const { cleanValues, errors } = registerForm().validate({ email });
 
   if (errors && errors.length) {
     return { errors };
@@ -63,37 +58,35 @@ const registerApi = async ({ req, res, session }) => {
   );
 
   if (user && user.password) {
-    throw new UserAlreadyExistsError('User already exists');
+    throw new UserAlreadyExistsError(
+      'An account with this email address already exists.'
+    );
+  }
+
+  if (user && !user.enabled) {
+    throw new UserNotEnabledError('This account has been disabled.');
   }
 
   if (!user) {
     user = await createUser({
       email: cleanValues.email,
-      imageUrl: '', // TODO: set a default image from public/static
       enabled: true,
       registrationIP: ip,
+      imageUrl: '', // TODO: set a default image from public/static
       verifications: {
         email: false,
         phone: false,
       },
     });
-
-    // const userVerification = await createUserVerification({
-    //  userId: user.id,
-    //  type: TYPE_EMAIL,
-    // });
   }
 
-  const claims = tokenOptions.createClaims(user);
+  const magicLogin = await createMagicLogin({
+    userId: user.id,
+  });
 
-  createSessionCookies(res, signTokens(claims, tokenOptions.secret), user.id);
+  await sendMagicSignUpEmail(req, user.email, magicLogin.id);
 
-  await sendUserVerificationEmail(req, user.email, userVerification.id);
-
-  return {
-    isAuthenticated: true,
-    claims,
-  };
+  return {};
 };
 
 registerApi.options = {

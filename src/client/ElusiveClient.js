@@ -10,6 +10,7 @@ class ElusiveClient {
 
     this.options = {
       auth: {
+        defaultDisplayName: 'User',
         maxLoginAttemptsPerAccountPerHour: 8,
         maxLoginAttemptsPerIPPerHour: 16,
         maxPasswordResetAttemptsPerHour: 4,
@@ -21,9 +22,10 @@ class ElusiveClient {
       mail: {
         fromEmail: 'no-reply@example.com',
         fromName: 'Example',
+        magicLoginTemplateID: null,
+        magicSignUpTemplateID: null,
         resetPasswordRequestTemplateID: null,
         sendMailOnDevServer: false,
-        verifyEmailTemplateID: null,
       },
       sessions: {
         accessTokenCookieName: 'at',
@@ -109,9 +111,10 @@ class ElusiveClient {
         const {
           fromEmail,
           fromName,
+          magicLoginTemplateID,
+          magicSignUpTemplateID,
           resetPasswordRequestTemplateID,
           sendMailOnDevServer,
-          verifyEmailTemplateID,
         } = mail;
 
         if (fromEmail) {
@@ -122,16 +125,20 @@ class ElusiveClient {
           this.options.mail.fromName = fromName;
         }
 
+        if (magicLoginTemplateID) {
+          this.options.mail.magicLoginTemplateID = magicLoginTemplateID;
+        }
+
+        if (magicSignUpTemplateID) {
+          this.options.mail.magicSignUpTemplateID = magicSignUpTemplateID;
+        }
+
         if (resetPasswordRequestTemplateID) {
           this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
         }
 
         if (sendMailOnDevServer) {
           this.options.mail.sendMailOnDevServer = sendMailOnDevServer;
-        }
-
-        if (verifyEmailTemplateID) {
-          this.options.mail.verifyEmailTemplateID = verifyEmailTemplateID;
         }
       }
 

@@ -5,30 +5,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-var client = require('../index-44fecfcf.js');
+var client = require('../index-37c59d88.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('../utils-f3c27b36.js');
+var utils = require('../utils-2966bd10.js');
 require('bcryptjs');
-var resetPasswordConfirm = require('../reset-password-confirm-e9821992.js');
+var resetPasswordConfirm = require('../reset-password-confirm-25c9160a.js');
 require('sanitize-html');
 var utils$1 = require('../utils-b08f259e.js');
 var index$1 = require('../index-2340470f.js');
-require('../utils-8766c95d.js');
+require('../utils-97f4e668.js');
 require('uuid');
-require('../utils-f4788b10.js');
+require('../utils-a7c6b530.js');
 var loginAttempts = require('../models/loginAttempts.js');
-var passwordResetAttempts = require('../models/passwordResetAttempts.js');
 var users = require('../models/users.js');
+var magicLogins = require('../models/magicLogins.js');
+var passwordResetAttempts = require('../models/passwordResetAttempts.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
-var userVerifications = require('../models/userVerifications.js');
-var utils$3 = require('../utils-7422c0eb.js');
+var utils$3 = require('../utils-ae5fb9e6.js');
 require('../SessionContext-efd795c9.js');
-var utils$4 = require('../utils-2e8aac41.js');
+var utils$4 = require('../utils-8488b29d.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -313,28 +313,26 @@ logoutApi.options = {
 };
 
 var registerApi = function registerApi(_ref) {
-  var req, res, session, _Elusive$options, authOptions, tokenOptions, _req$body, email, password, termsAgreed, _registerForm$validat, cleanValues, errors, ip, date1DayAgo, recentUsersByIP, user, userVerification, claims;
+  var req, res, session, authOptions, email, _registerForm$validat, cleanValues, errors, ip, date1DayAgo, recentUsersByIP, user, magicLogin;
 
   return index$1._regeneratorRuntime.async(function registerApi$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           req = _ref.req, res = _ref.res, session = _ref.session;
-          _Elusive$options = index.options, authOptions = _Elusive$options.auth, tokenOptions = _Elusive$options.tokens;
+          authOptions = index.options.auth;
 
           if (!session.isAuthenticated) {
             _context.next = 4;
             break;
           }
 
-          throw new utils.AlreadyAuthenticatedError('You are already logged in');
+          throw new utils.AlreadyAuthenticatedError('You are already logged in.');
 
         case 4:
-          _req$body = req.body, email = _req$body.email, password = _req$body.password, termsAgreed = _req$body.termsAgreed;
+          email = req.body.email;
           _registerForm$validat = resetPasswordConfirm.registerForm().validate({
-            email: email,
-            password: password,
-            termsAgreed: termsAgreed
+            email: email
           }), cleanValues = _registerForm$validat.cleanValues, errors = _registerForm$validat.errors;
 
           if (!(errors && errors.length)) {
@@ -375,50 +373,58 @@ var registerApi = function registerApi(_ref) {
         case 18:
           user = _context.sent;
 
-          if (!user) {
+          if (!(user && user.password)) {
             _context.next = 21;
             break;
           }
 
-          throw new utils.UserAlreadyExistsError('User already exists');
+          throw new utils.UserAlreadyExistsError('An account with this email address already exists.');
 
         case 21:
-          _context.next = 23;
+          if (!(user && !user.enabled)) {
+            _context.next = 23;
+            break;
+          }
+
+          throw new users.UserNotEnabledError('This account has been disabled.');
+
+        case 23:
+          if (user) {
+            _context.next = 27;
+            break;
+          }
+
+          _context.next = 26;
           return index$1._regeneratorRuntime.awrap(users.createUser({
             email: cleanValues.email,
-            password: utils.hashPassword(cleanValues.password),
-            imageUrl: '',
             enabled: true,
-            termsAgreed: termsAgreed,
             registrationIP: ip,
+            imageUrl: '',
+            // TODO: set a default image from public/static
             verifications: {
               email: false,
               phone: false
             }
           }));
 
-        case 23:
+        case 26:
           user = _context.sent;
-          _context.next = 26;
-          return index$1._regeneratorRuntime.awrap(userVerifications.createUserVerification({
-            userId: user.id,
-            type: userVerifications.TYPE_EMAIL
+
+        case 27:
+          _context.next = 29;
+          return index$1._regeneratorRuntime.awrap(magicLogins.createMagicLogin({
+            userId: user.id
           }));
 
-        case 26:
-          userVerification = _context.sent;
-          claims = tokenOptions.createClaims(user);
-          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), user.id);
-          _context.next = 31;
-          return index$1._regeneratorRuntime.awrap(userVerifications.sendUserVerificationEmail(req, user.email, userVerification.id));
-
-        case 31:
-          return _context.abrupt("return", {
-            isAuthenticated: true,
-            claims: claims
-          });
+        case 29:
+          magicLogin = _context.sent;
+          _context.next = 32;
+          return index$1._regeneratorRuntime.awrap(magicLogins.sendMagicSignUpEmail(req, user.email, magicLogin.id));
 
         case 32:
+          return _context.abrupt("return", {});
+
+        case 33:
         case "end":
           return _context.stop();
       }
