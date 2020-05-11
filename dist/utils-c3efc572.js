@@ -25,8 +25,8 @@ var onboardingPasswordRoute = function onboardingPasswordRoute() {
 var onboardingNameRoute = function onboardingNameRoute() {
   return '/onboarding/name';
 };
-var onboardingImageRoute = function onboardingImageRoute() {
-  return '/onboarding/image';
+var onboardingProfilePictureRoute = function onboardingProfilePictureRoute() {
+  return '/onboarding/profile-picture';
 };
 var registerRoute = function registerRoute() {
   return '/signup';
@@ -48,7 +48,7 @@ var loginRouteWithNext = function loginRouteWithNext() {
       pathname = _window$location.pathname,
       search = _window$location.search;
   var href = loginRoute();
-  var excludedNextRoutes = [logoutRoute(), onboardingRoute(), onboardingImageRoute(), onboardingNameRoute(), onboardingPasswordRoute()];
+  var excludedNextRoutes = [logoutRoute(), onboardingRoute(), onboardingProfilePictureRoute(), onboardingNameRoute(), onboardingPasswordRoute()];
 
   if (!excludedNextRoutes.includes(pathname)) {
     var encodedNext = encodeURIComponent("".concat(pathname).concat(search));
@@ -70,8 +70,8 @@ var onboardingPasswordAPIRoute = function onboardingPasswordAPIRoute() {
 var onboardingNameAPIRoute = function onboardingNameAPIRoute() {
   return '/api/onboarding/name';
 };
-var onboardingImageAPIRoute = function onboardingImageAPIRoute() {
-  return '/api/onboarding/image';
+var onboardingProfilePictureAPIRoute = function onboardingProfilePictureAPIRoute() {
+  return '/api/onboarding/profile-picture';
 };
 var registerAPIRoute = function registerAPIRoute() {
   return '/api/register';
@@ -93,12 +93,12 @@ exports.loginRouteWithNext = loginRouteWithNext;
 exports.logoutAPIRoute = logoutAPIRoute;
 exports.logoutRoute = logoutRoute;
 exports.magicLoginRoute = magicLoginRoute;
-exports.onboardingImageAPIRoute = onboardingImageAPIRoute;
-exports.onboardingImageRoute = onboardingImageRoute;
 exports.onboardingNameAPIRoute = onboardingNameAPIRoute;
 exports.onboardingNameRoute = onboardingNameRoute;
 exports.onboardingPasswordAPIRoute = onboardingPasswordAPIRoute;
 exports.onboardingPasswordRoute = onboardingPasswordRoute;
+exports.onboardingProfilePictureAPIRoute = onboardingProfilePictureAPIRoute;
+exports.onboardingProfilePictureRoute = onboardingProfilePictureRoute;
 exports.onboardingRoute = onboardingRoute;
 exports.registerAPIRoute = registerAPIRoute;
 exports.registerRoute = registerRoute;

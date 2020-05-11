@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var utils$2$1 = require('./utils-245024c5.js');
+var utils$2$1 = require('./utils-c3efc572.js');
 
 
 
@@ -13,12 +13,12 @@ exports.loginRouteWithNext = utils$2$1.loginRouteWithNext;
 exports.logoutAPIRoute = utils$2$1.logoutAPIRoute;
 exports.logoutRoute = utils$2$1.logoutRoute;
 exports.magicLoginRoute = utils$2$1.magicLoginRoute;
-exports.onboardingImageAPIRoute = utils$2$1.onboardingImageAPIRoute;
-exports.onboardingImageRoute = utils$2$1.onboardingImageRoute;
 exports.onboardingNameAPIRoute = utils$2$1.onboardingNameAPIRoute;
 exports.onboardingNameRoute = utils$2$1.onboardingNameRoute;
 exports.onboardingPasswordAPIRoute = utils$2$1.onboardingPasswordAPIRoute;
 exports.onboardingPasswordRoute = utils$2$1.onboardingPasswordRoute;
+exports.onboardingProfilePictureAPIRoute = utils$2$1.onboardingProfilePictureAPIRoute;
+exports.onboardingProfilePictureRoute = utils$2$1.onboardingProfilePictureRoute;
 exports.onboardingRoute = utils$2$1.onboardingRoute;
 exports.registerAPIRoute = utils$2$1.registerAPIRoute;
 exports.registerRoute = utils$2$1.registerRoute;
