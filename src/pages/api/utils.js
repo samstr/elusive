@@ -13,40 +13,27 @@ import {
   validateRequest,
 } from '../../http';
 import {
+  RELOAD_USER_SOURCE_REFRESH_TOKEN,
   SessionError,
-  createSessionCookies,
   deleteSessionCookies,
   getSession,
 } from '../../sessions';
-import { TokenError, signTokens } from '../../tokens';
+import { TokenError } from '../../tokens';
 
 export const apiWrapper = async (req, res, api) => {
   const { sentry } = Elusive.services;
-  const { tokens: tokenOptions } = Elusive.options;
 
   const options = {
     allowedMethods: [GET],
     requireAuth: false,
-    setSessionCookies: false,
-    reloadSessionUser: false,
+    reloadUserSource: RELOAD_USER_SOURCE_REFRESH_TOKEN,
     ...api.options,
   };
 
   try {
     validateRequest(req, res, options);
 
-    const { session, tokens } = await getSession(
-      req,
-      options.reloadSessionUser
-    );
-
-    if (options.setSessionCookies && session.isAuthenticated && tokens) {
-      createSessionCookies(
-        res,
-        signTokens(session.claims, tokenOptions.secret),
-        session.claims.user.id
-      );
-    }
+    const { session, tokens } = await getSession(req, options.reloadUserSource);
 
     if (options.requireAuth && !session.isAuthenticated) {
       return httpForbiddenResponse(
@@ -59,7 +46,7 @@ export const apiWrapper = async (req, res, api) => {
 
     data = {
       ...data,
-      ...(await api({ req, res, session })),
+      ...(await api({ req, res, session, tokens })),
     };
 
     if (data.errors && data.errors.length) {

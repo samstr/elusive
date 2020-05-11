@@ -28,7 +28,7 @@ var magicLogins = require('../models/magicLogins.js');
 var passwordResetAttempts = require('../models/passwordResetAttempts.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
-var utils$4 = require('../utils-65fb8ebf.js');
+var utils$4 = require('../utils-e425e693.js');
 require('../SessionContext-efd795c9.js');
 var utils$5 = require('../utils-f128e714.js');
 require('jsonwebtoken');
@@ -37,102 +37,97 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = function apiWrapper(req, res, api) {
-  var sentry, tokenOptions, options, _await$getSession, session, tokens, data;
+  var sentry, options, _await$getSession, session, tokens, data;
 
   return index$1._regeneratorRuntime.async(function apiWrapper$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           sentry = index.services.sentry;
-          tokenOptions = index.options.tokens;
           options = _objectSpread({
             allowedMethods: [utils$2.GET],
             requireAuth: false,
-            setSessionCookies: false,
-            reloadSessionUser: false
+            reloadUserSource: utils$4.RELOAD_USER_SOURCE_REFRESH_TOKEN
           }, api.options);
-          _context.prev = 3;
+          _context.prev = 2;
           utils$2.validateRequest(req, res, options);
-          _context.next = 7;
-          return index$1._regeneratorRuntime.awrap(utils$4.getSession(req, options.reloadSessionUser));
+          _context.next = 6;
+          return index$1._regeneratorRuntime.awrap(utils$4.getSession(req, options.reloadUserSource));
 
-        case 7:
+        case 6:
           _await$getSession = _context.sent;
           session = _await$getSession.session;
           tokens = _await$getSession.tokens;
 
-          if (options.setSessionCookies && session.isAuthenticated && tokens) {
-            utils$4.createSessionCookies(res, utils$5.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
-          }
-
           if (!(options.requireAuth && !session.isAuthenticated)) {
-            _context.next = 13;
+            _context.next = 11;
             break;
           }
 
           return _context.abrupt("return", utils$2.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
 
-        case 13:
+        case 11:
           data = {};
           _context.t0 = _objectSpread;
           _context.t1 = {};
           _context.t2 = data;
           _context.t3 = {};
-          _context.next = 20;
+          _context.next = 18;
           return index$1._regeneratorRuntime.awrap(api({
             req: req,
             res: res,
-            session: session
+            session: session,
+            tokens: tokens
           }));
 
-        case 20:
+        case 18:
           _context.t4 = _context.sent;
           data = (0, _context.t0)(_context.t1, _context.t2, _context.t3, _context.t4);
 
           if (!(data.errors && data.errors.length)) {
-            _context.next = 24;
+            _context.next = 22;
             break;
           }
 
           return _context.abrupt("return", utils$2.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
 
-        case 24:
+        case 22:
           return _context.abrupt("return", utils$2.httpOKResponse(res, data));
 
-        case 27:
-          _context.prev = 27;
-          _context.t5 = _context["catch"](3);
+        case 25:
+          _context.prev = 25;
+          _context.t5 = _context["catch"](2);
 
           if (!(_context.t5 instanceof utils$2.HttpError)) {
-            _context.next = 32;
+            _context.next = 30;
             break;
           }
 
           if (!(_context.t5 instanceof utils$2.HttpMethodNotAllowedError)) {
-            _context.next = 32;
+            _context.next = 30;
             break;
           }
 
           return _context.abrupt("return", utils$2.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 32:
+        case 30:
           if (!(_context.t5 instanceof utils$4.SessionError || _context.t5 instanceof utils$5.TokenError)) {
-            _context.next = 35;
+            _context.next = 33;
             break;
           }
 
           utils$4.deleteSessionCookies(res);
           return _context.abrupt("return", utils$2.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 35:
+        case 33:
           if (!(_context.t5 instanceof FormErrors.BaseError)) {
-            _context.next = 37;
+            _context.next = 35;
             break;
           }
 
           return _context.abrupt("return", utils$2.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
 
-        case 37:
+        case 35:
           console.error('error in apiWrapper:', _context.t5);
 
           if (sentry) {
@@ -141,12 +136,12 @@ var apiWrapper = function apiWrapper(req, res, api) {
 
           return _context.abrupt("return", utils$2.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
 
-        case 40:
+        case 38:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[3, 27]], Promise);
+  }, null, null, [[2, 25]], Promise);
 };
 
 var loginAPI = function loginAPI(_ref) {
@@ -633,17 +628,23 @@ resetPasswordRequestAPI.options = {
 };
 
 var sessionAPI = function sessionAPI(_ref) {
-  var session;
+  var res, session, tokens, tokenOptions;
   return index$1._regeneratorRuntime.async(function sessionAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          session = _ref.session;
+          res = _ref.res, session = _ref.session, tokens = _ref.tokens;
+          tokenOptions = index.options.tokens; // Are there tokens? That means we regenerated the session. Set new cookies
+
+          if (session.isAuthenticated && tokens) {
+            utils$4.createSessionCookies(res, utils$5.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+          }
+
           return _context.abrupt("return", {
             session: session
           });
 
-        case 2:
+        case 4:
         case "end":
           return _context.stop();
       }
@@ -652,8 +653,7 @@ var sessionAPI = function sessionAPI(_ref) {
 };
 
 sessionAPI.options = {
-  reloadSessionUser: true,
-  setSessionCookies: true
+  reloadUserSource: utils$4.RELOAD_USER_SOURCE_DATABASE
 };
 
 exports.apiWrapper = apiWrapper;

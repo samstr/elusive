@@ -76,6 +76,8 @@ var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError4) {
   return SessionUserNotEnabledError;
 }(SessionError);
 
+var RELOAD_USER_SOURCE_REFRESH_TOKEN = 'refresh-token';
+var RELOAD_USER_SOURCE_DATABASE = 'database';
 var buildSessionCookieString = function buildSessionCookieString(name, value, expiryDate) {
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
 };
@@ -97,7 +99,7 @@ var deleteSessionCookieStrings = function deleteSessionCookieStrings() {
 var deleteSessionCookies = function deleteSessionCookies(res) {
   res.setHeader('Set-Cookie', deleteSessionCookieStrings());
 };
-var getSession = function getSession(req, reloadSessionUser) {
+var getSession = function getSession(req, reloadUserSource) {
   var _Elusive$options, sessionOptions, tokenOptions, accessToken, refreshToken, userId, session, tokens, _getClaims, accessTokenClaims, accessTokenExpired, accessTokenInvalid, _getClaims2, refreshTokenClaims, refreshTokenExpired, refreshTokenInvalid, user;
 
   return index$1._regeneratorRuntime.async(function getSession$(_context) {
@@ -123,7 +125,7 @@ var getSession = function getSession(req, reloadSessionUser) {
           };
 
           if (!(accessToken && refreshToken && userId)) {
-            _context.next = 40;
+            _context.next = 39;
             break;
           }
 
@@ -157,7 +159,7 @@ var getSession = function getSession(req, reloadSessionUser) {
 
         case 17:
           if (!accessTokenExpired) {
-            _context.next = 40;
+            _context.next = 39;
             break;
           }
 
@@ -188,7 +190,7 @@ var getSession = function getSession(req, reloadSessionUser) {
           throw new SessionUserIdMismatchError('User id cookie does not match refresh token');
 
         case 25:
-          if (!reloadSessionUser) {
+          if (!(reloadUserSource === RELOAD_USER_SOURCE_DATABASE)) {
             _context.next = 37;
             break;
           }
@@ -217,24 +219,26 @@ var getSession = function getSession(req, reloadSessionUser) {
 
         case 34:
           session.claims = tokenOptions.createClaims(user);
-          _context.next = 39;
+          _context.next = 38;
           break;
 
         case 37:
-          console.log('returning refreshTokenClaims');
-          session.claims = refreshTokenClaims;
+          if (reloadUserSource === RELOAD_USER_SOURCE_REFRESH_TOKEN) {
+            console.log('returning refreshTokenClaims');
+            session.claims = refreshTokenClaims;
+          }
 
-        case 39:
+        case 38:
           tokens = utils$5.signTokens(session.claims, tokenOptions.secret);
 
-        case 40:
+        case 39:
           session.isAuthenticated = !!session.claims;
           return _context.abrupt("return", {
             session: session,
             tokens: tokens
           });
 
-        case 42:
+        case 41:
         case "end":
           return _context.stop();
       }
@@ -242,6 +246,8 @@ var getSession = function getSession(req, reloadSessionUser) {
   }, null, null, null, Promise);
 };
 
+exports.RELOAD_USER_SOURCE_DATABASE = RELOAD_USER_SOURCE_DATABASE;
+exports.RELOAD_USER_SOURCE_REFRESH_TOKEN = RELOAD_USER_SOURCE_REFRESH_TOKEN;
 exports.SessionError = SessionError;
 exports.SessionUserIdMismatchError = SessionUserIdMismatchError;
 exports.SessionUserNoLongerExistsError = SessionUserNoLongerExistsError;

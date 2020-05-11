@@ -15,6 +15,9 @@ import {
   SessionUserNotEnabledError,
 } from './errors';
 
+export const RELOAD_USER_SOURCE_REFRESH_TOKEN = 'refresh-token';
+export const RELOAD_USER_SOURCE_DATABASE = 'database';
+
 export const buildSessionCookieString = (name, value, expiryDate) =>
   [
     `${name}=${value}`,
@@ -76,7 +79,7 @@ export const deleteSessionCookies = (res) => {
   res.setHeader('Set-Cookie', deleteSessionCookieStrings());
 };
 
-export const getSession = async (req, reloadSessionUser) => {
+export const getSession = async (req, reloadUserSource) => {
   const { sessions: sessionOptions, tokens: tokenOptions } = Elusive.options;
 
   const accessToken = req.cookies[sessionOptions.accessTokenCookieName];
@@ -146,7 +149,7 @@ export const getSession = async (req, reloadSessionUser) => {
         );
       }
 
-      if (reloadSessionUser) {
+      if (reloadUserSource === RELOAD_USER_SOURCE_DATABASE) {
         console.log('REFRESHING ACCESS TOKEN by reloading session user');
 
         const user = await getUserByID(refreshTokenClaims.user.id);
@@ -162,7 +165,7 @@ export const getSession = async (req, reloadSessionUser) => {
         }
 
         session.claims = tokenOptions.createClaims(user);
-      } else {
+      } else if (reloadUserSource === RELOAD_USER_SOURCE_REFRESH_TOKEN) {
         console.log('returning refreshTokenClaims');
         session.claims = refreshTokenClaims;
       }

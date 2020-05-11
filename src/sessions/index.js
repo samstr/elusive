@@ -19,6 +19,8 @@ import {
 export { SessionContext, SessionContextProvider, useSessionContext };
 
 import {
+  RELOAD_USER_SOURCE_DATABASE,
+  RELOAD_USER_SOURCE_REFRESH_TOKEN,
   buildSessionCookieString,
   createSessionCookieStrings,
   createSessionCookies,
@@ -27,6 +29,8 @@ import {
   getSession,
 } from './utils';
 export {
+  RELOAD_USER_SOURCE_DATABASE,
+  RELOAD_USER_SOURCE_REFRESH_TOKEN,
   buildSessionCookieString,
   createSessionCookieStrings,
   createSessionCookies,
