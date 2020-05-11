@@ -8,6 +8,7 @@ export const resetPasswordConfirmRoute = (id) => ({
   href: '/reset/[id]',
   asPath: `/reset/${id}`,
 });
+export const termsRoute = () => '/terms';
 export const onboardingRoute = () => '/welcome';
 
 export const loginRouteWithNext = () => {

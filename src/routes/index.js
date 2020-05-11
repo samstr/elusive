@@ -13,6 +13,7 @@ import {
   resetPasswordRequestAPIRoute,
   resetPasswordRequestRoute,
   sessionAPIRoute,
+  termsRoute,
 } from './utils';
 export {
   indexRoute,
@@ -29,4 +30,5 @@ export {
   resetPasswordRequestAPIRoute,
   resetPasswordRequestRoute,
   sessionAPIRoute,
+  termsRoute,
 };
