@@ -51,7 +51,7 @@ const useSession = () => {
         cancelRequest = null;
 
         const _session = {
-          ...response.data,
+          ...response.data.session,
           _ready: true,
         };
 
@@ -63,7 +63,7 @@ const useSession = () => {
           const { pathname } = window.location;
 
           if (
-            _session.claims.user.onboarding?.needsPassword &&
+            _session.claims.user.needsOnboarding &&
             pathname !== onboardingRoute() &&
             pathname !== onboardingPasswordRoute()
           ) {

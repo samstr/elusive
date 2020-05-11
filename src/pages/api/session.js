@@ -1,5 +1,5 @@
 const sessionAPI = async ({ session }) => ({
-  ...session,
+  session,
 });
 
 sessionAPI.options = {

@@ -2,10 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var utils$2$1 = require('./utils-c3efc572.js');
+var utils$2$1 = require('./utils-bfe56e17.js');
 
 
 
+exports.homeRoute = utils$2$1.homeRoute;
 exports.indexRoute = utils$2$1.indexRoute;
 exports.loginAPIRoute = utils$2$1.loginAPIRoute;
 exports.loginRoute = utils$2$1.loginRoute;

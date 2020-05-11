@@ -1,4 +1,5 @@
 import {
+  homeRoute,
   indexRoute,
   loginAPIRoute,
   loginRoute,
@@ -23,6 +24,7 @@ import {
   termsRoute,
 } from './utils';
 export {
+  homeRoute,
   indexRoute,
   loginAPIRoute,
   loginRoute,

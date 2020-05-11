@@ -15,7 +15,7 @@ require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
 var index$1 = require('./index-2340470f.js');
 require('uuid');
-var utils$2 = require('./utils-c3efc572.js');
+var utils$2 = require('./utils-bfe56e17.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
@@ -104,6 +104,29 @@ var useData = function useData() {
   return data;
 };
 
+var useOnboarding = function useOnboarding() {
+  var router$1 = router.useRouter();
+
+  var _useSessionContext = SessionContext.useSessionContext(),
+      sessionContext = _useSessionContext.sessionContext;
+
+  React.useEffect(function () {
+    if (sessionContext._ready && sessionContext.isAuthenticated) {
+      var user = sessionContext.claims.user;
+
+      if (user.needsOnboarding) {
+        router$1.replace(utils$2.onboardingPasswordRoute());
+      } else if (!user.name) {
+        router$1.replace(utils$2.onboardingNameRoute());
+      } else if (!user.profilePictureURL) {
+        router$1.replace(utils$2.onboardingProfilePictureRoute());
+      } else {
+        router$1.replace(utils$2.homeRoute());
+      }
+    }
+  }, [sessionContext._ready]);
+};
+
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();
   React.useEffect(function () {
@@ -161,7 +184,7 @@ var useSession = function useSession() {
     var cancelRequest;
 
     var fetch = function fetch() {
-      var response, _session, _session$claims$user$, pathname;
+      var response, _session, pathname;
 
       return index$1._regeneratorRuntime.async(function fetch$(_context) {
         while (1) {
@@ -178,7 +201,7 @@ var useSession = function useSession() {
             case 3:
               response = _context.sent;
               cancelRequest = null;
-              _session = _objectSpread({}, response.data, {
+              _session = _objectSpread({}, response.data.session, {
                 _ready: true
               });
               setSession(_session);
@@ -187,7 +210,7 @@ var useSession = function useSession() {
               if (_session.isAuthenticated) {
                 pathname = window.location.pathname;
 
-                if (((_session$claims$user$ = _session.claims.user.onboarding) === null || _session$claims$user$ === void 0 ? void 0 : _session$claims$user$.needsPassword) && pathname !== utils$2.onboardingRoute() && pathname !== utils$2.onboardingPasswordRoute()) {
+                if (_session.claims.user.needsOnboarding && pathname !== utils$2.onboardingRoute() && pathname !== utils$2.onboardingPasswordRoute()) {
                   router$1.replace(utils$2.onboardingPasswordRoute());
                 }
               }
@@ -219,6 +242,7 @@ var useSession = function useSession() {
 };
 
 exports.useData = useData;
+exports.useOnboarding = useOnboarding;
 exports.useRedirect = useRedirect;
 exports.useRequireAuth = useRequireAuth;
 exports.useSession = useSession;
