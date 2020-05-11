@@ -7,6 +7,7 @@ import {
   loginRoute,
   loginRouteWithNext,
   onboardingRoute,
+  onboardingPasswordRoute,
   sessionAPIRoute,
 } from '../routes';
 import { useSessionContext } from '../sessions';
@@ -54,17 +55,21 @@ const useSession = () => {
           _ready: true,
         };
 
-        // if user still needs onboarding
-        if (
-          _session?.isAuthenticated &&
-          _session?.claims?.user?.needsPassword
-        ) {
-          router.replace(onboardingRoute());
-          return;
-        }
-
         setSession(_session);
         setSessionContext(_session);
+
+        // if user still needs onboarding
+        if (_session.isAuthenticated) {
+          const { pathname } = window.location;
+
+          if (
+            _session.claims.user.onboarding?.needsPassword &&
+            pathname !== onboardingRoute() &&
+            pathname !== onboardingPasswordRoute()
+          ) {
+            router.replace(onboardingRoute());
+          }
+        }
       } catch (err) {
         return handleError(err);
       }

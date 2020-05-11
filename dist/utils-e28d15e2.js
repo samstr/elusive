@@ -7,19 +7,6 @@ var indexRoute = function indexRoute() {
 var loginRoute = function loginRoute() {
   return '/login';
 };
-var loginRouteWithNext = function loginRouteWithNext() {
-  var _window$location = window.location,
-      pathname = _window$location.pathname,
-      search = _window$location.search;
-  var href = loginRoute();
-
-  if (pathname !== logoutRoute()) {
-    var encodedNext = encodeURIComponent("".concat(pathname).concat(search));
-    href = "".concat(href, "?next=").concat(encodedNext);
-  }
-
-  return href;
-};
 var logoutRoute = function logoutRoute() {
   return '/logout';
 };
@@ -31,6 +18,15 @@ var magicLoginRoute = function magicLoginRoute(id) {
 };
 var onboardingRoute = function onboardingRoute() {
   return '/onboarding';
+};
+var onboardingPasswordRoute = function onboardingPasswordRoute() {
+  return '/onboarding/password';
+};
+var onboardingNameRoute = function onboardingNameRoute() {
+  return '/onboarding/name';
+};
+var onboardingImageRoute = function onboardingImageRoute() {
+  return '/onboarding/image';
 };
 var registerRoute = function registerRoute() {
   return '/signup';
@@ -46,6 +42,20 @@ var resetPasswordRequestRoute = function resetPasswordRequestRoute() {
 };
 var termsRoute = function termsRoute() {
   return '/terms';
+};
+var loginRouteWithNext = function loginRouteWithNext() {
+  var _window$location = window.location,
+      pathname = _window$location.pathname,
+      search = _window$location.search;
+  var href = loginRoute();
+  var excludedNextRoutes = [logoutRoute(), onboardingRoute(), onboardingImageRoute(), onboardingNameRoute(), onboardingPasswordRoute()];
+
+  if (!excludedNextRoutes.includes(pathname)) {
+    var encodedNext = encodeURIComponent("".concat(pathname).concat(search));
+    href = "".concat(href, "?next=").concat(encodedNext);
+  }
+
+  return href;
 }; // API routes
 
 var loginAPIRoute = function loginAPIRoute() {
@@ -74,6 +84,9 @@ exports.loginRouteWithNext = loginRouteWithNext;
 exports.logoutAPIRoute = logoutAPIRoute;
 exports.logoutRoute = logoutRoute;
 exports.magicLoginRoute = magicLoginRoute;
+exports.onboardingImageRoute = onboardingImageRoute;
+exports.onboardingNameRoute = onboardingNameRoute;
+exports.onboardingPasswordRoute = onboardingPasswordRoute;
 exports.onboardingRoute = onboardingRoute;
 exports.registerAPIRoute = registerAPIRoute;
 exports.registerRoute = registerRoute;

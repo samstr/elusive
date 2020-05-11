@@ -15,7 +15,7 @@ require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
 var index$1 = require('./index-2340470f.js');
 require('uuid');
-var utils$2 = require('./utils-cfb1f3f6.js');
+var utils$2 = require('./utils-e28d15e2.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
@@ -161,7 +161,7 @@ var useSession = function useSession() {
     var cancelRequest;
 
     var fetch = function fetch() {
-      var _session$claims, _session$claims$user, response, _session;
+      var response, _session, _session$claims$user$, pathname;
 
       return index$1._regeneratorRuntime.async(function fetch$(_context) {
         while (1) {
@@ -180,33 +180,32 @@ var useSession = function useSession() {
               cancelRequest = null;
               _session = _objectSpread({}, response.data, {
                 _ready: true
-              }); // if user still needs onboarding
+              });
+              setSession(_session);
+              setSessionContext(_session); // if user still needs onboarding
 
-              if (!((_session === null || _session === void 0 ? void 0 : _session.isAuthenticated) && (_session === null || _session === void 0 ? void 0 : (_session$claims = _session.claims) === null || _session$claims === void 0 ? void 0 : (_session$claims$user = _session$claims.user) === null || _session$claims$user === void 0 ? void 0 : _session$claims$user.needsPassword))) {
-                _context.next = 9;
-                break;
+              if (_session.isAuthenticated) {
+                pathname = window.location.pathname;
+
+                if (((_session$claims$user$ = _session.claims.user.onboarding) === null || _session$claims$user$ === void 0 ? void 0 : _session$claims$user$.needsPassword) && pathname !== utils$2.onboardingRoute() && pathname !== utils$2.onboardingPasswordRoute()) {
+                  router$1.replace(utils$2.onboardingRoute());
+                }
               }
 
-              router$1.replace(utils$2.onboardingRoute());
-              return _context.abrupt("return");
-
-            case 9:
-              setSession(_session);
-              setSessionContext(_session);
-              _context.next = 16;
+              _context.next = 14;
               break;
 
-            case 13:
-              _context.prev = 13;
+            case 11:
+              _context.prev = 11;
               _context.t0 = _context["catch"](0);
               return _context.abrupt("return", handleError(_context.t0));
 
-            case 16:
+            case 14:
             case "end":
               return _context.stop();
           }
         }
-      }, null, null, [[0, 13]], Promise);
+      }, null, null, [[0, 11]], Promise);
     };
 
     fetch();

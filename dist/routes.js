@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var utils$2$1 = require('./utils-cfb1f3f6.js');
+var utils$2$1 = require('./utils-e28d15e2.js');
 
 
 
@@ -13,6 +13,9 @@ exports.loginRouteWithNext = utils$2$1.loginRouteWithNext;
 exports.logoutAPIRoute = utils$2$1.logoutAPIRoute;
 exports.logoutRoute = utils$2$1.logoutRoute;
 exports.magicLoginRoute = utils$2$1.magicLoginRoute;
+exports.onboardingImageRoute = utils$2$1.onboardingImageRoute;
+exports.onboardingNameRoute = utils$2$1.onboardingNameRoute;
+exports.onboardingPasswordRoute = utils$2$1.onboardingPasswordRoute;
 exports.onboardingRoute = utils$2$1.onboardingRoute;
 exports.registerAPIRoute = utils$2$1.registerAPIRoute;
 exports.registerRoute = utils$2$1.registerRoute;

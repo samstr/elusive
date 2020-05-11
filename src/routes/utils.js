@@ -1,17 +1,6 @@
 // Page routes
 export const indexRoute = () => '/';
 export const loginRoute = () => '/login';
-export const loginRouteWithNext = () => {
-  const { pathname, search } = window.location;
-  let href = loginRoute();
-
-  if (pathname !== logoutRoute()) {
-    const encodedNext = encodeURIComponent(`${pathname}${search}`);
-    href = `${href}?next=${encodedNext}`;
-  }
-
-  return href;
-};
 export const logoutRoute = () => '/logout';
 export const magicLoginRoute = (id) => ({
   href: '/login/[id]',
@@ -20,7 +9,7 @@ export const magicLoginRoute = (id) => ({
 export const onboardingRoute = () => '/onboarding';
 export const onboardingPasswordRoute = () => '/onboarding/password';
 export const onboardingNameRoute = () => '/onboarding/name';
-export const onboardingPictureRoute = () => '/onboarding/picture';
+export const onboardingImageRoute = () => '/onboarding/image';
 
 export const registerRoute = () => '/signup';
 export const resetPasswordConfirmRoute = (id) => ({
@@ -29,6 +18,26 @@ export const resetPasswordConfirmRoute = (id) => ({
 });
 export const resetPasswordRequestRoute = () => '/reset';
 export const termsRoute = () => '/terms';
+
+export const loginRouteWithNext = () => {
+  const { pathname, search } = window.location;
+  let href = loginRoute();
+
+  const excludedNextRoutes = [
+    logoutRoute(),
+    onboardingRoute(),
+    onboardingImageRoute(),
+    onboardingNameRoute(),
+    onboardingPasswordRoute(),
+  ];
+
+  if (!excludedNextRoutes.includes(pathname)) {
+    const encodedNext = encodeURIComponent(`${pathname}${search}`);
+    href = `${href}?next=${encodedNext}`;
+  }
+
+  return href;
+};
 
 // API routes
 export const loginAPIRoute = () => '/api/login';
