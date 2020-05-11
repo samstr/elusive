@@ -17,7 +17,9 @@ export const magicLoginRoute = (id) => ({
   href: '/login/[id]',
   asPath: `/login/${id}`,
 });
-export const onboardingRoute = () => '/welcome';
+export const onboardingRoute = () => '/onboarding';
+export const onboardingPasswordRoute = () => '/onboarding/password';
+
 export const registerRoute = () => '/signup';
 export const resetPasswordConfirmRoute = (id) => ({
   href: '/reset/[id]',
