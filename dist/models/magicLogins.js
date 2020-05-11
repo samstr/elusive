@@ -99,7 +99,7 @@ var sendMagicSignUpEmail = function sendMagicSignUpEmail(req, toEmail, magicLogi
               subject: "Confirm your ".concat(siteOptions.name, " account"),
               preheader: "Welcome to ".concat(siteOptions.name, ". Thank you for confirming your email address. Click here to create your account. "),
               reasonForEmail: "you signed up for a ".concat(siteOptions.name, " account"),
-              magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID)),
+              magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID).asPath),
               termsURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.termsRoute())
             })
           }));

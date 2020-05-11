@@ -41,9 +41,9 @@ export const sendMagicSignUpEmail = async (req, toEmail, magicLoginID) => {
       subject: `Confirm your ${siteOptions.name} account`,
       preheader: `Welcome to ${siteOptions.name}. Thank you for confirming your email address. Click here to create your account. `,
       reasonForEmail: `you signed up for a ${siteOptions.name} account`,
-      magicLoginURL: `${dynamicTemplateData.baseURL}${magicLoginRoute(
-        magicLoginID
-      )}`,
+      magicLoginURL: `${dynamicTemplateData.baseURL}${
+        magicLoginRoute(magicLoginID).asPath
+      }`,
       termsURL: `${dynamicTemplateData.baseURL}${termsRoute()}`,
     },
   });
