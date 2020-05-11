@@ -13,6 +13,7 @@ var index$1 = require('../index-2340470f.js');
 var utils = require('../utils-b8aefd19.js');
 require('uuid');
 var utils$1 = require('../utils-3fbf90f8.js');
+var utils$2 = require('../utils-6e4a815b.js');
 var users = require('./users.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -98,7 +99,8 @@ var sendMagicSignUpEmail = function sendMagicSignUpEmail(req, toEmail, magicLogi
               subject: "Confirm your ".concat(siteOptions.name, " account"),
               preheader: "Welcome to ".concat(siteOptions.name, ". Thank you for confirming your email address. Click here to create your account. "),
               reasonForEmail: "you signed up for a ".concat(siteOptions.name, " account"),
-              magicLoginURL: "".concat(dynamicTemplateData.baseURL, "/login/").concat(magicLoginID)
+              magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID)),
+              termsURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.termsRoute())
             })
           }));
 

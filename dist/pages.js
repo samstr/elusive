@@ -15,10 +15,10 @@ require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
 var index$1 = require('./index-2340470f.js');
 require('uuid');
+var utils$2 = require('./utils-6e4a815b.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var utils$1 = require('./utils-88e48cad.js');
 var SessionContext = require('./SessionContext-efd795c9.js');
 require('jsonwebtoken');
 
@@ -39,8 +39,8 @@ var useData = function useData() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$1.loginRoute()) {
-        router$1.replace(utils$1.loginRouteWithNext());
+      if (pathname !== utils$2.loginRoute()) {
+        router$1.replace(utils$2.loginRouteWithNext());
       }
 
       return;
@@ -119,7 +119,7 @@ var useRequireAuth = function useRequireAuth() {
 
   React.useEffect(function () {
     if (sessionContext._ready && !sessionContext.isAuthenticated) {
-      router$1.replace(utils$1.loginRouteWithNext());
+      router$1.replace(utils$2.loginRouteWithNext());
     }
   }, [sessionContext._ready]);
 };
@@ -147,8 +147,8 @@ var useSession = function useSession() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$1.loginRoute()) {
-        router$1.replace(utils$1.loginRouteWithNext());
+      if (pathname !== utils$2.loginRoute()) {
+        router$1.replace(utils$2.loginRouteWithNext());
       }
 
       return;
@@ -169,7 +169,7 @@ var useSession = function useSession() {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return index$1._regeneratorRuntime.awrap(axios__default(utils$1.sessionAPIRoute(), {
+              return index$1._regeneratorRuntime.awrap(axios__default(utils$2.sessionAPIRoute(), {
                 cancelToken: new axios.CancelToken(function (c) {
                   cancelRequest = c;
                 })
@@ -187,7 +187,7 @@ var useSession = function useSession() {
                 break;
               }
 
-              router$1.replace(utils$1.onboardingRoute());
+              router$1.replace(utils$2.onboardingRoute());
               return _context.abrupt("return");
 
             case 9:

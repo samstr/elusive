@@ -1,6 +1,7 @@
 import Elusive from '../';
 import { BaseError } from '../errors';
 import { defaultDynamicTemplateData, sendMail } from '../mail';
+import { magicLoginRoute, termsRoute } from '../routes';
 import { createModel, createService } from './';
 import { getUserByID } from './users';
 
@@ -40,7 +41,10 @@ export const sendMagicSignUpEmail = async (req, toEmail, magicLoginID) => {
       subject: `Confirm your ${siteOptions.name} account`,
       preheader: `Welcome to ${siteOptions.name}. Thank you for confirming your email address. Click here to create your account. `,
       reasonForEmail: `you signed up for a ${siteOptions.name} account`,
-      magicLoginURL: `${dynamicTemplateData.baseURL}/login/${magicLoginID}`,
+      magicLoginURL: `${dynamicTemplateData.baseURL}${magicLoginRoute(
+        magicLoginID
+      )}`,
+      termsURL: `${dynamicTemplateData.baseURL}${termsRoute()}`,
     },
   });
 };
