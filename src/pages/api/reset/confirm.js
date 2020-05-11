@@ -1,23 +1,23 @@
-import Elusive from '../../';
-import { hashPassword } from '../../auth';
-import { resetPasswordConfirmForm } from '../../forms/auth';
-import { POST } from '../../http';
+import Elusive from '../../../';
+import { hashPassword } from '../../../auth';
+import { resetPasswordConfirmForm } from '../../../forms/auth';
+import { POST } from '../../../http';
 import {
   PasswordResetNotFoundError,
   PasswordResetAlreadyUsedError,
   PasswordResetExpiredError,
   getPasswordResetByID,
   updatePasswordReset,
-} from '../../models/passwordResets';
+} from '../../../models/passwordResets';
 import {
   UserNotEnabledError,
   UserNotFoundError,
   updateUser,
-} from '../../models/users';
-import { createSessionCookies } from '../../sessions';
-import { signTokens } from '../../tokens';
+} from '../../../models/users';
+import { createSessionCookies } from '../../../sessions';
+import { signTokens } from '../../../tokens';
 
-const resetPasswordConfirmApi = async ({ req, res }) => {
+const resetPasswordConfirmAPI = async ({ req, res }) => {
   const { tokens: tokenOptions } = Elusive.options;
   const { passwordResetID, password } = req.body;
 
@@ -76,8 +76,8 @@ const resetPasswordConfirmApi = async ({ req, res }) => {
   };
 };
 
-resetPasswordConfirmApi.options = {
+resetPasswordConfirmAPI.options = {
   allowedMethods: [POST],
 };
 
-export default resetPasswordConfirmApi;
+export default resetPasswordConfirmAPI;

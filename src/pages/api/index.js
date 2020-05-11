@@ -1,20 +1,20 @@
 import { apiWrapper } from './utils';
 export { apiWrapper };
 
-import loginApi from './login';
-export { loginApi };
+import loginAPI from './login';
+export { loginAPI };
 
-import logoutApi from './logout';
-export { logoutApi };
+import logoutAPI from './logout';
+export { logoutAPI };
 
-import registerApi from './register';
-export { registerApi };
+import registerAPI from './register';
+export { registerAPI };
 
-import resetPasswordConfirmApi from './reset-password-confirm';
-export { resetPasswordConfirmApi };
+import resetPasswordConfirmAPI from './reset/confirm';
+export { resetPasswordConfirmAPI };
 
-import resetPasswordRequestApi from './reset-password-request';
-export { resetPasswordRequestApi };
+import resetPasswordRequestAPI from './reset/request';
+export { resetPasswordRequestAPI };
 
-import sessionApi from './session';
-export { sessionApi };
+import sessionAPI from './session';
+export { sessionAPI };

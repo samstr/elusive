@@ -1,10 +1,10 @@
-const sessionApi = async ({ session }) => ({
+const sessionAPI = async ({ session }) => ({
   ...session,
 });
 
-sessionApi.options = {
+sessionAPI.options = {
   reloadSessionUser: true,
   setSessionCookies: true,
 };
 
-export default sessionApi;
+export default sessionAPI;

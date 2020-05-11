@@ -1,21 +1,21 @@
 import moment from 'moment';
 
-import Elusive from '../../';
-import { TooManyResetPasswordRequestsError } from '../../auth';
-import { resetPasswordRequestForm } from '../../forms/auth';
-import { POST } from '../../http';
+import Elusive from '../../../';
+import { TooManyResetPasswordRequestsError } from '../../../auth';
+import { resetPasswordRequestForm } from '../../../forms/auth';
+import { POST } from '../../../http';
 import {
   listPasswordResetAttempts,
   passwordResetAttemptsCollection,
   createPasswordResetAttempt,
-} from '../../models/passwordResetAttempts';
+} from '../../../models/passwordResetAttempts';
 import {
   createPasswordReset,
   sendPasswordResetRequestEmail,
-} from '../../models/passwordResets';
-import { getUser, usersCollection } from '../../models/users';
+} from '../../../models/passwordResets';
+import { getUser, usersCollection } from '../../../models/users';
 
-const resetPasswordRequestApi = async ({ req }) => {
+const resetPasswordRequestAPI = async ({ req }) => {
   const { auth: authOptions } = Elusive.options;
   const { email } = req.body;
 
@@ -67,8 +67,8 @@ const resetPasswordRequestApi = async ({ req }) => {
   }
 };
 
-resetPasswordRequestApi.options = {
+resetPasswordRequestAPI.options = {
   allowedMethods: [POST],
 };
 
-export default resetPasswordRequestApi;
+export default resetPasswordRequestAPI;

@@ -2,7 +2,7 @@ import { NotAuthenticatedError } from '../../auth';
 import { POST } from '../../http';
 import { deleteSessionCookies } from '../../sessions';
 
-const logoutApi = async ({ res, session }) => {
+const logoutAPI = async ({ res, session }) => {
   if (!session.isAuthenticated) {
     throw new NotAuthenticatedError('You are not logged in');
   }
@@ -15,8 +15,8 @@ const logoutApi = async ({ res, session }) => {
   };
 };
 
-logoutApi.options = {
+logoutAPI.options = {
   allowedMethods: [POST],
 };
 
-export default logoutApi;
+export default logoutAPI;

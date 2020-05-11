@@ -9,7 +9,7 @@ import {
   UserNotFoundError,
 } from '../../../../models/users';
 
-const resetPasswordConfirmDataApi = async ({ req }) => {
+const resetPasswordConfirmDataAPI = async ({ req }) => {
   const passwordReset = await getPasswordResetByID(req.query.id);
 
   if (!passwordReset) {
@@ -43,4 +43,4 @@ const resetPasswordConfirmDataApi = async ({ req }) => {
   };
 };
 
-export default resetPasswordConfirmDataApi;
+export default resetPasswordConfirmDataAPI;

@@ -1,2 +1,2 @@
-import resetPasswordConfirmDataApi from './reset/[id]';
-export { resetPasswordConfirmDataApi };
+import resetPasswordConfirmDataAPI from './reset/[id]';
+export { resetPasswordConfirmDataAPI };

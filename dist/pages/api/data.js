@@ -17,9 +17,9 @@ var users = require('../../models/users.js');
 require('moment');
 var passwordResets = require('../../models/passwordResets.js');
 
-var resetPasswordConfirmDataApi = function resetPasswordConfirmDataApi(_ref) {
+var resetPasswordConfirmDataAPI = function resetPasswordConfirmDataAPI(_ref) {
   var req, passwordReset;
-  return index$1._regeneratorRuntime.async(function resetPasswordConfirmDataApi$(_context) {
+  return index$1._regeneratorRuntime.async(function resetPasswordConfirmDataAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -88,4 +88,4 @@ var resetPasswordConfirmDataApi = function resetPasswordConfirmDataApi(_ref) {
   }, null, null, null, Promise);
 };
 
-exports.resetPasswordConfirmDataApi = resetPasswordConfirmDataApi;
+exports.resetPasswordConfirmDataAPI = resetPasswordConfirmDataAPI;

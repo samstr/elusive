@@ -23,7 +23,7 @@ import {
 import { createSessionCookies } from '../../sessions';
 import { signTokens } from '../../tokens';
 
-export const loginApi = async ({ req, res, session }) => {
+export const loginAPI = async ({ req, res, session }) => {
   const { auth: authOptions, tokens: tokenOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
@@ -108,8 +108,8 @@ export const loginApi = async ({ req, res, session }) => {
   };
 };
 
-loginApi.options = {
+loginAPI.options = {
   allowedMethods: [POST],
 };
 
-export default loginApi;
+export default loginAPI;

@@ -20,7 +20,7 @@ import {
   usersCollection,
 } from '../../models/users';
 
-const registerApi = async ({ req, res, session }) => {
+const registerAPI = async ({ req, res, session }) => {
   const { auth: authOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
@@ -87,8 +87,8 @@ const registerApi = async ({ req, res, session }) => {
   return {};
 };
 
-registerApi.options = {
+registerAPI.options = {
   allowedMethods: [POST],
 };
 
-export default registerApi;
+export default registerAPI;

@@ -149,10 +149,10 @@ var apiWrapper = function apiWrapper(req, res, api) {
   }, null, null, [[3, 27]], Promise);
 };
 
-var loginApi = function loginApi(_ref) {
+var loginAPI = function loginAPI(_ref) {
   var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, recentLoginAttemptsByAccount, _loginForm$validate, cleanValues, errors, user, claims;
 
-  return index$1._regeneratorRuntime.async(function loginApi$(_context) {
+  return index$1._regeneratorRuntime.async(function loginAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -276,13 +276,13 @@ var loginApi = function loginApi(_ref) {
     }
   }, null, null, null, Promise);
 };
-loginApi.options = {
+loginAPI.options = {
   allowedMethods: [utils$2.POST]
 };
 
-var logoutApi = function logoutApi(_ref) {
+var logoutAPI = function logoutAPI(_ref) {
   var res, session;
-  return index$1._regeneratorRuntime.async(function logoutApi$(_context) {
+  return index$1._regeneratorRuntime.async(function logoutAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -310,14 +310,14 @@ var logoutApi = function logoutApi(_ref) {
   }, null, null, null, Promise);
 };
 
-logoutApi.options = {
+logoutAPI.options = {
   allowedMethods: [utils$2.POST]
 };
 
-var registerApi = function registerApi(_ref) {
+var registerAPI = function registerAPI(_ref) {
   var req, res, session, authOptions, email, _registerForm$validat, cleanValues, errors, ip, date1DayAgo, recentUsersByIP, user, magicLogin;
 
-  return index$1._regeneratorRuntime.async(function registerApi$(_context) {
+  return index$1._regeneratorRuntime.async(function registerAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -431,14 +431,14 @@ var registerApi = function registerApi(_ref) {
   }, null, null, null, Promise);
 };
 
-registerApi.options = {
+registerAPI.options = {
   allowedMethods: [utils$2.POST]
 };
 
-var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
+var resetPasswordConfirmAPI = function resetPasswordConfirmAPI(_ref) {
   var req, res, tokenOptions, _req$body, passwordResetID, password, _resetPasswordConfirm, cleanValues, errors, passwordReset, claims;
 
-  return index$1._regeneratorRuntime.async(function resetPasswordConfirmApi$(_context) {
+  return index$1._regeneratorRuntime.async(function resetPasswordConfirmAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -537,14 +537,14 @@ var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
   }, null, null, null, Promise);
 };
 
-resetPasswordConfirmApi.options = {
+resetPasswordConfirmAPI.options = {
   allowedMethods: [utils$2.POST]
 };
 
-var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
+var resetPasswordRequestAPI = function resetPasswordRequestAPI(_ref) {
   var req, authOptions, email, ip, date1HourAgo, recentPasswordResetAttemptsByIP, _resetPasswordRequest, cleanValues, errors, user, passwordReset;
 
-  return index$1._regeneratorRuntime.async(function resetPasswordRequestApi$(_context) {
+  return index$1._regeneratorRuntime.async(function resetPasswordRequestAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -624,7 +624,7 @@ var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
   }, null, null, null, Promise);
 };
 
-resetPasswordRequestApi.options = {
+resetPasswordRequestAPI.options = {
   allowedMethods: [utils$2.POST]
 };
 
@@ -632,9 +632,9 @@ function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if 
 
 function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var sessionApi = function sessionApi(_ref) {
+var sessionAPI = function sessionAPI(_ref) {
   var session;
-  return index$1._regeneratorRuntime.async(function sessionApi$(_context) {
+  return index$1._regeneratorRuntime.async(function sessionAPI$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -649,15 +649,15 @@ var sessionApi = function sessionApi(_ref) {
   }, null, null, null, Promise);
 };
 
-sessionApi.options = {
+sessionAPI.options = {
   reloadSessionUser: true,
   setSessionCookies: true
 };
 
 exports.apiWrapper = apiWrapper;
-exports.loginApi = loginApi;
-exports.logoutApi = logoutApi;
-exports.registerApi = registerApi;
-exports.resetPasswordConfirmApi = resetPasswordConfirmApi;
-exports.resetPasswordRequestApi = resetPasswordRequestApi;
-exports.sessionApi = sessionApi;
+exports.loginAPI = loginAPI;
+exports.logoutAPI = logoutAPI;
+exports.registerAPI = registerAPI;
+exports.resetPasswordConfirmAPI = resetPasswordConfirmAPI;
+exports.resetPasswordRequestAPI = resetPasswordRequestAPI;
+exports.sessionAPI = sessionAPI;
