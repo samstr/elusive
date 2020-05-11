@@ -421,7 +421,11 @@ var registerAPI = function registerAPI(_ref) {
           return index$1._regeneratorRuntime.awrap(magicLogins.sendMagicSignUpEmail(req, user.email, magicLogin.id));
 
         case 32:
-          return _context.abrupt("return", {});
+          return _context.abrupt("return", {
+            user: {
+              id: user.id
+            }
+          });
 
         case 33:
         case "end":

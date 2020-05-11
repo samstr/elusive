@@ -21,6 +21,7 @@ export default [
       'models/passwordResetAttempts': './src/models/passwordResetAttempts.js',
       'models/passwordResets': './src/models/passwordResets.js',
       'models/users': './src/models/users.js',
+      onboarding: './src/onboarding/index.js',
       pages: './src/pages/index.js',
       'pages/api': './src/pages/api/index.js',
       'pages/api/data': './src/pages/api/data/index.js',

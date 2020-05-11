@@ -84,7 +84,11 @@ const registerAPI = async ({ req, res, session }) => {
 
   await sendMagicSignUpEmail(req, user.email, magicLogin.id);
 
-  return {};
+  return {
+    user: {
+      id: user.id,
+    },
+  };
 };
 
 registerAPI.options = {
