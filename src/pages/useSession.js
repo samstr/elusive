@@ -67,7 +67,7 @@ const useSession = () => {
             pathname !== onboardingRoute() &&
             pathname !== onboardingPasswordRoute()
           ) {
-            router.replace(onboardingRoute());
+            router.replace(onboardingPasswordRoute());
           }
         }
       } catch (err) {

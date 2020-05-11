@@ -188,7 +188,7 @@ var useSession = function useSession() {
                 pathname = window.location.pathname;
 
                 if (((_session$claims$user$ = _session.claims.user.onboarding) === null || _session$claims$user$ === void 0 ? void 0 : _session$claims$user$.needsPassword) && pathname !== utils$2.onboardingRoute() && pathname !== utils$2.onboardingPasswordRoute()) {
-                  router$1.replace(utils$2.onboardingRoute());
+                  router$1.replace(utils$2.onboardingPasswordRoute());
                 }
               }
 
