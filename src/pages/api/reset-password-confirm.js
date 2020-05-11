@@ -1,6 +1,6 @@
 import Elusive from '../../';
 import { hashPassword } from '../../auth';
-import { resetPasswordConfirmForm } from '../../forms';
+import { resetPasswordConfirmForm } from '../../forms/auth';
 import { POST } from '../../http';
 import {
   PasswordResetNotFoundError,

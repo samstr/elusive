@@ -283,89 +283,6 @@ var getOnChangeValue = function getOnChangeValue(event) {
   };
 };
 
-var loginForm = (function () {
-  var authOptions = index.options.auth;
-  return createForm({
-    fields: {
-      email: emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Please enter your email'
-        },
-        invalid: {
-          errorMessage: 'Your email is invalid'
-        }
-      }),
-      password: textField('password', {
-        required: {
-          value: true,
-          errorMessage: 'Please enter your password'
-        },
-        minLength: {
-          value: authOptions.passwordMinLength,
-          errorMessage: 'Your password is too short'
-        }
-      })
-    }
-  });
-});
-
-var registerForm = (function () {
-  return createForm({
-    fields: {
-      email: emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Your email is required'
-        },
-        invalid: {
-          errorMessage: 'Your email address is invalid'
-        }
-      })
-    }
-  });
-});
-
-var resetPasswordRequestForm = (function () {
-  return createForm({
-    fields: {
-      email: emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Your email is required'
-        },
-        invalid: {
-          errorMessage: 'Your email address is invalid'
-        }
-      })
-    }
-  });
-});
-
-var resetPasswordConfirmForm = (function () {
-  var authOptions = index.options.auth;
-  return createForm({
-    fields: {
-      passwordResetID: textField('passwordResetID', {
-        required: {
-          value: true,
-          errorMessage: 'Missing password reset key'
-        }
-      }),
-      password: textField('password', {
-        required: {
-          value: true,
-          errorMessage: 'Your password is required'
-        },
-        minLength: {
-          value: authOptions.passwordMinLength,
-          errorMessage: 'Your password is too short'
-        }
-      })
-    }
-  });
-});
-
 exports.FieldValueTooLongError = FieldValueTooLongError;
 exports.FieldValueTooShortError = FieldValueTooShortError;
 exports.FormError = FormError;
@@ -378,8 +295,4 @@ exports.createForm = createForm;
 exports.emailField = emailField;
 exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
-exports.loginForm = loginForm;
-exports.registerForm = registerForm;
-exports.resetPasswordConfirmForm = resetPasswordConfirmForm;
-exports.resetPasswordRequestForm = resetPasswordRequestForm;
 exports.textField = textField;

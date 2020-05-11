@@ -13,9 +13,10 @@ require('prop-types');
 require('react-bootstrap');
 var utils = require('../utils-7e8cb237.js');
 require('bcryptjs');
-var resetPasswordConfirm = require('../reset-password-confirm-942bd2d7.js');
+require('../utils-77793fc7.js');
 require('sanitize-html');
-var utils$1 = require('../utils-b08f259e.js');
+var resetPasswordRequest = require('../reset-password-request-19bcb399.js');
+var utils$2 = require('../utils-b08f259e.js');
 var index$1 = require('../index-2340470f.js');
 require('../utils-b8aefd19.js');
 require('uuid');
@@ -27,9 +28,9 @@ var magicLogins = require('../models/magicLogins.js');
 var passwordResetAttempts = require('../models/passwordResetAttempts.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('../models/passwordResets.js');
-var utils$3 = require('../utils-9cbd9924.js');
+var utils$4 = require('../utils-15081c20.js');
 require('../SessionContext-efd795c9.js');
-var utils$4 = require('../utils-c61a436b.js');
+var utils$5 = require('../utils-c61a436b.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -45,15 +46,15 @@ var apiWrapper = function apiWrapper(req, res, api) {
           sentry = index.services.sentry;
           tokenOptions = index.options.tokens;
           options = _objectSpread({
-            allowedMethods: [utils$1.GET],
+            allowedMethods: [utils$2.GET],
             requireAuth: false,
             setSessionCookies: false,
             reloadSessionUser: false
           }, api.options);
           _context.prev = 3;
-          utils$1.validateRequest(req, res, options);
+          utils$2.validateRequest(req, res, options);
           _context.next = 7;
-          return index$1._regeneratorRuntime.awrap(utils$3.getSession(req, options.reloadSessionUser));
+          return index$1._regeneratorRuntime.awrap(utils$4.getSession(req, options.reloadSessionUser));
 
         case 7:
           _await$getSession = _context.sent;
@@ -61,7 +62,7 @@ var apiWrapper = function apiWrapper(req, res, api) {
           tokens = _await$getSession.tokens;
 
           if (options.setSessionCookies && session.isAuthenticated && tokens) {
-            utils$3.createSessionCookies(res, utils$4.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+            utils$4.createSessionCookies(res, utils$5.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
           }
 
           if (!(options.requireAuth && !session.isAuthenticated)) {
@@ -69,7 +70,7 @@ var apiWrapper = function apiWrapper(req, res, api) {
             break;
           }
 
-          return _context.abrupt("return", utils$1.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
+          return _context.abrupt("return", utils$2.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
 
         case 13:
           data = {};
@@ -93,35 +94,35 @@ var apiWrapper = function apiWrapper(req, res, api) {
             break;
           }
 
-          return _context.abrupt("return", utils$1.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
+          return _context.abrupt("return", utils$2.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
 
         case 24:
-          return _context.abrupt("return", utils$1.httpOKResponse(res, data));
+          return _context.abrupt("return", utils$2.httpOKResponse(res, data));
 
         case 27:
           _context.prev = 27;
           _context.t5 = _context["catch"](3);
 
-          if (!(_context.t5 instanceof utils$1.HttpError)) {
+          if (!(_context.t5 instanceof utils$2.HttpError)) {
             _context.next = 32;
             break;
           }
 
-          if (!(_context.t5 instanceof utils$1.HttpMethodNotAllowedError)) {
+          if (!(_context.t5 instanceof utils$2.HttpMethodNotAllowedError)) {
             _context.next = 32;
             break;
           }
 
-          return _context.abrupt("return", utils$1.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
+          return _context.abrupt("return", utils$2.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 32:
-          if (!(_context.t5 instanceof utils$3.SessionError || _context.t5 instanceof utils$4.TokenError)) {
+          if (!(_context.t5 instanceof utils$4.SessionError || _context.t5 instanceof utils$5.TokenError)) {
             _context.next = 35;
             break;
           }
 
-          utils$3.deleteSessionCookies(res);
-          return _context.abrupt("return", utils$1.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
+          utils$4.deleteSessionCookies(res);
+          return _context.abrupt("return", utils$2.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 35:
           if (!(_context.t5 instanceof FormErrors.BaseError)) {
@@ -129,7 +130,7 @@ var apiWrapper = function apiWrapper(req, res, api) {
             break;
           }
 
-          return _context.abrupt("return", utils$1.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
+          return _context.abrupt("return", utils$2.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
 
         case 37:
           console.error('error in apiWrapper:', _context.t5);
@@ -138,7 +139,7 @@ var apiWrapper = function apiWrapper(req, res, api) {
             sentry.captureException(_context.t5);
           }
 
-          return _context.abrupt("return", utils$1.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
+          return _context.abrupt("return", utils$2.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
 
         case 40:
         case "end":
@@ -216,7 +217,7 @@ var loginApi = function loginApi(_ref) {
           }));
 
         case 21:
-          _loginForm$validate = resetPasswordConfirm.loginForm().validate({
+          _loginForm$validate = resetPasswordRequest.loginForm().validate({
             email: email,
             password: password
           }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
@@ -262,7 +263,7 @@ var loginApi = function loginApi(_ref) {
 
         case 33:
           claims = tokenOptions.createClaims(user);
-          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), user.id);
+          utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), user.id);
           return _context.abrupt("return", {
             isAuthenticated: true,
             claims: claims
@@ -276,7 +277,7 @@ var loginApi = function loginApi(_ref) {
   }, null, null, null, Promise);
 };
 loginApi.options = {
-  allowedMethods: [utils$1.POST]
+  allowedMethods: [utils$2.POST]
 };
 
 var logoutApi = function logoutApi(_ref) {
@@ -295,7 +296,7 @@ var logoutApi = function logoutApi(_ref) {
           throw new utils.NotAuthenticatedError('You are not logged in');
 
         case 3:
-          utils$3.deleteSessionCookies(res);
+          utils$4.deleteSessionCookies(res);
           return _context.abrupt("return", {
             isAuthenticated: false,
             claims: null
@@ -310,7 +311,7 @@ var logoutApi = function logoutApi(_ref) {
 };
 
 logoutApi.options = {
-  allowedMethods: [utils$1.POST]
+  allowedMethods: [utils$2.POST]
 };
 
 var registerApi = function registerApi(_ref) {
@@ -332,7 +333,7 @@ var registerApi = function registerApi(_ref) {
 
         case 4:
           email = req.body.email;
-          _registerForm$validat = resetPasswordConfirm.registerForm().validate({
+          _registerForm$validat = resetPasswordRequest.registerForm().validate({
             email: email
           }), cleanValues = _registerForm$validat.cleanValues, errors = _registerForm$validat.errors;
 
@@ -431,7 +432,7 @@ var registerApi = function registerApi(_ref) {
 };
 
 registerApi.options = {
-  allowedMethods: [utils$1.POST]
+  allowedMethods: [utils$2.POST]
 };
 
 var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
@@ -444,7 +445,7 @@ var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
           req = _ref.req, res = _ref.res;
           tokenOptions = index.options.tokens;
           _req$body = req.body, passwordResetID = _req$body.passwordResetID, password = _req$body.password;
-          _resetPasswordConfirm = resetPasswordConfirm.resetPasswordConfirmForm().validate({
+          _resetPasswordConfirm = resetPasswordRequest.resetPasswordConfirmForm().validate({
             passwordResetID: passwordResetID,
             password: password
           }), cleanValues = _resetPasswordConfirm.cleanValues, errors = _resetPasswordConfirm.errors;
@@ -522,7 +523,7 @@ var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
 
         case 25:
           claims = tokenOptions.createClaims(passwordReset.user);
-          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), passwordReset.user.id);
+          utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), passwordReset.user.id);
           return _context.abrupt("return", {
             isAuthenticated: true,
             claims: claims
@@ -537,7 +538,7 @@ var resetPasswordConfirmApi = function resetPasswordConfirmApi(_ref) {
 };
 
 resetPasswordConfirmApi.options = {
-  allowedMethods: [utils$1.POST]
+  allowedMethods: [utils$2.POST]
 };
 
 var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
@@ -579,7 +580,7 @@ var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
           }));
 
         case 13:
-          _resetPasswordRequest = resetPasswordConfirm.resetPasswordRequestForm().validate({
+          _resetPasswordRequest = resetPasswordRequest.resetPasswordRequestForm().validate({
             email: email
           }), cleanValues = _resetPasswordRequest.cleanValues, errors = _resetPasswordRequest.errors;
 
@@ -624,7 +625,7 @@ var resetPasswordRequestApi = function resetPasswordRequestApi(_ref) {
 };
 
 resetPasswordRequestApi.options = {
-  allowedMethods: [utils$1.POST]
+  allowedMethods: [utils$2.POST]
 };
 
 function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }

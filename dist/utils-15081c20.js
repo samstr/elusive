@@ -5,7 +5,7 @@ var index = require('./index.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
 var index$1 = require('./index-2340470f.js');
 var users = require('./models/users.js');
-var utils$4 = require('./utils-c61a436b.js');
+var utils$5 = require('./utils-c61a436b.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -127,14 +127,14 @@ var getSession = function getSession(req, reloadSessionUser) {
             break;
           }
 
-          _getClaims = utils$4.getClaims(accessToken, tokenOptions.secret), accessTokenClaims = _getClaims.claims, accessTokenExpired = _getClaims.expired, accessTokenInvalid = _getClaims.invalid;
+          _getClaims = utils$5.getClaims(accessToken, tokenOptions.secret), accessTokenClaims = _getClaims.claims, accessTokenExpired = _getClaims.expired, accessTokenInvalid = _getClaims.invalid;
 
           if (!accessTokenInvalid) {
             _context.next = 11;
             break;
           }
 
-          throw new utils$4.InvalidAccessTokenError('Invalid access token');
+          throw new utils$5.InvalidAccessTokenError('Invalid access token');
 
         case 11:
           if (!accessTokenClaims) {
@@ -162,14 +162,14 @@ var getSession = function getSession(req, reloadSessionUser) {
           }
 
           // access token has expired (every 10 mins) so we need to generate a new one from the refreshToken
-          _getClaims2 = utils$4.getClaims(refreshToken, tokenOptions.secret), refreshTokenClaims = _getClaims2.claims, refreshTokenExpired = _getClaims2.expired, refreshTokenInvalid = _getClaims2.invalid;
+          _getClaims2 = utils$5.getClaims(refreshToken, tokenOptions.secret), refreshTokenClaims = _getClaims2.claims, refreshTokenExpired = _getClaims2.expired, refreshTokenInvalid = _getClaims2.invalid;
 
           if (!refreshTokenInvalid) {
             _context.next = 21;
             break;
           }
 
-          throw new utils$4.InvalidRefreshTokenError('Invalid refresh token');
+          throw new utils$5.InvalidRefreshTokenError('Invalid refresh token');
 
         case 21:
           if (!refreshTokenExpired) {
@@ -177,7 +177,7 @@ var getSession = function getSession(req, reloadSessionUser) {
             break;
           }
 
-          throw new utils$4.RefreshTokenExpiredError('Refresh token expired');
+          throw new utils$5.RefreshTokenExpiredError('Refresh token expired');
 
         case 23:
           if (!(refreshTokenClaims.user.id !== userId)) {
@@ -225,7 +225,7 @@ var getSession = function getSession(req, reloadSessionUser) {
           session.claims = refreshTokenClaims;
 
         case 39:
-          tokens = utils$4.signTokens(session.claims, tokenOptions.secret);
+          tokens = utils$5.signTokens(session.claims, tokenOptions.secret);
 
         case 40:
           session.isAuthenticated = !!session.claims;

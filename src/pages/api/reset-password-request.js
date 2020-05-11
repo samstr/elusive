@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import Elusive from '../../';
 import { TooManyResetPasswordRequestsError } from '../../auth';
-import { resetPasswordRequestForm } from '../../forms';
+import { resetPasswordRequestForm } from '../../forms/auth';
 import { POST } from '../../http';
 import {
   listPasswordResetAttempts,
