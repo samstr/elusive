@@ -9,7 +9,8 @@ export const magicLoginRoute = (id) => ({
 export const onboardingRoute = () => '/onboarding';
 export const onboardingPasswordRoute = () => '/onboarding/password';
 export const onboardingNameRoute = () => '/onboarding/name';
-export const onboardingImageRoute = () => '/onboarding/image';
+export const onboardingProfilePictureRoute = () =>
+  '/onboarding/profile-picture';
 
 export const registerRoute = () => '/signup';
 export const resetPasswordConfirmRoute = (id) => ({
@@ -26,7 +27,7 @@ export const loginRouteWithNext = () => {
   const excludedNextRoutes = [
     logoutRoute(),
     onboardingRoute(),
-    onboardingImageRoute(),
+    onboardingProfilePictureRoute(),
     onboardingNameRoute(),
     onboardingPasswordRoute(),
   ];
@@ -44,7 +45,8 @@ export const loginAPIRoute = () => '/api/login';
 export const logoutAPIRoute = () => '/api/logout';
 export const onboardingPasswordAPIRoute = () => '/api/onboarding/password';
 export const onboardingNameAPIRoute = () => '/api/onboarding/name';
-export const onboardingImageAPIRoute = () => '/api/onboarding/image';
+export const onboardingProfilePictureAPIRoute = () =>
+  '/api/onboarding/profile-picture';
 export const registerAPIRoute = () => '/api/register';
 export const resetPasswordConfirmAPIRoute = () => '/api/reset/confirm';
 export const resetPasswordRequestAPIRoute = () => '/api/reset/request';
