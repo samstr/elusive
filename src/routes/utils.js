@@ -19,6 +19,8 @@ export const magicLoginRoute = (id) => ({
 });
 export const onboardingRoute = () => '/onboarding';
 export const onboardingPasswordRoute = () => '/onboarding/password';
+export const onboardingNameRoute = () => '/onboarding/name';
+export const onboardingPictureRoute = () => '/onboarding/picture';
 
 export const registerRoute = () => '/signup';
 export const resetPasswordConfirmRoute = (id) => ({

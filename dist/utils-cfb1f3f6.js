@@ -30,7 +30,7 @@ var magicLoginRoute = function magicLoginRoute(id) {
   };
 };
 var onboardingRoute = function onboardingRoute() {
-  return '/welcome';
+  return '/onboarding';
 };
 var registerRoute = function registerRoute() {
   return '/signup';

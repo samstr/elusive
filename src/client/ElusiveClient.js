@@ -1,7 +1,7 @@
 class ElusiveClient {
   static instance;
 
-  setDefaults = () => {
+  setDefaults() {
     this.services = {
       firebase: null,
       sendgrid: null,
@@ -42,9 +42,9 @@ class ElusiveClient {
         secret: null,
       },
     };
-  };
+  }
 
-  init = (services, options) => {
+  init(services, options) {
     this.setDefaults();
 
     if (services) {
@@ -199,7 +199,7 @@ class ElusiveClient {
         }
       }
     }
-  };
+  }
 
   static getInstance() {
     if (ElusiveClient.instance) {

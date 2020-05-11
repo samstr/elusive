@@ -35,17 +35,18 @@ function _defineProperty(obj, key, value) {
 
 var ElusiveClient = /*#__PURE__*/function () {
   function ElusiveClient() {
-    var _this = this;
-
     classCallCheck._classCallCheck(this, ElusiveClient);
+  }
 
-    _defineProperty(this, "setDefaults", function () {
-      _this.services = {
+  _createClass(ElusiveClient, [{
+    key: "setDefaults",
+    value: function setDefaults() {
+      this.services = {
         firebase: null,
         sendgrid: null,
         sentry: null
       };
-      _this.options = {
+      this.options = {
         auth: {
           maxLoginAttemptsPerAccountPerHour: 8,
           maxLoginAttemptsPerIPPerHour: 16,
@@ -81,10 +82,11 @@ var ElusiveClient = /*#__PURE__*/function () {
           secret: null
         }
       };
-    });
-
-    _defineProperty(this, "init", function (services, options) {
-      _this.setDefaults();
+    }
+  }, {
+    key: "init",
+    value: function init(services, options) {
+      this.setDefaults();
 
       if (services) {
         var firebase = services.firebase,
@@ -92,15 +94,15 @@ var ElusiveClient = /*#__PURE__*/function () {
             sentry = services.sentry;
 
         if (firebase) {
-          _this.services.firebase = firebase;
+          this.services.firebase = firebase;
         }
 
         if (sendgrid) {
-          _this.services.sendgrid = sendgrid;
+          this.services.sendgrid = sendgrid;
         }
 
         if (sentry) {
-          _this.services.sentry = sentry;
+          this.services.sentry = sentry;
         }
       }
 
@@ -121,31 +123,31 @@ var ElusiveClient = /*#__PURE__*/function () {
               saltRounds = auth.saltRounds;
 
           if (maxLoginAttemptsPerAccountPerHour) {
-            _this.options.auth.maxLoginAttemptsPerAccountPerHour = maxLoginAttemptsPerAccountPerHour;
+            this.options.auth.maxLoginAttemptsPerAccountPerHour = maxLoginAttemptsPerAccountPerHour;
           }
 
           if (maxLoginAttemptsPerIPPerHour) {
-            _this.options.auth.maxLoginAttemptsPerIPPerHour = maxLoginAttemptsPerIPPerHour;
+            this.options.auth.maxLoginAttemptsPerIPPerHour = maxLoginAttemptsPerIPPerHour;
           }
 
           if (maxPasswordResetAttemptsPerHour) {
-            _this.options.auth.maxPasswordResetAttemptsPerHour = maxPasswordResetAttemptsPerHour;
+            this.options.auth.maxPasswordResetAttemptsPerHour = maxPasswordResetAttemptsPerHour;
           }
 
           if (maxRegistrationsPerDay) {
-            _this.options.auth.maxRegistrationsPerDay = maxRegistrationsPerDay;
+            this.options.auth.maxRegistrationsPerDay = maxRegistrationsPerDay;
           }
 
           if (passwordMinLength) {
-            _this.options.auth.passwordMinLength = passwordMinLength;
+            this.options.auth.passwordMinLength = passwordMinLength;
           }
 
           if (passwordResetExpiryHours) {
-            _this.options.auth.passwordResetExpiryHours = passwordResetExpiryHours;
+            this.options.auth.passwordResetExpiryHours = passwordResetExpiryHours;
           }
 
           if (saltRounds) {
-            _this.options.auth.saltRounds = saltRounds;
+            this.options.auth.saltRounds = saltRounds;
           }
         }
 
@@ -158,27 +160,27 @@ var ElusiveClient = /*#__PURE__*/function () {
               sendMailOnDevServer = mail.sendMailOnDevServer;
 
           if (fromEmail) {
-            _this.options.mail.fromEmail = fromEmail;
+            this.options.mail.fromEmail = fromEmail;
           }
 
           if (fromName) {
-            _this.options.mail.fromName = fromName;
+            this.options.mail.fromName = fromName;
           }
 
           if (magicLoginTemplateID) {
-            _this.options.mail.magicLoginTemplateID = magicLoginTemplateID;
+            this.options.mail.magicLoginTemplateID = magicLoginTemplateID;
           }
 
           if (magicSignUpTemplateID) {
-            _this.options.mail.magicSignUpTemplateID = magicSignUpTemplateID;
+            this.options.mail.magicSignUpTemplateID = magicSignUpTemplateID;
           }
 
           if (resetPasswordRequestTemplateID) {
-            _this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
+            this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
           }
 
           if (sendMailOnDevServer) {
-            _this.options.mail.sendMailOnDevServer = sendMailOnDevServer;
+            this.options.mail.sendMailOnDevServer = sendMailOnDevServer;
           }
         }
 
@@ -189,19 +191,19 @@ var ElusiveClient = /*#__PURE__*/function () {
               userIdCookieName = sessions.userIdCookieName;
 
           if (accessTokenCookieName) {
-            _this.options.sessions.accessTokenCookieName = accessTokenCookieName;
+            this.options.sessions.accessTokenCookieName = accessTokenCookieName;
           }
 
           if (cookieExpiryMins) {
-            _this.options.sessions.cookieExpiryMins = cookieExpiryMins;
+            this.options.sessions.cookieExpiryMins = cookieExpiryMins;
           }
 
           if (refreshTokenCookieName) {
-            _this.options.sessions.refreshTokenCookieName = refreshTokenCookieName;
+            this.options.sessions.refreshTokenCookieName = refreshTokenCookieName;
           }
 
           if (userIdCookieName) {
-            _this.options.sessions.userIdCookieName = userIdCookieName;
+            this.options.sessions.userIdCookieName = userIdCookieName;
           }
         }
 
@@ -209,7 +211,7 @@ var ElusiveClient = /*#__PURE__*/function () {
           var name = site.name;
 
           if (name) {
-            _this.options.site.name = name;
+            this.options.site.name = name;
           }
         }
 
@@ -220,26 +222,24 @@ var ElusiveClient = /*#__PURE__*/function () {
               secret = tokens.secret;
 
           if (accessTokenExpiryMins) {
-            _this.options.tokens.accessTokenExpiryMins = accessTokenExpiryMins;
+            this.options.tokens.accessTokenExpiryMins = accessTokenExpiryMins;
           }
 
           if (createClaims) {
-            _this.options.tokens.createClaims = createClaims;
+            this.options.tokens.createClaims = createClaims;
           }
 
           if (refreshTokenExpiryMins) {
-            _this.options.tokens.refreshTokenExpiryMins = refreshTokenExpiryMins;
+            this.options.tokens.refreshTokenExpiryMins = refreshTokenExpiryMins;
           }
 
           if (secret) {
-            _this.options.tokens.secret = secret;
+            this.options.tokens.secret = secret;
           }
         }
       }
-    });
-  }
-
-  _createClass(ElusiveClient, null, [{
+    }
+  }], [{
     key: "getInstance",
     value: function getInstance() {
       if (ElusiveClient.instance) {
