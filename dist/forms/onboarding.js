@@ -12,7 +12,7 @@ require('react-bootstrap');
 var utils = require('../utils-9aa5c5d6.js');
 require('sanitize-html');
 
-var setPassword = (function () {
+var password = (function () {
   var authOptions = index.options.auth;
   return utils.createForm({
     fields: {
@@ -30,4 +30,4 @@ var setPassword = (function () {
   });
 });
 
-exports.setPasswordForm = setPassword;
+exports.onboardingPasswordForm = password;

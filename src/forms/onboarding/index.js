@@ -1,2 +1,2 @@
-import setPasswordForm from './set-password';
-export { setPasswordForm };
+import onboardingPasswordForm from './password';
+export { onboardingPasswordForm };

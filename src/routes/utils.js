@@ -42,7 +42,10 @@ export const loginRouteWithNext = () => {
 // API routes
 export const loginAPIRoute = () => '/api/login';
 export const logoutAPIRoute = () => '/api/logout';
+export const onboardingPasswordAPIRoute = () => '/api/onboarding/password';
+export const onboardingNameAPIRoute = () => '/api/onboarding/name';
+export const onboardingImageAPIRoute = () => '/api/onboarding/image';
 export const registerAPIRoute = () => '/api/register';
-export const resetPasswordConfirmAPIRoute = () => '/api/reset-password-confirm';
-export const resetPasswordRequestAPIRoute = () => '/api/reset-password-request';
+export const resetPasswordConfirmAPIRoute = () => '/api/reset/confirm';
+export const resetPasswordRequestAPIRoute = () => '/api/reset/request';
 export const sessionAPIRoute = () => '/api/session';
