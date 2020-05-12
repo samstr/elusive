@@ -22,6 +22,9 @@ var magicLoginRoute = function magicLoginRoute(id) {
 var onboardingRoute = function onboardingRoute() {
   return '/onboarding';
 };
+var privacyRoute = function privacyRoute() {
+  return '/privacy';
+};
 var signupRoute = function signupRoute() {
   return '/signup';
 };
@@ -75,6 +78,7 @@ exports.logoutRoute = logoutRoute;
 exports.magicLoginRoute = magicLoginRoute;
 exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
+exports.privacyRoute = privacyRoute;
 exports.resetAPIRoute = resetAPIRoute;
 exports.resetRoute = resetRoute;
 exports.sessionAPIRoute = sessionAPIRoute;

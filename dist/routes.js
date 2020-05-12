@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var utils$2$1 = require('./utils-4cdd756f.js');
+var utils$2$1 = require('./utils-e5ce624c.js');
 
 
 
@@ -16,6 +16,7 @@ exports.logoutRoute = utils$2$1.logoutRoute;
 exports.magicLoginRoute = utils$2$1.magicLoginRoute;
 exports.onboardingAPIRoute = utils$2$1.onboardingAPIRoute;
 exports.onboardingRoute = utils$2$1.onboardingRoute;
+exports.privacyRoute = utils$2$1.privacyRoute;
 exports.resetAPIRoute = utils$2$1.resetAPIRoute;
 exports.resetRoute = utils$2$1.resetRoute;
 exports.sessionAPIRoute = utils$2$1.sessionAPIRoute;

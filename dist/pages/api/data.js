@@ -20,7 +20,7 @@ require('../../utils-505540cd.js');
 require('uuid');
 require('../../utils-b8a60dab.js');
 require('../../models/loginAttempts.js');
-require('../../utils-4cdd756f.js');
+require('../../utils-e5ce624c.js');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
 require('../../models/resetAttempts.js');
@@ -29,7 +29,7 @@ require('../../SessionContext-efd795c9.js');
 var utils$5 = require('../../utils-7f9c7d1c.js');
 require('jsonwebtoken');
 require('moment');
-require('../../signup-c453c97d.js');
+require('../../signup-a5f797cf.js');
 
 var magicLoginDataAPI = function magicLoginDataAPI(_ref) {
   var req, res, tokenOptions, magicLogin, claims;

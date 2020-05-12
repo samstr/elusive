@@ -8,6 +8,7 @@ export const magicLoginRoute = (id) => ({
   asPath: `/login/${id}`,
 });
 export const onboardingRoute = () => '/onboarding';
+export const privacyRoute = () => '/privacy';
 export const signupRoute = () => '/signup';
 export const resetRoute = () => '/reset';
 export const termsRoute = () => '/terms';
