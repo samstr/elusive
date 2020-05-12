@@ -9,9 +9,9 @@ require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('../utils-bf270033.js');
+var utils = require('../utils-7117daaa.js');
 require('sanitize-html');
-var signup = require('../signup-38e90245.js');
+var signup = require('../signup-6fe2610a.js');
 
 var onboarding = (function () {
   var authOptions = index.options.auth;

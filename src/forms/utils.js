@@ -17,12 +17,17 @@ export const createForm = ({ fields, validate }) => {
 
   return {
     fields,
-    validate: (values) => {
+    validate: (values, fieldsToValidate) => {
       const cleanValues = {};
       let errors = [];
 
+      // use all fields if none provided
+      if (!fieldsToValidate) {
+        fieldsToValidate = Object.keys(fields);
+      }
+
       // validate each field
-      Object.keys(fields).forEach((field) => {
+      fieldsToValidate.forEach((field) => {
         const value = values[field];
 
         try {

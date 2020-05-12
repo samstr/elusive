@@ -108,11 +108,16 @@ var createForm = function createForm(_ref) {
   var sentry = index.services.sentry;
   return {
     fields: fields,
-    validate: function validate(values) {
+    validate: function validate(values, fieldsToValidate) {
       var cleanValues = {};
-      var errors = []; // validate each field
+      var errors = []; // use all fields if none provided
 
-      Object.keys(fields).forEach(function (field) {
+      if (!fieldsToValidate) {
+        fieldsToValidate = Object.keys(fields);
+      } // validate each field
+
+
+      fieldsToValidate.forEach(function (field) {
         var value = values[field];
 
         try {

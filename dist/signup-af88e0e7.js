@@ -7,7 +7,7 @@ require('./FormErrors-1539c4dc.js');
 var utils = require('./utils-872f816c.js');
 require('bcryptjs');
 require('sanitize-html');
-var signup = require('./signup-38e90245.js');
+var signup = require('./signup-6fe2610a.js');
 var utils$2 = require('./utils-b08f259e.js');
 var index$1 = require('./index-2340470f.js');
 var loginAttempts = require('./models/loginAttempts.js');
