@@ -3,7 +3,16 @@ import React from 'react';
 import { Button as BootstrapButton, Spinner } from 'react-bootstrap';
 
 const Button = (props) => {
-  const { variant, type, onClick, isLoading, text, block, disabled } = props;
+  const {
+    block,
+    disabled,
+    isLoading,
+    onClick,
+    size,
+    text,
+    type,
+    variant,
+  } = props;
 
   let _disabled = disabled;
 
@@ -30,6 +39,7 @@ const Button = (props) => {
       type={type}
       onClick={onClick}
       disabled={_disabled}
+      size={size}
       block={block}>
       {spinnerContent}
       {textContent}
@@ -45,6 +55,7 @@ Button.propTypes = {
   text: PropTypes.string,
   block: PropTypes.bool,
   disabled: PropTypes.bool,
+  size: PropTypes.string,
 };
 
 export default Button;

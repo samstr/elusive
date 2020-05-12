@@ -12,13 +12,14 @@ var reactBootstrap = require('react-bootstrap');
 var __jsx = React__default.createElement;
 
 var Button = function Button(props) {
-  var variant = props.variant,
-      type = props.type,
-      onClick = props.onClick,
+  var block = props.block,
+      disabled = props.disabled,
       isLoading = props.isLoading,
+      onClick = props.onClick,
+      size = props.size,
       text = props.text,
-      block = props.block,
-      disabled = props.disabled;
+      type = props.type,
+      variant = props.variant;
   var _disabled = disabled;
   var spinnerContent;
   var textContent = text;
@@ -40,6 +41,7 @@ var Button = function Button(props) {
     type: type,
     onClick: onClick,
     disabled: _disabled,
+    size: size,
     block: block
   }, spinnerContent, textContent);
 };
@@ -51,7 +53,8 @@ Button.propTypes = {
   isLoading: PropTypes.bool,
   text: PropTypes.string,
   block: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  size: PropTypes.string
 };
 
 exports.Button = Button;
