@@ -22,15 +22,6 @@ var magicLoginRoute = function magicLoginRoute(id) {
 var onboardingRoute = function onboardingRoute() {
   return '/onboarding';
 };
-var onboardingPasswordRoute = function onboardingPasswordRoute() {
-  return '/onboarding/password';
-};
-var onboardingNameRoute = function onboardingNameRoute() {
-  return '/onboarding/name';
-};
-var onboardingProfilePictureRoute = function onboardingProfilePictureRoute() {
-  return '/onboarding/profile-picture';
-};
 var registerRoute = function registerRoute() {
   return '/signup';
 };
@@ -67,14 +58,8 @@ var loginAPIRoute = function loginAPIRoute() {
 var logoutAPIRoute = function logoutAPIRoute() {
   return '/api/logout';
 };
-var onboardingPasswordAPIRoute = function onboardingPasswordAPIRoute() {
-  return '/api/onboarding/password';
-};
-var onboardingNameAPIRoute = function onboardingNameAPIRoute() {
-  return '/api/onboarding/name';
-};
-var onboardingProfilePictureAPIRoute = function onboardingProfilePictureAPIRoute() {
-  return '/api/onboarding/profile-picture';
+var onboardingAPIRoute = function onboardingAPIRoute() {
+  return '/api/onboarding';
 };
 var registerAPIRoute = function registerAPIRoute() {
   return '/api/register';
@@ -97,12 +82,7 @@ exports.loginRouteWithNext = loginRouteWithNext;
 exports.logoutAPIRoute = logoutAPIRoute;
 exports.logoutRoute = logoutRoute;
 exports.magicLoginRoute = magicLoginRoute;
-exports.onboardingNameAPIRoute = onboardingNameAPIRoute;
-exports.onboardingNameRoute = onboardingNameRoute;
-exports.onboardingPasswordAPIRoute = onboardingPasswordAPIRoute;
-exports.onboardingPasswordRoute = onboardingPasswordRoute;
-exports.onboardingProfilePictureAPIRoute = onboardingProfilePictureAPIRoute;
-exports.onboardingProfilePictureRoute = onboardingProfilePictureRoute;
+exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
 exports.registerAPIRoute = registerAPIRoute;
 exports.registerRoute = registerRoute;

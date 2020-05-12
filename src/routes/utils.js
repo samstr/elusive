@@ -8,11 +8,6 @@ export const magicLoginRoute = (id) => ({
   asPath: `/login/${id}`,
 });
 export const onboardingRoute = () => '/onboarding';
-export const onboardingPasswordRoute = () => '/onboarding/password';
-export const onboardingNameRoute = () => '/onboarding/name';
-export const onboardingProfilePictureRoute = () =>
-  '/onboarding/profile-picture';
-
 export const registerRoute = () => '/signup';
 export const resetPasswordConfirmRoute = (id) => ({
   href: '/reset/[id]',
@@ -44,10 +39,7 @@ export const loginRouteWithNext = () => {
 // API routes
 export const loginAPIRoute = () => '/api/login';
 export const logoutAPIRoute = () => '/api/logout';
-export const onboardingPasswordAPIRoute = () => '/api/onboarding/password';
-export const onboardingNameAPIRoute = () => '/api/onboarding/name';
-export const onboardingProfilePictureAPIRoute = () =>
-  '/api/onboarding/profile-picture';
+export const onboardingAPIRoute = () => '/api/onboarding';
 export const registerAPIRoute = () => '/api/register';
 export const resetPasswordConfirmAPIRoute = () => '/api/reset/confirm';
 export const resetPasswordRequestAPIRoute = () => '/api/reset/request';
