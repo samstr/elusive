@@ -6,9 +6,9 @@ var index = require('./index.js');
 require('./FormErrors-1539c4dc.js');
 var utils = require('./utils-0e4a4d8d.js');
 require('bcryptjs');
+var reset = require('./reset-e12034ed.js');
 require('sanitize-html');
-var resetPasswordRequest = require('./reset-password-request-b77fe1f1.js');
-var utils$2 = require('./utils-b08f259e.js');
+var utils$1 = require('./utils-b08f259e.js');
 var index$1 = require('./index-2340470f.js');
 var loginAttempts = require('./models/loginAttempts.js');
 var users = require('./models/users.js');
@@ -16,9 +16,9 @@ var magicLogins = require('./models/magicLogins.js');
 var passwordResetAttempts = require('./models/passwordResetAttempts.js');
 var moment = _interopDefault(require('moment'));
 var passwordResets = require('./models/passwordResets.js');
-var utils$4 = require('./utils-e425e693.js');
+var utils$3 = require('./utils-841d3b9b.js');
 require('./SessionContext-efd795c9.js');
-var utils$5 = require('./utils-f128e714.js');
+var utils$4 = require('./utils-f128e714.js');
 
 var loginAPI = function loginAPI(_ref) {
   var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, recentLoginAttemptsByAccount, _loginForm$validate, cleanValues, errors, user, claims;
@@ -88,7 +88,7 @@ var loginAPI = function loginAPI(_ref) {
           }));
 
         case 21:
-          _loginForm$validate = resetPasswordRequest.loginForm().validate({
+          _loginForm$validate = reset.loginForm().validate({
             email: email,
             password: password
           }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
@@ -134,7 +134,7 @@ var loginAPI = function loginAPI(_ref) {
 
         case 33:
           claims = tokenOptions.createClaims(user);
-          utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), user.id);
+          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), user.id);
           return _context.abrupt("return", {
             isAuthenticated: true,
             claims: claims
@@ -148,7 +148,7 @@ var loginAPI = function loginAPI(_ref) {
   }, null, null, null, Promise);
 };
 loginAPI.options = {
-  allowedMethods: [utils$2.POST]
+  allowedMethods: [utils$1.POST]
 };
 
 var logoutAPI = function logoutAPI(_ref) {
@@ -167,7 +167,7 @@ var logoutAPI = function logoutAPI(_ref) {
           throw new utils.NotAuthenticatedError('You are not logged in');
 
         case 3:
-          utils$4.deleteSessionCookies(res);
+          utils$3.deleteSessionCookies(res);
           return _context.abrupt("return", {
             isAuthenticated: false,
             claims: null
@@ -182,7 +182,7 @@ var logoutAPI = function logoutAPI(_ref) {
 };
 
 logoutAPI.options = {
-  allowedMethods: [utils$2.POST]
+  allowedMethods: [utils$1.POST]
 };
 
 var registerAPI = function registerAPI(_ref) {
@@ -204,7 +204,7 @@ var registerAPI = function registerAPI(_ref) {
 
         case 4:
           email = req.body.email;
-          _registerForm$validat = resetPasswordRequest.registerForm().validate({
+          _registerForm$validat = reset.registerForm().validate({
             email: email
           }), cleanValues = _registerForm$validat.cleanValues, errors = _registerForm$validat.errors;
 
@@ -307,117 +307,11 @@ var registerAPI = function registerAPI(_ref) {
 };
 
 registerAPI.options = {
-  allowedMethods: [utils$2.POST]
-};
-
-var resetPasswordConfirmAPI = function resetPasswordConfirmAPI(_ref) {
-  var req, res, tokenOptions, _req$body, passwordResetID, password, _resetPasswordConfirm, cleanValues, errors, passwordReset, claims;
-
-  return index$1._regeneratorRuntime.async(function resetPasswordConfirmAPI$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          req = _ref.req, res = _ref.res;
-          tokenOptions = index.options.tokens;
-          _req$body = req.body, passwordResetID = _req$body.passwordResetID, password = _req$body.password;
-          _resetPasswordConfirm = resetPasswordRequest.resetPasswordConfirmForm().validate({
-            passwordResetID: passwordResetID,
-            password: password
-          }), cleanValues = _resetPasswordConfirm.cleanValues, errors = _resetPasswordConfirm.errors;
-
-          if (!(errors && errors.length)) {
-            _context.next = 6;
-            break;
-          }
-
-          return _context.abrupt("return", {
-            errors: errors
-          });
-
-        case 6:
-          _context.next = 8;
-          return index$1._regeneratorRuntime.awrap(passwordResets.getPasswordResetByID(passwordResetID));
-
-        case 8:
-          passwordReset = _context.sent;
-
-          if (passwordReset) {
-            _context.next = 11;
-            break;
-          }
-
-          throw new passwordResets.PasswordResetNotFoundError('Password reset key not found');
-
-        case 11:
-          if (!passwordReset.used) {
-            _context.next = 13;
-            break;
-          }
-
-          throw new passwordResets.PasswordResetAlreadyUsedError('Password reset key already used');
-
-        case 13:
-          if (!passwordReset.hasExpired()) {
-            _context.next = 15;
-            break;
-          }
-
-          throw new passwordResets.PasswordResetExpiredError('Password reset key has expired');
-
-        case 15:
-          _context.next = 17;
-          return index$1._regeneratorRuntime.awrap(passwordReset.getUser());
-
-        case 17:
-          if (passwordReset.user) {
-            _context.next = 19;
-            break;
-          }
-
-          throw new users.UserNotFoundError('User not found');
-
-        case 19:
-          if (passwordReset.user.enabled) {
-            _context.next = 21;
-            break;
-          }
-
-          throw new users.UserNotEnabledError('User not enabled');
-
-        case 21:
-          _context.next = 23;
-          return index$1._regeneratorRuntime.awrap(passwordResets.updatePasswordReset(passwordReset, {
-            used: true
-          }));
-
-        case 23:
-          _context.next = 25;
-          return index$1._regeneratorRuntime.awrap(users.updateUser(passwordReset.user, {
-            password: utils.hashPassword(cleanValues.password)
-          }));
-
-        case 25:
-          claims = tokenOptions.createClaims(passwordReset.user);
-          utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), passwordReset.user.id);
-          return _context.abrupt("return", {
-            isAuthenticated: true,
-            claims: claims
-          });
-
-        case 28:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, null, null, null, Promise);
-};
-
-resetPasswordConfirmAPI.options = {
-  allowedMethods: [utils$2.POST]
+  allowedMethods: [utils$1.POST]
 };
 
 var resetPasswordRequestAPI = function resetPasswordRequestAPI(_ref) {
-  var req, authOptions, email, ip, date1HourAgo, recentPasswordResetAttemptsByIP, _resetPasswordRequest, cleanValues, errors, user, passwordReset;
+  var req, authOptions, email, ip, date1HourAgo, recentPasswordResetAttemptsByIP, _resetForm$validate, cleanValues, errors, user, passwordReset;
 
   return index$1._regeneratorRuntime.async(function resetPasswordRequestAPI$(_context) {
     while (1) {
@@ -455,9 +349,9 @@ var resetPasswordRequestAPI = function resetPasswordRequestAPI(_ref) {
           }));
 
         case 13:
-          _resetPasswordRequest = resetPasswordRequest.resetPasswordRequestForm().validate({
+          _resetForm$validate = reset.resetForm().validate({
             email: email
-          }), cleanValues = _resetPasswordRequest.cleanValues, errors = _resetPasswordRequest.errors;
+          }), cleanValues = _resetForm$validate.cleanValues, errors = _resetForm$validate.errors;
 
           if (!(errors && errors.length)) {
             _context.next = 16;
@@ -500,7 +394,7 @@ var resetPasswordRequestAPI = function resetPasswordRequestAPI(_ref) {
 };
 
 resetPasswordRequestAPI.options = {
-  allowedMethods: [utils$2.POST]
+  allowedMethods: [utils$1.POST]
 };
 
 var sessionAPI = function sessionAPI(_ref) {
@@ -513,7 +407,7 @@ var sessionAPI = function sessionAPI(_ref) {
           tokenOptions = index.options.tokens; // Are there tokens? That means we regenerated the session. Set new cookies
 
           if (session.isAuthenticated && tokens) {
-            utils$4.createSessionCookies(res, utils$5.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+            utils$3.createSessionCookies(res, utils$4.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
           }
 
           return _context.abrupt("return", {
@@ -529,12 +423,11 @@ var sessionAPI = function sessionAPI(_ref) {
 };
 
 sessionAPI.options = {
-  reloadUserSource: utils$4.RELOAD_USER_SOURCE_DATABASE
+  reloadUserSource: utils$3.RELOAD_USER_SOURCE_DATABASE
 };
 
 exports.loginAPI = loginAPI;
 exports.logoutAPI = logoutAPI;
 exports.registerAPI = registerAPI;
-exports.resetPasswordConfirmAPI = resetPasswordConfirmAPI;
 exports.resetPasswordRequestAPI = resetPasswordRequestAPI;
 exports.sessionAPI = sessionAPI;

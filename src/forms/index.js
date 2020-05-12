@@ -15,6 +15,18 @@ export {
   UnknownFormError,
 };
 
+import loginForm from './login';
+export { loginForm };
+
+import onboardingForm from './onboarding';
+export { onboardingForm };
+
+import registerForm from './register';
+export { registerForm };
+
+import resetForm from './reset';
+export { resetForm };
+
 import {
   booleanField,
   clearFormFieldErrors,

@@ -7,7 +7,7 @@ import {
   TooManyLoginAttemptsError,
   comparePasswordHash,
 } from '../../auth';
-import { loginForm } from '../../forms/auth';
+import { loginForm } from '../../forms';
 import { POST } from '../../http';
 import {
   createLoginAttempt,

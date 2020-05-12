@@ -11,26 +11,25 @@ require('prop-types');
 require('react-bootstrap');
 require('../../utils-0e4a4d8d.js');
 require('bcryptjs');
-require('../../utils-9aa5c5d6.js');
+require('../../reset-e12034ed.js');
 require('sanitize-html');
-require('../../reset-password-request-b77fe1f1.js');
 require('../../utils-b08f259e.js');
 var index$1 = require('../../index-2340470f.js');
 require('../../utils-9a85f680.js');
 require('uuid');
 require('../../utils-29bedb4c.js');
 require('../../models/loginAttempts.js');
-require('../../utils-fd2c8eb3.js');
+require('../../utils-3535eccd.js');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
 require('../../models/passwordResetAttempts.js');
 require('moment');
 var passwordResets = require('../../models/passwordResets.js');
-var utils$4 = require('../../utils-e425e693.js');
+var utils$3 = require('../../utils-841d3b9b.js');
 require('../../SessionContext-efd795c9.js');
-var utils$5 = require('../../utils-f128e714.js');
+var utils$4 = require('../../utils-f128e714.js');
 require('jsonwebtoken');
-require('../../session-47f6d2f7.js');
+require('../../session-39ea72be.js');
 
 var magicLoginDataAPI = function magicLoginDataAPI(_ref) {
   var req, res, tokenOptions, magicLogin, claims;
@@ -96,7 +95,7 @@ var magicLoginDataAPI = function magicLoginDataAPI(_ref) {
 
         case 18:
           claims = tokenOptions.createClaims(magicLogin.user);
-          utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
+          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
           return _context.abrupt("return", {
             session: {
               isAuthenticated: true,

@@ -1,19 +1,19 @@
 import moment from 'moment';
 
-import Elusive from '../../../';
-import { TooManyResetPasswordRequestsError } from '../../../auth';
-import { resetPasswordRequestForm } from '../../../forms/auth';
-import { POST } from '../../../http';
+import Elusive from '../../';
+import { TooManyResetPasswordRequestsError } from '../../auth';
+import { resetForm } from '../../forms';
+import { POST } from '../../http';
 import {
   listPasswordResetAttempts,
   passwordResetAttemptsCollection,
   createPasswordResetAttempt,
-} from '../../../models/passwordResetAttempts';
+} from '../../models/passwordResetAttempts';
 import {
   createPasswordReset,
   sendPasswordResetRequestEmail,
-} from '../../../models/passwordResets';
-import { getUser, usersCollection } from '../../../models/users';
+} from '../../models/passwordResets';
+import { getUser, usersCollection } from '../../models/users';
 
 const resetPasswordRequestAPI = async ({ req }) => {
   const { auth: authOptions } = Elusive.options;
@@ -45,7 +45,7 @@ const resetPasswordRequestAPI = async ({ req }) => {
     email,
   });
 
-  const { cleanValues, errors } = resetPasswordRequestForm().validate({
+  const { cleanValues, errors } = resetForm().validate({
     email,
   });
 

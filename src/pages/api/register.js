@@ -6,7 +6,7 @@ import {
   TooManyRegistrationsError,
   UserAlreadyExistsError,
 } from '../../auth';
-import { registerForm } from '../../forms/auth';
+import { registerForm } from '../../forms';
 import { POST } from '../../http';
 import {
   createMagicLogin,

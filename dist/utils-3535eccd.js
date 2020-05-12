@@ -25,13 +25,7 @@ var onboardingRoute = function onboardingRoute() {
 var registerRoute = function registerRoute() {
   return '/signup';
 };
-var resetPasswordConfirmRoute = function resetPasswordConfirmRoute(id) {
-  return {
-    href: '/reset/[id]',
-    asPath: "/reset/".concat(id)
-  };
-};
-var resetPasswordRequestRoute = function resetPasswordRequestRoute() {
+var resetRoute = function resetRoute() {
   return '/reset';
 };
 var termsRoute = function termsRoute() {
@@ -64,11 +58,8 @@ var onboardingAPIRoute = function onboardingAPIRoute() {
 var registerAPIRoute = function registerAPIRoute() {
   return '/api/register';
 };
-var resetPasswordConfirmAPIRoute = function resetPasswordConfirmAPIRoute() {
-  return '/api/reset/confirm';
-};
-var resetPasswordRequestAPIRoute = function resetPasswordRequestAPIRoute() {
-  return '/api/reset/request';
+var resetAPIRoute = function resetAPIRoute() {
+  return '/api/reset';
 };
 var sessionAPIRoute = function sessionAPIRoute() {
   return '/api/session';
@@ -86,9 +77,7 @@ exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
 exports.registerAPIRoute = registerAPIRoute;
 exports.registerRoute = registerRoute;
-exports.resetPasswordConfirmAPIRoute = resetPasswordConfirmAPIRoute;
-exports.resetPasswordConfirmRoute = resetPasswordConfirmRoute;
-exports.resetPasswordRequestAPIRoute = resetPasswordRequestAPIRoute;
-exports.resetPasswordRequestRoute = resetPasswordRequestRoute;
+exports.resetAPIRoute = resetAPIRoute;
+exports.resetRoute = resetRoute;
 exports.sessionAPIRoute = sessionAPIRoute;
 exports.termsRoute = termsRoute;

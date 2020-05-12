@@ -11,8 +11,6 @@ export default [
       components: './src/components/index.js',
       errors: './src/errors/index.js',
       forms: './src/forms/index.js',
-      'forms/auth': './src/forms/auth/index.js',
-      'forms/onboarding': './src/forms/onboarding/index.js',
       http: './src/http/index.js',
       mail: './src/mail/index.js',
       'models/index': './src/models/index.js',

@@ -10,11 +10,8 @@ export { logoutAPI };
 import registerAPI from './register';
 export { registerAPI };
 
-import resetPasswordConfirmAPI from './reset/confirm';
-export { resetPasswordConfirmAPI };
-
-import resetPasswordRequestAPI from './reset/request';
-export { resetPasswordRequestAPI };
+import resetAPI from './reset';
+export { resetAPI };
 
 import sessionAPI from './session';
 export { sessionAPI };

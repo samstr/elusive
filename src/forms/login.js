@@ -1,21 +1,24 @@
-import Elusive from '../../';
-import { createForm, textField } from '../utils';
+import Elusive from '../';
+import { createForm, emailField, textField } from './utils';
 
 export default () => {
   const { auth: authOptions } = Elusive.options;
 
   return createForm({
     fields: {
-      passwordResetID: textField('passwordResetID', {
+      email: emailField('email', {
         required: {
           value: true,
-          errorMessage: 'Missing password reset key',
+          errorMessage: 'Please enter your email',
+        },
+        invalid: {
+          errorMessage: 'Your email is invalid',
         },
       }),
       password: textField('password', {
         required: {
           value: true,
-          errorMessage: 'Your password is required',
+          errorMessage: 'Please enter your password',
         },
         minLength: {
           value: authOptions.passwordMinLength,
