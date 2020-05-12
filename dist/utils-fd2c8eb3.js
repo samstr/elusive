@@ -42,7 +42,7 @@ var loginRouteWithNext = function loginRouteWithNext() {
       pathname = _window$location.pathname,
       search = _window$location.search;
   var href = loginRoute();
-  var excludedNextRoutes = [logoutRoute(), onboardingRoute(), onboardingProfilePictureRoute(), onboardingNameRoute(), onboardingPasswordRoute()];
+  var excludedNextRoutes = [logoutRoute(), onboardingRoute()];
 
   if (!excludedNextRoutes.includes(pathname)) {
     var encodedNext = encodeURIComponent("".concat(pathname).concat(search));
