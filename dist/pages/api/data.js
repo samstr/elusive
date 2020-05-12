@@ -3,33 +3,33 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('../../classCallCheck-d2bb402f.js');
-require('../../index-53403115.js');
+require('../../index-d4a1d5bf.js');
 var index = require('../../index.js');
 require('../../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-require('../../utils-0e4a4d8d.js');
+require('../../utils-872f816c.js');
 require('bcryptjs');
-require('../../reset-e12034ed.js');
+require('../../utils-bf270033.js');
 require('sanitize-html');
+require('../../signup-38e90245.js');
 require('../../utils-b08f259e.js');
 var index$1 = require('../../index-2340470f.js');
-require('../../utils-9a85f680.js');
+require('../../utils-505540cd.js');
 require('uuid');
-require('../../utils-29bedb4c.js');
+require('../../utils-b8a60dab.js');
 require('../../models/loginAttempts.js');
-require('../../utils-3535eccd.js');
+require('../../utils-4cdd756f.js');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
-require('../../models/passwordResetAttempts.js');
-require('moment');
-var passwordResets = require('../../models/passwordResets.js');
-var utils$3 = require('../../utils-841d3b9b.js');
+require('../../models/resetAttempts.js');
+var utils$4 = require('../../utils-d4e69f0f.js');
 require('../../SessionContext-efd795c9.js');
-var utils$4 = require('../../utils-f128e714.js');
+var utils$5 = require('../../utils-7f9c7d1c.js');
 require('jsonwebtoken');
-require('../../session-39ea72be.js');
+require('moment');
+require('../../signup-c453c97d.js');
 
 var magicLoginDataAPI = function magicLoginDataAPI(_ref) {
   var req, res, tokenOptions, magicLogin, claims;
@@ -95,7 +95,7 @@ var magicLoginDataAPI = function magicLoginDataAPI(_ref) {
 
         case 18:
           claims = tokenOptions.createClaims(magicLogin.user);
-          utils$3.createSessionCookies(res, utils$4.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
+          utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
           return _context.abrupt("return", {
             session: {
               isAuthenticated: true,
@@ -111,76 +111,4 @@ var magicLoginDataAPI = function magicLoginDataAPI(_ref) {
   }, null, null, null, Promise);
 };
 
-var resetPasswordConfirmDataAPI = function resetPasswordConfirmDataAPI(_ref) {
-  var req, passwordReset;
-  return index$1._regeneratorRuntime.async(function resetPasswordConfirmDataAPI$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          req = _ref.req;
-          _context.next = 3;
-          return index$1._regeneratorRuntime.awrap(passwordResets.getPasswordResetByID(req.query.id));
-
-        case 3:
-          passwordReset = _context.sent;
-
-          if (passwordReset) {
-            _context.next = 6;
-            break;
-          }
-
-          throw new passwordResets.PasswordResetNotFoundError('Password reset key not found');
-
-        case 6:
-          if (!passwordReset.used) {
-            _context.next = 8;
-            break;
-          }
-
-          throw new passwordResets.PasswordResetAlreadyUsedError('Password reset key has already been used');
-
-        case 8:
-          if (!passwordReset.hasExpired()) {
-            _context.next = 10;
-            break;
-          }
-
-          throw new passwordResets.PasswordResetExpiredError('Password reset key has expired');
-
-        case 10:
-          _context.next = 12;
-          return index$1._regeneratorRuntime.awrap(passwordReset.getUser());
-
-        case 12:
-          if (passwordReset.user) {
-            _context.next = 14;
-            break;
-          }
-
-          throw new users.UserNotFoundError('User not found');
-
-        case 14:
-          if (passwordReset.user.enabled) {
-            _context.next = 16;
-            break;
-          }
-
-          throw new users.UserNotEnabledError('User not enabled');
-
-        case 16:
-          return _context.abrupt("return", {
-            passwordReset: {
-              id: passwordReset.id
-            }
-          });
-
-        case 17:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, null, null, null, Promise);
-};
-
 exports.magicLoginDataAPI = magicLoginDataAPI;
-exports.resetPasswordConfirmDataAPI = resetPasswordConfirmDataAPI;

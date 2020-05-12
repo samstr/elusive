@@ -6,7 +6,7 @@ import {
   TooManyRegistrationsError,
   UserAlreadyExistsError,
 } from '../../auth';
-import { registerForm } from '../../forms';
+import { signupForm } from '../../forms/auth';
 import { POST } from '../../http';
 import {
   createMagicLogin,
@@ -20,7 +20,7 @@ import {
   usersCollection,
 } from '../../models/users';
 
-const registerAPI = async ({ req, res, session }) => {
+const signupAPI = async ({ req, res, session }) => {
   const { auth: authOptions } = Elusive.options;
 
   if (session.isAuthenticated) {
@@ -29,7 +29,7 @@ const registerAPI = async ({ req, res, session }) => {
 
   const { email } = req.body;
 
-  const { cleanValues, errors } = registerForm().validate({ email });
+  const { cleanValues, errors } = signupForm().validate({ email });
 
   if (errors && errors.length) {
     return { errors };
@@ -91,8 +91,8 @@ const registerAPI = async ({ req, res, session }) => {
   };
 };
 
-registerAPI.options = {
+signupAPI.options = {
   allowedMethods: [POST],
 };
 
-export default registerAPI;
+export default signupAPI;

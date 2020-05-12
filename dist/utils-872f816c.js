@@ -75,18 +75,18 @@ var TooManyLoginAttemptsError = /*#__PURE__*/function (_AuthError4) {
 
   return TooManyLoginAttemptsError;
 }(AuthError);
-var TooManyResetPasswordRequestsError = /*#__PURE__*/function (_AuthError5) {
-  FormErrors._inherits(TooManyResetPasswordRequestsError, _AuthError5);
+var TooManyResetAttemptsError = /*#__PURE__*/function (_AuthError5) {
+  FormErrors._inherits(TooManyResetAttemptsError, _AuthError5);
 
-  var _super6 = _createSuper(TooManyResetPasswordRequestsError);
+  var _super6 = _createSuper(TooManyResetAttemptsError);
 
-  function TooManyResetPasswordRequestsError() {
-    classCallCheck._classCallCheck(this, TooManyResetPasswordRequestsError);
+  function TooManyResetAttemptsError() {
+    classCallCheck._classCallCheck(this, TooManyResetAttemptsError);
 
     return _super6.apply(this, arguments);
   }
 
-  return TooManyResetPasswordRequestsError;
+  return TooManyResetAttemptsError;
 }(AuthError);
 var TooManyRegistrationsError = /*#__PURE__*/function (_AuthError6) {
   FormErrors._inherits(TooManyRegistrationsError, _AuthError6);
@@ -129,7 +129,7 @@ exports.AuthenticationFailedError = AuthenticationFailedError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.TooManyLoginAttemptsError = TooManyLoginAttemptsError;
 exports.TooManyRegistrationsError = TooManyRegistrationsError;
-exports.TooManyResetPasswordRequestsError = TooManyResetPasswordRequestsError;
+exports.TooManyResetAttemptsError = TooManyResetAttemptsError;
 exports.UserAlreadyExistsError = UserAlreadyExistsError;
 exports.comparePasswordHash = comparePasswordHash;
 exports.hashPassword = hashPassword;

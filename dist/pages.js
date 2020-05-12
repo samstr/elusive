@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-53403115.js');
+var client = require('./index-d4a1d5bf.js');
 require('./index.js');
 require('./FormErrors-1539c4dc.js');
 var React = require('react');
@@ -15,7 +15,7 @@ require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
 var index$1 = require('./index-2340470f.js');
 require('uuid');
-var utils$2 = require('./utils-3535eccd.js');
+var utils$2 = require('./utils-4cdd756f.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');

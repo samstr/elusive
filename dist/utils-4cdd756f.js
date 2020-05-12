@@ -22,7 +22,7 @@ var magicLoginRoute = function magicLoginRoute(id) {
 var onboardingRoute = function onboardingRoute() {
   return '/onboarding';
 };
-var registerRoute = function registerRoute() {
+var signupRoute = function signupRoute() {
   return '/signup';
 };
 var resetRoute = function resetRoute() {
@@ -55,14 +55,14 @@ var logoutAPIRoute = function logoutAPIRoute() {
 var onboardingAPIRoute = function onboardingAPIRoute() {
   return '/api/onboarding';
 };
-var registerAPIRoute = function registerAPIRoute() {
-  return '/api/register';
-};
 var resetAPIRoute = function resetAPIRoute() {
   return '/api/reset';
 };
 var sessionAPIRoute = function sessionAPIRoute() {
   return '/api/session';
+};
+var signupAPIRoute = function signupAPIRoute() {
+  return '/api/signup';
 };
 
 exports.homeRoute = homeRoute;
@@ -75,9 +75,9 @@ exports.logoutRoute = logoutRoute;
 exports.magicLoginRoute = magicLoginRoute;
 exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
-exports.registerAPIRoute = registerAPIRoute;
-exports.registerRoute = registerRoute;
 exports.resetAPIRoute = resetAPIRoute;
 exports.resetRoute = resetRoute;
 exports.sessionAPIRoute = sessionAPIRoute;
+exports.signupAPIRoute = signupAPIRoute;
+exports.signupRoute = signupRoute;
 exports.termsRoute = termsRoute;

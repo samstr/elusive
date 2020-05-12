@@ -9,11 +9,11 @@ import {
   magicLoginRoute,
   onboardingAPIRoute,
   onboardingRoute,
-  registerAPIRoute,
-  registerRoute,
   resetAPIRoute,
   resetRoute,
   sessionAPIRoute,
+  signupAPIRoute,
+  signupRoute,
   termsRoute,
 } from './utils';
 export {
@@ -27,10 +27,10 @@ export {
   magicLoginRoute,
   onboardingAPIRoute,
   onboardingRoute,
-  registerAPIRoute,
-  registerRoute,
   resetAPIRoute,
   resetRoute,
   sessionAPIRoute,
+  signupAPIRoute,
+  signupRoute,
   termsRoute,
 };

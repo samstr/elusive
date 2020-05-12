@@ -11,42 +11,42 @@ require('prop-types');
 require('react-bootstrap');
 require('../index-2340470f.js');
 require('uuid');
-var utils = require('../utils-b8a60dab.js');
+var utils$1 = require('../utils-b8a60dab.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-var COLLECTION = 'loginAttempts';
+var COLLECTION = 'resetAttempts';
 var model = function model(data) {
-  return utils.createModel(data);
+  return utils$1.createModel(data);
 };
 
-var _createService = utils.createService(model, COLLECTION),
-    loginAttemptsCollection = _createService.collection,
-    getLoginAttemptByID = _createService.getObjectByID,
-    getLoginAttempt = _createService.getObject,
-    createLoginAttempt = _createService.createObject,
-    updateLoginAttempt = _createService.updateObject,
-    listLoginAttempts = _createService.listObjects;
-var LoginAttemptNotFoundError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(LoginAttemptNotFoundError, _BaseError);
+var _createService = utils$1.createService(model, COLLECTION),
+    resetAttemptsCollection = _createService.collection,
+    getResetAttemptByID = _createService.getObjectByID,
+    getResetAttempt = _createService.getObject,
+    createResetAttempt = _createService.createObject,
+    updateResetAttempt = _createService.updateObject,
+    listResetAttempts = _createService.listObjects;
+var ResetAttemptNotFoundError = /*#__PURE__*/function (_BaseError) {
+  FormErrors._inherits(ResetAttemptNotFoundError, _BaseError);
 
-  var _super = _createSuper(LoginAttemptNotFoundError);
+  var _super = _createSuper(ResetAttemptNotFoundError);
 
-  function LoginAttemptNotFoundError() {
-    classCallCheck._classCallCheck(this, LoginAttemptNotFoundError);
+  function ResetAttemptNotFoundError() {
+    classCallCheck._classCallCheck(this, ResetAttemptNotFoundError);
 
     return _super.apply(this, arguments);
   }
 
-  return LoginAttemptNotFoundError;
+  return ResetAttemptNotFoundError;
 }(FormErrors.BaseError);
 
-exports.LoginAttemptNotFoundError = LoginAttemptNotFoundError;
-exports.createLoginAttempt = createLoginAttempt;
-exports.getLoginAttempt = getLoginAttempt;
-exports.getLoginAttemptByID = getLoginAttemptByID;
-exports.listLoginAttempts = listLoginAttempts;
-exports.loginAttemptsCollection = loginAttemptsCollection;
+exports.ResetAttemptNotFoundError = ResetAttemptNotFoundError;
+exports.createResetAttempt = createResetAttempt;
+exports.getResetAttempt = getResetAttempt;
+exports.getResetAttemptByID = getResetAttemptByID;
+exports.listResetAttempts = listResetAttempts;
 exports.model = model;
-exports.updateLoginAttempt = updateLoginAttempt;
+exports.resetAttemptsCollection = resetAttemptsCollection;
+exports.updateResetAttempt = updateResetAttempt;

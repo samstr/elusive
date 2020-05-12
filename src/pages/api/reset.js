@@ -1,21 +1,17 @@
 import moment from 'moment';
 
 import Elusive from '../../';
-import { TooManyResetPasswordRequestsError } from '../../auth';
-import { resetForm } from '../../forms';
+import { TooManyResetAttemptsError } from '../../auth';
+import { resetForm } from '../../forms/auth';
 import { POST } from '../../http';
 import {
-  listPasswordResetAttempts,
-  passwordResetAttemptsCollection,
-  createPasswordResetAttempt,
-} from '../../models/passwordResetAttempts';
-import {
-  createPasswordReset,
-  sendPasswordResetRequestEmail,
-} from '../../models/passwordResets';
+  listResetAttempts,
+  resetAttemptsCollection,
+  createResetAttempt,
+} from '../../models/resetAttempts';
 import { getUser, usersCollection } from '../../models/users';
 
-const resetPasswordRequestAPI = async ({ req }) => {
+const resetAPI = async ({ req }) => {
   const { auth: authOptions } = Elusive.options;
   const { email } = req.body;
 
@@ -23,24 +19,21 @@ const resetPasswordRequestAPI = async ({ req }) => {
   const date1HourAgo = moment().subtract(1, 'hour');
 
   if (process.env.NODE_ENV === 'production') {
-    const recentPasswordResetAttemptsByIP = await listPasswordResetAttempts(
-      passwordResetAttemptsCollection()
+    const recentResetAttemptsByIP = await listResetAttempts(
+      resetAttemptsCollection()
         .where('ip', '==', ip)
         .where('dateCreated', '>', date1HourAgo)
-        .limit(authOptions.maxPasswordResetAttemptsPerHour)
+        .limit(authOptions.maxResetAttemptsPerHour)
     );
 
-    if (
-      recentPasswordResetAttemptsByIP.length >=
-      authOptions.maxPasswordResetAttemptsPerHour
-    ) {
-      throw new TooManyResetPasswordRequestsError(
+    if (recentResetAttemptsByIP.length >= authOptions.maxResetAttemptsPerHour) {
+      throw new TooManyResetAttemptsError(
         'You have requested too many password resets. Try again later.'
       );
     }
   }
 
-  await createPasswordResetAttempt({
+  await createResetAttempt({
     ip,
     email,
   });
@@ -58,17 +51,13 @@ const resetPasswordRequestAPI = async ({ req }) => {
   );
 
   if (user && user.enabled) {
-    const passwordReset = await createPasswordReset({
-      userId: user.id,
-      ip: ip,
-    });
-
-    await sendPasswordResetRequestEmail(req, user.email, passwordReset.id);
+    // TODO: Create magic login link
+    // Send email
   }
 };
 
-resetPasswordRequestAPI.options = {
+resetAPI.options = {
   allowedMethods: [POST],
 };
 
-export default resetPasswordRequestAPI;
+export default resetAPI;

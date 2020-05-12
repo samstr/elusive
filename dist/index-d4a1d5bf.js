@@ -50,8 +50,8 @@ var ElusiveClient = /*#__PURE__*/function () {
         auth: {
           maxLoginAttemptsPerAccountPerHour: 8,
           maxLoginAttemptsPerIPPerHour: 16,
-          maxPasswordResetAttemptsPerHour: 4,
           maxRegistrationsPerDay: 5,
+          maxResetAttemptsPerHour: 5,
           passwordMinLength: 3,
           passwordResetExpiryHours: 24,
           saltRounds: 10
@@ -116,8 +116,8 @@ var ElusiveClient = /*#__PURE__*/function () {
         if (auth) {
           var maxLoginAttemptsPerAccountPerHour = auth.maxLoginAttemptsPerAccountPerHour,
               maxLoginAttemptsPerIPPerHour = auth.maxLoginAttemptsPerIPPerHour,
-              maxPasswordResetAttemptsPerHour = auth.maxPasswordResetAttemptsPerHour,
               maxRegistrationsPerDay = auth.maxRegistrationsPerDay,
+              maxResetAttemptsPerHour = auth.maxResetAttemptsPerHour,
               passwordMinLength = auth.passwordMinLength,
               passwordResetExpiryHours = auth.passwordResetExpiryHours,
               saltRounds = auth.saltRounds;
@@ -130,12 +130,12 @@ var ElusiveClient = /*#__PURE__*/function () {
             this.options.auth.maxLoginAttemptsPerIPPerHour = maxLoginAttemptsPerIPPerHour;
           }
 
-          if (maxPasswordResetAttemptsPerHour) {
-            this.options.auth.maxPasswordResetAttemptsPerHour = maxPasswordResetAttemptsPerHour;
-          }
-
           if (maxRegistrationsPerDay) {
             this.options.auth.maxRegistrationsPerDay = maxRegistrationsPerDay;
+          }
+
+          if (maxResetAttemptsPerHour) {
+            this.options.auth.maxResetAttemptsPerHour = maxResetAttemptsPerHour;
           }
 
           if (passwordMinLength) {
