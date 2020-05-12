@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "2.0.55",
+  "version": "2.0.56",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -36,7 +36,7 @@
     "bootstrap": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.25.3",
-    "next": "^9.3.6",
+    "next": "^9.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",

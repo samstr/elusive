@@ -3,16 +3,16 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-var client = require('../index-d4a1d5bf.js');
+var client = require('../index-15dd3ed4.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var index$1 = require('../index-2340470f.js');
-var utils = require('../utils-505540cd.js');
+var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
+var utils = require('../utils-59a862f2.js');
 require('uuid');
-var utils$1 = require('../utils-b8a60dab.js');
+var utils$1 = require('../utils-3ba3aef8.js');
 var utils$2 = require('../utils-e5ce624c.js');
 var users = require('./users.js');
 
@@ -27,24 +27,30 @@ var COLLECTION = 'magicLogins';
 var model = function model(data) {
   var model = utils$1.createModel(data);
 
-  model.getUser = function _callee(_) {
-    return index$1._regeneratorRuntime.async(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return index$1._regeneratorRuntime.awrap(users.getUserByID(model.userId));
+  model.getUser = /*#__PURE__*/function () {
+    var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_) {
+      return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return users.getUserByID(model.userId);
 
-          case 2:
-            model.user = _context.sent;
+            case 2:
+              model.user = _context.sent;
 
-          case 3:
-          case "end":
-            return _context.stop();
+            case 3:
+            case "end":
+              return _context.stop();
+          }
         }
-      }
-    }, null, null, null, Promise);
-  };
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   return model;
 };
@@ -82,38 +88,61 @@ var MagicLoginNotFoundError = /*#__PURE__*/function (_BaseError2) {
 
   return MagicLoginNotFoundError;
 }(FormErrors.BaseError);
-var sendMagicSignUpEmail = function sendMagicSignUpEmail(req, toEmail, magicLoginID) {
-  var _Elusive$options, mailOptions, siteOptions, dynamicTemplateData;
+var sendSignupEmail = /*#__PURE__*/function () {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee2(req, toEmail, magicLoginID) {
+    var _Elusive$options, mailOptions, siteOptions, dynamicTemplateData;
 
-  return index$1._regeneratorRuntime.async(function sendMagicSignUpEmail$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _Elusive$options = index.options, mailOptions = _Elusive$options.mail, siteOptions = _Elusive$options.site;
-          dynamicTemplateData = utils.defaultDynamicTemplateData(req);
-          _context2.next = 4;
-          return index$1._regeneratorRuntime.awrap(utils.sendMail({
-            to: toEmail,
-            template_id: mailOptions.magicSignUpTemplateID,
-            dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
-              subject: "Confirm your ".concat(siteOptions.name, " account"),
-              preheader: "Welcome to ".concat(siteOptions.name, ". Thank you for confirming your email address. Click here to create your account. "),
-              reasonForEmail: "you signed up for a ".concat(siteOptions.name, " account"),
-              magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID).asPath),
-              termsURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.termsRoute())
-            })
-          }));
+    return asyncToGenerator._regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _Elusive$options = index.options, mailOptions = _Elusive$options.mail, siteOptions = _Elusive$options.site;
+            dynamicTemplateData = utils.defaultDynamicTemplateData(req);
+            _context2.next = 4;
+            return utils.sendMail({
+              to: toEmail,
+              template_id: mailOptions.magicSignUpTemplateID,
+              dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
+                subject: "Confirm your ".concat(siteOptions.name, " account"),
+                preheader: "Welcome to ".concat(siteOptions.name, ". Thank you for confirming your email address. Click here to create your account. "),
+                reasonForEmail: "you signed up for a ".concat(siteOptions.name, " account"),
+                magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID).asPath),
+                termsURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.termsRoute())
+              })
+            });
 
-        case 4:
-          return _context2.abrupt("return", _context2.sent);
+          case 4:
+            return _context2.abrupt("return", _context2.sent);
 
-        case 5:
-        case "end":
-          return _context2.stop();
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
       }
-    }
-  }, null, null, null, Promise);
-};
+    }, _callee2);
+  }));
+
+  return function sendSignupEmail(_x2, _x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var sendResetEmail = /*#__PURE__*/function () {
+  var _ref3 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee3(req, toEmail, magicLoginID) {
+    return asyncToGenerator._regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function sendResetEmail(_x5, _x6, _x7) {
+    return _ref3.apply(this, arguments);
+  };
+}();
 
 exports.MagicLoginAlreadyUsedError = MagicLoginAlreadyUsedError;
 exports.MagicLoginNotFoundError = MagicLoginNotFoundError;
@@ -123,5 +152,6 @@ exports.getMagicLoginByID = getMagicLoginByID;
 exports.listMagicLogins = listMagicLogins;
 exports.magicLoginsCollection = magicLoginsCollection;
 exports.model = model;
-exports.sendMagicSignUpEmail = sendMagicSignUpEmail;
+exports.sendResetEmail = sendResetEmail;
+exports.sendSignupEmail = sendSignupEmail;
 exports.updateMagicLogin = updateMagicLogin;

@@ -59,10 +59,9 @@ var ElusiveClient = /*#__PURE__*/function () {
         mail: {
           fromEmail: 'no-reply@example.com',
           fromName: 'Example',
-          magicLoginTemplateID: null,
-          magicSignUpTemplateID: null,
-          resetPasswordRequestTemplateID: null,
-          sendMailOnDevServer: false
+          resetTemplateID: null,
+          sendMailOnDevServer: false,
+          signupTemplateID: null
         },
         sessions: {
           accessTokenCookieName: 'at',
@@ -154,10 +153,9 @@ var ElusiveClient = /*#__PURE__*/function () {
         if (mail) {
           var fromEmail = mail.fromEmail,
               fromName = mail.fromName,
-              magicLoginTemplateID = mail.magicLoginTemplateID,
-              magicSignUpTemplateID = mail.magicSignUpTemplateID,
-              resetPasswordRequestTemplateID = mail.resetPasswordRequestTemplateID,
-              sendMailOnDevServer = mail.sendMailOnDevServer;
+              resetTemplateID = mail.resetTemplateID,
+              sendMailOnDevServer = mail.sendMailOnDevServer,
+              signupTemplateID = mail.signupTemplateID;
 
           if (fromEmail) {
             this.options.mail.fromEmail = fromEmail;
@@ -167,20 +165,16 @@ var ElusiveClient = /*#__PURE__*/function () {
             this.options.mail.fromName = fromName;
           }
 
-          if (magicLoginTemplateID) {
-            this.options.mail.magicLoginTemplateID = magicLoginTemplateID;
-          }
-
-          if (magicSignUpTemplateID) {
-            this.options.mail.magicSignUpTemplateID = magicSignUpTemplateID;
-          }
-
-          if (resetPasswordRequestTemplateID) {
-            this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
+          if (resetTemplateID) {
+            this.options.mail.resetTemplateID = resetTemplateID;
           }
 
           if (sendMailOnDevServer) {
             this.options.mail.sendMailOnDevServer = sendMailOnDevServer;
+          }
+
+          if (signupTemplateID) {
+            this.options.mail.signupTemplateID = signupTemplateID;
           }
         }
 

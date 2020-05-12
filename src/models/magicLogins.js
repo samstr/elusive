@@ -29,7 +29,7 @@ export const {
 export class MagicLoginAlreadyUsedError extends BaseError {}
 export class MagicLoginNotFoundError extends BaseError {}
 
-export const sendMagicSignUpEmail = async (req, toEmail, magicLoginID) => {
+export const sendSignupEmail = async (req, toEmail, magicLoginID) => {
   const { mail: mailOptions, site: siteOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
 
@@ -47,4 +47,10 @@ export const sendMagicSignUpEmail = async (req, toEmail, magicLoginID) => {
       termsURL: `${dynamicTemplateData.baseURL}${termsRoute()}`,
     },
   });
+};
+
+export const sendResetEmail = async (req, toEmail, magicLoginID) => {
+  //
+  //
+  //
 };

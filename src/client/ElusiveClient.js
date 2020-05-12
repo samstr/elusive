@@ -21,10 +21,9 @@ class ElusiveClient {
       mail: {
         fromEmail: 'no-reply@example.com',
         fromName: 'Example',
-        magicLoginTemplateID: null,
-        magicSignUpTemplateID: null,
-        resetPasswordRequestTemplateID: null,
+        resetTemplateID: null,
         sendMailOnDevServer: false,
+        signupTemplateID: null,
       },
       sessions: {
         accessTokenCookieName: 'at',
@@ -110,10 +109,9 @@ class ElusiveClient {
         const {
           fromEmail,
           fromName,
-          magicLoginTemplateID,
-          magicSignUpTemplateID,
-          resetPasswordRequestTemplateID,
+          resetTemplateID,
           sendMailOnDevServer,
+          signupTemplateID,
         } = mail;
 
         if (fromEmail) {
@@ -124,20 +122,16 @@ class ElusiveClient {
           this.options.mail.fromName = fromName;
         }
 
-        if (magicLoginTemplateID) {
-          this.options.mail.magicLoginTemplateID = magicLoginTemplateID;
-        }
-
-        if (magicSignUpTemplateID) {
-          this.options.mail.magicSignUpTemplateID = magicSignUpTemplateID;
-        }
-
-        if (resetPasswordRequestTemplateID) {
-          this.options.mail.resetPasswordRequestTemplateID = resetPasswordRequestTemplateID;
+        if (resetTemplateID) {
+          this.options.mail.resetTemplateID = resetTemplateID;
         }
 
         if (sendMailOnDevServer) {
           this.options.mail.sendMailOnDevServer = sendMailOnDevServer;
+        }
+
+        if (signupTemplateID) {
+          this.options.mail.signupTemplateID = signupTemplateID;
         }
       }
 

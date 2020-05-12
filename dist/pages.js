@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-d4a1d5bf.js');
+var client = require('./index-15dd3ed4.js');
 require('./index.js');
 require('./FormErrors-1539c4dc.js');
 var React = require('react');
@@ -13,7 +13,7 @@ var React__default = _interopDefault(React);
 require('prop-types');
 require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
-var index$1 = require('./index-2340470f.js');
+var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
 require('uuid');
 var utils$2 = require('./utils-e5ce624c.js');
 var axios = require('axios');
@@ -57,42 +57,48 @@ var useData = function useData() {
   React.useEffect(function () {
     var cancelRequest;
 
-    var fetch = function fetch() {
-      var _window$location, pathname, search, url, response;
+    var fetch = /*#__PURE__*/function () {
+      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee() {
+        var _window$location, pathname, search, url, response;
 
-      return index$1._regeneratorRuntime.async(function fetch$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _window$location = window.location, pathname = _window$location.pathname, search = _window$location.search;
-              url = "/api/data".concat(pathname).concat(search);
-              _context.next = 5;
-              return index$1._regeneratorRuntime.awrap(axios__default(url, {
-                cancelToken: new axios.CancelToken(function (c) {
-                  cancelRequest = c;
-                })
-              }));
+        return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _window$location = window.location, pathname = _window$location.pathname, search = _window$location.search;
+                url = "/api/data".concat(pathname).concat(search);
+                _context.next = 5;
+                return axios__default(url, {
+                  cancelToken: new axios.CancelToken(function (c) {
+                    cancelRequest = c;
+                  })
+                });
 
-            case 5:
-              response = _context.sent;
-              cancelRequest = null;
-              setData(response.data);
-              _context.next = 13;
-              break;
+              case 5:
+                response = _context.sent;
+                cancelRequest = null;
+                setData(response.data);
+                _context.next = 13;
+                break;
 
-            case 10:
-              _context.prev = 10;
-              _context.t0 = _context["catch"](0);
-              return _context.abrupt("return", handleError(_context.t0));
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
+                return _context.abrupt("return", handleError(_context.t0));
 
-            case 13:
-            case "end":
-              return _context.stop();
+              case 13:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      }, null, null, [[0, 10]], Promise);
-    };
+        }, _callee, null, [[0, 10]]);
+      }));
+
+      return function fetch() {
+        return _ref.apply(this, arguments);
+      };
+    }();
 
     fetch();
     return function () {
@@ -160,54 +166,60 @@ var useSession = function useSession() {
   React.useEffect(function () {
     var cancelRequest;
 
-    var fetch = function fetch() {
-      var response, _session, pathname, user;
+    var fetch = /*#__PURE__*/function () {
+      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee() {
+        var response, _session, pathname, user;
 
-      return index$1._regeneratorRuntime.async(function fetch$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return index$1._regeneratorRuntime.awrap(axios__default(utils$2.sessionAPIRoute(), {
-                cancelToken: new axios.CancelToken(function (c) {
-                  cancelRequest = c;
-                })
-              }));
+        return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios__default(utils$2.sessionAPIRoute(), {
+                  cancelToken: new axios.CancelToken(function (c) {
+                    cancelRequest = c;
+                  })
+                });
 
-            case 3:
-              response = _context.sent;
-              cancelRequest = null;
-              _session = _objectSpread({}, response.data.session, {
-                _ready: true
-              });
-              setSession(_session);
-              setSessionContext(_session); // if user still needs onboarding
+              case 3:
+                response = _context.sent;
+                cancelRequest = null;
+                _session = _objectSpread({}, response.data.session, {
+                  _ready: true
+                });
+                setSession(_session);
+                setSessionContext(_session); // if user still needs onboarding
 
-              if (_session.isAuthenticated) {
-                pathname = window.location.pathname;
-                user = _session.claims.user;
+                if (_session.isAuthenticated) {
+                  pathname = window.location.pathname;
+                  user = _session.claims.user;
 
-                if (user.needsOnboarding && pathname !== utils$2.onboardingRoute()) {
-                  router$1.replace(utils$2.onboardingRoute());
+                  if (user.needsOnboarding && pathname !== utils$2.onboardingRoute()) {
+                    router$1.replace(utils$2.onboardingRoute());
+                  }
                 }
-              }
 
-              _context.next = 14;
-              break;
+                _context.next = 14;
+                break;
 
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](0);
-              return _context.abrupt("return", handleError(_context.t0));
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](0);
+                return _context.abrupt("return", handleError(_context.t0));
 
-            case 14:
-            case "end":
-              return _context.stop();
+              case 14:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      }, null, null, [[0, 11]], Promise);
-    };
+        }, _callee, null, [[0, 11]]);
+      }));
+
+      return function fetch() {
+        return _ref.apply(this, arguments);
+      };
+    }();
 
     fetch();
     return function () {

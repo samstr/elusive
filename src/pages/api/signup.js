@@ -8,10 +8,7 @@ import {
 } from '../../auth';
 import { signupForm } from '../../forms/auth';
 import { POST } from '../../http';
-import {
-  createMagicLogin,
-  sendMagicSignUpEmail,
-} from '../../models/magicLogins';
+import { createMagicLogin, sendSignupEmail } from '../../models/magicLogins';
 import {
   UserNotEnabledError,
   createUser,
@@ -82,7 +79,7 @@ const signupAPI = async ({ req, res, session }) => {
     userId: user.id,
   });
 
-  await sendMagicSignUpEmail(req, user.email, magicLogin.id);
+  await sendSignupEmail(req, user.email, magicLogin.id);
 
   return {
     user: {
