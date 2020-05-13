@@ -3,7 +3,7 @@
 var index = require('./index.js');
 var utils = require('./utils-69cbd2b3.js');
 
-var loginForm = (function () {
+var loginWithPasswordForm = (function () {
   var authOptions = index.options.auth;
   return utils.createForm({
     fields: {
@@ -62,6 +62,6 @@ var signupForm = (function () {
   });
 });
 
-exports.loginForm = loginForm;
+exports.loginWithPasswordForm = loginWithPasswordForm;
 exports.resetForm = resetForm;
 exports.signupForm = signupForm;

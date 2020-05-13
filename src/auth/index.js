@@ -19,5 +19,17 @@ export {
   UserAlreadyExistsError,
 };
 
-import { comparePasswordHash, hashPassword } from './utils';
-export { comparePasswordHash, hashPassword };
+import {
+  LOGIN_TYPE_LINK,
+  LOGIN_TYPE_PASSWORD,
+  LOGIN_TYPES,
+  comparePasswordHash,
+  hashPassword,
+} from './utils';
+export {
+  LOGIN_TYPE_LINK,
+  LOGIN_TYPE_PASSWORD,
+  LOGIN_TYPES,
+  comparePasswordHash,
+  hashPassword,
+};

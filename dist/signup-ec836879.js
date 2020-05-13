@@ -4,10 +4,10 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var index = require('./index.js');
 require('./FormErrors-1539c4dc.js');
-var utils = require('./utils-d5a46b3f.js');
+var utils = require('./utils-e7b622d1.js');
 require('bcryptjs');
 require('sanitize-html');
-var signup = require('./signup-d599da4d.js');
+var signup = require('./signup-6e2a8ff3.js');
 var utils$2 = require('./utils-b08f259e.js');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
 var loginAttempts = require('./models/loginAttempts.js');
@@ -21,7 +21,7 @@ var moment = _interopDefault(require('moment'));
 
 var loginAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
-    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, recentLoginAttemptsByAccount, _loginForm$validate, cleanValues, errors, user, claims;
+    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors, user, claims;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -88,10 +88,10 @@ var loginAPI = /*#__PURE__*/function () {
             });
 
           case 21:
-            _loginForm$validate = signup.loginForm().validate({
+            _loginWithPasswordFor = signup.loginWithPasswordForm().validate({
               email: email,
               password: password
-            }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
+            }), cleanValues = _loginWithPasswordFor.cleanValues, errors = _loginWithPasswordFor.errors;
 
             if (!(errors && errors.length)) {
               _context.next = 24;

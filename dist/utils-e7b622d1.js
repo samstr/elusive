@@ -115,6 +115,9 @@ var UserAlreadyExistsError = /*#__PURE__*/function (_AuthError7) {
   return UserAlreadyExistsError;
 }(AuthError);
 
+var LOGIN_TYPE_LINK = 'link';
+var LOGIN_TYPE_PASSWORD = 'password';
+var LOGIN_TYPES = [LOGIN_TYPE_LINK, LOGIN_TYPE_PASSWORD];
 var hashPassword = function hashPassword(password) {
   var authOptions = index.options.auth;
   return bcrypt.hashSync(password, authOptions.saltRounds);
@@ -126,6 +129,9 @@ var comparePasswordHash = function comparePasswordHash(password, hash) {
 exports.AlreadyAuthenticatedError = AlreadyAuthenticatedError;
 exports.AuthError = AuthError;
 exports.AuthenticationFailedError = AuthenticationFailedError;
+exports.LOGIN_TYPES = LOGIN_TYPES;
+exports.LOGIN_TYPE_LINK = LOGIN_TYPE_LINK;
+exports.LOGIN_TYPE_PASSWORD = LOGIN_TYPE_PASSWORD;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.TooManyLoginAttemptsError = TooManyLoginAttemptsError;
 exports.TooManyRegistrationsError = TooManyRegistrationsError;

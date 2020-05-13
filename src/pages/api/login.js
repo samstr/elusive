@@ -7,7 +7,7 @@ import {
   TooManyLoginAttemptsError,
   comparePasswordHash,
 } from '../../auth';
-import { loginForm } from '../../forms/auth';
+import { loginWithLinkForm, loginWithPasswordForm } from '../../forms/auth';
 import { POST } from '../../http';
 import {
   createLoginAttempt,
@@ -76,7 +76,10 @@ export const loginAPI = async ({ req, res, session }) => {
     email,
   });
 
-  const { cleanValues, errors } = loginForm().validate({ email, password });
+  const { cleanValues, errors } = loginWithPasswordForm().validate({
+    email,
+    password,
+  });
 
   if (errors && errors.length) {
     return { errors };

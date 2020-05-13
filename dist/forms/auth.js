@@ -11,7 +11,23 @@ require('prop-types');
 require('react-bootstrap');
 var utils = require('../utils-69cbd2b3.js');
 require('sanitize-html');
-var signup = require('../signup-d599da4d.js');
+var signup = require('../signup-6e2a8ff3.js');
+
+var loginWithLink = (function () {
+  return utils.createForm({
+    fields: {
+      email: utils.emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your email'
+        },
+        invalid: {
+          errorMessage: 'Your email is invalid'
+        }
+      })
+    }
+  });
+});
 
 var onboarding = (function () {
   var authOptions = index.options.auth;
@@ -31,7 +47,8 @@ var onboarding = (function () {
   });
 });
 
-exports.loginForm = signup.loginForm;
+exports.loginWithPasswordForm = signup.loginWithPasswordForm;
 exports.resetForm = signup.resetForm;
 exports.signupForm = signup.signupForm;
+exports.loginWithLinkForm = loginWithLink;
 exports.onboardingForm = onboarding;
