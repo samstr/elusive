@@ -9,21 +9,22 @@ require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('./utils-e7b622d1.js');
+var errors = require('./errors-1d6db12f.js');
 require('bcryptjs');
+var utils = require('./utils-c24ba8b7.js');
 
 
 
-exports.AlreadyAuthenticatedError = utils.AlreadyAuthenticatedError;
-exports.AuthError = utils.AuthError;
-exports.AuthenticationFailedError = utils.AuthenticationFailedError;
+exports.AlreadyAuthenticatedError = errors.AlreadyAuthenticatedError;
+exports.AuthError = errors.AuthError;
+exports.AuthenticationFailedError = errors.AuthenticationFailedError;
+exports.NotAuthenticatedError = errors.NotAuthenticatedError;
+exports.TooManyLoginAttemptsError = errors.TooManyLoginAttemptsError;
+exports.TooManyRegistrationsError = errors.TooManyRegistrationsError;
+exports.TooManyResetAttemptsError = errors.TooManyResetAttemptsError;
+exports.UserAlreadyExistsError = errors.UserAlreadyExistsError;
 exports.LOGIN_TYPES = utils.LOGIN_TYPES;
 exports.LOGIN_TYPE_LINK = utils.LOGIN_TYPE_LINK;
 exports.LOGIN_TYPE_PASSWORD = utils.LOGIN_TYPE_PASSWORD;
-exports.NotAuthenticatedError = utils.NotAuthenticatedError;
-exports.TooManyLoginAttemptsError = utils.TooManyLoginAttemptsError;
-exports.TooManyRegistrationsError = utils.TooManyRegistrationsError;
-exports.TooManyResetAttemptsError = utils.TooManyResetAttemptsError;
-exports.UserAlreadyExistsError = utils.UserAlreadyExistsError;
 exports.comparePasswordHash = utils.comparePasswordHash;
 exports.hashPassword = utils.hashPassword;

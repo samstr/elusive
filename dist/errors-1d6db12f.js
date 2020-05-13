@@ -1,11 +1,7 @@
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var index = require('./index.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
-var bcrypt = _interopDefault(require('bcryptjs'));
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -115,27 +111,11 @@ var UserAlreadyExistsError = /*#__PURE__*/function (_AuthError7) {
   return UserAlreadyExistsError;
 }(AuthError);
 
-var LOGIN_TYPE_LINK = 'link';
-var LOGIN_TYPE_PASSWORD = 'password';
-var LOGIN_TYPES = [LOGIN_TYPE_LINK, LOGIN_TYPE_PASSWORD];
-var hashPassword = function hashPassword(password) {
-  var authOptions = index.options.auth;
-  return bcrypt.hashSync(password, authOptions.saltRounds);
-};
-var comparePasswordHash = function comparePasswordHash(password, hash) {
-  return bcrypt.compareSync(password, hash);
-};
-
 exports.AlreadyAuthenticatedError = AlreadyAuthenticatedError;
 exports.AuthError = AuthError;
 exports.AuthenticationFailedError = AuthenticationFailedError;
-exports.LOGIN_TYPES = LOGIN_TYPES;
-exports.LOGIN_TYPE_LINK = LOGIN_TYPE_LINK;
-exports.LOGIN_TYPE_PASSWORD = LOGIN_TYPE_PASSWORD;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.TooManyLoginAttemptsError = TooManyLoginAttemptsError;
 exports.TooManyRegistrationsError = TooManyRegistrationsError;
 exports.TooManyResetAttemptsError = TooManyResetAttemptsError;
 exports.UserAlreadyExistsError = UserAlreadyExistsError;
-exports.comparePasswordHash = comparePasswordHash;
-exports.hashPassword = hashPassword;

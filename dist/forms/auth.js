@@ -9,31 +9,17 @@ require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('../utils-69cbd2b3.js');
+require('bcryptjs');
+require('../utils-c24ba8b7.js');
+var utils$1 = require('../utils-69cbd2b3.js');
 require('sanitize-html');
-var signup = require('../signup-6e2a8ff3.js');
-
-var loginWithLink = (function () {
-  return utils.createForm({
-    fields: {
-      email: utils.emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Please enter your email'
-        },
-        invalid: {
-          errorMessage: 'Your email is invalid'
-        }
-      })
-    }
-  });
-});
+var signup = require('../signup-f25b8831.js');
 
 var onboarding = (function () {
   var authOptions = index.options.auth;
-  return utils.createForm({
+  return utils$1.createForm({
     fields: {
-      password: utils.textField('password', {
+      password: utils$1.textField('password', {
         required: {
           value: true,
           errorMessage: 'Please enter your password'
@@ -47,8 +33,8 @@ var onboarding = (function () {
   });
 });
 
+exports.loginWithLinkForm = signup.loginWithLinkForm;
 exports.loginWithPasswordForm = signup.loginWithPasswordForm;
 exports.resetForm = signup.resetForm;
 exports.signupForm = signup.signupForm;
-exports.loginWithLinkForm = loginWithLink;
 exports.onboardingForm = onboarding;

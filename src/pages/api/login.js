@@ -2,6 +2,8 @@ import moment from 'moment';
 
 import Elusive from '../../';
 import {
+  LOGIN_TYPE_LINK,
+  LOGIN_TYPE_PASSWORD,
   AlreadyAuthenticatedError,
   AuthenticationFailedError,
   TooManyLoginAttemptsError,
@@ -50,7 +52,7 @@ export const loginAPI = async ({ req, res, session }) => {
     }
   }
 
-  const { email, password } = req.body;
+  const { email, password, type } = req.body;
 
   if (process.env.NODE_ENV === 'production') {
     const recentLoginAttemptsByAccount = await listLoginAttempts(
@@ -74,41 +76,65 @@ export const loginAPI = async ({ req, res, session }) => {
   await createLoginAttempt({
     ip,
     email,
+    type,
   });
 
-  const { cleanValues, errors } = loginWithPasswordForm().validate({
-    email,
-    password,
-  });
+  if (type === LOGIN_TYPE_PASSWORD) {
+    const { cleanValues, errors } = loginWithPasswordForm().validate({
+      type,
+      email,
+      password,
+    });
 
-  if (errors && errors.length) {
-    return { errors };
+    if (errors && errors.length) {
+      return { errors };
+    }
+
+    const user = await getUser(
+      usersCollection().where('email', '==', cleanValues.email)
+    );
+
+    if (!user) {
+      throw new UserNotFoundError('Authentication failed');
+    }
+
+    if (!user.enabled) {
+      throw new UserNotEnabledError('Authentication failed');
+    }
+
+    if (!comparePasswordHash(cleanValues.password, user.password)) {
+      throw new AuthenticationFailedError('Authentication failed');
+    }
+
+    const claims = tokenOptions.createClaims(user);
+
+    createSessionCookies(res, signTokens(claims, tokenOptions.secret), user.id);
+
+    return {
+      session: {
+        isAuthenticated: true,
+        claims,
+      },
+    };
+  } else if (type === LOGIN_TYPE_LINK) {
+    const { cleanValues, errors } = loginWithLinkForm().validate({
+      type,
+      email,
+    });
+
+    if (errors && errors.length) {
+      return { errors };
+    }
+
+    const user = await getUser(
+      usersCollection().where('email', '==', cleanValues.email)
+    );
+
+    if (user && user.enabled) {
+      // TODO: Create magic login link
+      // Send email
+    }
   }
-
-  const user = await getUser(
-    usersCollection().where('email', '==', cleanValues.email)
-  );
-
-  if (!user) {
-    throw new UserNotFoundError('Authentication failed');
-  }
-
-  if (!user.enabled) {
-    throw new UserNotEnabledError('Authentication failed');
-  }
-
-  if (!comparePasswordHash(cleanValues.password, user.password)) {
-    throw new AuthenticationFailedError('Authentication failed');
-  }
-
-  const claims = tokenOptions.createClaims(user);
-
-  createSessionCookies(res, signTokens(claims, tokenOptions.secret), user.id);
-
-  return {
-    isAuthenticated: true,
-    claims,
-  };
 };
 
 loginAPI.options = {

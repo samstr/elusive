@@ -1,4 +1,6 @@
-import { createForm, emailField } from '../utils';
+import { LOGIN_TYPES } from '../../auth';
+import { InvalidFieldValueError } from '../errors';
+import { createForm, emailField, textField } from '../utils';
 
 export default () =>
   createForm({
@@ -12,5 +14,23 @@ export default () =>
           errorMessage: 'Your email is invalid',
         },
       }),
+      type: textField(
+        'type',
+        {
+          required: {
+            value: true,
+            errorMessage: 'Type field is missing.',
+          },
+        },
+        (type) => {
+          if (!LOGIN_TYPES.includes(type)) {
+            throw new InvalidFieldValueError('Type field is invalid.', [
+              'type',
+            ]);
+          }
+
+          return type;
+        }
+      ),
     },
   });

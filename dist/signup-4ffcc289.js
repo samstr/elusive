@@ -4,10 +4,11 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var index = require('./index.js');
 require('./FormErrors-1539c4dc.js');
-var utils = require('./utils-e7b622d1.js');
+var errors = require('./errors-1d6db12f.js');
 require('bcryptjs');
+var utils = require('./utils-c24ba8b7.js');
 require('sanitize-html');
-var signup = require('./signup-6e2a8ff3.js');
+var signup = require('./signup-f25b8831.js');
 var utils$2 = require('./utils-b08f259e.js');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
 var loginAttempts = require('./models/loginAttempts.js');
@@ -21,7 +22,7 @@ var moment = _interopDefault(require('moment'));
 
 var loginAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
-    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors, user, claims;
+    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, type, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors$1, user, claims, _loginWithLinkForm$va, _cleanValues, _errors, _user;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -35,7 +36,7 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils.AlreadyAuthenticatedError('You are already logged in');
+            throw new errors.AlreadyAuthenticatedError('You are already logged in');
 
           case 4:
             ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
@@ -57,10 +58,10 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
+            throw new errors.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
 
           case 12:
-            _req$body = req.body, email = _req$body.email, password = _req$body.password;
+            _req$body = req.body, email = _req$body.email, password = _req$body.password, type = _req$body.type;
 
             if (!(process.env.NODE_ENV === 'production')) {
               _context.next = 19;
@@ -78,69 +79,107 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
+            throw new errors.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
 
           case 19:
             _context.next = 21;
             return loginAttempts.createLoginAttempt({
               ip: ip,
-              email: email
+              email: email,
+              type: type
             });
 
           case 21:
+            if (!(type === utils.LOGIN_TYPE_PASSWORD)) {
+              _context.next = 39;
+              break;
+            }
+
             _loginWithPasswordFor = signup.loginWithPasswordForm().validate({
+              type: type,
               email: email,
               password: password
-            }), cleanValues = _loginWithPasswordFor.cleanValues, errors = _loginWithPasswordFor.errors;
+            }), cleanValues = _loginWithPasswordFor.cleanValues, errors$1 = _loginWithPasswordFor.errors;
 
-            if (!(errors && errors.length)) {
-              _context.next = 24;
+            if (!(errors$1 && errors$1.length)) {
+              _context.next = 25;
               break;
             }
 
             return _context.abrupt("return", {
-              errors: errors
+              errors: errors$1
             });
 
-          case 24:
-            _context.next = 26;
+          case 25:
+            _context.next = 27;
             return users.getUser(users.usersCollection().where('email', '==', cleanValues.email));
 
-          case 26:
+          case 27:
             user = _context.sent;
 
             if (user) {
-              _context.next = 29;
+              _context.next = 30;
               break;
             }
 
             throw new users.UserNotFoundError('Authentication failed');
 
-          case 29:
+          case 30:
             if (user.enabled) {
-              _context.next = 31;
+              _context.next = 32;
               break;
             }
 
             throw new users.UserNotEnabledError('Authentication failed');
 
-          case 31:
+          case 32:
             if (utils.comparePasswordHash(cleanValues.password, user.password)) {
-              _context.next = 33;
+              _context.next = 34;
               break;
             }
 
-            throw new utils.AuthenticationFailedError('Authentication failed');
+            throw new errors.AuthenticationFailedError('Authentication failed');
 
-          case 33:
+          case 34:
             claims = tokenOptions.createClaims(user);
             utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
-              isAuthenticated: true,
-              claims: claims
+              session: {
+                isAuthenticated: true,
+                claims: claims
+              }
             });
 
-          case 36:
+          case 39:
+            if (!(type === utils.LOGIN_TYPE_LINK)) {
+              _context.next = 47;
+              break;
+            }
+
+            _loginWithLinkForm$va = signup.loginWithLinkForm().validate({
+              type: type,
+              email: email
+            }), _cleanValues = _loginWithLinkForm$va.cleanValues, _errors = _loginWithLinkForm$va.errors;
+
+            if (!(_errors && _errors.length)) {
+              _context.next = 43;
+              break;
+            }
+
+            return _context.abrupt("return", {
+              errors: _errors
+            });
+
+          case 43:
+            _context.next = 45;
+            return users.getUser(users.usersCollection().where('email', '==', _cleanValues.email));
+
+          case 45:
+            _user = _context.sent;
+
+            if (_user && _user.enabled) ;
+
+          case 47:
           case "end":
             return _context.stop();
         }
@@ -170,7 +209,7 @@ var logoutAPI = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils.NotAuthenticatedError('You are not logged in');
+            throw new errors.NotAuthenticatedError('You are not logged in');
 
           case 3:
             utils$4.deleteSessionCookies(res);
@@ -198,7 +237,7 @@ logoutAPI.options = {
 
 var resetAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
-    var req, authOptions, email, ip, date1HourAgo, recentResetAttemptsByIP, _resetForm$validate, cleanValues, errors, user;
+    var req, authOptions, email, ip, date1HourAgo, recentResetAttemptsByIP, _resetForm$validate, cleanValues, errors$1, user;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -226,7 +265,7 @@ var resetAPI = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils.TooManyResetAttemptsError('You have requested too many password resets. Try again later.');
+            throw new errors.TooManyResetAttemptsError('You have requested too many password resets. Try again later.');
 
           case 11:
             _context.next = 13;
@@ -238,15 +277,15 @@ var resetAPI = /*#__PURE__*/function () {
           case 13:
             _resetForm$validate = signup.resetForm().validate({
               email: email
-            }), cleanValues = _resetForm$validate.cleanValues, errors = _resetForm$validate.errors;
+            }), cleanValues = _resetForm$validate.cleanValues, errors$1 = _resetForm$validate.errors;
 
-            if (!(errors && errors.length)) {
+            if (!(errors$1 && errors$1.length)) {
               _context.next = 16;
               break;
             }
 
             return _context.abrupt("return", {
-              errors: errors
+              errors: errors$1
             });
 
           case 16:
@@ -312,7 +351,7 @@ sessionAPI.options = {
 
 var signupAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
-    var req, res, session, authOptions, email, _signupForm$validate, cleanValues, errors, ip, date1DayAgo, recentUsersByIP, user, magicLogin;
+    var req, res, session, authOptions, email, _signupForm$validate, cleanValues, errors$1, ip, date1DayAgo, recentUsersByIP, user, magicLogin;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -326,21 +365,21 @@ var signupAPI = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils.AlreadyAuthenticatedError('You are already logged in.');
+            throw new errors.AlreadyAuthenticatedError('You are already logged in.');
 
           case 4:
             email = req.body.email;
             _signupForm$validate = signup.signupForm().validate({
               email: email
-            }), cleanValues = _signupForm$validate.cleanValues, errors = _signupForm$validate.errors;
+            }), cleanValues = _signupForm$validate.cleanValues, errors$1 = _signupForm$validate.errors;
 
-            if (!(errors && errors.length)) {
+            if (!(errors$1 && errors$1.length)) {
               _context.next = 8;
               break;
             }
 
             return _context.abrupt("return", {
-              errors: errors
+              errors: errors$1
             });
 
           case 8:
@@ -363,7 +402,7 @@ var signupAPI = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils.TooManyRegistrationsError('You have created too many accounts recently.');
+            throw new errors.TooManyRegistrationsError('You have created too many accounts recently.');
 
           case 16:
             _context.next = 18;
@@ -377,7 +416,7 @@ var signupAPI = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils.UserAlreadyExistsError('An account with this email address already exists.');
+            throw new errors.UserAlreadyExistsError('An account with this email address already exists.');
 
           case 21:
             if (!(user && !user.enabled)) {
