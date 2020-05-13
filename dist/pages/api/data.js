@@ -20,7 +20,7 @@ require('../../utils-59a862f2.js');
 require('uuid');
 require('../../utils-3ba3aef8.js');
 require('../../models/loginAttempts.js');
-require('../../utils-e5ce624c.js');
+require('../../utils-08b190dc.js');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
 require('../../models/resetAttempts.js');
@@ -29,7 +29,7 @@ require('../../SessionContext-efd795c9.js');
 var utils$5 = require('../../utils-73ff7fd4.js');
 require('jsonwebtoken');
 require('moment');
-require('../../signup-01e9866c.js');
+require('../../signup-8cc5bc84.js');
 
 var magicLoginDataAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {

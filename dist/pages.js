@@ -15,7 +15,7 @@ require('react-bootstrap');
 var utils = require('./utils-b08f259e.js');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
 require('uuid');
-var utils$2 = require('./utils-e5ce624c.js');
+var utils$2 = require('./utils-08b190dc.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
@@ -40,7 +40,7 @@ var useData = function useData() {
       var pathname = window.location.pathname;
 
       if (pathname !== utils$2.loginRoute()) {
-        router$1.replace(utils$2.loginRouteWithNext());
+        router$1.replace(utils$2.loginRoute());
       }
 
       return;
@@ -154,7 +154,7 @@ var useSession = function useSession() {
       var pathname = window.location.pathname;
 
       if (pathname !== utils$2.loginRoute()) {
-        router$1.replace(utils$2.loginRouteWithNext());
+        router$1.replace(utils$2.loginRoute());
       }
 
       return;

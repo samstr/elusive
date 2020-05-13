@@ -17,7 +17,7 @@ export const loginRouteWithNext = () => {
   const { pathname, search } = window.location;
   let href = loginRoute();
 
-  const excludedNextRoutes = [logoutRoute(), onboardingRoute()];
+  const excludedNextRoutes = [logoutRoute()];
 
   if (!excludedNextRoutes.includes(pathname)) {
     const encodedNext = encodeURIComponent(`${pathname}${search}`);

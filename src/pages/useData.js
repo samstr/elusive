@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { HTTP_STATUS_UNAUTHORIZED } from '../http';
-import { loginRoute, loginRouteWithNext } from '../routes';
+import { loginRoute } from '../routes';
 import { useSessionContext } from '../sessions';
 
 const useData = () => {
@@ -20,7 +20,7 @@ const useData = () => {
       const { pathname } = window.location;
 
       if (pathname !== loginRoute()) {
-        router.replace(loginRouteWithNext());
+        router.replace(loginRoute());
       }
       return;
     }
