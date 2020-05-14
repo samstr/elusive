@@ -10,6 +10,7 @@ class ElusiveClient {
 
     this.options = {
       auth: {
+        magicLoginExpiryHours: 1,
         maxLoginAttemptsPerAccountPerHour: 8,
         maxLoginAttemptsPerIPPerHour: 16,
         maxRegistrationsPerDay: 5,
@@ -21,6 +22,7 @@ class ElusiveClient {
       mail: {
         fromEmail: 'no-reply@example.com',
         fromName: 'Example',
+        loginTemplateID: null,
         resetTemplateID: null,
         sendMailOnDevServer: false,
         signupTemplateID: null,
@@ -67,6 +69,7 @@ class ElusiveClient {
 
       if (auth) {
         const {
+          magicLoginExpiryHours,
           maxLoginAttemptsPerAccountPerHour,
           maxLoginAttemptsPerIPPerHour,
           maxRegistrationsPerDay,
@@ -75,6 +78,10 @@ class ElusiveClient {
           passwordResetExpiryHours,
           saltRounds,
         } = auth;
+
+        if (magicLoginExpiryHours) {
+          this.options.auth.magicLoginExpiryHours = magicLoginExpiryHours;
+        }
 
         if (maxLoginAttemptsPerAccountPerHour) {
           this.options.auth.maxLoginAttemptsPerAccountPerHour = maxLoginAttemptsPerAccountPerHour;
@@ -109,6 +116,7 @@ class ElusiveClient {
         const {
           fromEmail,
           fromName,
+          loginTemplateID,
           resetTemplateID,
           sendMailOnDevServer,
           signupTemplateID,
@@ -120,6 +128,10 @@ class ElusiveClient {
 
         if (fromName) {
           this.options.mail.fromName = fromName;
+        }
+
+        if (loginTemplateID) {
+          this.options.mail.loginTemplateID = loginTemplateID;
         }
 
         if (resetTemplateID) {

@@ -29,6 +29,33 @@ export const {
 export class MagicLoginAlreadyUsedError extends BaseError {}
 export class MagicLoginNotFoundError extends BaseError {}
 
+export const sendLoginEmail = async (req, toEmail, magicLoginID) => {
+  const {
+    auth: authOptions,
+    mail: mailOptions,
+    site: siteOptions,
+  } = Elusive.options;
+  const dynamicTemplateData = defaultDynamicTemplateData(req);
+
+  return await sendMail({
+    to: toEmail,
+    template_id: mailOptions.magicLoginTemplateID,
+    dynamic_template_data: {
+      ...dynamicTemplateData,
+      subject: `Login to your ${siteOptions.name} account`,
+      preheader: `Click the button below and you will be automatically logged in to your ${siteOptions.name} account. `,
+      reasonForEmail: `you requested an automatic login link`,
+      magicLoginURL: `${dynamicTemplateData.baseURL}${
+        magicLoginRoute(magicLoginID).asPath
+      }`,
+      expiryHours:
+        authOptions.magicLoginExpiryHours === 1
+          ? `${authOptions.magicLoginExpiryHours} hour`
+          : `${authOptions.magicLoginExpiryHours} hours`,
+    },
+  });
+};
+
 export const sendSignupEmail = async (req, toEmail, magicLoginID) => {
   const { mail: mailOptions, site: siteOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);

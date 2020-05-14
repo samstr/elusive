@@ -131,8 +131,11 @@ export const loginAPI = async ({ req, res, session }) => {
     );
 
     if (user && user.enabled) {
-      // TODO: Create magic login link
-      // Send email
+      const magicLogin = await createMagicLogin({
+        userId: user.id,
+      });
+
+      await sendLoginEmail(req, user.email, magicLogin.id);
     }
   }
 };

@@ -1,12 +1,14 @@
 import Elusive from '../';
 
 export const defaultDynamicTemplateData = (req) => {
+  const { site: siteOptions } = Elusive.options;
   const baseURL = `${
     process.env.NODE_ENV === 'production' ? 'https' : 'http'
   }://${req.headers.host}`;
 
   return {
     baseURL,
+    siteName: siteOptions.siteName,
   };
 };
 
