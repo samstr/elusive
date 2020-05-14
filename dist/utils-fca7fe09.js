@@ -199,7 +199,10 @@ var textField = function textField(name, options, validate) {
     if (value) {
       cleanValue = sanitizeHtml(value, {
         allowedTags: [],
-        allowedAttributes: {}
+        allowedAttributes: {},
+        parser: {
+          decodeEntities: false
+        }
       });
     }
 

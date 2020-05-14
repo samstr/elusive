@@ -8,7 +8,7 @@ var errors = require('./errors-1d6db12f.js');
 require('bcryptjs');
 var utils = require('./utils-a6a1ae57.js');
 require('sanitize-html');
-var signup = require('./signup-5ac42c46.js');
+var signup = require('./signup-6cd9e67b.js');
 var utils$2 = require('./utils-b08f259e.js');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
 var loginAttempts = require('./models/loginAttempts.js');

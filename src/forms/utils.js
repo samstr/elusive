@@ -108,6 +108,9 @@ export const textField = (name, options, validate) =>
       cleanValue = sanitizeHtml(value, {
         allowedTags: [],
         allowedAttributes: {},
+        parser: {
+          decodeEntities: false,
+        },
       });
     }
 

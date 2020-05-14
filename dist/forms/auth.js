@@ -11,9 +11,9 @@ require('prop-types');
 require('react-bootstrap');
 require('bcryptjs');
 require('../utils-a6a1ae57.js');
-var utils$1 = require('../utils-69f231fd.js');
+var utils$1 = require('../utils-fca7fe09.js');
 require('sanitize-html');
-var signup = require('../signup-5ac42c46.js');
+var signup = require('../signup-6cd9e67b.js');
 
 var onboarding = (function () {
   var authOptions = index.options.auth;
