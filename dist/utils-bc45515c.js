@@ -1,11 +1,8 @@
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
 var FormErrors = require('./FormErrors-1539c4dc.js');
-var sanitizeHtml = _interopDefault(require('sanitize-html'));
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -194,17 +191,7 @@ var textField = function textField(name, options, validate) {
   return field(name, options, function (value) {
     var _options$minLength, _options$minLength2, _options$maxLength, _options$maxLength2, _options$invalid, _options$invalid2, _options$invalid2$val;
 
-    var cleanValue;
-
-    if (value) {
-      cleanValue = sanitizeHtml(value, {
-        allowedTags: [],
-        allowedAttributes: {},
-        parser: {
-          decodeEntities: false
-        }
-      });
-    }
+    var cleanValue = value;
 
     if ((options === null || options === void 0 ? void 0 : (_options$minLength = options.minLength) === null || _options$minLength === void 0 ? void 0 : _options$minLength.value) && cleanValue.length < (options === null || options === void 0 ? void 0 : (_options$minLength2 = options.minLength) === null || _options$minLength2 === void 0 ? void 0 : _options$minLength2.value)) {
       throw new FieldValueTooShortError(options.minLength.errorMessage, [name]);

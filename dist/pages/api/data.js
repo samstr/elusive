@@ -12,9 +12,8 @@ require('react-bootstrap');
 require('../../errors-1d6db12f.js');
 require('bcryptjs');
 require('../../utils-a6a1ae57.js');
-require('../../utils-fca7fe09.js');
-require('sanitize-html');
-require('../../signup-6cd9e67b.js');
+require('../../utils-bc45515c.js');
+require('../../signup-0b38e1e3.js');
 require('../../utils-b08f259e.js');
 var asyncToGenerator = require('../../asyncToGenerator-ae22edb1.js');
 require('../../utils-4b2eeb65.js');
@@ -30,7 +29,7 @@ require('../../SessionContext-efd795c9.js');
 var utils$5 = require('../../utils-a7f6a71b.js');
 require('jsonwebtoken');
 require('moment');
-require('../../signup-e1c13aa3.js');
+require('../../signup-c464c4b2.js');
 
 var magicLoginDataAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {

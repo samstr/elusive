@@ -1,5 +1,3 @@
-import sanitizeHtml from 'sanitize-html';
-
 import Elusive from '../';
 import { errorJson } from '../errors';
 
@@ -102,17 +100,7 @@ export const field = (name, options, validate) => ({
 
 export const textField = (name, options, validate) =>
   field(name, options, (value) => {
-    let cleanValue;
-
-    if (value) {
-      cleanValue = sanitizeHtml(value, {
-        allowedTags: [],
-        allowedAttributes: {},
-        parser: {
-          decodeEntities: false,
-        },
-      });
-    }
+    let cleanValue = value;
 
     if (
       options?.minLength?.value &&

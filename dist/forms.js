@@ -9,8 +9,7 @@ require('./FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var utils = require('./utils-fca7fe09.js');
-require('sanitize-html');
+var utils = require('./utils-bc45515c.js');
 
 
 
