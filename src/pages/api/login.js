@@ -85,6 +85,7 @@ export const loginAPI = async ({ req, res, session }) => {
       type,
       email,
       password,
+      next,
     });
 
     if (errors && errors.length) {
@@ -136,7 +137,7 @@ export const loginAPI = async ({ req, res, session }) => {
         userId: user.id,
       });
 
-      await sendLoginEmail(req, user.email, magicLogin.id);
+      await sendLoginEmail(req, user.email, magicLogin.id, next);
     }
   }
 };

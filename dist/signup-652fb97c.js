@@ -8,7 +8,7 @@ var errors = require('./errors-1d6db12f.js');
 require('bcryptjs');
 var utils = require('./utils-a6a1ae57.js');
 require('sanitize-html');
-var signup = require('./signup-50e33efc.js');
+var signup = require('./signup-375a2069.js');
 var utils$2 = require('./utils-b08f259e.js');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
 var loginAttempts = require('./models/loginAttempts.js');
@@ -98,7 +98,8 @@ var loginAPI = /*#__PURE__*/function () {
             _loginWithPasswordFor = signup.loginWithPasswordForm().validate({
               type: type,
               email: email,
-              password: password
+              password: password,
+              next: next
             }), cleanValues = _loginWithPasswordFor.cleanValues, errors$1 = _loginWithPasswordFor.errors;
 
             if (!(errors$1 && errors$1.length)) {
@@ -190,7 +191,7 @@ var loginAPI = /*#__PURE__*/function () {
           case 49:
             magicLogin = _context.sent;
             _context.next = 52;
-            return magicLogins.sendLoginEmail(req, _user.email, magicLogin.id);
+            return magicLogins.sendLoginEmail(req, _user.email, magicLogin.id, next);
 
           case 52:
           case "end":

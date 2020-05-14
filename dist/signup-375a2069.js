@@ -28,7 +28,8 @@ var loginWithLinkForm = (function () {
         }
 
         return type;
-      })
+      }),
+      next: utils$1.textField('next')
     }
   });
 });

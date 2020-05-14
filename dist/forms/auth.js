@@ -13,7 +13,7 @@ require('bcryptjs');
 require('../utils-a6a1ae57.js');
 var utils$1 = require('../utils-c88c9c04.js');
 require('sanitize-html');
-var signup = require('../signup-50e33efc.js');
+var signup = require('../signup-375a2069.js');
 
 var onboarding = (function () {
   var authOptions = index.options.auth;
