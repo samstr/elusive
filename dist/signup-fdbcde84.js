@@ -183,14 +183,14 @@ var loginAPI = /*#__PURE__*/function () {
             }
 
             _context.next = 49;
-            return createMagicLogin({
+            return magicLogins.createMagicLogin({
               userId: _user.id
             });
 
           case 49:
             magicLogin = _context.sent;
             _context.next = 52;
-            return sendLoginEmail(req, _user.email, magicLogin.id);
+            return magicLogins.sendLoginEmail(req, _user.email, magicLogin.id);
 
           case 52:
           case "end":

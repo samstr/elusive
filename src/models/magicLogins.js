@@ -39,7 +39,7 @@ export const sendLoginEmail = async (req, toEmail, magicLoginID) => {
 
   return await sendMail({
     to: toEmail,
-    template_id: mailOptions.magicLoginTemplateID,
+    template_id: mailOptions.loginTemplateID,
     dynamic_template_data: {
       ...dynamicTemplateData,
       subject: `Login to your ${siteOptions.name} account`,
@@ -62,7 +62,7 @@ export const sendSignupEmail = async (req, toEmail, magicLoginID) => {
 
   return await sendMail({
     to: toEmail,
-    template_id: mailOptions.magicSignUpTemplateID,
+    template_id: mailOptions.signupTemplateID,
     dynamic_template_data: {
       ...dynamicTemplateData,
       subject: `Confirm your ${siteOptions.name} account`,

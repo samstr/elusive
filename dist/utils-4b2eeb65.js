@@ -17,7 +17,7 @@ var defaultDynamicTemplateData = function defaultDynamicTemplateData(req) {
 };
 var sendMail = /*#__PURE__*/function () {
   var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(message) {
-    var _Elusive$services, sendgrid, sentry, mailOptions;
+    var _Elusive$services, sendgrid, sentry, mailOptions, _err$response, _err$response$body, _err$response2, _err$response2$body;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -33,7 +33,7 @@ var sendMail = /*#__PURE__*/function () {
             });
 
             if (!(process.env.NODE_ENV === 'production' || mailOptions.sendMailOnDevServer)) {
-              _context.next = 14;
+              _context.next = 15;
               break;
             }
 
@@ -48,9 +48,14 @@ var sendMail = /*#__PURE__*/function () {
             _context.prev = 10;
             _context.t0 = _context["catch"](4);
             console.log(_context.t0);
+
+            if ((_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$body = _err$response.body) === null || _err$response$body === void 0 ? void 0 : _err$response$body.errors) {
+              console.log((_err$response2 = _context.t0.response) === null || _err$response2 === void 0 ? void 0 : (_err$response2$body = _err$response2.body) === null || _err$response2$body === void 0 ? void 0 : _err$response2$body.errors);
+            }
+
             sentry.captureException(_context.t0);
 
-          case 14:
+          case 15:
           case "end":
             return _context.stop();
         }

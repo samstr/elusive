@@ -16,6 +16,7 @@ import {
   loginAttemptsCollection,
   listLoginAttempts,
 } from '../../models/loginAttempts';
+import { createMagicLogin, sendLoginEmail } from '../../models/magicLogins';
 import {
   UserNotFoundError,
   UserNotEnabledError,

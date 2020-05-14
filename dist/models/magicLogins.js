@@ -10,7 +10,7 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
-var utils = require('../utils-59259237.js');
+var utils = require('../utils-4b2eeb65.js');
 require('uuid');
 var utils$1 = require('../utils-100b7d88.js');
 var utils$2 = require('../utils-08b190dc.js');
@@ -101,7 +101,7 @@ var sendLoginEmail = /*#__PURE__*/function () {
             _context2.next = 4;
             return utils.sendMail({
               to: toEmail,
-              template_id: mailOptions.magicLoginTemplateID,
+              template_id: mailOptions.loginTemplateID,
               dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
                 subject: "Login to your ".concat(siteOptions.name, " account"),
                 preheader: "Click the button below and you will be automatically logged in to your ".concat(siteOptions.name, " account. "),
@@ -139,7 +139,7 @@ var sendSignupEmail = /*#__PURE__*/function () {
             _context3.next = 4;
             return utils.sendMail({
               to: toEmail,
-              template_id: mailOptions.magicSignUpTemplateID,
+              template_id: mailOptions.signupTemplateID,
               dynamic_template_data: _objectSpread({}, dynamicTemplateData, {
                 subject: "Confirm your ".concat(siteOptions.name, " account"),
                 preheader: "Welcome to ".concat(siteOptions.name, ". Thank you for confirming your email address. Click here to create your account. "),
