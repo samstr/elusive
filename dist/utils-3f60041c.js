@@ -31,6 +31,12 @@ var signupRoute = function signupRoute() {
 var resetRoute = function resetRoute() {
   return '/reset';
 };
+var settingsRoute = function settingsRoute() {
+  return '/settings';
+};
+var settingsSecurityRoute = function settingsSecurityRoute() {
+  return '/settings/security';
+};
 var termsRoute = function termsRoute() {
   return '/terms';
 };
@@ -82,6 +88,8 @@ exports.privacyRoute = privacyRoute;
 exports.resetAPIRoute = resetAPIRoute;
 exports.resetRoute = resetRoute;
 exports.sessionAPIRoute = sessionAPIRoute;
+exports.settingsRoute = settingsRoute;
+exports.settingsSecurityRoute = settingsSecurityRoute;
 exports.signupAPIRoute = signupAPIRoute;
 exports.signupRoute = signupRoute;
 exports.termsRoute = termsRoute;

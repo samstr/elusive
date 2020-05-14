@@ -1,9 +1,10 @@
 import moment from 'moment';
 
 import Elusive from '../../';
-import { TooManyResetAttemptsError } from '../../auth';
+import { TooManyResetAttemptsError, sendResetEmail } from '../../auth';
 import { resetForm } from '../../forms/auth';
 import { POST } from '../../http';
+import { createMagicLogin } from '../../models/magicLogins';
 import {
   listResetAttempts,
   resetAttemptsCollection,
@@ -51,8 +52,11 @@ const resetAPI = async ({ req }) => {
   );
 
   if (user && user.enabled) {
-    // TODO: Create magic login link
-    // Send email
+    const magicLogin = await createMagicLogin({
+      userId: user.id,
+    });
+
+    await sendResetEmail(req, user.email, magicLogin.id);
   }
 };
 

@@ -12,10 +12,10 @@ var React = require('react');
 var React__default = _interopDefault(React);
 require('prop-types');
 require('react-bootstrap');
-var utils = require('./utils-b08f259e.js');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
+var utils$1 = require('./utils-3f60041c.js');
+var utils = require('./utils-b08f259e.js');
 require('uuid');
-var utils$2 = require('./utils-08b190dc.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
@@ -39,8 +39,8 @@ var useData = function useData() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$2.loginRoute()) {
-        router$1.replace(utils$2.loginRoute());
+      if (pathname !== utils$1.loginRoute()) {
+        router$1.replace(utils$1.loginRoute());
       }
 
       return;
@@ -125,7 +125,7 @@ var useRequireAuth = function useRequireAuth() {
 
   React.useEffect(function () {
     if (sessionContext._ready && !sessionContext.isAuthenticated) {
-      router$1.replace(utils$2.loginRouteWithNext());
+      router$1.replace(utils$1.loginRouteWithNext());
     }
   }, [sessionContext._ready]);
 };
@@ -153,8 +153,8 @@ var useSession = function useSession() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$2.loginRoute()) {
-        router$1.replace(utils$2.loginRoute());
+      if (pathname !== utils$1.loginRoute()) {
+        router$1.replace(utils$1.loginRoute());
       }
 
       return;
@@ -176,7 +176,7 @@ var useSession = function useSession() {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__default(utils$2.sessionAPIRoute(), {
+                return axios__default(utils$1.sessionAPIRoute(), {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelRequest = c;
                   })
@@ -195,8 +195,8 @@ var useSession = function useSession() {
                   pathname = window.location.pathname;
                   user = _session.claims.user;
 
-                  if (user.needsOnboarding && pathname !== utils$2.onboardingRoute()) {
-                    router$1.replace(utils$2.onboardingRoute());
+                  if (user.needsOnboarding && pathname !== utils$1.onboardingRoute()) {
+                    router$1.replace(utils$1.onboardingRoute());
                   }
                 }
 

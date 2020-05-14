@@ -9,16 +9,19 @@ require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
+require('../asyncToGenerator-ae22edb1.js');
 require('bcryptjs');
-require('../utils-a6a1ae57.js');
-var utils$1 = require('../utils-bc45515c.js');
-var signup = require('../signup-0b38e1e3.js');
+require('../utils-4b2eeb65.js');
+require('../utils-3f60041c.js');
+require('../utils-8e2326e3.js');
+var utils$3 = require('../utils-bc45515c.js');
+var signup = require('../signup-fbb2288c.js');
 
 var onboarding = (function () {
   var authOptions = index.options.auth;
-  return utils$1.createForm({
+  return utils$3.createForm({
     fields: {
-      password: utils$1.textField('password', {
+      password: utils$3.textField('password', {
         required: {
           value: true,
           errorMessage: 'Please enter your password'

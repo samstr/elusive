@@ -2,13 +2,13 @@
 
 var index = require('./index.js');
 require('./FormErrors-1539c4dc.js');
-var utils = require('./utils-a6a1ae57.js');
-var utils$1 = require('./utils-bc45515c.js');
+var utils$2 = require('./utils-8e2326e3.js');
+var utils$3 = require('./utils-bc45515c.js');
 
 var loginWithLinkForm = (function () {
-  return utils$1.createForm({
+  return utils$3.createForm({
     fields: {
-      email: utils$1.emailField('email', {
+      email: utils$3.emailField('email', {
         required: {
           value: true,
           errorMessage: 'Please enter your email'
@@ -17,28 +17,28 @@ var loginWithLinkForm = (function () {
           errorMessage: 'Your email is invalid'
         }
       }),
-      type: utils$1.textField('type', {
+      type: utils$3.textField('type', {
         required: {
           value: true,
           errorMessage: 'Type field is missing.'
         }
       }, function (type) {
-        if (!utils.LOGIN_TYPES.includes(type)) {
-          throw new utils$1.InvalidFieldValueError('Type field is invalid.', ['type']);
+        if (!utils$2.LOGIN_TYPES.includes(type)) {
+          throw new utils$3.InvalidFieldValueError('Type field is invalid.', ['type']);
         }
 
         return type;
       }),
-      next: utils$1.textField('next')
+      next: utils$3.textField('next')
     }
   });
 });
 
 var loginWithPasswordForm = (function () {
   var authOptions = index.options.auth;
-  return utils$1.createForm({
+  return utils$3.createForm({
     fields: {
-      email: utils$1.emailField('email', {
+      email: utils$3.emailField('email', {
         required: {
           value: true,
           errorMessage: 'Please enter your email.'
@@ -47,7 +47,7 @@ var loginWithPasswordForm = (function () {
           errorMessage: 'Your email is invalid.'
         }
       }),
-      password: utils$1.textField('password', {
+      password: utils$3.textField('password', {
         required: {
           value: true,
           errorMessage: 'Please enter your password.'
@@ -57,14 +57,14 @@ var loginWithPasswordForm = (function () {
           errorMessage: 'Your password is too short.'
         }
       }),
-      type: utils$1.textField('type', {
+      type: utils$3.textField('type', {
         required: {
           value: true,
           errorMessage: 'Type field is missing.'
         }
       }, function (type) {
-        if (!utils.LOGIN_TYPES.includes(type)) {
-          throw new utils$1.InvalidFieldValueError('Type field is invalid.', ['type']);
+        if (!utils$2.LOGIN_TYPES.includes(type)) {
+          throw new utils$3.InvalidFieldValueError('Type field is invalid.', ['type']);
         }
 
         return type;
@@ -74,9 +74,9 @@ var loginWithPasswordForm = (function () {
 });
 
 var resetForm = (function () {
-  return utils$1.createForm({
+  return utils$3.createForm({
     fields: {
-      email: utils$1.emailField('email', {
+      email: utils$3.emailField('email', {
         required: {
           value: true,
           errorMessage: 'Your email is required'
@@ -90,9 +90,9 @@ var resetForm = (function () {
 });
 
 var signupForm = (function () {
-  return utils$1.createForm({
+  return utils$3.createForm({
     fields: {
-      email: utils$1.emailField('email', {
+      email: utils$3.emailField('email', {
         required: {
           value: true,
           errorMessage: 'Your email is required'

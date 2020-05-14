@@ -11,6 +11,8 @@ export const onboardingRoute = () => '/onboarding';
 export const privacyRoute = () => '/privacy';
 export const signupRoute = () => '/signup';
 export const resetRoute = () => '/reset';
+export const settingsRoute = () => '/settings';
+export const settingsSecurityRoute = () => '/settings/security';
 export const termsRoute = () => '/terms';
 
 export const loginRouteWithNext = () => {

@@ -5,10 +5,11 @@ import {
   AlreadyAuthenticatedError,
   TooManyRegistrationsError,
   UserAlreadyExistsError,
+  sendSignupEmail,
 } from '../../auth';
 import { signupForm } from '../../forms/auth';
 import { POST } from '../../http';
-import { createMagicLogin, sendSignupEmail } from '../../models/magicLogins';
+import { createMagicLogin } from '../../models/magicLogins';
 import {
   UserNotEnabledError,
   createUser,

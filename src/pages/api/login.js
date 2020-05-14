@@ -8,6 +8,7 @@ import {
   AuthenticationFailedError,
   TooManyLoginAttemptsError,
   comparePasswordHash,
+  sendLoginEmail,
 } from '../../auth';
 import { loginWithLinkForm, loginWithPasswordForm } from '../../forms/auth';
 import { POST } from '../../http';
@@ -16,7 +17,7 @@ import {
   loginAttemptsCollection,
   listLoginAttempts,
 } from '../../models/loginAttempts';
-import { createMagicLogin, sendLoginEmail } from '../../models/magicLogins';
+import { createMagicLogin } from '../../models/magicLogins';
 import {
   UserNotFoundError,
   UserNotEnabledError,

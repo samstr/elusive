@@ -25,6 +25,9 @@ import {
   LOGIN_TYPES,
   comparePasswordHash,
   hashPassword,
+  sendLoginEmail,
+  sendResetEmail,
+  sendSignupEmail,
 } from './utils';
 export {
   LOGIN_TYPE_LINK,
@@ -32,4 +35,7 @@ export {
   LOGIN_TYPES,
   comparePasswordHash,
   hashPassword,
+  sendLoginEmail,
+  sendResetEmail,
+  sendSignupEmail,
 };
