@@ -48,6 +48,7 @@ var ElusiveClient = /*#__PURE__*/function () {
       };
       this.options = {
         auth: {
+          magicLoginExpiryHours: 1,
           maxLoginAttemptsPerAccountPerHour: 8,
           maxLoginAttemptsPerIPPerHour: 16,
           maxRegistrationsPerDay: 5,
@@ -59,6 +60,7 @@ var ElusiveClient = /*#__PURE__*/function () {
         mail: {
           fromEmail: 'no-reply@example.com',
           fromName: 'Example',
+          loginTemplateID: null,
           resetTemplateID: null,
           sendMailOnDevServer: false,
           signupTemplateID: null
@@ -113,13 +115,18 @@ var ElusiveClient = /*#__PURE__*/function () {
             tokens = options.tokens;
 
         if (auth) {
-          var maxLoginAttemptsPerAccountPerHour = auth.maxLoginAttemptsPerAccountPerHour,
+          var magicLoginExpiryHours = auth.magicLoginExpiryHours,
+              maxLoginAttemptsPerAccountPerHour = auth.maxLoginAttemptsPerAccountPerHour,
               maxLoginAttemptsPerIPPerHour = auth.maxLoginAttemptsPerIPPerHour,
               maxRegistrationsPerDay = auth.maxRegistrationsPerDay,
               maxResetAttemptsPerHour = auth.maxResetAttemptsPerHour,
               passwordMinLength = auth.passwordMinLength,
               passwordResetExpiryHours = auth.passwordResetExpiryHours,
               saltRounds = auth.saltRounds;
+
+          if (magicLoginExpiryHours) {
+            this.options.auth.magicLoginExpiryHours = magicLoginExpiryHours;
+          }
 
           if (maxLoginAttemptsPerAccountPerHour) {
             this.options.auth.maxLoginAttemptsPerAccountPerHour = maxLoginAttemptsPerAccountPerHour;
@@ -153,6 +160,7 @@ var ElusiveClient = /*#__PURE__*/function () {
         if (mail) {
           var fromEmail = mail.fromEmail,
               fromName = mail.fromName,
+              loginTemplateID = mail.loginTemplateID,
               resetTemplateID = mail.resetTemplateID,
               sendMailOnDevServer = mail.sendMailOnDevServer,
               signupTemplateID = mail.signupTemplateID;
@@ -163,6 +171,10 @@ var ElusiveClient = /*#__PURE__*/function () {
 
           if (fromName) {
             this.options.mail.fromName = fromName;
+          }
+
+          if (loginTemplateID) {
+            this.options.mail.loginTemplateID = loginTemplateID;
           }
 
           if (resetTemplateID) {

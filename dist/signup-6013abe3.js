@@ -6,23 +6,23 @@ var index = require('./index.js');
 require('./FormErrors-1539c4dc.js');
 var errors = require('./errors-1d6db12f.js');
 require('bcryptjs');
-var utils = require('./utils-c24ba8b7.js');
+var utils = require('./utils-a6a1ae57.js');
 require('sanitize-html');
-var signup = require('./signup-f25b8831.js');
+var signup = require('./signup-50e33efc.js');
 var utils$2 = require('./utils-b08f259e.js');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
 var loginAttempts = require('./models/loginAttempts.js');
 var users = require('./models/users.js');
 var magicLogins = require('./models/magicLogins.js');
 var resetAttempts = require('./models/resetAttempts.js');
-var utils$4 = require('./utils-d75b0f7b.js');
+var utils$4 = require('./utils-74545f35.js');
 require('./SessionContext-efd795c9.js');
-var utils$5 = require('./utils-73ff7fd4.js');
+var utils$5 = require('./utils-a7f6a71b.js');
 var moment = _interopDefault(require('moment'));
 
 var loginAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
-    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, type, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors$1, user, claims, _loginWithLinkForm$va, _cleanValues, _errors, _user;
+    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, type, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors$1, user, claims, _loginWithLinkForm$va, _cleanValues, _errors, _user, magicLogin;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -152,7 +152,7 @@ var loginAPI = /*#__PURE__*/function () {
 
           case 39:
             if (!(type === utils.LOGIN_TYPE_LINK)) {
-              _context.next = 47;
+              _context.next = 52;
               break;
             }
 
@@ -177,9 +177,22 @@ var loginAPI = /*#__PURE__*/function () {
           case 45:
             _user = _context.sent;
 
-            if (_user && _user.enabled) ;
+            if (!(_user && _user.enabled)) {
+              _context.next = 52;
+              break;
+            }
 
-          case 47:
+            _context.next = 49;
+            return createMagicLogin({
+              userId: _user.id
+            });
+
+          case 49:
+            magicLogin = _context.sent;
+            _context.next = 52;
+            return sendLoginEmail(req, _user.email, magicLogin.id);
+
+          case 52:
           case "end":
             return _context.stop();
         }

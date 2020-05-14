@@ -3,17 +3,17 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('../classCallCheck-d2bb402f.js');
-require('../index-15dd3ed4.js');
+require('../index-c5fa8643.js');
 var index = require('../index.js');
 require('../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
 require('bcryptjs');
-require('../utils-c24ba8b7.js');
-var utils$1 = require('../utils-69cbd2b3.js');
+require('../utils-a6a1ae57.js');
+var utils$1 = require('../utils-c88c9c04.js');
 require('sanitize-html');
-var signup = require('../signup-f25b8831.js');
+var signup = require('../signup-50e33efc.js');
 
 var onboarding = (function () {
   var authOptions = index.options.auth;

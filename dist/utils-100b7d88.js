@@ -1,6 +1,6 @@
 'use strict';
 
-var client = require('./index-15dd3ed4.js');
+var client = require('./index-c5fa8643.js');
 var index = require('./index.js');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
 var uuid = require('uuid');

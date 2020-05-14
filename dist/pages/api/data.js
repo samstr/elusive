@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('../../classCallCheck-d2bb402f.js');
-require('../../index-15dd3ed4.js');
+require('../../index-c5fa8643.js');
 var index = require('../../index.js');
 require('../../FormErrors-1539c4dc.js');
 require('react');
@@ -11,26 +11,26 @@ require('prop-types');
 require('react-bootstrap');
 require('../../errors-1d6db12f.js');
 require('bcryptjs');
-require('../../utils-c24ba8b7.js');
-require('../../utils-69cbd2b3.js');
+require('../../utils-a6a1ae57.js');
+require('../../utils-c88c9c04.js');
 require('sanitize-html');
-require('../../signup-f25b8831.js');
+require('../../signup-50e33efc.js');
 require('../../utils-b08f259e.js');
 var asyncToGenerator = require('../../asyncToGenerator-ae22edb1.js');
-require('../../utils-59a862f2.js');
+require('../../utils-59259237.js');
 require('uuid');
-require('../../utils-3ba3aef8.js');
+require('../../utils-100b7d88.js');
 require('../../models/loginAttempts.js');
 require('../../utils-08b190dc.js');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
 require('../../models/resetAttempts.js');
-var utils$4 = require('../../utils-d75b0f7b.js');
+var utils$4 = require('../../utils-74545f35.js');
 require('../../SessionContext-efd795c9.js');
-var utils$5 = require('../../utils-73ff7fd4.js');
+var utils$5 = require('../../utils-a7f6a71b.js');
 require('jsonwebtoken');
 require('moment');
-require('../../signup-4ffcc289.js');
+require('../../signup-6013abe3.js');
 
 var magicLoginDataAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
