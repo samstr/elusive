@@ -53,7 +53,7 @@ export const loginAPI = async ({ req, res, session }) => {
     }
   }
 
-  const { email, password, type } = req.body;
+  const { type, email, password, next } = req.body;
 
   if (process.env.NODE_ENV === 'production') {
     const recentLoginAttemptsByAccount = await listLoginAttempts(
@@ -122,6 +122,7 @@ export const loginAPI = async ({ req, res, session }) => {
     const { cleanValues, errors } = loginWithLinkForm().validate({
       type,
       email,
+      next,
     });
 
     if (errors && errors.length) {
@@ -137,7 +138,7 @@ export const loginAPI = async ({ req, res, session }) => {
         userId: user.id,
       });
 
-      await sendLoginEmail(req, user.email, magicLogin.id, next);
+      await sendLoginEmail(req, user.email, magicLogin.id, cleanValues.next);
     }
   }
 };

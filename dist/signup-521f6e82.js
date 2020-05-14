@@ -22,7 +22,7 @@ var moment = _interopDefault(require('moment'));
 
 var loginAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
-    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, type, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors$1, user, claims, _loginWithLinkForm$va, _cleanValues, _errors, _user, magicLogin;
+    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, type, email, password, next, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors$1, user, claims, _loginWithLinkForm$va, _cleanValues, _errors, _user, magicLogin;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -61,7 +61,7 @@ var loginAPI = /*#__PURE__*/function () {
             throw new errors.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
 
           case 12:
-            _req$body = req.body, email = _req$body.email, password = _req$body.password, type = _req$body.type;
+            _req$body = req.body, type = _req$body.type, email = _req$body.email, password = _req$body.password, next = _req$body.next;
 
             if (!(process.env.NODE_ENV === 'production')) {
               _context.next = 19;
@@ -159,7 +159,8 @@ var loginAPI = /*#__PURE__*/function () {
 
             _loginWithLinkForm$va = signup.loginWithLinkForm().validate({
               type: type,
-              email: email
+              email: email,
+              next: next
             }), _cleanValues = _loginWithLinkForm$va.cleanValues, _errors = _loginWithLinkForm$va.errors;
 
             if (!(_errors && _errors.length)) {
@@ -191,7 +192,7 @@ var loginAPI = /*#__PURE__*/function () {
           case 49:
             magicLogin = _context.sent;
             _context.next = 52;
-            return magicLogins.sendLoginEmail(req, _user.email, magicLogin.id, next);
+            return magicLogins.sendLoginEmail(req, _user.email, magicLogin.id, _cleanValues.next);
 
           case 52:
           case "end":

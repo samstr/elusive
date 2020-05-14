@@ -30,7 +30,7 @@ require('../../SessionContext-efd795c9.js');
 var utils$5 = require('../../utils-a7f6a71b.js');
 require('jsonwebtoken');
 require('moment');
-require('../../signup-b8176246.js');
+require('../../signup-521f6e82.js');
 
 var magicLoginDataAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {

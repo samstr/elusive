@@ -89,8 +89,8 @@ var MagicLoginNotFoundError = /*#__PURE__*/function (_BaseError2) {
   return MagicLoginNotFoundError;
 }(FormErrors.BaseError);
 var sendLoginEmail = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee2(req, toEmail, magicLoginID) {
-    var _Elusive$options, authOptions, mailOptions, siteOptions, dynamicTemplateData;
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee2(req, toEmail, magicLoginID, next) {
+    var _Elusive$options, authOptions, mailOptions, siteOptions, dynamicTemplateData, magicLoginURL;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -98,7 +98,13 @@ var sendLoginEmail = /*#__PURE__*/function () {
           case 0:
             _Elusive$options = index.options, authOptions = _Elusive$options.auth, mailOptions = _Elusive$options.mail, siteOptions = _Elusive$options.site;
             dynamicTemplateData = utils.defaultDynamicTemplateData(req);
-            _context2.next = 4;
+            magicLoginURL = "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID).asPath);
+
+            if (next) {
+              magicLoginURL = "".concat(magicLoginURL, "?next=").concat(encodeURIComponent(next));
+            }
+
+            _context2.next = 6;
             return utils.sendMail({
               to: toEmail,
               template_id: mailOptions.loginTemplateID,
@@ -106,15 +112,15 @@ var sendLoginEmail = /*#__PURE__*/function () {
                 subject: "Login to your ".concat(siteOptions.name, " account"),
                 preheader: "Click the button below and you will be automatically logged in to your ".concat(siteOptions.name, " account. "),
                 reasonForEmail: "you requested an automatic login link",
-                magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID).asPath),
+                magicLoginURL: magicLoginURL,
                 expiryHours: authOptions.magicLoginExpiryHours === 1 ? "".concat(authOptions.magicLoginExpiryHours, " hour") : "".concat(authOptions.magicLoginExpiryHours, " hours")
               })
             });
 
-          case 4:
+          case 6:
             return _context2.abrupt("return", _context2.sent);
 
-          case 5:
+          case 7:
           case "end":
             return _context2.stop();
         }
@@ -122,7 +128,7 @@ var sendLoginEmail = /*#__PURE__*/function () {
     }, _callee2);
   }));
 
-  return function sendLoginEmail(_x2, _x3, _x4) {
+  return function sendLoginEmail(_x2, _x3, _x4, _x5) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -144,7 +150,7 @@ var sendSignupEmail = /*#__PURE__*/function () {
                 subject: "Confirm your ".concat(siteOptions.name, " account"),
                 preheader: "Welcome to ".concat(siteOptions.name, ". Thank you for confirming your email address. Click here to create your account. "),
                 reasonForEmail: "you signed up for a ".concat(siteOptions.name, " account"),
-                magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID).asPath),
+                magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.magicLoginRoute(magicLoginID).asPath, "?next=").concat(encodeURIComponent(utils$2.onboardingRoute())),
                 termsURL: "".concat(dynamicTemplateData.baseURL).concat(utils$2.termsRoute())
               })
             });
@@ -160,7 +166,7 @@ var sendSignupEmail = /*#__PURE__*/function () {
     }, _callee3);
   }));
 
-  return function sendSignupEmail(_x5, _x6, _x7) {
+  return function sendSignupEmail(_x6, _x7, _x8) {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -177,7 +183,7 @@ var sendResetEmail = /*#__PURE__*/function () {
     }, _callee4);
   }));
 
-  return function sendResetEmail(_x8, _x9, _x10) {
+  return function sendResetEmail(_x9, _x10, _x11) {
     return _ref4.apply(this, arguments);
   };
 }();
