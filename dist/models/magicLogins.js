@@ -2,6 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
 var client = require('../index-c5fa8643.js');
 var index = require('../index.js');
@@ -13,6 +15,7 @@ var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
 var utils = require('../utils-4b2eeb65.js');
 require('uuid');
 var utils$1 = require('../utils-100b7d88.js');
+var moment = _interopDefault(require('moment'));
 var utils$2 = require('../utils-08b190dc.js');
 var users = require('./users.js');
 
@@ -26,6 +29,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 var COLLECTION = 'magicLogins';
 var model = function model(data) {
   var model = utils$1.createModel(data);
+
+  model.hasExpired = function () {
+    return magicLoginExpired(model);
+  };
 
   model.getUser = /*#__PURE__*/function () {
     var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_) {
@@ -88,6 +95,26 @@ var MagicLoginNotFoundError = /*#__PURE__*/function (_BaseError2) {
 
   return MagicLoginNotFoundError;
 }(FormErrors.BaseError);
+var MagicLoginExpiredError = /*#__PURE__*/function (_BaseError3) {
+  FormErrors._inherits(MagicLoginExpiredError, _BaseError3);
+
+  var _super3 = _createSuper(MagicLoginExpiredError);
+
+  function MagicLoginExpiredError() {
+    classCallCheck._classCallCheck(this, MagicLoginExpiredError);
+
+    return _super3.apply(this, arguments);
+  }
+
+  return MagicLoginExpiredError;
+}(FormErrors.BaseError);
+var magicLoginExpired = function magicLoginExpired(magicLogin) {
+  var authOptions = index.options.auth;
+  var dateNow = moment();
+  var dateCreated = moment.unix(magicLogin.dateCreated);
+  var dateExpires = moment(dateCreated).add(authOptions.magicLoginExpiryHours, 'hours');
+  return dateNow.isAfter(dateExpires);
+};
 var sendLoginEmail = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee2(req, toEmail, magicLoginID, next) {
     var _Elusive$options, authOptions, mailOptions, siteOptions, dynamicTemplateData, magicLoginURL;
@@ -189,11 +216,13 @@ var sendResetEmail = /*#__PURE__*/function () {
 }();
 
 exports.MagicLoginAlreadyUsedError = MagicLoginAlreadyUsedError;
+exports.MagicLoginExpiredError = MagicLoginExpiredError;
 exports.MagicLoginNotFoundError = MagicLoginNotFoundError;
 exports.createMagicLogin = createMagicLogin;
 exports.getMagicLogin = getMagicLogin;
 exports.getMagicLoginByID = getMagicLoginByID;
 exports.listMagicLogins = listMagicLogins;
+exports.magicLoginExpired = magicLoginExpired;
 exports.magicLoginsCollection = magicLoginsCollection;
 exports.model = model;
 exports.sendLoginEmail = sendLoginEmail;

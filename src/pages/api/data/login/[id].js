@@ -1,6 +1,7 @@
 import Elusive from '../../../../';
 import {
   MagicLoginAlreadyUsedError,
+  MagicLoginExpiredError,
   MagicLoginNotFoundError,
   getMagicLoginByID,
   updateMagicLogin,
@@ -9,7 +10,6 @@ import {
   UserNotEnabledError,
   UserNotFoundError,
 } from '../../../../models/users';
-import { apiWrapper } from '../../../../pages/api';
 import { createSessionCookies } from '../../../../sessions';
 import { signTokens } from '../../../../tokens';
 
@@ -38,14 +38,16 @@ const magicLoginDataAPI = async ({ req, res }) => {
     throw new UserNotEnabledError('This account has been disabled.');
   }
 
-  if (magicLogin.user.password) {
-    await updateMagicLogin(
-      { id: magicLogin.id },
-      {
-        used: true,
-      }
-    );
+  if (magicLogin.hasExpired()) {
+    throw new MagicLoginExpiredError('This login link has expired.');
   }
+
+  await updateMagicLogin(
+    { id: magicLogin.id },
+    {
+      used: true,
+    }
+  );
 
   const claims = tokenOptions.createClaims(magicLogin.user);
 

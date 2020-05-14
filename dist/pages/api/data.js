@@ -9,27 +9,18 @@ require('../../FormErrors-1539c4dc.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-require('../../errors-1d6db12f.js');
-require('bcryptjs');
-require('../../utils-a6a1ae57.js');
-require('../../utils-bc45515c.js');
-require('../../signup-0b38e1e3.js');
-require('../../utils-b08f259e.js');
 var asyncToGenerator = require('../../asyncToGenerator-ae22edb1.js');
 require('../../utils-4b2eeb65.js');
 require('uuid');
 require('../../utils-100b7d88.js');
-require('../../models/loginAttempts.js');
+require('moment');
 require('../../utils-08b190dc.js');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
-require('../../models/resetAttempts.js');
 var utils$4 = require('../../utils-74545f35.js');
 require('../../SessionContext-efd795c9.js');
 var utils$5 = require('../../utils-a7f6a71b.js');
 require('jsonwebtoken');
-require('moment');
-require('../../signup-c464c4b2.js');
 
 var magicLoginDataAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
@@ -82,19 +73,22 @@ var magicLoginDataAPI = /*#__PURE__*/function () {
             throw new users.UserNotEnabledError('This account has been disabled.');
 
           case 15:
-            if (!magicLogin.user.password) {
-              _context.next = 18;
+            if (!magicLogin.hasExpired()) {
+              _context.next = 17;
               break;
             }
 
-            _context.next = 18;
+            throw new magicLogins.MagicLoginExpiredError('This login link has expired.');
+
+          case 17:
+            _context.next = 19;
             return magicLogins.updateMagicLogin({
               id: magicLogin.id
             }, {
               used: true
             });
 
-          case 18:
+          case 19:
             claims = tokenOptions.createClaims(magicLogin.user);
             utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
             return _context.abrupt("return", {
@@ -104,7 +98,7 @@ var magicLoginDataAPI = /*#__PURE__*/function () {
               }
             });
 
-          case 21:
+          case 22:
           case "end":
             return _context.stop();
         }
