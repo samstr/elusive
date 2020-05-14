@@ -170,16 +170,16 @@ var createForm = function createForm(_ref) {
 var field = function field(name, options, _validate2) {
   return {
     validate: function validate(value) {
+      var _options$required;
+
       var cleanValue;
 
       if (value) {
         cleanValue = value.trim();
       }
 
-      if (options.required && options.required.value) {
-        if (options.required.value && !cleanValue) {
-          throw new MissingRequiredFieldError(options.required.errorMessage, [name]);
-        }
+      if ((options === null || options === void 0 ? void 0 : (_options$required = options.required) === null || _options$required === void 0 ? void 0 : _options$required.value) && !cleanValue) {
+        throw new MissingRequiredFieldError(options.required.errorMessage, [name]);
       }
 
       if (typeof _validate2 === 'function') {
@@ -192,6 +192,8 @@ var field = function field(name, options, _validate2) {
 };
 var textField = function textField(name, options, validate) {
   return field(name, options, function (value) {
+    var _options$minLength, _options$minLength2, _options$maxLength, _options$maxLength2, _options$invalid, _options$invalid2, _options$invalid2$val;
+
     var cleanValue;
 
     if (value) {
@@ -201,22 +203,16 @@ var textField = function textField(name, options, validate) {
       });
     }
 
-    if (options.minLength && options.minLength.value) {
-      if (cleanValue.length < options.minLength.value) {
-        throw new FieldValueTooShortError(options.minLength.errorMessage, [name]);
-      }
+    if ((options === null || options === void 0 ? void 0 : (_options$minLength = options.minLength) === null || _options$minLength === void 0 ? void 0 : _options$minLength.value) && cleanValue.length < (options === null || options === void 0 ? void 0 : (_options$minLength2 = options.minLength) === null || _options$minLength2 === void 0 ? void 0 : _options$minLength2.value)) {
+      throw new FieldValueTooShortError(options.minLength.errorMessage, [name]);
     }
 
-    if (options.maxLength && options.maxLength.value) {
-      if (cleanValue.length > options.maxLength.value) {
-        throw new FieldValueTooLongError(options.maxLength.errorMessage, [name]);
-      }
+    if ((options === null || options === void 0 ? void 0 : (_options$maxLength = options.maxLength) === null || _options$maxLength === void 0 ? void 0 : _options$maxLength.value) && cleanValue.length > (options === null || options === void 0 ? void 0 : (_options$maxLength2 = options.maxLength) === null || _options$maxLength2 === void 0 ? void 0 : _options$maxLength2.value)) {
+      throw new FieldValueTooLongError(options.maxLength.errorMessage, [name]);
     }
 
-    if (options.invalid && options.invalid.value) {
-      if (!options.invalid.value.test(cleanValue)) {
-        throw new InvalidFieldValueError(options.invalid.errorMessage, [name]);
-      }
+    if ((options === null || options === void 0 ? void 0 : (_options$invalid = options.invalid) === null || _options$invalid === void 0 ? void 0 : _options$invalid.value) && !(options === null || options === void 0 ? void 0 : (_options$invalid2 = options.invalid) === null || _options$invalid2 === void 0 ? void 0 : (_options$invalid2$val = _options$invalid2.value) === null || _options$invalid2$val === void 0 ? void 0 : _options$invalid2$val.test(cleanValue))) {
+      throw new InvalidFieldValueError(options.invalid.errorMessage, [name]);
     }
 
     if (typeof validate === 'function') {
@@ -248,12 +244,12 @@ var emailField = function emailField(name, options) {
 var booleanField = function booleanField(name, options, _validate3) {
   return {
     validate: function validate(value) {
+      var _options$required2;
+
       var cleanValue = value;
 
-      if (options.required && options.required.value) {
-        if (options.required.value && !cleanValue) {
-          throw new MissingRequiredFieldError(options.required.errorMessage, [name]);
-        }
+      if ((options === null || options === void 0 ? void 0 : (_options$required2 = options.required) === null || _options$required2 === void 0 ? void 0 : _options$required2.value) && !cleanValue) {
+        throw new MissingRequiredFieldError(options.required.errorMessage, [name]);
       }
 
       if (typeof _validate3 === 'function') {

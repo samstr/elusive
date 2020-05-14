@@ -86,12 +86,10 @@ export const field = (name, options, validate) => ({
       cleanValue = value.trim();
     }
 
-    if (options.required && options.required.value) {
-      if (options.required.value && !cleanValue) {
-        throw new MissingRequiredFieldError(options.required.errorMessage, [
-          name,
-        ]);
-      }
+    if (options?.required?.value && !cleanValue) {
+      throw new MissingRequiredFieldError(options.required.errorMessage, [
+        name,
+      ]);
     }
 
     if (typeof validate === 'function') {
@@ -113,26 +111,22 @@ export const textField = (name, options, validate) =>
       });
     }
 
-    if (options.minLength && options.minLength.value) {
-      if (cleanValue.length < options.minLength.value) {
-        throw new FieldValueTooShortError(options.minLength.errorMessage, [
-          name,
-        ]);
-      }
+    if (
+      options?.minLength?.value &&
+      cleanValue.length < options?.minLength?.value
+    ) {
+      throw new FieldValueTooShortError(options.minLength.errorMessage, [name]);
     }
 
-    if (options.maxLength && options.maxLength.value) {
-      if (cleanValue.length > options.maxLength.value) {
-        throw new FieldValueTooLongError(options.maxLength.errorMessage, [
-          name,
-        ]);
-      }
+    if (
+      options?.maxLength?.value &&
+      cleanValue.length > options?.maxLength?.value
+    ) {
+      throw new FieldValueTooLongError(options.maxLength.errorMessage, [name]);
     }
 
-    if (options.invalid && options.invalid.value) {
-      if (!options.invalid.value.test(cleanValue)) {
-        throw new InvalidFieldValueError(options.invalid.errorMessage, [name]);
-      }
+    if (options?.invalid?.value && !options?.invalid?.value?.test(cleanValue)) {
+      throw new InvalidFieldValueError(options.invalid.errorMessage, [name]);
     }
 
     if (typeof validate === 'function') {
@@ -165,12 +159,10 @@ export const booleanField = (name, options, validate) => ({
   validate: (value) => {
     const cleanValue = value;
 
-    if (options.required && options.required.value) {
-      if (options.required.value && !cleanValue) {
-        throw new MissingRequiredFieldError(options.required.errorMessage, [
-          name,
-        ]);
-      }
+    if (options?.required?.value && !cleanValue) {
+      throw new MissingRequiredFieldError(options.required.errorMessage, [
+        name,
+      ]);
     }
 
     if (typeof validate === 'function') {
