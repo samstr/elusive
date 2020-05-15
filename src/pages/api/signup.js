@@ -66,10 +66,15 @@ const signupAPI = async ({ req, res, session }) => {
   }
 
   if (!user) {
+    const baseURL = `${
+      process.env.NODE_ENV === 'production' ? 'https' : 'http'
+    }://${req.headers.host}`;
+
     user = await createUser({
       email: cleanValues.email,
       enabled: true,
       registrationIP: ip,
+      profilePictureURL: `${baseURL}/img/profile-picture/default.png`,
       verifications: {
         email: false,
       },
