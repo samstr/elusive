@@ -508,7 +508,7 @@ sessionAPI.options = {
 
 var signupAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
-    var req, res, session, authOptions, email, _signupForm$validate, cleanValues, errors$1, ip, date1DayAgo, recentUsersByIP, user, magicLogin;
+    var req, res, session, authOptions, email, _signupForm$validate, cleanValues, errors$1, ip, date1DayAgo, recentUsersByIP, user, baseURL, magicLogin;
 
     return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -585,42 +585,44 @@ var signupAPI = /*#__PURE__*/function () {
 
           case 23:
             if (user) {
-              _context.next = 27;
+              _context.next = 28;
               break;
             }
 
-            _context.next = 26;
+            baseURL = "".concat(process.env.NODE_ENV === 'production' ? 'https' : 'http', "://").concat(req.headers.host);
+            _context.next = 27;
             return users.createUser({
               email: cleanValues.email,
               enabled: true,
               registrationIP: ip,
+              profilePictureURL: "".concat(baseURL, "/img/profile-picture/default.png"),
               verifications: {
                 email: false
               }
             });
 
-          case 26:
+          case 27:
             user = _context.sent;
 
-          case 27:
-            _context.next = 29;
+          case 28:
+            _context.next = 30;
             return magicLogins.createMagicLogin({
               userId: user.id
             });
 
-          case 29:
+          case 30:
             magicLogin = _context.sent;
-            _context.next = 32;
+            _context.next = 33;
             return utils$2.sendSignupEmail(req, user.email, magicLogin.id);
 
-          case 32:
+          case 33:
             return _context.abrupt("return", {
               user: {
                 id: user.id
               }
             });
 
-          case 33:
+          case 34:
           case "end":
             return _context.stop();
         }
