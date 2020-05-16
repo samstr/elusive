@@ -20,30 +20,14 @@ var Button = function Button(props) {
       text = props.text,
       type = props.type,
       variant = props.variant;
-  var _disabled = disabled;
-  var spinnerContent;
-  var textContent = text;
-
-  if (isLoading && !disabled) {
-    spinnerContent = __jsx(reactBootstrap.Spinner, {
-      as: "span",
-      animation: "border",
-      size: "sm",
-      role: "status",
-      "aria-hidden": "true"
-    });
-    _disabled = true;
-    textContent = null;
-  }
-
   return __jsx(reactBootstrap.Button, {
     variant: variant,
     type: type,
     onClick: onClick,
-    disabled: _disabled,
+    disabled: disabled || isLoading,
     size: size,
     block: block
-  }, spinnerContent, textContent);
+  }, isLoading && "Loading...", !isLoading && text);
 };
 
 Button.propTypes = {

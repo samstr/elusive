@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button as BootstrapButton, Spinner } from 'react-bootstrap';
+import { Button as BootstrapButton } from 'react-bootstrap';
 
 const Button = (props) => {
   const {
@@ -14,35 +14,16 @@ const Button = (props) => {
     variant,
   } = props;
 
-  let _disabled = disabled;
-
-  let spinnerContent;
-  let textContent = text;
-
-  if (isLoading && !disabled) {
-    spinnerContent = (
-      <Spinner
-        as="span"
-        animation="border"
-        size="sm"
-        role="status"
-        aria-hidden="true"
-      />
-    );
-    _disabled = true;
-    textContent = null;
-  }
-
   return (
     <BootstrapButton
       variant={variant}
       type={type}
       onClick={onClick}
-      disabled={_disabled}
+      disabled={disabled || isLoading}
       size={size}
       block={block}>
-      {spinnerContent}
-      {textContent}
+      {isLoading && `Loading...`}
+      {!isLoading && text}
     </BootstrapButton>
   );
 };
