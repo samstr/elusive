@@ -18,7 +18,7 @@ require('../utils-db80ea21.js');
 require('../utils-3f60041c.js');
 var utils$2 = require('../utils-b7078773.js');
 require('../utils-bc45515c.js');
-var signup = require('../signup-8f2753d6.js');
+var signup = require('../signup-d8d194e5.js');
 var utils$4 = require('../utils-b08f259e.js');
 require('uuid');
 require('../utils-100b7d88.js');
@@ -379,6 +379,87 @@ logoutAPI.options = {
   allowedMethods: [utils$4.POST]
 };
 
+var onboardingAPI = /*#__PURE__*/function () {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+    var req, res, session, tokenOptions, password, _onboardingForm$valid, cleanValues, errors, user, claims;
+
+    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            req = _ref.req, res = _ref.res, session = _ref.session;
+            tokenOptions = index.options.tokens;
+            password = req.body.password;
+            _onboardingForm$valid = signup.onboardingForm().validate({
+              password: password
+            }), cleanValues = _onboardingForm$valid.cleanValues, errors = _onboardingForm$valid.errors;
+
+            if (!(errors && errors.length)) {
+              _context.next = 6;
+              break;
+            }
+
+            return _context.abrupt("return", {
+              errors: errors
+            });
+
+          case 6:
+            _context.next = 8;
+            return users.getUserByID(session.claims.user.id);
+
+          case 8:
+            user = _context.sent;
+
+            if (user) {
+              _context.next = 11;
+              break;
+            }
+
+            throw new users.UserNotFoundError('This account no longer exists.');
+
+          case 11:
+            if (user.enabled) {
+              _context.next = 13;
+              break;
+            }
+
+            throw new users.UserNotEnabledError('This account has been disabled.');
+
+          case 13:
+            _context.next = 15;
+            return users.updateUser(user, {
+              password: utils$2.hashPassword(cleanValues.password)
+            });
+
+          case 15:
+            user = _context.sent;
+            claims = tokenOptions.createClaims(user);
+            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
+            return _context.abrupt("return", {
+              session: {
+                isAuthenticated: true,
+                claims: claims
+              }
+            });
+
+          case 19:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function onboardingAPI(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+onboardingAPI.options = {
+  allowedMethods: [utils$4.POST],
+  requireAuth: true
+};
+
 var resetAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
     var req, authOptions, email, ip, date1HourAgo, recentResetAttemptsByIP, _resetForm$validate, cleanValues, errors$1, user, magicLogin;
@@ -642,6 +723,7 @@ signupAPI.options = {
 exports.apiWrapper = apiWrapper;
 exports.loginAPI = loginAPI;
 exports.logoutAPI = logoutAPI;
+exports.onboardingAPI = onboardingAPI;
 exports.resetAPI = resetAPI;
 exports.sessionAPI = sessionAPI;
 exports.signupAPI = signupAPI;

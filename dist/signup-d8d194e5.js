@@ -73,6 +73,24 @@ var loginWithPasswordForm = (function () {
   });
 });
 
+var onboardingForm = (function () {
+  var authOptions = index.options.auth;
+  return utils$3.createForm({
+    fields: {
+      password: utils$3.textField('password', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your password'
+        },
+        minLength: {
+          value: authOptions.passwordMinLength,
+          errorMessage: 'Your password is too short'
+        }
+      })
+    }
+  });
+});
+
 var resetForm = (function () {
   return utils$3.createForm({
     fields: {
@@ -107,5 +125,6 @@ var signupForm = (function () {
 
 exports.loginWithLinkForm = loginWithLinkForm;
 exports.loginWithPasswordForm = loginWithPasswordForm;
+exports.onboardingForm = onboardingForm;
 exports.resetForm = resetForm;
 exports.signupForm = signupForm;
