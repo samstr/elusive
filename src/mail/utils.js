@@ -8,7 +8,7 @@ export const defaultDynamicTemplateData = (req) => {
 
   return {
     baseURL,
-    siteName: siteOptions.siteName,
+    siteName: siteOptions.name,
   };
 };
 

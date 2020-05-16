@@ -12,7 +12,7 @@ var defaultDynamicTemplateData = function defaultDynamicTemplateData(req) {
   var baseURL = "".concat(process.env.NODE_ENV === 'production' ? 'https' : 'http', "://").concat(req.headers.host);
   return {
     baseURL: baseURL,
-    siteName: siteOptions.siteName
+    siteName: siteOptions.name
   };
 };
 var sendMail = /*#__PURE__*/function () {
