@@ -7,12 +7,15 @@ const Button = (props) => {
     block,
     disabled,
     isLoading,
+    loadingText,
     onClick,
     size,
     text,
     type,
     variant,
   } = props;
+
+  const _loadingText = loadingText || 'Loading...';
 
   return (
     <BootstrapButton
@@ -22,7 +25,7 @@ const Button = (props) => {
       disabled={disabled || isLoading}
       size={size}
       block={block}>
-      {isLoading && `Loading...`}
+      {isLoading && _loadingText}
       {!isLoading && text}
     </BootstrapButton>
   );
@@ -33,6 +36,7 @@ Button.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
   isLoading: PropTypes.bool,
+  loadingText: PropTypes.string,
   text: PropTypes.string,
   block: PropTypes.bool,
   disabled: PropTypes.bool,

@@ -15,11 +15,15 @@ var Button = function Button(props) {
   var block = props.block,
       disabled = props.disabled,
       isLoading = props.isLoading,
+      loadingText = props.loadingText,
       onClick = props.onClick,
       size = props.size,
       text = props.text,
       type = props.type,
       variant = props.variant;
+
+  var _loadingText = loadingText || 'Loading...';
+
   return __jsx(reactBootstrap.Button, {
     variant: variant,
     type: type,
@@ -27,7 +31,7 @@ var Button = function Button(props) {
     disabled: disabled || isLoading,
     size: size,
     block: block
-  }, isLoading && "Loading...", !isLoading && text);
+  }, isLoading && _loadingText, !isLoading && text);
 };
 
 Button.propTypes = {
@@ -35,6 +39,7 @@ Button.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
   isLoading: PropTypes.bool,
+  loadingText: PropTypes.string,
   text: PropTypes.string,
   block: PropTypes.bool,
   disabled: PropTypes.bool,

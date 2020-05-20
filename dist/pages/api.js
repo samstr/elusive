@@ -16,9 +16,9 @@ var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
 require('bcryptjs');
 require('../utils-db80ea21.js');
 require('../utils-3f60041c.js');
-var utils$2 = require('../utils-b7078773.js');
+var utils$2 = require('../utils-48f0ca53.js');
 require('../utils-bc45515c.js');
-var signup = require('../signup-d8d194e5.js');
+var signup = require('../signup-6f3fff1c.js');
 var utils$4 = require('../utils-b08f259e.js');
 require('uuid');
 require('../utils-100b7d88.js');
@@ -27,9 +27,9 @@ var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$6 = require('../utils-5d6fb8d6.js');
+var utils$5 = require('../utils-41a3d612.js');
 require('../SessionContext-efd795c9.js');
-var utils$7 = require('../utils-a7f6a71b.js');
+var utils$6 = require('../utils-a7f6a71b.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -47,12 +47,12 @@ var apiWrapper = /*#__PURE__*/function () {
             options = _objectSpread({
               allowedMethods: [utils$4.GET],
               requireAuth: false,
-              reloadUserSource: utils$6.RELOAD_USER_SOURCE_REFRESH_TOKEN
+              reloadUserSource: utils$5.RELOAD_USER_SOURCE_REFRESH_TOKEN
             }, api.options);
             _context.prev = 2;
             utils$4.validateRequest(req, res, options);
             _context.next = 6;
-            return utils$6.getSession(req, options.reloadUserSource);
+            return utils$5.getSession(req, options.reloadUserSource);
 
           case 6:
             _yield$getSession = _context.sent;
@@ -111,12 +111,12 @@ var apiWrapper = /*#__PURE__*/function () {
             return _context.abrupt("return", utils$4.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
 
           case 30:
-            if (!(_context.t5 instanceof utils$6.SessionError || _context.t5 instanceof utils$7.TokenError)) {
+            if (!(_context.t5 instanceof utils$5.SessionError || _context.t5 instanceof utils$6.TokenError)) {
               _context.next = 33;
               break;
             }
 
-            utils$6.deleteSessionCookies(res);
+            utils$5.deleteSessionCookies(res);
             return _context.abrupt("return", utils$4.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
 
           case 33:
@@ -272,7 +272,7 @@ var loginAPI = /*#__PURE__*/function () {
 
           case 34:
             claims = tokenOptions.createClaims(user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
+            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,
@@ -356,7 +356,7 @@ var logoutAPI = /*#__PURE__*/function () {
             throw new errors.NotAuthenticatedError('You are not logged in');
 
           case 3:
-            utils$6.deleteSessionCookies(res);
+            utils$5.deleteSessionCookies(res);
             return _context.abrupt("return", {
               isAuthenticated: false,
               claims: null
@@ -434,7 +434,7 @@ var onboardingAPI = /*#__PURE__*/function () {
           case 15:
             user = _context.sent;
             claims = tokenOptions.createClaims(user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
+            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,
@@ -563,7 +563,7 @@ var sessionAPI = /*#__PURE__*/function () {
             tokenOptions = index.options.tokens; // Are there tokens? That means we regenerated the session. Set new cookies
 
             if (session.isAuthenticated && tokens) {
-              utils$6.createSessionCookies(res, utils$7.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+              utils$5.createSessionCookies(res, utils$6.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
             }
 
             return _context.abrupt("return", {
@@ -584,7 +584,7 @@ var sessionAPI = /*#__PURE__*/function () {
 }();
 
 sessionAPI.options = {
-  reloadUserSource: utils$6.RELOAD_USER_SOURCE_DATABASE
+  reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE
 };
 
 var signupAPI = /*#__PURE__*/function () {

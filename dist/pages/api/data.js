@@ -10,14 +10,18 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 var asyncToGenerator = require('../../asyncToGenerator-ae22edb1.js');
+require('bcryptjs');
+require('../../utils-db80ea21.js');
+require('../../utils-3f60041c.js');
+require('../../utils-48f0ca53.js');
 require('uuid');
 require('../../utils-100b7d88.js');
 require('moment');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
-var utils$6 = require('../../utils-5d6fb8d6.js');
+var utils$5 = require('../../utils-41a3d612.js');
 require('../../SessionContext-efd795c9.js');
-var utils$7 = require('../../utils-a7f6a71b.js');
+var utils$6 = require('../../utils-a7f6a71b.js');
 require('jsonwebtoken');
 
 var magicLoginDataAPI = /*#__PURE__*/function () {
@@ -88,7 +92,7 @@ var magicLoginDataAPI = /*#__PURE__*/function () {
 
           case 19:
             claims = tokenOptions.createClaims(magicLogin.user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
+            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,

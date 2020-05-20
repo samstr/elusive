@@ -12,8 +12,12 @@ require('react');
 require('prop-types');
 require('react-bootstrap');
 var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
+require('bcryptjs');
+require('../utils-db80ea21.js');
+require('../utils-3f60041c.js');
+require('../utils-48f0ca53.js');
 require('uuid');
-var utils = require('../utils-100b7d88.js');
+var utils$3 = require('../utils-100b7d88.js');
 var moment = _interopDefault(require('moment'));
 var users = require('./users.js');
 
@@ -22,7 +26,7 @@ function _createSuper(Derived) { return function () { var Super = FormErrors._ge
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'magicLogins';
 var model = function model(data) {
-  var model = utils.createModel(data);
+  var model = utils$3.createModel(data);
 
   model.hasExpired = function () {
     return magicLoginExpired(model);
@@ -56,7 +60,7 @@ var model = function model(data) {
   return model;
 };
 
-var _createService = utils.createService(model, COLLECTION),
+var _createService = utils$3.createService(model, COLLECTION),
     magicLoginsCollection = _createService.collection,
     getMagicLoginByID = _createService.getObjectByID,
     getMagicLogin = _createService.getObject,

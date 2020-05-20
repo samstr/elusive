@@ -13,6 +13,7 @@ var React__default = _interopDefault(React);
 require('prop-types');
 require('react-bootstrap');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
+require('bcryptjs');
 var utils$1 = require('./utils-3f60041c.js');
 var utils = require('./utils-b08f259e.js');
 require('uuid');

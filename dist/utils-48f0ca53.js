@@ -22,6 +22,9 @@ var hashPassword = function hashPassword(password) {
 var comparePasswordHash = function comparePasswordHash(password, hash) {
   return bcrypt.compareSync(password, hash);
 };
+var hasRole = function hasRole(role, roles) {
+  return roles.includes(role);
+};
 var sendLoginEmail = /*#__PURE__*/function () {
   var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(req, toEmail, magicLoginID, next) {
     var _Elusive$options, authOptions, mailOptions, siteOptions, dynamicTemplateData, magicLoginURL;
@@ -147,6 +150,7 @@ exports.LOGIN_TYPES = LOGIN_TYPES;
 exports.LOGIN_TYPE_LINK = LOGIN_TYPE_LINK;
 exports.LOGIN_TYPE_PASSWORD = LOGIN_TYPE_PASSWORD;
 exports.comparePasswordHash = comparePasswordHash;
+exports.hasRole = hasRole;
 exports.hashPassword = hashPassword;
 exports.sendLoginEmail = sendLoginEmail;
 exports.sendResetEmail = sendResetEmail;

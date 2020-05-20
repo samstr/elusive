@@ -14,7 +14,7 @@ require('./asyncToGenerator-ae22edb1.js');
 require('bcryptjs');
 require('./utils-db80ea21.js');
 require('./utils-3f60041c.js');
-var utils$2 = require('./utils-b7078773.js');
+var utils$2 = require('./utils-48f0ca53.js');
 
 
 
@@ -30,6 +30,7 @@ exports.LOGIN_TYPES = utils$2.LOGIN_TYPES;
 exports.LOGIN_TYPE_LINK = utils$2.LOGIN_TYPE_LINK;
 exports.LOGIN_TYPE_PASSWORD = utils$2.LOGIN_TYPE_PASSWORD;
 exports.comparePasswordHash = utils$2.comparePasswordHash;
+exports.hasRole = utils$2.hasRole;
 exports.hashPassword = utils$2.hashPassword;
 exports.sendLoginEmail = utils$2.sendLoginEmail;
 exports.sendResetEmail = utils$2.sendResetEmail;

@@ -11,17 +11,17 @@ require('prop-types');
 require('react-bootstrap');
 require('../asyncToGenerator-ae22edb1.js');
 require('uuid');
-var utils = require('../utils-100b7d88.js');
+var utils$3 = require('../utils-100b7d88.js');
 
 function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'resetAttempts';
 var model = function model(data) {
-  return utils.createModel(data);
+  return utils$3.createModel(data);
 };
 
-var _createService = utils.createService(model, COLLECTION),
+var _createService = utils$3.createService(model, COLLECTION),
     resetAttemptsCollection = _createService.collection,
     getResetAttemptByID = _createService.getObjectByID,
     getResetAttempt = _createService.getObject,
