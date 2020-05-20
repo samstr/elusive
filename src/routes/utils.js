@@ -12,6 +12,9 @@ export const privacyRoute = () => '/privacy';
 export const signupRoute = () => '/signup';
 export const resetRoute = () => '/reset';
 export const settingsRoute = () => '/settings';
+export const settingsAccountRoute = () => '/settings/account';
+export const settingsEmailsRoute = () => '/settings/emails';
+export const settingsNotificationsRoute = () => '/settings/notifications';
 export const termsRoute = () => '/terms';
 
 export const loginRouteWithNext = () => {

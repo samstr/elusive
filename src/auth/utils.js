@@ -6,7 +6,7 @@ import {
   magicLoginRoute,
   termsRoute,
   onboardingRoute,
-  settingsSecurityRoute,
+  settingsAccountRoute,
 } from '../routes';
 
 export const LOGIN_TYPE_LINK = 'link';
@@ -98,7 +98,7 @@ export const sendResetEmail = async (req, toEmail, magicLoginID) => {
       reasonForEmail: `we received a password reset request for this account`,
       magicLoginURL: `${dynamicTemplateData.baseURL}${
         magicLoginRoute(magicLoginID).asPath
-      }?next=${encodeURIComponent(settingsSecurityRoute())}`,
+      }?next=${encodeURIComponent(settingsAccountRoute())}`,
       expiryHours:
         authOptions.magicLoginExpiryHours === 1
           ? `${authOptions.magicLoginExpiryHours} hour`
