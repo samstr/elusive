@@ -15,7 +15,7 @@ const Button = (props) => {
     variant,
   } = props;
 
-  const _loadingText = loadingText || 'Loading...';
+  const _loadingText = `${loadingText}...` || 'Loading...';
 
   return (
     <BootstrapButton

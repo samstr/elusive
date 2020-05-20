@@ -22,7 +22,7 @@ var Button = function Button(props) {
       type = props.type,
       variant = props.variant;
 
-  var _loadingText = loadingText || 'Loading...';
+  var _loadingText = "".concat(loadingText, "...") || 'Loading...';
 
   return __jsx(reactBootstrap.Button, {
     variant: variant,
