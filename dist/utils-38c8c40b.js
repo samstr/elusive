@@ -43,6 +43,9 @@ var settingsEmailsRoute = function settingsEmailsRoute() {
 var settingsNotificationsRoute = function settingsNotificationsRoute() {
   return '/settings/notifications';
 };
+var settingsProfileRoute = function settingsProfileRoute() {
+  return '/settings/profile';
+};
 var termsRoute = function termsRoute() {
   return '/terms';
 };
@@ -97,6 +100,7 @@ exports.sessionAPIRoute = sessionAPIRoute;
 exports.settingsAccountRoute = settingsAccountRoute;
 exports.settingsEmailsRoute = settingsEmailsRoute;
 exports.settingsNotificationsRoute = settingsNotificationsRoute;
+exports.settingsProfileRoute = settingsProfileRoute;
 exports.settingsRoute = settingsRoute;
 exports.signupAPIRoute = signupAPIRoute;
 exports.signupRoute = signupRoute;

@@ -15,6 +15,7 @@ export const settingsRoute = () => '/settings';
 export const settingsAccountRoute = () => '/settings/account';
 export const settingsEmailsRoute = () => '/settings/emails';
 export const settingsNotificationsRoute = () => '/settings/notifications';
+export const settingsProfileRoute = () => '/settings/profile';
 export const termsRoute = () => '/terms';
 
 export const loginRouteWithNext = () => {
