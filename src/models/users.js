@@ -1,9 +1,16 @@
+import { hasRole } from '../auth';
 import { BaseError } from '../errors';
 import { createModel, createService } from './';
 
 const COLLECTION = 'users';
 
-export const model = (data) => createModel(data);
+export const model = (data) => {
+  const model = createModel(data);
+
+  model.hasRole = (role) => hasRole(role, model.roles);
+
+  return model;
+};
 
 export const {
   collection: usersCollection,

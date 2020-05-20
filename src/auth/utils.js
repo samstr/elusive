@@ -13,6 +13,9 @@ export const LOGIN_TYPE_LINK = 'link';
 export const LOGIN_TYPE_PASSWORD = 'password';
 export const LOGIN_TYPES = [LOGIN_TYPE_LINK, LOGIN_TYPE_PASSWORD];
 
+export const ROLE_USER = 'user';
+export const ROLE_ADMIN = 'admin';
+
 export const hashPassword = (password) => {
   const { auth: authOptions } = Elusive.options;
 
@@ -21,6 +24,8 @@ export const hashPassword = (password) => {
 
 export const comparePasswordHash = (password, hash) =>
   bcrypt.compareSync(password, hash);
+
+export const hasRole = (role, roles) => roles.includes(role);
 
 export const sendLoginEmail = async (req, toEmail, magicLoginID, next) => {
   const {
