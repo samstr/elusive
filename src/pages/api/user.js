@@ -16,7 +16,17 @@ const userAPI = async ({ session }) => {
     throw new UserNotEnabledError('Authentication failed');
   }
 
-  return { user };
+  return {
+    user: {
+      id: user.id,
+      email: user.email,
+      enabled: user.enabled,
+      name: user.name,
+      profilePictureURL: user.profilePictureURL,
+      username: user.username,
+      verifications: user.verifications,
+    },
+  };
 };
 
 userAPI.options = {

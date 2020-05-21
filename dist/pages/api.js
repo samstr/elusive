@@ -751,7 +751,15 @@ var userAPI = /*#__PURE__*/function () {
 
           case 8:
             return _context.abrupt("return", {
-              user: user
+              user: {
+                id: user.id,
+                email: user.email,
+                enabled: user.enabled,
+                name: user.name,
+                profilePictureURL: user.profilePictureURL,
+                username: user.username,
+                verifications: user.verifications
+              }
             });
 
           case 9:
