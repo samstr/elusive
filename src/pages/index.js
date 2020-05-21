@@ -23,3 +23,6 @@ export { useRequireAuth };
 
 import useSession from './useSession';
 export { useSession };
+
+import useUser from './useUser';
+export { useUser };

@@ -12,7 +12,7 @@ var React__default = _interopDefault(React);
 var PropTypes = _interopDefault(require('prop-types'));
 require('react-bootstrap');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
-var utils$1 = require('./utils-38c8c40b.js');
+var utils$1 = require('./utils-3409f232.js');
 var utils = require('./utils-b08f259e.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
@@ -291,6 +291,97 @@ var useSession = function useSession() {
   return session;
 };
 
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var useUser = function useUser() {
+  var _useUserContext = useUserContext(),
+      userContext = _useUserContext.userContext,
+      resetUserContext = _useUserContext.resetUserContext,
+      setUserContext = _useUserContext.setUserContext;
+
+  var _useState = React.useState(userContext),
+      user = _useState[0],
+      setUser = _useState[1];
+
+  var router$1 = router.useRouter();
+
+  var handleError = function handleError(err) {
+    if (axios__default.isCancel(err)) return;
+
+    if (err.response && err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
+      resetUserContext();
+      var pathname = window.location.pathname;
+
+      if (pathname !== utils$1.loginRoute()) {
+        router$1.replace(utils$1.loginRoute());
+      }
+
+      return;
+    }
+
+    console.log('Unknown error in useUser: ', err);
+  };
+
+  React.useEffect(function () {
+    var cancelRequest;
+
+    var fetch = /*#__PURE__*/function () {
+      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee() {
+        var response, _user;
+
+        return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios__default(utils$1.userAPIRoute(), {
+                  cancelToken: new axios.CancelToken(function (c) {
+                    cancelRequest = c;
+                  })
+                });
+
+              case 3:
+                response = _context.sent;
+                cancelRequest = null;
+                _user = _objectSpread$1({}, response.data.user, {
+                  _ready: true
+                });
+                setUser(_user);
+                setUserContext(_user);
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
+                return _context.abrupt("return", handleError(_context.t0));
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 10]]);
+      }));
+
+      return function fetch() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    fetch();
+    return function () {
+      if (typeof cancelRequest === 'function') {
+        cancelRequest();
+      }
+    };
+  }, []);
+  return user;
+};
+
 exports.SessionContext = SessionContext;
 exports.SessionContextProvider = SessionContextProvider;
 exports.UserContext = UserContext;
@@ -300,4 +391,5 @@ exports.useRedirect = useRedirect;
 exports.useRequireAuth = useRequireAuth;
 exports.useSession = useSession;
 exports.useSessionContext = useSessionContext;
+exports.useUser = useUser;
 exports.useUserContext = useUserContext;

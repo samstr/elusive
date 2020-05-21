@@ -82,6 +82,9 @@ var sessionAPIRoute = function sessionAPIRoute() {
 var signupAPIRoute = function signupAPIRoute() {
   return '/api/signup';
 };
+var userAPIRoute = function userAPIRoute() {
+  return '/api/user';
+};
 
 exports.homeRoute = homeRoute;
 exports.indexRoute = indexRoute;
@@ -105,3 +108,4 @@ exports.settingsRoute = settingsRoute;
 exports.signupAPIRoute = signupAPIRoute;
 exports.signupRoute = signupRoute;
 exports.termsRoute = termsRoute;
+exports.userAPIRoute = userAPIRoute;

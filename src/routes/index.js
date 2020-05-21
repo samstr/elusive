@@ -21,6 +21,7 @@ import {
   signupAPIRoute,
   signupRoute,
   termsRoute,
+  userAPIRoute,
 } from './utils';
 export {
   homeRoute,
@@ -45,4 +46,5 @@ export {
   signupAPIRoute,
   signupRoute,
   termsRoute,
+  userAPIRoute,
 };

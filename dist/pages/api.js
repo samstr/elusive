@@ -16,10 +16,10 @@ var errors = require('../errors-1d6db12f.js');
 var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
 require('bcryptjs');
 require('../utils-6d646aa4.js');
-require('../utils-38c8c40b.js');
-var utils$2 = require('../utils-598d4c69.js');
+require('../utils-3409f232.js');
+var utils$2 = require('../utils-f5131aa8.js');
 require('../utils-1aa1c711.js');
-var signup = require('../signup-2fccf2ae.js');
+var signup = require('../signup-2c822131.js');
 var utils$4 = require('../utils-b08f259e.js');
 require('uuid');
 require('../utils-51ff1bef.js');
@@ -28,7 +28,7 @@ var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$5 = require('../utils-d7c74a5e.js');
+var utils$5 = require('../utils-8ff74ba8.js');
 var utils$6 = require('../utils-93376c2c.js');
 require('jsonwebtoken');
 
@@ -728,33 +728,29 @@ var userAPI = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             session = _ref.session;
-            _context.next = 3;
-            return users.getUserByID(session.claims.user.id);
-
-          case 3:
-            user = _context.sent;
+            user = users.getUserByID(session.claims.user.id);
 
             if (user) {
+              _context.next = 4;
+              break;
+            }
+
+            throw new users.UserNotFoundError('Authentication failed');
+
+          case 4:
+            if (user.enabled) {
               _context.next = 6;
               break;
             }
 
-            throw new users.UserNotFoundError('User not found');
+            throw new users.UserNotEnabledError('Authentication failed');
 
           case 6:
-            if (user.enabled) {
-              _context.next = 8;
-              break;
-            }
-
-            throw new users.UserNotEnabledError('User not enabled');
-
-          case 8:
             return _context.abrupt("return", {
               user: user
             });
 
-          case 9:
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -768,6 +764,7 @@ var userAPI = /*#__PURE__*/function () {
 }();
 
 userAPI.options = {
+  reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE,
   requireAuth: true
 };
 
