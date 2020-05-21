@@ -14,6 +14,7 @@ export default [
       'forms/auth': './src/forms/auth/index.js',
       http: './src/http/index.js',
       mail: './src/mail/index.js',
+      math: './src/math/index.js',
       'models/index': './src/models/index.js',
       'models/loginAttempts': './src/models/loginAttempts.js',
       'models/magicLogins': './src/models/magicLogins.js',

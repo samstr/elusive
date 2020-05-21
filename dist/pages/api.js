@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-require('../ElusiveClient-5959be3f.js');
+require('../ElusiveClient-b6e2cec5.js');
 var defineProperty = require('../defineProperty-ba7cd53d.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-bf65213f.js');
@@ -15,21 +15,22 @@ require('react-bootstrap');
 var errors = require('../errors-bd1f45c5.js');
 var asyncToGenerator = require('../asyncToGenerator-42483001.js');
 require('bcryptjs');
-require('../utils-6363c83d.js');
+require('../utils-53071686.js');
 require('../utils-3409f232.js');
-var utils$2 = require('../utils-188be96f.js');
-require('../utils-9764db7d.js');
-var signup = require('../signup-3f09436d.js');
+var utils$2 = require('../utils-9098034f.js');
+require('../utils-4edd432e.js');
+var signup = require('../signup-4f7fd5f0.js');
 var utils$4 = require('../utils-4a27a4e3.js');
+var utils$5 = require('../utils-b82a9439.js');
 require('uuid');
-require('../utils-ee651d6c.js');
+require('../utils-71c02254.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$5 = require('../utils-f23580e5.js');
-var utils$6 = require('../utils-760de03d.js');
+var utils$6 = require('../utils-e94a7920.js');
+var utils$7 = require('../utils-1fe8b89d.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -47,12 +48,12 @@ var apiWrapper = /*#__PURE__*/function () {
             options = _objectSpread({
               allowedMethods: [utils$4.GET],
               requireAuth: false,
-              reloadUserSource: utils$5.RELOAD_USER_SOURCE_REFRESH_TOKEN
+              reloadUserSource: utils$6.RELOAD_USER_SOURCE_REFRESH_TOKEN
             }, api.options);
             _context.prev = 2;
             utils$4.validateRequest(req, res, options);
             _context.next = 6;
-            return utils$5.getSession(req, options.reloadUserSource);
+            return utils$6.getSession(req, options.reloadUserSource);
 
           case 6:
             _yield$getSession = _context.sent;
@@ -109,12 +110,12 @@ var apiWrapper = /*#__PURE__*/function () {
             return _context.abrupt("return", utils$4.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t3)));
 
           case 28:
-            if (!(_context.t3 instanceof utils$5.SessionError || _context.t3 instanceof utils$6.TokenError)) {
+            if (!(_context.t3 instanceof utils$6.SessionError || _context.t3 instanceof utils$7.TokenError)) {
               _context.next = 31;
               break;
             }
 
-            utils$5.deleteSessionCookies(res);
+            utils$6.deleteSessionCookies(res);
             return _context.abrupt("return", utils$4.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t3)));
 
           case 31:
@@ -270,7 +271,7 @@ var loginAPI = /*#__PURE__*/function () {
 
           case 34:
             claims = tokenOptions.createClaims(user);
-            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), user.id);
+            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,
@@ -354,7 +355,7 @@ var logoutAPI = /*#__PURE__*/function () {
             throw new errors.NotAuthenticatedError('You are not logged in');
 
           case 3:
-            utils$5.deleteSessionCookies(res);
+            utils$6.deleteSessionCookies(res);
             return _context.abrupt("return", {
               isAuthenticated: false,
               claims: null
@@ -432,7 +433,7 @@ var onboardingAPI = /*#__PURE__*/function () {
           case 15:
             user = _context.sent;
             claims = tokenOptions.createClaims(user);
-            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), user.id);
+            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,
@@ -561,7 +562,7 @@ var sessionAPI = /*#__PURE__*/function () {
             tokenOptions = index.options.tokens; // Are there tokens? That means we regenerated the session. Set new cookies
 
             if (session.isAuthenticated && tokens) {
-              utils$5.createSessionCookies(res, utils$6.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+              utils$6.createSessionCookies(res, utils$7.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
             }
 
             return _context.abrupt("return", {
@@ -582,15 +583,7 @@ var sessionAPI = /*#__PURE__*/function () {
 }();
 
 sessionAPI.options = {
-  reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE
-};
-
-var randomInt = function randomInt(min, max) {
-  var _min = Math.ceil(min);
-
-  var _max = Math.floor(max);
-
-  return Math.floor(Math.random() * (_max - _min + 1)) + _min;
+  reloadUserSource: utils$6.RELOAD_USER_SOURCE_DATABASE
 };
 
 var signupAPI = /*#__PURE__*/function () {
@@ -682,7 +675,7 @@ var signupAPI = /*#__PURE__*/function () {
               email: cleanValues.email,
               enabled: true,
               registrationIP: ip,
-              profilePictureURL: "".concat(baseURL, "/img/profile-picture/default-").concat(randomInt(1, authOptions.numDefaultProfilePictureVariations), ".png"),
+              profilePictureURL: "".concat(baseURL, "/img/profile-picture/default-").concat(utils$5.randomInt(1, authOptions.numDefaultProfilePictureVariations), ".png"),
               verifications: {
                 email: false
               }
@@ -782,7 +775,7 @@ var userAPI = /*#__PURE__*/function () {
 }();
 
 userAPI.options = {
-  reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE,
+  reloadUserSource: utils$6.RELOAD_USER_SOURCE_DATABASE,
   requireAuth: true
 };
 

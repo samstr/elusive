@@ -39,7 +39,7 @@ var ElusiveClient = /*#__PURE__*/function () {
           maxLoginAttemptsPerIPPerHour: 16,
           maxRegistrationsPerDay: 5,
           maxResetAttemptsPerHour: 5,
-          numDefaultProfilePictureVariations: 10,
+          numDefaultProfilePictureVariations: 12,
           passwordMinLength: 3,
           passwordResetExpiryHours: 24,
           saltRounds: 10
