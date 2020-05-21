@@ -6,7 +6,7 @@ import {
 import { RELOAD_USER_SOURCE_DATABASE } from '../../sessions';
 
 const userAPI = async ({ session }) => {
-  const user = getUserByID(session.claims.user.id);
+  const user = await getUserByID(session.claims.user.id);
 
   if (!user) {
     throw new UserNotFoundError('Authentication failed');

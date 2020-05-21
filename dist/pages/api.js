@@ -728,29 +728,33 @@ var userAPI = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             session = _ref.session;
-            user = users.getUserByID(session.claims.user.id);
+            _context.next = 3;
+            return users.getUserByID(session.claims.user.id);
+
+          case 3:
+            user = _context.sent;
 
             if (user) {
-              _context.next = 4;
+              _context.next = 6;
               break;
             }
 
             throw new users.UserNotFoundError('Authentication failed');
 
-          case 4:
+          case 6:
             if (user.enabled) {
-              _context.next = 6;
+              _context.next = 8;
               break;
             }
 
             throw new users.UserNotEnabledError('Authentication failed');
 
-          case 6:
+          case 8:
             return _context.abrupt("return", {
               user: user
             });
 
-          case 7:
+          case 9:
           case "end":
             return _context.stop();
         }
