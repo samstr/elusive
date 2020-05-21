@@ -18,3 +18,6 @@ export { sessionAPI };
 
 import signupAPI from './signup';
 export { signupAPI };
+
+import userAPI from './user';
+export { userAPI };

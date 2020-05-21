@@ -12,9 +12,7 @@ export const SessionContext = createContext(defaultValue);
 export const SessionContextProvider = ({ children }) => {
   const [sessionContext, setSessionContext] = useState(defaultValue);
 
-  const resetSessionContext = () => {
-    setSessionContext(defaultValue);
-  };
+  const resetSessionContext = () => setSessionContext(defaultValue);
 
   const context = {
     sessionContext,

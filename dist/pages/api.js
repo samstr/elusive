@@ -5,7 +5,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-var client = require('../index-c5fa8643.js');
+require('../client.js');
+var defineProperty = require('../defineProperty-ba7cd53d.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-1539c4dc.js');
 require('react');
@@ -14,27 +15,26 @@ require('react-bootstrap');
 var errors = require('../errors-1d6db12f.js');
 var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
 require('bcryptjs');
-require('../utils-db80ea21.js');
+require('../utils-6d646aa4.js');
 require('../utils-38c8c40b.js');
-var utils$2 = require('../utils-92a02ff3.js');
-require('../utils-bc45515c.js');
-var signup = require('../signup-bd77715f.js');
+var utils$2 = require('../utils-598d4c69.js');
+require('../utils-1aa1c711.js');
+var signup = require('../signup-2fccf2ae.js');
 var utils$4 = require('../utils-b08f259e.js');
 require('uuid');
-require('../utils-100b7d88.js');
+require('../utils-51ff1bef.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$5 = require('../utils-10ca7220.js');
-require('../SessionContext-efd795c9.js');
-var utils$6 = require('../utils-a7f6a71b.js');
+var utils$5 = require('../utils-d7c74a5e.js');
+var utils$6 = require('../utils-93376c2c.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = /*#__PURE__*/function () {
   var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(req, res, api) {
     var sentry, options, _yield$getSession, session, tokens, data;
@@ -720,6 +720,57 @@ signupAPI.options = {
   allowedMethods: [utils$4.POST]
 };
 
+var userAPI = /*#__PURE__*/function () {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+    var session, user;
+    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            session = _ref.session;
+            _context.next = 3;
+            return users.getUserByID(session.claims.user.id);
+
+          case 3:
+            user = _context.sent;
+
+            if (user) {
+              _context.next = 6;
+              break;
+            }
+
+            throw new users.UserNotFoundError('User not found');
+
+          case 6:
+            if (user.enabled) {
+              _context.next = 8;
+              break;
+            }
+
+            throw new users.UserNotEnabledError('User not enabled');
+
+          case 8:
+            return _context.abrupt("return", {
+              user: user
+            });
+
+          case 9:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function userAPI(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+userAPI.options = {
+  requireAuth: true
+};
+
 exports.apiWrapper = apiWrapper;
 exports.loginAPI = loginAPI;
 exports.logoutAPI = logoutAPI;
@@ -727,3 +778,4 @@ exports.onboardingAPI = onboardingAPI;
 exports.resetAPI = resetAPI;
 exports.sessionAPI = sessionAPI;
 exports.signupAPI = signupAPI;
+exports.userAPI = userAPI;

@@ -3,19 +3,19 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { HTTP_STATUS_UNAUTHORIZED } from '../http';
-import { loginRoute } from '../routes';
-import { useSessionContext } from './SessionContext';
+import { loginRoute, userAPIRoute } from '../routes';
+import { useUserContext } from './UserContext';
 
-const useData = () => {
-  const { resetSessionContext } = useSessionContext();
-  const [data, setData] = useState();
+const useUser = () => {
+  const { userContext, resetUserContext, setUserContext } = useUserContext();
+  const [user, setUser] = useState(userContext);
   const router = useRouter();
 
   const handleError = (err) => {
     if (axios.isCancel(err)) return;
 
     if (err.response && err.response.status === HTTP_STATUS_UNAUTHORIZED) {
-      resetSessionContext();
+      resetUserContext();
 
       const { pathname } = window.location;
 
@@ -25,12 +25,7 @@ const useData = () => {
       return;
     }
 
-    if (err.response && err.response.data) {
-      setData(err.response.data);
-      return;
-    }
-
-    console.log('Unknown error in useData: ', err);
+    console.log('Unknown error in useUser: ', err);
   };
 
   useEffect(() => {
@@ -38,17 +33,20 @@ const useData = () => {
 
     const fetch = async () => {
       try {
-        const { pathname, search } = window.location;
-        const url = `/api/data${pathname}${search}`;
-
-        const response = await axios(url, {
+        const response = await axios(userAPIRoute(), {
           cancelToken: new CancelToken((c) => {
             cancelRequest = c;
           }),
         });
         cancelRequest = null;
 
-        setData(response.data);
+        const _user = {
+          ...response.data.user,
+          _ready: true,
+        };
+
+        setUser(_user);
+        setUserContext(_user);
       } catch (err) {
         return handleError(err);
       }
@@ -63,7 +61,7 @@ const useData = () => {
     };
   }, []);
 
-  return data;
+  return user;
 };
 
-export default useData;
+export default useUser;

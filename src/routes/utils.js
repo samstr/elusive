@@ -39,3 +39,4 @@ export const onboardingAPIRoute = () => '/api/onboarding';
 export const resetAPIRoute = () => '/api/reset';
 export const sessionAPIRoute = () => '/api/session';
 export const signupAPIRoute = () => '/api/signup';
+export const userAPIRoute = () => '/api/user';

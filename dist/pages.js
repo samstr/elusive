@@ -5,26 +5,85 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./classCallCheck-d2bb402f.js');
-var client = require('./index-c5fa8643.js');
-require('./index.js');
+var defineProperty = require('./defineProperty-ba7cd53d.js');
 require('./FormErrors-1539c4dc.js');
 var React = require('react');
 var React__default = _interopDefault(React);
-require('prop-types');
+var PropTypes = _interopDefault(require('prop-types'));
 require('react-bootstrap');
 var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
-require('bcryptjs');
 var utils$1 = require('./utils-38c8c40b.js');
 var utils = require('./utils-b08f259e.js');
-require('uuid');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var SessionContext = require('./SessionContext-efd795c9.js');
-require('jsonwebtoken');
+
+var __jsx = React__default.createElement;
+var defaultValue = {
+  isAuthenticated: false,
+  claims: null,
+  _ready: false
+};
+var SessionContext = React.createContext(defaultValue);
+var SessionContextProvider = function SessionContextProvider(_ref) {
+  var children = _ref.children;
+
+  var _useState = React.useState(defaultValue),
+      sessionContext = _useState[0],
+      setSessionContext = _useState[1];
+
+  var resetSessionContext = function resetSessionContext() {
+    return setSessionContext(defaultValue);
+  };
+
+  var context = {
+    sessionContext: sessionContext,
+    setSessionContext: setSessionContext,
+    resetSessionContext: resetSessionContext
+  };
+  return __jsx(SessionContext.Provider, {
+    value: context
+  }, children);
+};
+SessionContextProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+var useSessionContext = function useSessionContext() {
+  return React.useContext(SessionContext);
+};
+
+var __jsx$1 = React__default.createElement;
+var defaultValue$1 = null;
+var UserContext = React.createContext(defaultValue$1);
+var UserContextProvider = function UserContextProvider(_ref) {
+  var children = _ref.children;
+
+  var _useState = React.useState(defaultValue$1),
+      userContext = _useState[0],
+      setUserContext = _useState[1];
+
+  var resetUserContext = function resetUserContext() {
+    return setUserContext(defaultValue$1);
+  };
+
+  var context = {
+    userContext: userContext,
+    setUserContext: setUserContext,
+    resetUserContext: resetUserContext
+  };
+  return __jsx$1(UserContext.Provider, {
+    value: context
+  }, children);
+};
+UserContextProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+var useUserContext = function useUserContext() {
+  return React.useContext(UserContext);
+};
 
 var useData = function useData() {
-  var _useSessionContext = SessionContext.useSessionContext(),
+  var _useSessionContext = useSessionContext(),
       resetSessionContext = _useSessionContext.resetSessionContext;
 
   var _useState = React.useState(),
@@ -121,7 +180,7 @@ var useRedirect = function useRedirect(href, asPath) {
 var useRequireAuth = function useRequireAuth() {
   var router$1 = router.useRouter();
 
-  var _useSessionContext = SessionContext.useSessionContext(),
+  var _useSessionContext = useSessionContext(),
       sessionContext = _useSessionContext.sessionContext;
 
   React.useEffect(function () {
@@ -133,10 +192,10 @@ var useRequireAuth = function useRequireAuth() {
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { client._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var useSession = function useSession() {
-  var _useSessionContext = SessionContext.useSessionContext(),
+  var _useSessionContext = useSessionContext(),
       sessionContext = _useSessionContext.sessionContext,
       resetSessionContext = _useSessionContext.resetSessionContext,
       setSessionContext = _useSessionContext.setSessionContext;
@@ -232,7 +291,13 @@ var useSession = function useSession() {
   return session;
 };
 
+exports.SessionContext = SessionContext;
+exports.SessionContextProvider = SessionContextProvider;
+exports.UserContext = UserContext;
+exports.UserContextProvider = UserContextProvider;
 exports.useData = useData;
 exports.useRedirect = useRedirect;
 exports.useRequireAuth = useRequireAuth;
 exports.useSession = useSession;
+exports.useSessionContext = useSessionContext;
+exports.useUserContext = useUserContext;
