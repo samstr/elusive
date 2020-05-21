@@ -2,7 +2,7 @@
 
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
-var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
+var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 var uuid = require('uuid');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -26,8 +26,8 @@ var createService = function createService(model, collectionName) {
       return _collection(collectionName);
     },
     getObjectByID: function () {
-      var _getObjectByID2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(id) {
-        return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+      var _getObjectByID2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(id) {
+        return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -48,8 +48,8 @@ var createService = function createService(model, collectionName) {
       return getObjectByID;
     }(),
     getObject: function () {
-      var _getObject2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee2(query) {
-        return asyncToGenerator._regeneratorRuntime.wrap(function _callee2$(_context2) {
+      var _getObject2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee2(query) {
+        return asyncToGenerator.regenerator.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
@@ -70,8 +70,8 @@ var createService = function createService(model, collectionName) {
       return getObject;
     }(),
     createObject: function () {
-      var _createObject2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee3(createProps) {
-        return asyncToGenerator._regeneratorRuntime.wrap(function _callee3$(_context3) {
+      var _createObject2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee3(createProps) {
+        return asyncToGenerator.regenerator.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
@@ -92,8 +92,8 @@ var createService = function createService(model, collectionName) {
       return createObject;
     }(),
     updateObject: function () {
-      var _updateObject2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee4(doc, updateProps) {
-        return asyncToGenerator._regeneratorRuntime.wrap(function _callee4$(_context4) {
+      var _updateObject2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee4(doc, updateProps) {
+        return asyncToGenerator.regenerator.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
@@ -114,8 +114,8 @@ var createService = function createService(model, collectionName) {
       return updateObject;
     }(),
     listObjects: function () {
-      var _listObjects2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee5(query) {
-        return asyncToGenerator._regeneratorRuntime.wrap(function _callee5$(_context5) {
+      var _listObjects2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee5(query) {
+        return asyncToGenerator.regenerator.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
@@ -145,9 +145,9 @@ var _collection = function _collection(collectionName) {
 };
 
 var _createObject = /*#__PURE__*/function () {
-  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee6(model, collectionName, createProps) {
+  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee6(model, collectionName, createProps) {
     var firebase, firestore, id, dateNow, doc;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee6$(_context6) {
+    return asyncToGenerator.regenerator.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
@@ -155,7 +155,7 @@ var _createObject = /*#__PURE__*/function () {
             firestore = firebase.firestore();
             id = uuid.v4();
             dateNow = firebase.firestore.Timestamp.now();
-            doc = _objectSpread({}, createProps, {
+            doc = _objectSpread(_objectSpread({}, createProps), {}, {
               dateCreated: dateNow,
               dateUpdated: dateNow
             });
@@ -163,7 +163,7 @@ var _createObject = /*#__PURE__*/function () {
             return firestore.collection(collectionName).doc(id).set(doc);
 
           case 7:
-            return _context6.abrupt("return", model(_objectSpread({}, doc, {
+            return _context6.abrupt("return", model(_objectSpread(_objectSpread({}, doc), {}, {
               id: id
             })));
 
@@ -181,9 +181,9 @@ var _createObject = /*#__PURE__*/function () {
 }();
 
 var _getObjectByID = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee7(model, collectionName, id) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee7(model, collectionName, id) {
     var firebase, firestore, doc;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee7$(_context7) {
+    return asyncToGenerator.regenerator.wrap(function _callee7$(_context7) {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
@@ -221,9 +221,9 @@ var _getObjectByID = /*#__PURE__*/function () {
 }();
 
 var _getObject = /*#__PURE__*/function () {
-  var _ref3 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee8(model, query) {
+  var _ref3 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee8(model, query) {
     var docs, object;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee8$(_context8) {
+    return asyncToGenerator.regenerator.wrap(function _callee8$(_context8) {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
@@ -254,16 +254,16 @@ var _getObject = /*#__PURE__*/function () {
 }();
 
 var _updateObject = /*#__PURE__*/function () {
-  var _ref4 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee9(model, collectionName, doc, updateProps) {
+  var _ref4 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee9(model, collectionName, doc, updateProps) {
     var firebase, firestore, newDoc;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee9$(_context9) {
+    return asyncToGenerator.regenerator.wrap(function _callee9$(_context9) {
       while (1) {
         switch (_context9.prev = _context9.next) {
           case 0:
             firebase = index.services.firebase;
             firestore = firebase.firestore();
             updateProps.dateUpdated = firebase.firestore.Timestamp.now();
-            newDoc = _objectSpread({}, doc, {}, updateProps);
+            newDoc = _objectSpread(_objectSpread({}, doc), updateProps);
             _context9.next = 6;
             return firestore.collection(collectionName).doc(doc.id).update(updateProps);
 
@@ -284,9 +284,9 @@ var _updateObject = /*#__PURE__*/function () {
 }();
 
 var _listObjects = /*#__PURE__*/function () {
-  var _ref5 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee10(model, query) {
+  var _ref5 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee10(model, query) {
     var docs, objects;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee10$(_context10) {
+    return asyncToGenerator.regenerator.wrap(function _callee10$(_context10) {
       while (1) {
         switch (_context10.prev = _context10.next) {
           case 0:

@@ -15,6 +15,7 @@ class ElusiveClient {
         maxLoginAttemptsPerIPPerHour: 16,
         maxRegistrationsPerDay: 5,
         maxResetAttemptsPerHour: 5,
+        numDefaultProfilePictureVariations: 10,
         passwordMinLength: 3,
         passwordResetExpiryHours: 24,
         saltRounds: 10,
@@ -74,6 +75,7 @@ class ElusiveClient {
           maxLoginAttemptsPerIPPerHour,
           maxRegistrationsPerDay,
           maxResetAttemptsPerHour,
+          numDefaultProfilePictureVariations,
           passwordMinLength,
           passwordResetExpiryHours,
           saltRounds,
@@ -97,6 +99,10 @@ class ElusiveClient {
 
         if (maxResetAttemptsPerHour) {
           this.options.auth.maxResetAttemptsPerHour = maxResetAttemptsPerHour;
+        }
+
+        if (numDefaultProfilePictureVariations) {
+          this.options.auth.numDefaultProfilePictureVariations = numDefaultProfilePictureVariations;
         }
 
         if (passwordMinLength) {

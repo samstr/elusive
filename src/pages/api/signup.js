@@ -9,6 +9,7 @@ import {
 } from '../../auth';
 import { signupForm } from '../../forms/auth';
 import { POST } from '../../http';
+import { randomInt } from '../../math';
 import { createMagicLogin } from '../../models/magicLogins';
 import {
   UserNotEnabledError,
@@ -74,7 +75,10 @@ const signupAPI = async ({ req, res, session }) => {
       email: cleanValues.email,
       enabled: true,
       registrationIP: ip,
-      profilePictureURL: `${baseURL}/img/profile-picture/default.png`,
+      profilePictureURL: `${baseURL}/img/profile-picture/default-${randomInt(
+        1,
+        authOptions.numDefaultProfilePictureVariations
+      )}.png`,
       verifications: {
         email: false,
       },

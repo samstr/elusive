@@ -5,24 +5,24 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-require('../client.js');
+require('../ElusiveClient-5959be3f.js');
 require('../defineProperty-ba7cd53d.js');
 var index = require('../index.js');
-var FormErrors = require('../FormErrors-1539c4dc.js');
+var FormErrors = require('../FormErrors-bf65213f.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
+var asyncToGenerator = require('../asyncToGenerator-42483001.js');
 require('bcryptjs');
-require('../utils-6d646aa4.js');
+require('../utils-6363c83d.js');
 require('../utils-3409f232.js');
-require('../utils-f5131aa8.js');
+require('../utils-188be96f.js');
 require('uuid');
-var utils$3 = require('../utils-51ff1bef.js');
+var utils$3 = require('../utils-ee651d6c.js');
 var moment = _interopDefault(require('moment'));
 var users = require('./users.js');
 
-function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'magicLogins';
@@ -34,8 +34,8 @@ var model = function model(data) {
   };
 
   model.getUser = /*#__PURE__*/function () {
-    var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_) {
-      return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_) {
+      return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:

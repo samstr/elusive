@@ -6,14 +6,14 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 require('./classCallCheck-d2bb402f.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
-require('./FormErrors-1539c4dc.js');
+require('./FormErrors-bf65213f.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 var PropTypes = _interopDefault(require('prop-types'));
 require('react-bootstrap');
-var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
+var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 var utils$1 = require('./utils-3409f232.js');
-var utils = require('./utils-b08f259e.js');
+var utils = require('./utils-4a27a4e3.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
@@ -118,10 +118,10 @@ var useData = function useData() {
     var cancelRequest;
 
     var fetch = /*#__PURE__*/function () {
-      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee() {
+      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee() {
         var _window$location, pathname, search, url, response;
 
-        return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+        return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -227,10 +227,10 @@ var useSession = function useSession() {
     var cancelRequest;
 
     var fetch = /*#__PURE__*/function () {
-      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee() {
+      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee() {
         var response, _session, pathname, user;
 
-        return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+        return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -245,7 +245,7 @@ var useSession = function useSession() {
               case 3:
                 response = _context.sent;
                 cancelRequest = null;
-                _session = _objectSpread({}, response.data.session, {
+                _session = _objectSpread(_objectSpread({}, response.data.session), {}, {
                   _ready: true
                 });
                 setSession(_session);
@@ -328,10 +328,10 @@ var useUser = function useUser() {
     var cancelRequest;
 
     var fetch = /*#__PURE__*/function () {
-      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee() {
+      var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee() {
         var response, _user;
 
-        return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+        return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -346,7 +346,7 @@ var useUser = function useUser() {
               case 3:
                 response = _context.sent;
                 cancelRequest = null;
-                _user = _objectSpread$1({}, response.data.user, {
+                _user = _objectSpread$1(_objectSpread$1({}, response.data.user), {}, {
                   _ready: true
                 });
                 setUser(_user);

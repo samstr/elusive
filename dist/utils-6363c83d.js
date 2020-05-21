@@ -2,7 +2,7 @@
 
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
-var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
+var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -16,16 +16,16 @@ var defaultDynamicTemplateData = function defaultDynamicTemplateData(req) {
   };
 };
 var sendMail = /*#__PURE__*/function () {
-  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(message) {
+  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(message) {
     var _Elusive$services, sendgrid, sentry, mailOptions, _err$response, _err$response$body, _err$response2, _err$response2$body;
 
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _Elusive$services = index.services, sendgrid = _Elusive$services.sendgrid, sentry = _Elusive$services.sentry;
             mailOptions = index.options.mail;
-            message = _objectSpread({}, message, {
+            message = _objectSpread(_objectSpread({}, message), {}, {
               from: {
                 email: mailOptions.fromEmail,
                 name: mailOptions.fromName

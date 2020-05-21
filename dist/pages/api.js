@@ -5,41 +5,41 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-require('../client.js');
+require('../ElusiveClient-5959be3f.js');
 var defineProperty = require('../defineProperty-ba7cd53d.js');
 var index = require('../index.js');
-var FormErrors = require('../FormErrors-1539c4dc.js');
+var FormErrors = require('../FormErrors-bf65213f.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var errors = require('../errors-1d6db12f.js');
-var asyncToGenerator = require('../asyncToGenerator-ae22edb1.js');
+var errors = require('../errors-bd1f45c5.js');
+var asyncToGenerator = require('../asyncToGenerator-42483001.js');
 require('bcryptjs');
-require('../utils-6d646aa4.js');
+require('../utils-6363c83d.js');
 require('../utils-3409f232.js');
-var utils$2 = require('../utils-f5131aa8.js');
-require('../utils-1aa1c711.js');
-var signup = require('../signup-2c822131.js');
-var utils$4 = require('../utils-b08f259e.js');
+var utils$2 = require('../utils-188be96f.js');
+require('../utils-9764db7d.js');
+var signup = require('../signup-3f09436d.js');
+var utils$4 = require('../utils-4a27a4e3.js');
 require('uuid');
-require('../utils-51ff1bef.js');
+require('../utils-ee651d6c.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$5 = require('../utils-8ff74ba8.js');
-var utils$6 = require('../utils-93376c2c.js');
+var utils$5 = require('../utils-f23580e5.js');
+var utils$6 = require('../utils-760de03d.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = /*#__PURE__*/function () {
-  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(req, res, api) {
+  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(req, res, api) {
     var sentry, options, _yield$getSession, session, tokens, data;
 
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -69,10 +69,8 @@ var apiWrapper = /*#__PURE__*/function () {
           case 11:
             data = {};
             _context.t0 = _objectSpread;
-            _context.t1 = {};
-            _context.t2 = data;
-            _context.t3 = {};
-            _context.next = 18;
+            _context.t1 = _objectSpread({}, data);
+            _context.next = 16;
             return api({
               req: req,
               res: res,
@@ -80,68 +78,68 @@ var apiWrapper = /*#__PURE__*/function () {
               tokens: tokens
             });
 
-          case 18:
-            _context.t4 = _context.sent;
-            data = (0, _context.t0)(_context.t1, _context.t2, _context.t3, _context.t4);
+          case 16:
+            _context.t2 = _context.sent;
+            data = (0, _context.t0)(_context.t1, _context.t2);
 
             if (!(data.errors && data.errors.length)) {
-              _context.next = 22;
+              _context.next = 20;
               break;
             }
 
             return _context.abrupt("return", utils$4.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
 
-          case 22:
+          case 20:
             return _context.abrupt("return", utils$4.httpOKResponse(res, data));
 
-          case 25:
-            _context.prev = 25;
-            _context.t5 = _context["catch"](2);
+          case 23:
+            _context.prev = 23;
+            _context.t3 = _context["catch"](2);
 
-            if (!(_context.t5 instanceof utils$4.HttpError)) {
-              _context.next = 30;
+            if (!(_context.t3 instanceof utils$4.HttpError)) {
+              _context.next = 28;
               break;
             }
 
-            if (!(_context.t5 instanceof utils$4.HttpMethodNotAllowedError)) {
-              _context.next = 30;
+            if (!(_context.t3 instanceof utils$4.HttpMethodNotAllowedError)) {
+              _context.next = 28;
               break;
             }
 
-            return _context.abrupt("return", utils$4.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t5)));
+            return _context.abrupt("return", utils$4.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t3)));
 
-          case 30:
-            if (!(_context.t5 instanceof utils$5.SessionError || _context.t5 instanceof utils$6.TokenError)) {
-              _context.next = 33;
+          case 28:
+            if (!(_context.t3 instanceof utils$5.SessionError || _context.t3 instanceof utils$6.TokenError)) {
+              _context.next = 31;
               break;
             }
 
             utils$5.deleteSessionCookies(res);
-            return _context.abrupt("return", utils$4.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t5)));
+            return _context.abrupt("return", utils$4.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t3)));
 
-          case 33:
-            if (!(_context.t5 instanceof FormErrors.BaseError)) {
-              _context.next = 35;
+          case 31:
+            if (!(_context.t3 instanceof FormErrors.BaseError)) {
+              _context.next = 33;
               break;
             }
 
-            return _context.abrupt("return", utils$4.httpBadRequestResponse(res, FormErrors.errorJson(_context.t5)));
+            return _context.abrupt("return", utils$4.httpBadRequestResponse(res, FormErrors.errorJson(_context.t3)));
 
-          case 35:
-            console.error('error in apiWrapper:', _context.t5);
+          case 33:
+            console.error('error in apiWrapper:', _context.t3);
 
             if (sentry) {
-              sentry.captureException(_context.t5);
+              sentry.captureException(_context.t3);
             }
 
             return _context.abrupt("return", utils$4.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
 
-          case 38:
+          case 36:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[2, 25]]);
+    }, _callee, null, [[2, 23]]);
   }));
 
   return function apiWrapper(_x, _x2, _x3) {
@@ -150,10 +148,10 @@ var apiWrapper = /*#__PURE__*/function () {
 }();
 
 var loginAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, type, email, password, next, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors$1, user, claims, _loginWithLinkForm$va, _cleanValues, _errors, _user, magicLogin;
 
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -340,9 +338,9 @@ loginAPI.options = {
 };
 
 var logoutAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var res, session;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -380,10 +378,10 @@ logoutAPI.options = {
 };
 
 var onboardingAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var req, res, session, tokenOptions, password, _onboardingForm$valid, cleanValues, errors, user, claims;
 
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -461,10 +459,10 @@ onboardingAPI.options = {
 };
 
 var resetAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var req, authOptions, email, ip, date1HourAgo, recentResetAttemptsByIP, _resetForm$validate, cleanValues, errors$1, user, magicLogin;
 
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -553,9 +551,9 @@ resetAPI.options = {
 };
 
 var sessionAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var res, session, tokens, tokenOptions;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -587,11 +585,19 @@ sessionAPI.options = {
   reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE
 };
 
+var randomInt = function randomInt(min, max) {
+  var _min = Math.ceil(min);
+
+  var _max = Math.floor(max);
+
+  return Math.floor(Math.random() * (_max - _min + 1)) + _min;
+};
+
 var signupAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var req, res, session, authOptions, email, _signupForm$validate, cleanValues, errors$1, ip, date1DayAgo, recentUsersByIP, user, baseURL, magicLogin;
 
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -676,7 +682,7 @@ var signupAPI = /*#__PURE__*/function () {
               email: cleanValues.email,
               enabled: true,
               registrationIP: ip,
-              profilePictureURL: "".concat(baseURL, "/img/profile-picture/default.png"),
+              profilePictureURL: "".concat(baseURL, "/img/profile-picture/default-").concat(randomInt(1, authOptions.numDefaultProfilePictureVariations), ".png"),
               verifications: {
                 email: false
               }
@@ -721,9 +727,9 @@ signupAPI.options = {
 };
 
 var userAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var session, user;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:

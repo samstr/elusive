@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-var FormErrors = require('./FormErrors-1539c4dc.js');
+var FormErrors = require('./FormErrors-bf65213f.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');

@@ -3,31 +3,31 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('../../classCallCheck-d2bb402f.js');
-require('../../client.js');
+require('../../ElusiveClient-5959be3f.js');
 require('../../defineProperty-ba7cd53d.js');
 var index = require('../../index.js');
-require('../../FormErrors-1539c4dc.js');
+require('../../FormErrors-bf65213f.js');
 require('react');
 require('prop-types');
 require('react-bootstrap');
-var asyncToGenerator = require('../../asyncToGenerator-ae22edb1.js');
+var asyncToGenerator = require('../../asyncToGenerator-42483001.js');
 require('bcryptjs');
-require('../../utils-6d646aa4.js');
+require('../../utils-6363c83d.js');
 require('../../utils-3409f232.js');
-require('../../utils-f5131aa8.js');
+require('../../utils-188be96f.js');
 require('uuid');
-require('../../utils-51ff1bef.js');
+require('../../utils-ee651d6c.js');
 require('moment');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
-var utils$5 = require('../../utils-8ff74ba8.js');
-var utils$6 = require('../../utils-93376c2c.js');
+var utils$5 = require('../../utils-f23580e5.js');
+var utils$6 = require('../../utils-760de03d.js');
 require('jsonwebtoken');
 
 var magicLoginDataAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(_ref) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var req, res, tokenOptions, magicLogin, claims;
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:

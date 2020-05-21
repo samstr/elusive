@@ -2,12 +2,12 @@
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
-var FormErrors = require('./FormErrors-1539c4dc.js');
-var asyncToGenerator = require('./asyncToGenerator-ae22edb1.js');
+var FormErrors = require('./FormErrors-bf65213f.js');
+var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 var users = require('./models/users.js');
-var utils$6 = require('./utils-93376c2c.js');
+var utils$6 = require('./utils-760de03d.js');
 
-function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var SessionError = /*#__PURE__*/function (_BaseError) {
@@ -100,10 +100,10 @@ var deleteSessionCookies = function deleteSessionCookies(res) {
   res.setHeader('Set-Cookie', deleteSessionCookieStrings());
 };
 var getSession = /*#__PURE__*/function () {
-  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator._regeneratorRuntime.mark(function _callee(req, reloadUserSource) {
+  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(req, reloadUserSource) {
     var _Elusive$options, sessionOptions, tokenOptions, accessToken, refreshToken, userId, session, tokens, _getClaims, accessTokenClaims, accessTokenExpired, accessTokenInvalid, _getClaims2, refreshTokenClaims, refreshTokenExpired, refreshTokenInvalid, user;
 
-    return asyncToGenerator._regeneratorRuntime.wrap(function _callee$(_context) {
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:

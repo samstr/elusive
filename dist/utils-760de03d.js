@@ -4,11 +4,11 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
-var FormErrors = require('./FormErrors-1539c4dc.js');
+var FormErrors = require('./FormErrors-bf65213f.js');
 var jwt = require('jsonwebtoken');
 var jwt__default = _interopDefault(jwt);
 
-function _createSuper(Derived) { return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var TokenError = /*#__PURE__*/function (_BaseError) {
