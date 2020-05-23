@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -52,14 +52,14 @@
     "@rollup/plugin-node-resolve": "^8.0.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
-    "eslint": "^7.0.0",
+    "eslint": "^7.1.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-react": "^7.20.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
-    "rollup": "^2.10.5",
+    "rollup": "^2.10.8",
     "rollup-plugin-babel": "^4.4.0",
     "yarn": "^1.22.4"
   },
