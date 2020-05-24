@@ -7,8 +7,8 @@ import { loginRoute, userAPIRoute } from '../routes';
 import { useUserContext } from './UserContext';
 
 const useUser = () => {
-  const { userContext, resetUserContext, setUserContext } = useUserContext();
-  const [user, setUser] = useState(userContext);
+  const { resetUserContext, setUserContext } = useUserContext();
+  const [user, setUser] = useState();
   const router = useRouter();
 
   const handleError = (err) => {

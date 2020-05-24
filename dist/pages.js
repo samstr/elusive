@@ -297,11 +297,10 @@ function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { 
 
 var useUser = function useUser() {
   var _useUserContext = useUserContext(),
-      userContext = _useUserContext.userContext,
       resetUserContext = _useUserContext.resetUserContext,
       setUserContext = _useUserContext.setUserContext;
 
-  var _useState = React.useState(userContext),
+  var _useState = React.useState(),
       user = _useState[0],
       setUser = _useState[1];
 
