@@ -18,7 +18,7 @@ const LoginPage = () => {
   const session = useSession();
   const [type, setType] = useState();
   const [success, setSuccess] = useState();
-  const { site: siteOptions } = Elusive.options;
+  const { mail: mailOptions, site: siteOptions } = Elusive.options;
 
   useEffect(() => {
     if (router.query.type) {
@@ -86,8 +86,8 @@ const LoginPage = () => {
               <div className="intro">
                 <p>We have sent you an email with an automatic login link.</p>
                 <p>
-                  You may need to check your spam folder or whitelist
-                  XXX@XXX.COM
+                  You may need to check your spam folder or whitelist{' '}
+                  {mailOptions.fromEmail}
                 </p>
               </div>
             </>
