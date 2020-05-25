@@ -18,12 +18,12 @@ var _JSXStyle = _interopDefault(require('styled-jsx/style'));
 var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-dc51e2f3.js');
+var SignupForm = require('./SignupForm-86bb7e05.js');
 var reactBootstrap = require('react-bootstrap');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-require('./signup-716da40b.js');
+require('./signupForm-b6131d87.js');
 var utils$3 = require('./utils-081fbcf9.js');
 var Link = _interopDefault(require('next/link'));
 

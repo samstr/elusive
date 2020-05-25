@@ -17,7 +17,7 @@ var reactBootstrap = require('react-bootstrap');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var signup = require('./signup-716da40b.js');
+var signupForm = require('./signupForm-b6131d87.js');
 
 var __jsx = React__default.createElement;
 
@@ -158,11 +158,11 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
       setSubmitting = _useState3[1];
 
   var onChange = function onChange(event) {
-    var _getOnChangeValue = signup.getOnChangeValue(event),
+    var _getOnChangeValue = signupForm.getOnChangeValue(event),
         field = _getOnChangeValue.field,
         value = _getOnChangeValue.value;
 
-    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
+    setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
     setValues(_objectSpread(_objectSpread({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
   };
 
@@ -177,7 +177,7 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
               event.preventDefault();
               event.stopPropagation();
               setFormErrors();
-              _loginWithLinkForm$va = signup.loginWithLinkForm().validate(values), cleanValues = _loginWithLinkForm$va.cleanValues, errors = _loginWithLinkForm$va.errors;
+              _loginWithLinkForm$va = signupForm.loginWithLinkForm().validate(values), cleanValues = _loginWithLinkForm$va.cleanValues, errors = _loginWithLinkForm$va.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 6;
@@ -277,11 +277,11 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
       setSubmitting = _useState3[1];
 
   var onChange = function onChange(event) {
-    var _getOnChangeValue = signup.getOnChangeValue(event),
+    var _getOnChangeValue = signupForm.getOnChangeValue(event),
         field = _getOnChangeValue.field,
         value = _getOnChangeValue.value;
 
-    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
+    setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
     setValues(_objectSpread$1(_objectSpread$1({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
   };
 
@@ -296,7 +296,7 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
               event.preventDefault();
               event.stopPropagation();
               setFormErrors(null);
-              _loginWithPasswordFor = signup.loginWithPasswordForm().validate(values), cleanValues = _loginWithPasswordFor.cleanValues, errors = _loginWithPasswordFor.errors;
+              _loginWithPasswordFor = signupForm.loginWithPasswordForm().validate(values), cleanValues = _loginWithPasswordFor.cleanValues, errors = _loginWithPasswordFor.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 6;
@@ -480,11 +480,11 @@ var OnboardingForm = function OnboardingForm(_ref) {
       setSubmitting = _useState3[1];
 
   var onChange = function onChange(event) {
-    var _getOnChangeValue = signup.getOnChangeValue(event),
+    var _getOnChangeValue = signupForm.getOnChangeValue(event),
         field = _getOnChangeValue.field,
         value = _getOnChangeValue.value;
 
-    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
+    setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
     setValues(_objectSpread$2(_objectSpread$2({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
   };
 
@@ -499,7 +499,7 @@ var OnboardingForm = function OnboardingForm(_ref) {
               event.preventDefault();
               event.stopPropagation();
               setFormErrors(null);
-              _onboardingForm$valid = signup.onboardingForm().validate(values), cleanValues = _onboardingForm$valid.cleanValues, errors = _onboardingForm$valid.errors;
+              _onboardingForm$valid = signupForm.onboardingForm().validate(values), cleanValues = _onboardingForm$valid.cleanValues, errors = _onboardingForm$valid.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 6;
@@ -606,11 +606,11 @@ var ResetForm = function ResetForm(_ref) {
       setSubmitting = _useState3[1];
 
   var onChange = function onChange(event) {
-    var _getOnChangeValue = signup.getOnChangeValue(event),
+    var _getOnChangeValue = signupForm.getOnChangeValue(event),
         field = _getOnChangeValue.field,
         value = _getOnChangeValue.value;
 
-    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
+    setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
     setValues(_objectSpread$3(_objectSpread$3({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
   };
 
@@ -625,7 +625,7 @@ var ResetForm = function ResetForm(_ref) {
               event.preventDefault();
               event.stopPropagation();
               setFormErrors(null);
-              _resetForm$validate = signup.resetForm().validate(values), cleanValues = _resetForm$validate.cleanValues, errors = _resetForm$validate.errors;
+              _resetForm$validate = signupForm.resetForm().validate(values), cleanValues = _resetForm$validate.cleanValues, errors = _resetForm$validate.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 6;
@@ -722,11 +722,11 @@ var SignupForm = function SignupForm(_ref) {
       setSubmitting = _useState3[1];
 
   var onChange = function onChange(event) {
-    var _getOnChangeValue = signup.getOnChangeValue(event),
+    var _getOnChangeValue = signupForm.getOnChangeValue(event),
         field = _getOnChangeValue.field,
         value = _getOnChangeValue.value;
 
-    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
+    setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
     setValues(_objectSpread$4(_objectSpread$4({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
   };
 
@@ -741,7 +741,7 @@ var SignupForm = function SignupForm(_ref) {
               event.preventDefault();
               event.stopPropagation();
               setFormErrors(null);
-              _signupForm$validate = signup.signupForm().validate(values), cleanValues = _signupForm$validate.cleanValues, errors = _signupForm$validate.errors;
+              _signupForm$validate = signupForm.signupForm().validate(values), cleanValues = _signupForm$validate.cleanValues, errors = _signupForm$validate.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 6;

@@ -15,19 +15,19 @@ export {
   UnknownFormError,
 };
 
-import loginWithLinkForm from './login-with-link';
+import loginWithLinkForm from './loginWithLinkForm';
 export { loginWithLinkForm };
 
-import loginWithPasswordForm from './login-with-password';
+import loginWithPasswordForm from './loginWithPasswordForm';
 export { loginWithPasswordForm };
 
-import onboardingForm from './onboarding';
+import onboardingForm from './onboardingForm';
 export { onboardingForm };
 
-import resetForm from './reset';
+import resetForm from './resetForm';
 export { resetForm };
 
-import signupForm from './signup';
+import signupForm from './signupForm';
 export { signupForm };
 
 import {

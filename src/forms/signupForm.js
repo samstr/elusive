@@ -1,7 +1,7 @@
 import { createForm, emailField } from './utils';
 
-export default () => {
-  return createForm({
+export default () =>
+  createForm({
     fields: {
       email: emailField('email', {
         required: {
@@ -14,4 +14,3 @@ export default () => {
       }),
     },
   });
-};

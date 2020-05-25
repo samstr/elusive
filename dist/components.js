@@ -15,11 +15,11 @@ require('./utils-24b30e03.js');
 require('styled-jsx/style');
 require('prop-types');
 require('react');
-var SignupForm = require('./SignupForm-dc51e2f3.js');
+var SignupForm = require('./SignupForm-86bb7e05.js');
 require('react-bootstrap');
 require('axios');
 require('next/router');
-require('./signup-716da40b.js');
+require('./signupForm-b6131d87.js');
 
 
 

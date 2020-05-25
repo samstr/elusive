@@ -15,7 +15,7 @@ require('bcryptjs');
 require('../utils-c048fd8a.js');
 require('../utils-3409f232.js');
 var utils$2 = require('../utils-24b30e03.js');
-var signup = require('../signup-716da40b.js');
+var signupForm = require('../signupForm-b6131d87.js');
 var utils$3 = require('../utils-081fbcf9.js');
 var utils$4 = require('../utils-b82a9439.js');
 require('uuid');
@@ -219,7 +219,7 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            _loginWithPasswordFor = signup.loginWithPasswordForm().validate({
+            _loginWithPasswordFor = signupForm.loginWithPasswordForm().validate({
               type: type,
               email: email,
               password: password,
@@ -281,7 +281,7 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            _loginWithLinkForm$va = signup.loginWithLinkForm().validate({
+            _loginWithLinkForm$va = signupForm.loginWithLinkForm().validate({
               type: type,
               email: email,
               next: next
@@ -385,7 +385,7 @@ var onboardingAPI = /*#__PURE__*/function () {
             req = _ref.req, res = _ref.res, session = _ref.session;
             tokenOptions = index.options.tokens;
             password = req.body.password;
-            _onboardingForm$valid = signup.onboardingForm().validate({
+            _onboardingForm$valid = signupForm.onboardingForm().validate({
               password: password
             }), cleanValues = _onboardingForm$valid.cleanValues, errors = _onboardingForm$valid.errors;
 
@@ -495,7 +495,7 @@ var resetAPI = /*#__PURE__*/function () {
             });
 
           case 13:
-            _resetForm$validate = signup.resetForm().validate({
+            _resetForm$validate = signupForm.resetForm().validate({
               email: email
             }), cleanValues = _resetForm$validate.cleanValues, errors = _resetForm$validate.errors;
 
@@ -602,7 +602,7 @@ var signupAPI = /*#__PURE__*/function () {
 
           case 4:
             email = req.body.email;
-            _signupForm$validate = signup.signupForm().validate({
+            _signupForm$validate = signupForm.signupForm().validate({
               email: email
             }), cleanValues = _signupForm$validate.cleanValues, errors = _signupForm$validate.errors;
 
