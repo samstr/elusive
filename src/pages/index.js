@@ -1,6 +1,9 @@
 import LoginPage from './LoginPage';
 export { LoginPage };
 
+import LogoutPage from './LogoutPage';
+export { LogoutPage };
+
 import ResetPage from './ResetPage';
 export { ResetPage };
 

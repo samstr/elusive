@@ -18,7 +18,7 @@ var _JSXStyle = _interopDefault(require('styled-jsx/style'));
 var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-63c54b86.js');
+var SignupForm = require('./SignupForm-50923600.js');
 require('react-bootstrap');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
@@ -298,6 +298,30 @@ var LoginPage = function LoginPage() {
 
 var __jsx$2 = React__default.createElement;
 
+var LogoutPage = function LogoutPage() {
+  var router$1 = router.useRouter();
+  var session = useSession();
+  React.useEffect(function () {
+    if (session._ready && !session.isAuthenticated) {
+      router$1.replace(utils$1$1.loginRoute());
+    }
+  }, [session]);
+
+  var onSuccess = function onSuccess() {
+    window.location = utils$1$1.indexRoute();
+  };
+
+  return __jsx$2(SignupForm.AuthBasePage, null, __jsx$2("h1", null, "Logout"), __jsx$2("div", {
+    className: "intro"
+  }, "Are sure you want to logout?"), __jsx$2("div", {
+    className: "form"
+  }, __jsx$2(SignupForm.LogoutForm, {
+    onSuccess: onSuccess
+  })));
+};
+
+var __jsx$3 = React__default.createElement;
+
 var ResetPage = function ResetPage() {
   useSession();
   var mailOptions = index.options.mail;
@@ -310,16 +334,16 @@ var ResetPage = function ResetPage() {
     return setSuccess(true);
   };
 
-  return __jsx$2(SignupForm.AuthBasePage, null, success ? __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "Check your inbox"), __jsx$2("div", {
+  return __jsx$3(SignupForm.AuthBasePage, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Check your inbox"), __jsx$3("div", {
     className: "intro"
-  }, __jsx$2("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$2("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "Forgot your password?"), __jsx$2("div", {
+  }, __jsx$3("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$3("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Forgot your password?"), __jsx$3("div", {
     className: "form"
-  }, __jsx$2(SignupForm.ResetForm, {
+  }, __jsx$3(SignupForm.ResetForm, {
     onSuccess: onSuccess
   }))));
 };
 
-var __jsx$3 = React__default.createElement;
+var __jsx$4 = React__default.createElement;
 
 var SignupPage = function SignupPage() {
   var router$1 = router.useRouter();
@@ -339,17 +363,17 @@ var SignupPage = function SignupPage() {
     return setSuccess(true);
   };
 
-  return __jsx$3(SignupForm.AuthBasePage, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Check your inbox"), __jsx$3("div", {
+  return __jsx$4(SignupForm.AuthBasePage, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Check your inbox"), __jsx$4("div", {
     className: "intro"
-  }, __jsx$3("p", null, "Please confirm your email address to get started."), __jsx$3("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Create an account"), __jsx$3("div", {
+  }, __jsx$4("p", null, "Please confirm your email address to get started."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Create an account"), __jsx$4("div", {
     className: "form"
-  }, __jsx$3(SignupForm.SignupForm, {
+  }, __jsx$4(SignupForm.SignupForm, {
     onSuccess: onSuccess
-  })), __jsx$3("div", {
+  })), __jsx$4("div", {
     className: "footer"
-  }, __jsx$3(Link, {
+  }, __jsx$4(Link, {
     href: utils$1$1.loginRoute()
-  }, __jsx$3("a", null, "I already have an account")))));
+  }, __jsx$4("a", null, "I already have an account")))));
 };
 
 var useData = function useData() {
@@ -440,7 +464,7 @@ var useData = function useData() {
   return data;
 };
 
-var __jsx$4 = React__default.createElement;
+var __jsx$5 = React__default.createElement;
 var defaultValue$1 = null;
 var UserContext = React.createContext(defaultValue$1);
 var UserContextProvider = function UserContextProvider(_ref) {
@@ -459,7 +483,7 @@ var UserContextProvider = function UserContextProvider(_ref) {
     setUserContext: setUserContext,
     resetUserContext: resetUserContext
   };
-  return __jsx$4(UserContext.Provider, {
+  return __jsx$5(UserContext.Provider, {
     value: context
   }, children);
 };
@@ -581,6 +605,7 @@ var useUser = function useUser() {
 };
 
 exports.LoginPage = LoginPage;
+exports.LogoutPage = LogoutPage;
 exports.ResetPage = ResetPage;
 exports.SessionContext = SessionContext;
 exports.SessionContextProvider = SessionContextProvider;

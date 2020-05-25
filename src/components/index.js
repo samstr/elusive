@@ -16,6 +16,9 @@ export { LoginWithLinkForm };
 import LoginWithPasswordForm from './LoginWithPasswordForm';
 export { LoginWithPasswordForm };
 
+import LogoutForm from './LogoutForm';
+export { LogoutForm };
+
 import ResetForm from './ResetForm';
 export { ResetForm };
 
