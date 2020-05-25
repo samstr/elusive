@@ -1,23 +1,26 @@
 import { apiWrapper } from './utils';
 export { apiWrapper };
 
-import loginAPI from './login';
+import loginAPI from './loginAPI';
 export { loginAPI };
 
-import logoutAPI from './logout';
+import logoutAPI from './logoutAPI';
 export { logoutAPI };
 
-import onboardingAPI from './onboarding';
+import magicLoginDataAPI from './magicLoginDataAPI';
+export { magicLoginDataAPI };
+
+import onboardingAPI from './onboardingAPI';
 export { onboardingAPI };
 
-import resetAPI from './reset';
+import resetAPI from './resetAPI';
 export { resetAPI };
 
-import sessionAPI from './session';
+import sessionAPI from './sessionAPI';
 export { sessionAPI };
 
-import signupAPI from './signup';
+import signupAPI from './signupAPI';
 export { signupAPI };
 
-import userAPI from './user';
+import userAPI from './userAPI';
 export { userAPI };

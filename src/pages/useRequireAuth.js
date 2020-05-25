@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+import { useSessionContext } from '../contexts';
 import { loginRouteWithNext } from '../routes';
-import { useSessionContext } from './SessionContext';
 
 const useRequireAuth = () => {
   const router = useRouter();

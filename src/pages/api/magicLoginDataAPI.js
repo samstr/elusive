@@ -1,17 +1,14 @@
-import Elusive from '../../../../';
+import Elusive from '../../';
 import {
   MagicLoginAlreadyUsedError,
   MagicLoginExpiredError,
   MagicLoginNotFoundError,
   getMagicLoginByID,
   updateMagicLogin,
-} from '../../../../models/magicLogins';
-import {
-  UserNotEnabledError,
-  UserNotFoundError,
-} from '../../../../models/users';
-import { createSessionCookies } from '../../../../sessions';
-import { signTokens } from '../../../../tokens';
+} from '../../models/magicLogins';
+import { UserNotEnabledError, UserNotFoundError } from '../../models/users';
+import { createSessionCookies } from '../../sessions';
+import { signTokens } from '../../tokens';
 
 const magicLoginDataAPI = async ({ req, res }) => {
   const { tokens: tokenOptions } = Elusive.options;

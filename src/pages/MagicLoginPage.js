@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 
 import { AuthBasePage, GenericErrors } from '../components';
+import { useSessionContext } from '../contexts';
 import { homeRoute, onboardingRoute } from '../routes';
 
 import useData from './useData';
-import { useSessionContext } from './SessionContext';
 
 const MagicLoginPage = () => {
   const data = useData();

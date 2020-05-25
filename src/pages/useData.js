@@ -2,9 +2,9 @@ import axios, { CancelToken } from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { useSessionContext } from '../contexts';
 import { HTTP_STATUS_UNAUTHORIZED } from '../http';
 import { loginRoute } from '../routes';
-import { useSessionContext } from './SessionContext';
 
 const useData = () => {
   const { resetSessionContext } = useSessionContext();

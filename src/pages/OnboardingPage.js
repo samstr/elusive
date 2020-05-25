@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 
 import { AuthBasePage, OnboardingForm } from '../components';
+import { useSessionContext } from '../contexts';
 import { settingsProfileRoute } from '../routes';
 
 import useRequireAuth from './useRequireAuth';
 import useSession from './useSession';
-import { useSessionContext } from './SessionContext';
 
 const OnboardingPage = () => {
   useRequireAuth();
