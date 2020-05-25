@@ -15,14 +15,15 @@ require('./utils-c048fd8a.js');
 require('./utils-3409f232.js');
 require('./utils-24b30e03.js');
 require('styled-jsx/style');
-var LoginWithPasswordForm = require('./LoginWithPasswordForm-cc07a125.js');
+var SignupForm = require('./SignupForm-ff8bdce9.js');
 require('axios');
 require('next/router');
-require('./login-with-password-b9acd6c9.js');
+require('./signup-d14953e8.js');
 
 
 
-exports.AuthBasePage = LoginWithPasswordForm.AuthBasePage;
-exports.Button = LoginWithPasswordForm.Button;
-exports.LoginWithLinkForm = LoginWithPasswordForm.LoginWithLinkForm;
-exports.LoginWithPasswordForm = LoginWithPasswordForm.LoginWithPasswordForm;
+exports.AuthBasePage = SignupForm.AuthBasePage;
+exports.Button = SignupForm.Button;
+exports.LoginWithLinkForm = SignupForm.LoginWithLinkForm;
+exports.LoginWithPasswordForm = SignupForm.LoginWithPasswordForm;
+exports.SignupForm = SignupForm.SignupForm;

@@ -1,13 +1,13 @@
 'use strict';
 
 var index = require('./index.js');
-var loginWithPassword = require('./login-with-password-b9acd6c9.js');
+var signup = require('./signup-d14953e8.js');
 
 var onboardingForm = (function () {
   var authOptions = index.options.auth;
-  return loginWithPassword.createForm({
+  return signup.createForm({
     fields: {
-      password: loginWithPassword.textField('password', {
+      password: signup.textField('password', {
         required: {
           value: true,
           errorMessage: 'Please enter your password'
@@ -22,25 +22,9 @@ var onboardingForm = (function () {
 });
 
 var resetForm = (function () {
-  return loginWithPassword.createForm({
+  return signup.createForm({
     fields: {
-      email: loginWithPassword.emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Your email is required'
-        },
-        invalid: {
-          errorMessage: 'Your email address is invalid'
-        }
-      })
-    }
-  });
-});
-
-var signupForm = (function () {
-  return loginWithPassword.createForm({
-    fields: {
-      email: loginWithPassword.emailField('email', {
+      email: signup.emailField('email', {
         required: {
           value: true,
           errorMessage: 'Your email is required'
@@ -55,4 +39,3 @@ var signupForm = (function () {
 
 exports.onboardingForm = onboardingForm;
 exports.resetForm = resetForm;
-exports.signupForm = signupForm;

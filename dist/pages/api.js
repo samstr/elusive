@@ -17,8 +17,8 @@ require('bcryptjs');
 require('../utils-c048fd8a.js');
 require('../utils-3409f232.js');
 var utils$2 = require('../utils-24b30e03.js');
-var loginWithPassword = require('../login-with-password-b9acd6c9.js');
-var signup = require('../signup-0d250b67.js');
+var signup = require('../signup-d14953e8.js');
+var reset = require('../reset-b054500e.js');
 var utils$3 = require('../utils-4a27a4e3.js');
 var utils$4 = require('../utils-b82a9439.js');
 require('uuid');
@@ -222,7 +222,7 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            _loginWithPasswordFor = loginWithPassword.loginWithPasswordForm().validate({
+            _loginWithPasswordFor = signup.loginWithPasswordForm().validate({
               type: type,
               email: email,
               password: password,
@@ -284,7 +284,7 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            _loginWithLinkForm$va = loginWithPassword.loginWithLinkForm().validate({
+            _loginWithLinkForm$va = signup.loginWithLinkForm().validate({
               type: type,
               email: email,
               next: next
@@ -388,7 +388,7 @@ var onboardingAPI = /*#__PURE__*/function () {
             req = _ref.req, res = _ref.res, session = _ref.session;
             tokenOptions = index.options.tokens;
             password = req.body.password;
-            _onboardingForm$valid = signup.onboardingForm().validate({
+            _onboardingForm$valid = reset.onboardingForm().validate({
               password: password
             }), cleanValues = _onboardingForm$valid.cleanValues, errors = _onboardingForm$valid.errors;
 
@@ -498,7 +498,7 @@ var resetAPI = /*#__PURE__*/function () {
             });
 
           case 13:
-            _resetForm$validate = signup.resetForm().validate({
+            _resetForm$validate = reset.resetForm().validate({
               email: email
             }), cleanValues = _resetForm$validate.cleanValues, errors$1 = _resetForm$validate.errors;
 

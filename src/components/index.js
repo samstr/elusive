@@ -9,3 +9,6 @@ export { LoginWithLinkForm };
 
 import LoginWithPasswordForm from './LoginWithPasswordForm';
 export { LoginWithPasswordForm };
+
+import SignupForm from './SignupForm';
+export { SignupForm };

@@ -1,6 +1,9 @@
 import LoginPage from './LoginPage';
 export { LoginPage };
 
+import SignupPage from './SignupPage';
+export { SignupPage };
+
 import {
   SessionContext,
   SessionContextProvider,

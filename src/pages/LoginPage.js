@@ -80,7 +80,7 @@ const LoginPage = () => {
       )}
       {type === LOGIN_TYPE_LINK && (
         <>
-          {success && (
+          {success ? (
             <>
               <h1>Check your inbox</h1>
               <div className="intro">
@@ -91,8 +91,7 @@ const LoginPage = () => {
                 </p>
               </div>
             </>
-          )}
-          {!success && (
+          ) : (
             <>
               <h1>Login to {siteOptions.name}</h1>
               <div className="form">

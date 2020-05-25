@@ -10,13 +10,14 @@ var React__default = _interopDefault(React);
 var PropTypes = _interopDefault(require('prop-types'));
 var reactBootstrap = require('react-bootstrap');
 var asyncToGenerator = require('./asyncToGenerator-42483001.js');
+require('bcryptjs');
 var utils$1 = require('./utils-3409f232.js');
 var utils$2 = require('./utils-24b30e03.js');
 var _JSXStyle = _interopDefault(require('styled-jsx/style'));
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var loginWithPassword = require('./login-with-password-b9acd6c9.js');
+var signup = require('./signup-d14953e8.js');
 
 var __jsx = React__default.createElement;
 
@@ -98,11 +99,11 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
       setSubmitting = _useState3[1];
 
   var onChange = function onChange(event) {
-    var _getOnChangeValue = loginWithPassword.getOnChangeValue(event),
+    var _getOnChangeValue = signup.getOnChangeValue(event),
         field = _getOnChangeValue.field,
         value = _getOnChangeValue.value;
 
-    setFormErrors(loginWithPassword.clearFormFieldErrors(formErrors, field));
+    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
     setValues(_objectSpread(_objectSpread({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
   };
 
@@ -117,7 +118,7 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
               event.preventDefault();
               event.stopPropagation();
               setFormErrors();
-              _loginWithLinkForm$va = loginWithPassword.loginWithLinkForm().validate(values), cleanValues = _loginWithLinkForm$va.cleanValues, errors = _loginWithLinkForm$va.errors;
+              _loginWithLinkForm$va = signup.loginWithLinkForm().validate(values), cleanValues = _loginWithLinkForm$va.cleanValues, errors = _loginWithLinkForm$va.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 6;
@@ -217,11 +218,11 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
       setSubmitting = _useState3[1];
 
   var onChange = function onChange(event) {
-    var _getOnChangeValue = loginWithPassword.getOnChangeValue(event),
+    var _getOnChangeValue = signup.getOnChangeValue(event),
         field = _getOnChangeValue.field,
         value = _getOnChangeValue.value;
 
-    setFormErrors(loginWithPassword.clearFormFieldErrors(formErrors, field));
+    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
     setValues(_objectSpread$1(_objectSpread$1({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
   };
 
@@ -236,7 +237,7 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
               event.preventDefault();
               event.stopPropagation();
               setFormErrors(null);
-              _loginWithPasswordFor = loginWithPassword.loginWithPasswordForm().validate(values), cleanValues = _loginWithPasswordFor.cleanValues, errors = _loginWithPasswordFor.errors;
+              _loginWithPasswordFor = signup.loginWithPasswordForm().validate(values), cleanValues = _loginWithPasswordFor.cleanValues, errors = _loginWithPasswordFor.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 6;
@@ -321,7 +322,124 @@ LoginWithPasswordForm.propTypes = {
   onSuccess: PropTypes.func.isRequired
 };
 
+var __jsx$4 = React__default.createElement;
+
+function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var SignupForm = function SignupForm(_ref) {
+  var onSuccess = _ref.onSuccess;
+  var defaultValues = {
+    email: ''
+  };
+
+  var _useState = React.useState(defaultValues),
+      values = _useState[0],
+      setValues = _useState[1];
+
+  var _useState2 = React.useState(null),
+      formErrors = _useState2[0],
+      setFormErrors = _useState2[1];
+
+  var _useState3 = React.useState(false),
+      submitting = _useState3[0],
+      setSubmitting = _useState3[1];
+
+  var onChange = function onChange(event) {
+    var _getOnChangeValue = signup.getOnChangeValue(event),
+        field = _getOnChangeValue.field,
+        value = _getOnChangeValue.value;
+
+    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
+    setValues(_objectSpread$2(_objectSpread$2({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
+  };
+
+  var submit = /*#__PURE__*/function () {
+    var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(event) {
+      var _signupForm$validate, cleanValues, errors, response, _err$response, _err$response$data;
+
+      return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              event.stopPropagation();
+              setFormErrors(null);
+              _signupForm$validate = signup.signupForm().validate(values), cleanValues = _signupForm$validate.cleanValues, errors = _signupForm$validate.errors;
+
+              if (!(errors && errors.length)) {
+                _context.next = 6;
+                break;
+              }
+
+              return _context.abrupt("return", setFormErrors(errors));
+
+            case 6:
+              setSubmitting(true);
+              _context.prev = 7;
+              _context.next = 10;
+              return axios__default.post(utils$1.signupAPIRoute(), cleanValues);
+
+            case 10:
+              response = _context.sent;
+              onSuccess(response.data);
+              _context.next = 18;
+              break;
+
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](7);
+              setSubmitting(false);
+              setFormErrors((_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.errors);
+
+            case 18:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[7, 14]]);
+    }));
+
+    return function submit(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return __jsx$4(React__default.Fragment, null, __jsx$4(reactBootstrap.Form, {
+    noValidate: true,
+    onSubmit: submit
+  }, __jsx$4(reactBootstrap.Form.Group, {
+    controlId: "email"
+  }, __jsx$4(reactBootstrap.Form.Control, {
+    name: "email",
+    type: "text",
+    placeholder: "Email",
+    onChange: onChange,
+    autoComplete: "off",
+    isInvalid: !!FormErrors.fieldErrors(formErrors, 'email').length,
+    autoFocus: true
+  }), __jsx$4(FormErrors.FormErrors, {
+    errors: formErrors,
+    field: "email"
+  })), __jsx$4(FormErrors.FormErrors, {
+    errors: formErrors
+  }), __jsx$4(Button, {
+    variant: "primary",
+    text: "Sign Up",
+    loadingText: "Signing up",
+    type: "submit",
+    isLoading: submitting,
+    block: true
+  })));
+};
+
+SignupForm.propTypes = {
+  onSuccess: PropTypes.func.isRequired
+};
+
 exports.AuthBasePage = AuthBasePage;
 exports.Button = Button;
 exports.LoginWithLinkForm = LoginWithLinkForm;
 exports.LoginWithPasswordForm = LoginWithPasswordForm;
+exports.SignupForm = SignupForm;
