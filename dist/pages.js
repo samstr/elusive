@@ -7,23 +7,24 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 require('./classCallCheck-d2bb402f.js');
 var ElusiveClient = require('./ElusiveClient-7405d865.js');
 var index = require('./index.js');
-require('./FormErrors-bf65213f.js');
-var React = require('react');
-var React__default = _interopDefault(React);
-var PropTypes = _interopDefault(require('prop-types'));
-require('react-bootstrap');
+require('./errors-b316e546.js');
+require('./utils-8eb11d51.js');
 var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 require('bcryptjs');
 require('./utils-c048fd8a.js');
-var utils$1 = require('./utils-3409f232.js');
+var utils$1$1 = require('./utils-3409f232.js');
 var utils$2 = require('./utils-24b30e03.js');
 var _JSXStyle = _interopDefault(require('styled-jsx/style'));
-var SignupForm = require('./SignupForm-ff8bdce9.js');
+var PropTypes = _interopDefault(require('prop-types'));
+var React = require('react');
+var React__default = _interopDefault(React);
+var SignupForm = require('./SignupForm-63c54b86.js');
+require('react-bootstrap');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-require('./signup-d14953e8.js');
-var utils$3 = require('./utils-4a27a4e3.js');
+require('./signup-5c75c218.js');
+var utils$3 = require('./utils-081fbcf9.js');
 var Link = _interopDefault(require('next/link'));
 
 var __jsx = React__default.createElement;
@@ -83,8 +84,8 @@ var useSession = function useSession() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$1.loginRoute()) {
-        router$1.replace(utils$1.loginRoute());
+      if (pathname !== utils$1$1.loginRoute()) {
+        router$1.replace(utils$1$1.loginRoute());
       }
 
       return;
@@ -106,7 +107,7 @@ var useSession = function useSession() {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__default(utils$1.sessionAPIRoute(), {
+                return axios__default(utils$1$1.sessionAPIRoute(), {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelRequest = c;
                   })
@@ -125,8 +126,8 @@ var useSession = function useSession() {
                   pathname = window.location.pathname;
                   user = _session.claims.user;
 
-                  if (user.needsOnboarding && pathname !== utils$1.onboardingRoute()) {
-                    router$1.replace(utils$1.onboardingRoute());
+                  if (user.needsOnboarding && pathname !== utils$1$1.onboardingRoute()) {
+                    router$1.replace(utils$1$1.onboardingRoute());
                   }
                 }
 
@@ -183,7 +184,7 @@ var LoginPage = function LoginPage() {
       if (utils$2.LOGIN_TYPES.includes(router$1.query.type)) {
         setType(router$1.query.type);
       } else {
-        router$1.replace(utils$1.loginRoute());
+        router$1.replace(utils$1$1.loginRoute());
       }
     } else {
       setType();
@@ -192,12 +193,12 @@ var LoginPage = function LoginPage() {
   }, [router$1.query]);
   React.useEffect(function () {
     if (session._ready && session.isAuthenticated) {
-      router$1.replace(utils$1.homeRoute());
+      router$1.replace(utils$1$1.homeRoute());
     }
   }, [session]);
 
   var loginTypeRouteWithNext = function loginTypeRouteWithNext(type) {
-    var url = "".concat(utils$1.loginRoute(), "?type=").concat(type);
+    var url = "".concat(utils$1$1.loginRoute(), "?type=").concat(type);
 
     if (router$1.query.next) {
       url = "".concat(url, "&next=").concat(encodeURIComponent(router$1.query.next));
@@ -207,7 +208,7 @@ var LoginPage = function LoginPage() {
   };
 
   var onPasswordSuccess = function onPasswordSuccess() {
-    var next = utils$1.homeRoute();
+    var next = utils$1$1.homeRoute();
 
     if (router$1.query.next) {
       next = decodeURIComponent(router$1.query.next);
@@ -229,7 +230,7 @@ var LoginPage = function LoginPage() {
   })), __jsx$1("div", {
     className: "jsx-1275567024" + " " + "footer"
   }, __jsx$1(Link, {
-    href: utils$1.resetRoute()
+    href: utils$1$1.resetRoute()
   }, __jsx$1("a", {
     className: "jsx-1275567024"
   }, "Forgot your password?")), "\xA0\xA0\u2022\xA0\xA0", __jsx$1(Link, {
@@ -287,7 +288,7 @@ var LoginPage = function LoginPage() {
   }, "Email me a login link")))), __jsx$1("div", {
     className: "jsx-1275567024" + " " + "footer"
   }, __jsx$1(Link, {
-    href: utils$1.signupRoute()
+    href: utils$1$1.signupRoute()
   }, __jsx$1("a", {
     className: "jsx-1275567024"
   }, "Create an account instead")))), __jsx$1(_JSXStyle, {
@@ -297,15 +298,9 @@ var LoginPage = function LoginPage() {
 
 var __jsx$2 = React__default.createElement;
 
-var SignupPage = function SignupPage() {
-  var router$1 = router.useRouter();
-  var session = useSession();
+var ResetPage = function ResetPage() {
+  useSession();
   var mailOptions = index.options.mail;
-  React.useEffect(function () {
-    if (session._ready && session.isAuthenticated) {
-      router$1.replace(utils$1.homeRoute());
-    }
-  }, [session]);
 
   var _useState = React.useState(),
       success = _useState[0],
@@ -317,15 +312,44 @@ var SignupPage = function SignupPage() {
 
   return __jsx$2(SignupForm.AuthBasePage, null, success ? __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "Check your inbox"), __jsx$2("div", {
     className: "intro"
-  }, __jsx$2("p", null, "Please confirm your email address to get started."), __jsx$2("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "Create an account"), __jsx$2("div", {
+  }, __jsx$2("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$2("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "Forgot your password?"), __jsx$2("div", {
     className: "form"
-  }, __jsx$2(SignupForm.SignupForm, {
+  }, __jsx$2(SignupForm.ResetForm, {
     onSuccess: onSuccess
-  })), __jsx$2("div", {
+  }))));
+};
+
+var __jsx$3 = React__default.createElement;
+
+var SignupPage = function SignupPage() {
+  var router$1 = router.useRouter();
+  var session = useSession();
+  var mailOptions = index.options.mail;
+  React.useEffect(function () {
+    if (session._ready && session.isAuthenticated) {
+      router$1.replace(utils$1$1.homeRoute());
+    }
+  }, [session]);
+
+  var _useState = React.useState(),
+      success = _useState[0],
+      setSuccess = _useState[1];
+
+  var onSuccess = function onSuccess() {
+    return setSuccess(true);
+  };
+
+  return __jsx$3(SignupForm.AuthBasePage, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Check your inbox"), __jsx$3("div", {
+    className: "intro"
+  }, __jsx$3("p", null, "Please confirm your email address to get started."), __jsx$3("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Create an account"), __jsx$3("div", {
+    className: "form"
+  }, __jsx$3(SignupForm.SignupForm, {
+    onSuccess: onSuccess
+  })), __jsx$3("div", {
     className: "footer"
-  }, __jsx$2(Link, {
-    href: utils$1.loginRoute()
-  }, __jsx$2("a", null, "I already have an account")))));
+  }, __jsx$3(Link, {
+    href: utils$1$1.loginRoute()
+  }, __jsx$3("a", null, "I already have an account")))));
 };
 
 var useData = function useData() {
@@ -345,8 +369,8 @@ var useData = function useData() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$1.loginRoute()) {
-        router$1.replace(utils$1.loginRoute());
+      if (pathname !== utils$1$1.loginRoute()) {
+        router$1.replace(utils$1$1.loginRoute());
       }
 
       return;
@@ -416,7 +440,7 @@ var useData = function useData() {
   return data;
 };
 
-var __jsx$3 = React__default.createElement;
+var __jsx$4 = React__default.createElement;
 var defaultValue$1 = null;
 var UserContext = React.createContext(defaultValue$1);
 var UserContextProvider = function UserContextProvider(_ref) {
@@ -435,7 +459,7 @@ var UserContextProvider = function UserContextProvider(_ref) {
     setUserContext: setUserContext,
     resetUserContext: resetUserContext
   };
-  return __jsx$3(UserContext.Provider, {
+  return __jsx$4(UserContext.Provider, {
     value: context
   }, children);
 };
@@ -461,7 +485,7 @@ var useRequireAuth = function useRequireAuth() {
 
   React.useEffect(function () {
     if (sessionContext._ready && !sessionContext.isAuthenticated) {
-      router$1.replace(utils$1.loginRouteWithNext());
+      router$1.replace(utils$1$1.loginRouteWithNext());
     }
   }, [sessionContext._ready]);
 };
@@ -488,8 +512,8 @@ var useUser = function useUser() {
       resetUserContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$1.loginRoute()) {
-        router$1.replace(utils$1.loginRoute());
+      if (pathname !== utils$1$1.loginRoute()) {
+        router$1.replace(utils$1$1.loginRoute());
       }
 
       return;
@@ -511,7 +535,7 @@ var useUser = function useUser() {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__default(utils$1.userAPIRoute(), {
+                return axios__default(utils$1$1.userAPIRoute(), {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelRequest = c;
                   })
@@ -557,6 +581,7 @@ var useUser = function useUser() {
 };
 
 exports.LoginPage = LoginPage;
+exports.ResetPage = ResetPage;
 exports.SessionContext = SessionContext;
 exports.SessionContextProvider = SessionContextProvider;
 exports.SignupPage = SignupPage;

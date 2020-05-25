@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
 import { LOGIN_TYPE_PASSWORD } from '../auth';
-import { fieldErrors, FormErrors } from '../errors';
+import { fieldErrors } from '../errors';
 import {
   clearFormFieldErrors,
   getOnChangeValue,
@@ -13,6 +13,7 @@ import {
 import { loginAPIRoute } from '../routes';
 
 import Button from './Button';
+import FormErrors from './FormErrors';
 
 const LoginWithPasswordForm = ({ onSuccess }) => {
   const defaultValues = {
@@ -58,42 +59,40 @@ const LoginWithPasswordForm = ({ onSuccess }) => {
   };
 
   return (
-    <>
-      <Form noValidate onSubmit={submit}>
-        <Form.Group controlId="email">
-          <Form.Control
-            name="email"
-            type="text"
-            placeholder="Email"
-            onChange={onChange}
-            autoComplete="off"
-            isInvalid={!!fieldErrors(formErrors, 'email').length}
-            autoFocus
-          />
-          <FormErrors errors={formErrors} field="email" />
-        </Form.Group>
-        <Form.Group controlId="password">
-          <Form.Control
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={onChange}
-            autoComplete="off"
-            isInvalid={!!fieldErrors(formErrors, 'password').length}
-          />
-          <FormErrors errors={formErrors} field="password" />
-        </Form.Group>
-        <FormErrors errors={formErrors} includingFields={['type']} />
-        <Button
-          variant="primary"
-          text="Login"
-          loadingText="Logging in"
-          type="submit"
-          isLoading={submitting}
-          block
+    <Form noValidate onSubmit={submit}>
+      <Form.Group controlId="email">
+        <Form.Control
+          name="email"
+          type="text"
+          placeholder="Email"
+          onChange={onChange}
+          autoComplete="off"
+          isInvalid={!!fieldErrors(formErrors, 'email').length}
+          autoFocus
         />
-      </Form>
-    </>
+        <FormErrors errors={formErrors} field="email" />
+      </Form.Group>
+      <Form.Group controlId="password">
+        <Form.Control
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={onChange}
+          autoComplete="off"
+          isInvalid={!!fieldErrors(formErrors, 'password').length}
+        />
+        <FormErrors errors={formErrors} field="password" />
+      </Form.Group>
+      <FormErrors errors={formErrors} includingFields={['type']} />
+      <Button
+        variant="primary"
+        text="Login"
+        loadingText="Logging in"
+        type="submit"
+        isLoading={submitting}
+        block
+      />
+    </Form>
   );
 };
 

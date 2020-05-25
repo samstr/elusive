@@ -5,24 +5,21 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
 require('../ElusiveClient-7405d865.js');
 require('../index.js');
-var FormErrors = require('../FormErrors-bf65213f.js');
-require('react');
-require('prop-types');
-require('react-bootstrap');
+var errors = require('../errors-b316e546.js');
 require('../asyncToGenerator-42483001.js');
 require('bcryptjs');
 require('../utils-c048fd8a.js');
 require('../utils-3409f232.js');
 var utils$2 = require('../utils-24b30e03.js');
 require('uuid');
-var utils$3 = require('../utils-8f18a4f1.js');
+var utils = require('../utils-8f18a4f1.js');
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'users';
 var model = function model(data) {
-  var model = utils$3.createModel(data);
+  var model = utils.createModel(data);
 
   model.hasRole = function (role) {
     return utils$2.hasRole(role, model.roles);
@@ -31,7 +28,7 @@ var model = function model(data) {
   return model;
 };
 
-var _createService = utils$3.createService(model, COLLECTION),
+var _createService = utils.createService(model, COLLECTION),
     usersCollection = _createService.collection,
     getUserByID = _createService.getObjectByID,
     getUser = _createService.getObject,
@@ -39,7 +36,7 @@ var _createService = utils$3.createService(model, COLLECTION),
     updateUser = _createService.updateObject,
     listUsers = _createService.listObjects;
 var UserNotEnabledError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(UserNotEnabledError, _BaseError);
+  errors._inherits(UserNotEnabledError, _BaseError);
 
   var _super = _createSuper(UserNotEnabledError);
 
@@ -50,9 +47,9 @@ var UserNotEnabledError = /*#__PURE__*/function (_BaseError) {
   }
 
   return UserNotEnabledError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 var UserNotFoundError = /*#__PURE__*/function (_BaseError2) {
-  FormErrors._inherits(UserNotFoundError, _BaseError2);
+  errors._inherits(UserNotFoundError, _BaseError2);
 
   var _super2 = _createSuper(UserNotFoundError);
 
@@ -63,7 +60,7 @@ var UserNotFoundError = /*#__PURE__*/function (_BaseError2) {
   }
 
   return UserNotFoundError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 
 exports.UserNotEnabledError = UserNotEnabledError;
 exports.UserNotFoundError = UserNotFoundError;

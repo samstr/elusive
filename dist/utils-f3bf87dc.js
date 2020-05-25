@@ -4,15 +4,15 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
-var FormErrors = require('./FormErrors-bf65213f.js');
+var errors = require('./errors-b316e546.js');
 var jwt = require('jsonwebtoken');
 var jwt__default = _interopDefault(jwt);
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var TokenError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(TokenError, _BaseError);
+  errors._inherits(TokenError, _BaseError);
 
   var _super = _createSuper(TokenError);
 
@@ -23,9 +23,9 @@ var TokenError = /*#__PURE__*/function (_BaseError) {
   }
 
   return TokenError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 var InvalidAccessTokenError = /*#__PURE__*/function (_TokenError) {
-  FormErrors._inherits(InvalidAccessTokenError, _TokenError);
+  errors._inherits(InvalidAccessTokenError, _TokenError);
 
   var _super2 = _createSuper(InvalidAccessTokenError);
 
@@ -38,7 +38,7 @@ var InvalidAccessTokenError = /*#__PURE__*/function (_TokenError) {
   return InvalidAccessTokenError;
 }(TokenError);
 var InvalidRefreshTokenError = /*#__PURE__*/function (_TokenError2) {
-  FormErrors._inherits(InvalidRefreshTokenError, _TokenError2);
+  errors._inherits(InvalidRefreshTokenError, _TokenError2);
 
   var _super3 = _createSuper(InvalidRefreshTokenError);
 
@@ -51,7 +51,7 @@ var InvalidRefreshTokenError = /*#__PURE__*/function (_TokenError2) {
   return InvalidRefreshTokenError;
 }(TokenError);
 var RefreshTokenExpiredError = /*#__PURE__*/function (_TokenError3) {
-  FormErrors._inherits(RefreshTokenExpiredError, _TokenError3);
+  errors._inherits(RefreshTokenExpiredError, _TokenError3);
 
   var _super4 = _createSuper(RefreshTokenExpiredError);
 

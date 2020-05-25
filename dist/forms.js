@@ -5,17 +5,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
 require('./classCallCheck-d2bb402f.js');
 require('./ElusiveClient-7405d865.js');
 require('./index.js');
-require('./FormErrors-bf65213f.js');
-require('react');
-require('prop-types');
-require('react-bootstrap');
+require('./errors-b316e546.js');
+require('./utils-8eb11d51.js');
 require('./asyncToGenerator-42483001.js');
 require('bcryptjs');
 require('./utils-c048fd8a.js');
 require('./utils-3409f232.js');
 require('./utils-24b30e03.js');
-var signup = require('./signup-d14953e8.js');
-var reset = require('./reset-b054500e.js');
+var signup = require('./signup-5c75c218.js');
+var onboarding = require('./onboarding-3c16a3e8.js');
 
 
 
@@ -33,7 +31,7 @@ exports.field = signup.field;
 exports.getOnChangeValue = signup.getOnChangeValue;
 exports.loginWithLinkForm = signup.loginWithLinkForm;
 exports.loginWithPasswordForm = signup.loginWithPasswordForm;
+exports.resetForm = signup.resetForm;
 exports.signupForm = signup.signupForm;
 exports.textField = signup.textField;
-exports.onboardingForm = reset.onboardingForm;
-exports.resetForm = reset.resetForm;
+exports.onboardingForm = onboarding.onboardingForm;

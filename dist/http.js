@@ -3,11 +3,8 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-require('./FormErrors-bf65213f.js');
-require('react');
-require('prop-types');
-require('react-bootstrap');
-var utils = require('./utils-4a27a4e3.js');
+require('./errors-b316e546.js');
+var utils = require('./utils-081fbcf9.js');
 
 
 

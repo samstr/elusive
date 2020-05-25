@@ -7,26 +7,23 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
 require('../ElusiveClient-7405d865.js');
 var index = require('../index.js');
-var FormErrors = require('../FormErrors-bf65213f.js');
-require('react');
-require('prop-types');
-require('react-bootstrap');
+var errors = require('../errors-b316e546.js');
 var asyncToGenerator = require('../asyncToGenerator-42483001.js');
 require('bcryptjs');
 require('../utils-c048fd8a.js');
 require('../utils-3409f232.js');
 require('../utils-24b30e03.js');
 require('uuid');
-var utils$3 = require('../utils-8f18a4f1.js');
+var utils = require('../utils-8f18a4f1.js');
 var moment = _interopDefault(require('moment'));
 var users = require('./users.js');
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'magicLogins';
 var model = function model(data) {
-  var model = utils$3.createModel(data);
+  var model = utils.createModel(data);
 
   model.hasExpired = function () {
     return magicLoginExpired(model);
@@ -60,7 +57,7 @@ var model = function model(data) {
   return model;
 };
 
-var _createService = utils$3.createService(model, COLLECTION),
+var _createService = utils.createService(model, COLLECTION),
     magicLoginsCollection = _createService.collection,
     getMagicLoginByID = _createService.getObjectByID,
     getMagicLogin = _createService.getObject,
@@ -68,7 +65,7 @@ var _createService = utils$3.createService(model, COLLECTION),
     updateMagicLogin = _createService.updateObject,
     listMagicLogins = _createService.listObjects;
 var MagicLoginAlreadyUsedError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(MagicLoginAlreadyUsedError, _BaseError);
+  errors._inherits(MagicLoginAlreadyUsedError, _BaseError);
 
   var _super = _createSuper(MagicLoginAlreadyUsedError);
 
@@ -79,9 +76,9 @@ var MagicLoginAlreadyUsedError = /*#__PURE__*/function (_BaseError) {
   }
 
   return MagicLoginAlreadyUsedError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 var MagicLoginNotFoundError = /*#__PURE__*/function (_BaseError2) {
-  FormErrors._inherits(MagicLoginNotFoundError, _BaseError2);
+  errors._inherits(MagicLoginNotFoundError, _BaseError2);
 
   var _super2 = _createSuper(MagicLoginNotFoundError);
 
@@ -92,9 +89,9 @@ var MagicLoginNotFoundError = /*#__PURE__*/function (_BaseError2) {
   }
 
   return MagicLoginNotFoundError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 var MagicLoginExpiredError = /*#__PURE__*/function (_BaseError3) {
-  FormErrors._inherits(MagicLoginExpiredError, _BaseError3);
+  errors._inherits(MagicLoginExpiredError, _BaseError3);
 
   var _super3 = _createSuper(MagicLoginExpiredError);
 
@@ -105,7 +102,7 @@ var MagicLoginExpiredError = /*#__PURE__*/function (_BaseError3) {
   }
 
   return MagicLoginExpiredError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 var magicLoginExpired = function magicLoginExpired(magicLogin) {
   var authOptions = index.options.auth;
   var dateNow = moment();

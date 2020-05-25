@@ -1,7 +1,7 @@
 'use strict';
 
 var index = require('./index.js');
-var signup = require('./signup-d14953e8.js');
+var signup = require('./signup-5c75c218.js');
 
 var onboardingForm = (function () {
   var authOptions = index.options.auth;
@@ -21,21 +21,4 @@ var onboardingForm = (function () {
   });
 });
 
-var resetForm = (function () {
-  return signup.createForm({
-    fields: {
-      email: signup.emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Your email is required'
-        },
-        invalid: {
-          errorMessage: 'Your email address is invalid'
-        }
-      })
-    }
-  });
-});
-
 exports.onboardingForm = onboardingForm;
-exports.resetForm = resetForm;

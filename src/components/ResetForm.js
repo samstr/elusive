@@ -4,14 +4,13 @@ import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
 import { fieldErrors } from '../errors';
-import { clearFormFieldErrors, getOnChangeValue } from '../forms';
-import { signupForm } from '../forms';
-import { signupAPIRoute } from '../routes';
+import { clearFormFieldErrors, getOnChangeValue, resetForm } from '../forms';
+import { resetAPIRoute } from '../routes';
 
 import Button from './Button';
 import FormErrors from './FormErrors';
 
-const SignupForm = ({ onSuccess }) => {
+const ResetForm = ({ onSuccess }) => {
   const defaultValues = {
     email: '',
   };
@@ -35,7 +34,7 @@ const SignupForm = ({ onSuccess }) => {
     event.stopPropagation();
     setFormErrors(null);
 
-    const { cleanValues, errors } = signupForm().validate(values);
+    const { cleanValues, errors } = resetForm().validate(values);
 
     if (errors && errors.length) {
       return setFormErrors(errors);
@@ -44,7 +43,7 @@ const SignupForm = ({ onSuccess }) => {
     setSubmitting(true);
 
     try {
-      const response = await axios.post(signupAPIRoute(), cleanValues);
+      const response = await axios.post(resetAPIRoute(), cleanValues);
       onSuccess(response.data);
     } catch (err) {
       setSubmitting(false);
@@ -69,8 +68,8 @@ const SignupForm = ({ onSuccess }) => {
       <FormErrors errors={formErrors} />
       <Button
         variant="primary"
-        text="Sign Up"
-        loadingText="Signing up"
+        text="Send"
+        loadingText="Sending"
         type="submit"
         isLoading={submitting}
         block
@@ -79,8 +78,8 @@ const SignupForm = ({ onSuccess }) => {
   );
 };
 
-SignupForm.propTypes = {
+ResetForm.propTypes = {
   onSuccess: PropTypes.func.isRequired,
 };
 
-export default SignupForm;
+export default ResetForm;

@@ -2,14 +2,15 @@
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
-var FormErrors = require('./FormErrors-bf65213f.js');
+var errors = require('./errors-b316e546.js');
+var utils = require('./utils-8eb11d51.js');
 var utils$2 = require('./utils-24b30e03.js');
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var FormError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(FormError, _BaseError);
+  errors._inherits(FormError, _BaseError);
 
   var _super = _createSuper(FormError);
 
@@ -29,9 +30,9 @@ var FormError = /*#__PURE__*/function (_BaseError) {
   }
 
   return FormError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 var UnknownFormError = /*#__PURE__*/function (_FormError) {
-  FormErrors._inherits(UnknownFormError, _FormError);
+  errors._inherits(UnknownFormError, _FormError);
 
   var _super2 = _createSuper(UnknownFormError);
 
@@ -44,7 +45,7 @@ var UnknownFormError = /*#__PURE__*/function (_FormError) {
   return UnknownFormError;
 }(FormError);
 var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
-  FormErrors._inherits(InvalidFieldValueError, _FormError2);
+  errors._inherits(InvalidFieldValueError, _FormError2);
 
   var _super3 = _createSuper(InvalidFieldValueError);
 
@@ -57,7 +58,7 @@ var InvalidFieldValueError = /*#__PURE__*/function (_FormError2) {
   return InvalidFieldValueError;
 }(FormError);
 var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
-  FormErrors._inherits(FieldValueTooShortError, _FormError3);
+  errors._inherits(FieldValueTooShortError, _FormError3);
 
   var _super4 = _createSuper(FieldValueTooShortError);
 
@@ -70,7 +71,7 @@ var FieldValueTooShortError = /*#__PURE__*/function (_FormError3) {
   return FieldValueTooShortError;
 }(FormError);
 var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
-  FormErrors._inherits(FieldValueTooLongError, _FormError4);
+  errors._inherits(FieldValueTooLongError, _FormError4);
 
   var _super5 = _createSuper(FieldValueTooLongError);
 
@@ -83,7 +84,7 @@ var FieldValueTooLongError = /*#__PURE__*/function (_FormError4) {
   return FieldValueTooLongError;
 }(FormError);
 var MissingRequiredFieldError = /*#__PURE__*/function (_FormError5) {
-  FormErrors._inherits(MissingRequiredFieldError, _FormError5);
+  errors._inherits(MissingRequiredFieldError, _FormError5);
 
   var _super6 = _createSuper(MissingRequiredFieldError);
 
@@ -155,7 +156,7 @@ var createForm = function createForm(_ref) {
       }
 
       if (errors.length) {
-        return FormErrors.errorJson(errors);
+        return utils.errorJson(errors);
       }
 
       return {
@@ -343,6 +344,22 @@ var loginWithPasswordForm = (function () {
   });
 });
 
+var resetForm = (function () {
+  return createForm({
+    fields: {
+      email: emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Your email is required'
+        },
+        invalid: {
+          errorMessage: 'Your email address is invalid'
+        }
+      })
+    }
+  });
+});
+
 var signupForm = (function () {
   return createForm({
     fields: {
@@ -373,5 +390,6 @@ exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
 exports.loginWithLinkForm = loginWithLinkForm;
 exports.loginWithPasswordForm = loginWithPasswordForm;
+exports.resetForm = resetForm;
 exports.signupForm = signupForm;
 exports.textField = textField;

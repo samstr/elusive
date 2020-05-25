@@ -2,16 +2,16 @@
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
-var FormErrors = require('./FormErrors-bf65213f.js');
+var errors = require('./errors-b316e546.js');
 var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 var users = require('./models/users.js');
-var utils$6 = require('./utils-ca026662.js');
+var utils$7 = require('./utils-f3bf87dc.js');
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var SessionError = /*#__PURE__*/function (_BaseError) {
-  FormErrors._inherits(SessionError, _BaseError);
+  errors._inherits(SessionError, _BaseError);
 
   var _super = _createSuper(SessionError);
 
@@ -22,9 +22,9 @@ var SessionError = /*#__PURE__*/function (_BaseError) {
   }
 
   return SessionError;
-}(FormErrors.BaseError);
+}(errors.BaseError);
 var MissingSessionCookiesError = /*#__PURE__*/function (_SessionError) {
-  FormErrors._inherits(MissingSessionCookiesError, _SessionError);
+  errors._inherits(MissingSessionCookiesError, _SessionError);
 
   var _super2 = _createSuper(MissingSessionCookiesError);
 
@@ -37,7 +37,7 @@ var MissingSessionCookiesError = /*#__PURE__*/function (_SessionError) {
   return MissingSessionCookiesError;
 }(SessionError);
 var SessionUserIdMismatchError = /*#__PURE__*/function (_SessionError2) {
-  FormErrors._inherits(SessionUserIdMismatchError, _SessionError2);
+  errors._inherits(SessionUserIdMismatchError, _SessionError2);
 
   var _super3 = _createSuper(SessionUserIdMismatchError);
 
@@ -50,7 +50,7 @@ var SessionUserIdMismatchError = /*#__PURE__*/function (_SessionError2) {
   return SessionUserIdMismatchError;
 }(SessionError);
 var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError3) {
-  FormErrors._inherits(SessionUserNoLongerExistsError, _SessionError3);
+  errors._inherits(SessionUserNoLongerExistsError, _SessionError3);
 
   var _super4 = _createSuper(SessionUserNoLongerExistsError);
 
@@ -63,7 +63,7 @@ var SessionUserNoLongerExistsError = /*#__PURE__*/function (_SessionError3) {
   return SessionUserNoLongerExistsError;
 }(SessionError);
 var SessionUserNotEnabledError = /*#__PURE__*/function (_SessionError4) {
-  FormErrors._inherits(SessionUserNotEnabledError, _SessionError4);
+  errors._inherits(SessionUserNotEnabledError, _SessionError4);
 
   var _super5 = _createSuper(SessionUserNotEnabledError);
 
@@ -130,14 +130,14 @@ var getSession = /*#__PURE__*/function () {
               break;
             }
 
-            _getClaims = utils$6.getClaims(accessToken, tokenOptions.secret), accessTokenClaims = _getClaims.claims, accessTokenExpired = _getClaims.expired, accessTokenInvalid = _getClaims.invalid;
+            _getClaims = utils$7.getClaims(accessToken, tokenOptions.secret), accessTokenClaims = _getClaims.claims, accessTokenExpired = _getClaims.expired, accessTokenInvalid = _getClaims.invalid;
 
             if (!accessTokenInvalid) {
               _context.next = 11;
               break;
             }
 
-            throw new utils$6.InvalidAccessTokenError('Invalid access token');
+            throw new utils$7.InvalidAccessTokenError('Invalid access token');
 
           case 11:
             if (!accessTokenClaims) {
@@ -165,14 +165,14 @@ var getSession = /*#__PURE__*/function () {
             }
 
             // access token has expired (every 10 mins) so we need to generate a new one from the refreshToken
-            _getClaims2 = utils$6.getClaims(refreshToken, tokenOptions.secret), refreshTokenClaims = _getClaims2.claims, refreshTokenExpired = _getClaims2.expired, refreshTokenInvalid = _getClaims2.invalid;
+            _getClaims2 = utils$7.getClaims(refreshToken, tokenOptions.secret), refreshTokenClaims = _getClaims2.claims, refreshTokenExpired = _getClaims2.expired, refreshTokenInvalid = _getClaims2.invalid;
 
             if (!refreshTokenInvalid) {
               _context.next = 21;
               break;
             }
 
-            throw new utils$6.InvalidRefreshTokenError('Invalid refresh token');
+            throw new utils$7.InvalidRefreshTokenError('Invalid refresh token');
 
           case 21:
             if (!refreshTokenExpired) {
@@ -180,7 +180,7 @@ var getSession = /*#__PURE__*/function () {
               break;
             }
 
-            throw new utils$6.RefreshTokenExpiredError('Refresh token expired');
+            throw new utils$7.RefreshTokenExpiredError('Refresh token expired');
 
           case 23:
             if (!(refreshTokenClaims.user.id !== userId)) {
@@ -230,7 +230,7 @@ var getSession = /*#__PURE__*/function () {
             }
 
           case 38:
-            tokens = utils$6.signTokens(session.claims, tokenOptions.secret);
+            tokens = utils$7.signTokens(session.claims, tokenOptions.secret);
 
           case 39:
             session.isAuthenticated = !!session.claims;

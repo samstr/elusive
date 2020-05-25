@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
 
+import { fieldErrors, genericErrors } from '../errors';
+
 import GenericErrors from './GenericErrors';
-import { fieldErrors, genericErrors } from './utils';
 
 const FormErrors = ({ errors, field, includingFields }) => {
   // Errors for a specific form field

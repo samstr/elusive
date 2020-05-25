@@ -4,20 +4,20 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var ElusiveClient = require('./ElusiveClient-7405d865.js');
 require('./index.js');
-var FormErrors = require('./FormErrors-bf65213f.js');
-var React = require('react');
-var React__default = _interopDefault(React);
-var PropTypes = _interopDefault(require('prop-types'));
-var reactBootstrap = require('react-bootstrap');
+var utils = require('./utils-8eb11d51.js');
 var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 require('bcryptjs');
-var utils$1 = require('./utils-3409f232.js');
+var utils$1$1 = require('./utils-3409f232.js');
 var utils$2 = require('./utils-24b30e03.js');
 var _JSXStyle = _interopDefault(require('styled-jsx/style'));
+var PropTypes = _interopDefault(require('prop-types'));
+var React = require('react');
+var React__default = _interopDefault(React);
+var reactBootstrap = require('react-bootstrap');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var signup = require('./signup-d14953e8.js');
+var signup = require('./signup-5c75c218.js');
 
 var __jsx = React__default.createElement;
 
@@ -72,6 +72,65 @@ Button.propTypes = {
 };
 
 var __jsx$2 = React__default.createElement;
+
+var GenericErrors = function GenericErrors(_ref) {
+  var errors = _ref.errors;
+  return __jsx$2(reactBootstrap.Alert, {
+    variant: "danger"
+  }, errors.map(function (error) {
+    return __jsx$2("div", {
+      key: error.message
+    }, error.message);
+  }));
+};
+
+GenericErrors.propTypes = {
+  errors: PropTypes.arrayOf(PropTypes.shape({
+    message: PropTypes.string.isRequired,
+    fields: PropTypes.arrayOf(PropTypes.string)
+  }))
+};
+
+var __jsx$3 = React__default.createElement;
+
+var FormErrors = function FormErrors(_ref) {
+  var errors = _ref.errors,
+      field = _ref.field,
+      includingFields = _ref.includingFields;
+
+  // Errors for a specific form field
+  if (field) {
+    var _fieldErrors = utils.fieldErrors(errors, field);
+
+    if (!_fieldErrors.length) return null;
+    return __jsx$3(reactBootstrap.Form.Control.Feedback, {
+      type: "invalid"
+    }, _fieldErrors.map(function (error) {
+      return __jsx$3("div", {
+        key: error.message
+      }, error.message);
+    }));
+  } // Generic errors
+
+
+  var _genericErrors = utils.genericErrors(errors, includingFields);
+
+  if (!_genericErrors.length) return null;
+  return __jsx$3(GenericErrors, {
+    errors: _genericErrors
+  });
+};
+
+FormErrors.propTypes = {
+  errors: PropTypes.arrayOf(PropTypes.shape({
+    message: PropTypes.string.isRequired,
+    fields: PropTypes.arrayOf(PropTypes.string)
+  })),
+  field: PropTypes.string,
+  includingFields: PropTypes.arrayOf(PropTypes.string)
+};
+
+var __jsx$4 = React__default.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -131,7 +190,7 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
               setSubmitting(true);
               _context.prev = 7;
               _context.next = 10;
-              return axios__default.post(utils$1.loginAPIRoute(), cleanValues);
+              return axios__default.post(utils$1$1.loginAPIRoute(), cleanValues);
 
             case 10:
               response = _context.sent;
@@ -158,40 +217,40 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
     };
   }();
 
-  return __jsx$2(React__default.Fragment, null, __jsx$2(reactBootstrap.Form, {
+  return __jsx$4(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$2(reactBootstrap.Form.Group, {
+  }, __jsx$4(reactBootstrap.Form.Group, {
     controlId: "email"
-  }, __jsx$2(reactBootstrap.Form.Control, {
+  }, __jsx$4(reactBootstrap.Form.Control, {
     name: "email",
     type: "text",
     placeholder: "Email",
     onChange: onChange,
     autoComplete: "off",
-    isInvalid: !!FormErrors.fieldErrors(formErrors, 'email').length,
+    isInvalid: !!utils.fieldErrors(formErrors, 'email').length,
     autoFocus: true
-  }), __jsx$2(FormErrors.FormErrors, {
+  }), __jsx$4(FormErrors, {
     errors: formErrors,
     field: "email"
-  })), __jsx$2(FormErrors.FormErrors, {
+  })), __jsx$4(FormErrors, {
     errors: formErrors,
     includingFields: ['type']
-  }), __jsx$2(Button, {
+  }), __jsx$4(Button, {
     variant: "primary",
     text: "Send",
     loadingText: "Sending",
     type: "submit",
     isLoading: submitting,
     block: true
-  })));
+  }));
 };
 
 LoginWithLinkForm.propTypes = {
   onSuccess: PropTypes.func.isRequired
 };
 
-var __jsx$3 = React__default.createElement;
+var __jsx$5 = React__default.createElement;
 
 function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -250,7 +309,7 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
               setSubmitting(true);
               _context.prev = 7;
               _context.next = 10;
-              return axios__default.post(utils$1.loginAPIRoute(), cleanValues);
+              return axios__default.post(utils$1$1.loginAPIRoute(), cleanValues);
 
             case 10:
               response = _context.sent;
@@ -277,58 +336,58 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
     };
   }();
 
-  return __jsx$3(React__default.Fragment, null, __jsx$3(reactBootstrap.Form, {
+  return __jsx$5(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$3(reactBootstrap.Form.Group, {
+  }, __jsx$5(reactBootstrap.Form.Group, {
     controlId: "email"
-  }, __jsx$3(reactBootstrap.Form.Control, {
+  }, __jsx$5(reactBootstrap.Form.Control, {
     name: "email",
     type: "text",
     placeholder: "Email",
     onChange: onChange,
     autoComplete: "off",
-    isInvalid: !!FormErrors.fieldErrors(formErrors, 'email').length,
+    isInvalid: !!utils.fieldErrors(formErrors, 'email').length,
     autoFocus: true
-  }), __jsx$3(FormErrors.FormErrors, {
+  }), __jsx$5(FormErrors, {
     errors: formErrors,
     field: "email"
-  })), __jsx$3(reactBootstrap.Form.Group, {
+  })), __jsx$5(reactBootstrap.Form.Group, {
     controlId: "password"
-  }, __jsx$3(reactBootstrap.Form.Control, {
+  }, __jsx$5(reactBootstrap.Form.Control, {
     type: "password",
     name: "password",
     placeholder: "Password",
     onChange: onChange,
     autoComplete: "off",
-    isInvalid: !!FormErrors.fieldErrors(formErrors, 'password').length
-  }), __jsx$3(FormErrors.FormErrors, {
+    isInvalid: !!utils.fieldErrors(formErrors, 'password').length
+  }), __jsx$5(FormErrors, {
     errors: formErrors,
     field: "password"
-  })), __jsx$3(FormErrors.FormErrors, {
+  })), __jsx$5(FormErrors, {
     errors: formErrors,
     includingFields: ['type']
-  }), __jsx$3(Button, {
+  }), __jsx$5(Button, {
     variant: "primary",
     text: "Login",
     loadingText: "Logging in",
     type: "submit",
     isLoading: submitting,
     block: true
-  })));
+  }));
 };
 
 LoginWithPasswordForm.propTypes = {
   onSuccess: PropTypes.func.isRequired
 };
 
-var __jsx$4 = React__default.createElement;
+var __jsx$6 = React__default.createElement;
 
 function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var SignupForm = function SignupForm(_ref) {
+var ResetForm = function ResetForm(_ref) {
   var onSuccess = _ref.onSuccess;
   var defaultValues = {
     email: ''
@@ -357,7 +416,7 @@ var SignupForm = function SignupForm(_ref) {
 
   var submit = /*#__PURE__*/function () {
     var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(event) {
-      var _signupForm$validate, cleanValues, errors, response, _err$response, _err$response$data;
+      var _resetForm$validate, cleanValues, errors, response, _err$response, _err$response$data;
 
       return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
         while (1) {
@@ -366,7 +425,7 @@ var SignupForm = function SignupForm(_ref) {
               event.preventDefault();
               event.stopPropagation();
               setFormErrors(null);
-              _signupForm$validate = signup.signupForm().validate(values), cleanValues = _signupForm$validate.cleanValues, errors = _signupForm$validate.errors;
+              _resetForm$validate = signup.resetForm().validate(values), cleanValues = _resetForm$validate.cleanValues, errors = _resetForm$validate.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 6;
@@ -379,7 +438,7 @@ var SignupForm = function SignupForm(_ref) {
               setSubmitting(true);
               _context.prev = 7;
               _context.next = 10;
-              return axios__default.post(utils$1.signupAPIRoute(), cleanValues);
+              return axios__default.post(utils$1$1.resetAPIRoute(), cleanValues);
 
             case 10:
               response = _context.sent;
@@ -406,32 +465,148 @@ var SignupForm = function SignupForm(_ref) {
     };
   }();
 
-  return __jsx$4(React__default.Fragment, null, __jsx$4(reactBootstrap.Form, {
+  return __jsx$6(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$4(reactBootstrap.Form.Group, {
+  }, __jsx$6(reactBootstrap.Form.Group, {
     controlId: "email"
-  }, __jsx$4(reactBootstrap.Form.Control, {
+  }, __jsx$6(reactBootstrap.Form.Control, {
     name: "email",
     type: "text",
     placeholder: "Email",
     onChange: onChange,
     autoComplete: "off",
-    isInvalid: !!FormErrors.fieldErrors(formErrors, 'email').length,
+    isInvalid: !!utils.fieldErrors(formErrors, 'email').length,
     autoFocus: true
-  }), __jsx$4(FormErrors.FormErrors, {
+  }), __jsx$6(FormErrors, {
     errors: formErrors,
     field: "email"
-  })), __jsx$4(FormErrors.FormErrors, {
+  })), __jsx$6(FormErrors, {
     errors: formErrors
-  }), __jsx$4(Button, {
+  }), __jsx$6(Button, {
+    variant: "primary",
+    text: "Send",
+    loadingText: "Sending",
+    type: "submit",
+    isLoading: submitting,
+    block: true
+  }));
+};
+
+ResetForm.propTypes = {
+  onSuccess: PropTypes.func.isRequired
+};
+
+var __jsx$7 = React__default.createElement;
+
+function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var SignupForm = function SignupForm(_ref) {
+  var onSuccess = _ref.onSuccess;
+  var defaultValues = {
+    email: ''
+  };
+
+  var _useState = React.useState(defaultValues),
+      values = _useState[0],
+      setValues = _useState[1];
+
+  var _useState2 = React.useState(null),
+      formErrors = _useState2[0],
+      setFormErrors = _useState2[1];
+
+  var _useState3 = React.useState(false),
+      submitting = _useState3[0],
+      setSubmitting = _useState3[1];
+
+  var onChange = function onChange(event) {
+    var _getOnChangeValue = signup.getOnChangeValue(event),
+        field = _getOnChangeValue.field,
+        value = _getOnChangeValue.value;
+
+    setFormErrors(signup.clearFormFieldErrors(formErrors, field));
+    setValues(_objectSpread$3(_objectSpread$3({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
+  };
+
+  var submit = /*#__PURE__*/function () {
+    var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(event) {
+      var _signupForm$validate, cleanValues, errors, response, _err$response, _err$response$data;
+
+      return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              event.stopPropagation();
+              setFormErrors(null);
+              _signupForm$validate = signup.signupForm().validate(values), cleanValues = _signupForm$validate.cleanValues, errors = _signupForm$validate.errors;
+
+              if (!(errors && errors.length)) {
+                _context.next = 6;
+                break;
+              }
+
+              return _context.abrupt("return", setFormErrors(errors));
+
+            case 6:
+              setSubmitting(true);
+              _context.prev = 7;
+              _context.next = 10;
+              return axios__default.post(utils$1$1.signupAPIRoute(), cleanValues);
+
+            case 10:
+              response = _context.sent;
+              onSuccess(response.data);
+              _context.next = 18;
+              break;
+
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](7);
+              setSubmitting(false);
+              setFormErrors((_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.errors);
+
+            case 18:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[7, 14]]);
+    }));
+
+    return function submit(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return __jsx$7(reactBootstrap.Form, {
+    noValidate: true,
+    onSubmit: submit
+  }, __jsx$7(reactBootstrap.Form.Group, {
+    controlId: "email"
+  }, __jsx$7(reactBootstrap.Form.Control, {
+    name: "email",
+    type: "text",
+    placeholder: "Email",
+    onChange: onChange,
+    autoComplete: "off",
+    isInvalid: !!utils.fieldErrors(formErrors, 'email').length,
+    autoFocus: true
+  }), __jsx$7(FormErrors, {
+    errors: formErrors,
+    field: "email"
+  })), __jsx$7(FormErrors, {
+    errors: formErrors
+  }), __jsx$7(Button, {
     variant: "primary",
     text: "Sign Up",
     loadingText: "Signing up",
     type: "submit",
     isLoading: submitting,
     block: true
-  })));
+  }));
 };
 
 SignupForm.propTypes = {
@@ -440,6 +615,9 @@ SignupForm.propTypes = {
 
 exports.AuthBasePage = AuthBasePage;
 exports.Button = Button;
+exports.FormErrors = FormErrors;
+exports.GenericErrors = GenericErrors;
 exports.LoginWithLinkForm = LoginWithLinkForm;
 exports.LoginWithPasswordForm = LoginWithPasswordForm;
+exports.ResetForm = ResetForm;
 exports.SignupForm = SignupForm;
