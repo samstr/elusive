@@ -19,7 +19,7 @@ var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');
 var React__default = _interopDefault(React);
 var SignupForm = require('./SignupForm-50923600.js');
-require('react-bootstrap');
+var reactBootstrap = require('react-bootstrap');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
@@ -320,62 +320,6 @@ var LogoutPage = function LogoutPage() {
   })));
 };
 
-var __jsx$3 = React__default.createElement;
-
-var ResetPage = function ResetPage() {
-  useSession();
-  var mailOptions = index.options.mail;
-
-  var _useState = React.useState(),
-      success = _useState[0],
-      setSuccess = _useState[1];
-
-  var onSuccess = function onSuccess() {
-    return setSuccess(true);
-  };
-
-  return __jsx$3(SignupForm.AuthBasePage, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Check your inbox"), __jsx$3("div", {
-    className: "intro"
-  }, __jsx$3("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$3("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Forgot your password?"), __jsx$3("div", {
-    className: "form"
-  }, __jsx$3(SignupForm.ResetForm, {
-    onSuccess: onSuccess
-  }))));
-};
-
-var __jsx$4 = React__default.createElement;
-
-var SignupPage = function SignupPage() {
-  var router$1 = router.useRouter();
-  var session = useSession();
-  var mailOptions = index.options.mail;
-  React.useEffect(function () {
-    if (session._ready && session.isAuthenticated) {
-      router$1.replace(utils$1$1.homeRoute());
-    }
-  }, [session]);
-
-  var _useState = React.useState(),
-      success = _useState[0],
-      setSuccess = _useState[1];
-
-  var onSuccess = function onSuccess() {
-    return setSuccess(true);
-  };
-
-  return __jsx$4(SignupForm.AuthBasePage, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Check your inbox"), __jsx$4("div", {
-    className: "intro"
-  }, __jsx$4("p", null, "Please confirm your email address to get started."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Create an account"), __jsx$4("div", {
-    className: "form"
-  }, __jsx$4(SignupForm.SignupForm, {
-    onSuccess: onSuccess
-  })), __jsx$4("div", {
-    className: "footer"
-  }, __jsx$4(Link, {
-    href: utils$1$1.loginRoute()
-  }, __jsx$4("a", null, "I already have an account")))));
-};
-
 var useData = function useData() {
   var _useSessionContext = useSessionContext(),
       resetSessionContext = _useSessionContext.resetSessionContext;
@@ -464,7 +408,103 @@ var useData = function useData() {
   return data;
 };
 
+var __jsx$3 = React__default.createElement;
+
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var MagicLoginPage = function MagicLoginPage() {
+  var data = useData();
+  var router$1 = router.useRouter();
+
+  var _useSessionContext = useSessionContext(),
+      setSessionContext = _useSessionContext.setSessionContext;
+
+  var errors = data === null || data === void 0 ? void 0 : data.errors;
+  React.useEffect(function () {
+    if (data === null || data === void 0 ? void 0 : data.session) {
+      var _data$session$claims, _data$session$claims$;
+
+      setSessionContext(_objectSpread$1(_objectSpread$1({}, data.session), {}, {
+        _ready: true
+      }));
+
+      if ((_data$session$claims = data.session.claims) === null || _data$session$claims === void 0 ? void 0 : (_data$session$claims$ = _data$session$claims.user) === null || _data$session$claims$ === void 0 ? void 0 : _data$session$claims$.needsOnboarding) {
+        router$1.replace(utils$1$1.onboardingRoute());
+      } else if (router$1.query.next) {
+        window.location = decodeURIComponent(router$1.query.next);
+      } else {
+        router$1.replace(utils$1$1.homeRoute());
+      }
+    }
+  }, [data]);
+  return __jsx$3(SignupForm.AuthBasePage, null, data && errors ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "There was a problem"), __jsx$3(SignupForm.GenericErrors, {
+    errors: errors
+  })) : __jsx$3(reactBootstrap.Spinner, {
+    animation: "border",
+    role: "status",
+    variant: "primary"
+  }));
+};
+
+var __jsx$4 = React__default.createElement;
+
+var ResetPage = function ResetPage() {
+  useSession();
+  var mailOptions = index.options.mail;
+
+  var _useState = React.useState(),
+      success = _useState[0],
+      setSuccess = _useState[1];
+
+  var onSuccess = function onSuccess() {
+    return setSuccess(true);
+  };
+
+  return __jsx$4(SignupForm.AuthBasePage, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Check your inbox"), __jsx$4("div", {
+    className: "intro"
+  }, __jsx$4("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Forgot your password?"), __jsx$4("div", {
+    className: "form"
+  }, __jsx$4(SignupForm.ResetForm, {
+    onSuccess: onSuccess
+  }))));
+};
+
 var __jsx$5 = React__default.createElement;
+
+var SignupPage = function SignupPage() {
+  var router$1 = router.useRouter();
+  var session = useSession();
+  var mailOptions = index.options.mail;
+  React.useEffect(function () {
+    if (session._ready && session.isAuthenticated) {
+      router$1.replace(utils$1$1.homeRoute());
+    }
+  }, [session]);
+
+  var _useState = React.useState(),
+      success = _useState[0],
+      setSuccess = _useState[1];
+
+  var onSuccess = function onSuccess() {
+    return setSuccess(true);
+  };
+
+  return __jsx$5(SignupForm.AuthBasePage, null, success ? __jsx$5(React__default.Fragment, null, __jsx$5("h1", null, "Check your inbox"), __jsx$5("div", {
+    className: "intro"
+  }, __jsx$5("p", null, "Please confirm your email address to get started."), __jsx$5("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$5(React__default.Fragment, null, __jsx$5("h1", null, "Create an account"), __jsx$5("div", {
+    className: "form"
+  }, __jsx$5(SignupForm.SignupForm, {
+    onSuccess: onSuccess
+  })), __jsx$5("div", {
+    className: "footer"
+  }, __jsx$5(Link, {
+    href: utils$1$1.loginRoute()
+  }, __jsx$5("a", null, "I already have an account")))));
+};
+
+var __jsx$6 = React__default.createElement;
 var defaultValue$1 = null;
 var UserContext = React.createContext(defaultValue$1);
 var UserContextProvider = function UserContextProvider(_ref) {
@@ -483,7 +523,7 @@ var UserContextProvider = function UserContextProvider(_ref) {
     setUserContext: setUserContext,
     resetUserContext: resetUserContext
   };
-  return __jsx$5(UserContext.Provider, {
+  return __jsx$6(UserContext.Provider, {
     value: context
   }, children);
 };
@@ -514,9 +554,9 @@ var useRequireAuth = function useRequireAuth() {
   }, [sessionContext._ready]);
 };
 
-function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var useUser = function useUser() {
   var _useUserContext = useUserContext(),
@@ -568,7 +608,7 @@ var useUser = function useUser() {
               case 3:
                 response = _context.sent;
                 cancelRequest = null;
-                _user = _objectSpread$1(_objectSpread$1({}, response.data.user), {}, {
+                _user = _objectSpread$2(_objectSpread$2({}, response.data.user), {}, {
                   _ready: true
                 });
                 setUser(_user);
@@ -606,6 +646,7 @@ var useUser = function useUser() {
 
 exports.LoginPage = LoginPage;
 exports.LogoutPage = LogoutPage;
+exports.MagicLoginPage = MagicLoginPage;
 exports.ResetPage = ResetPage;
 exports.SessionContext = SessionContext;
 exports.SessionContextProvider = SessionContextProvider;

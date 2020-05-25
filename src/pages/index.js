@@ -4,6 +4,9 @@ export { LoginPage };
 import LogoutPage from './LogoutPage';
 export { LogoutPage };
 
+import MagicLoginPage from './MagicLoginPage';
+export { MagicLoginPage };
+
 import ResetPage from './ResetPage';
 export { ResetPage };
 
