@@ -12,8 +12,7 @@ require('bcryptjs');
 require('./utils-c048fd8a.js');
 require('./utils-3409f232.js');
 require('./utils-24b30e03.js');
-var signup = require('./signup-5c75c218.js');
-var onboarding = require('./onboarding-3c16a3e8.js');
+var signup = require('./signup-716da40b.js');
 
 
 
@@ -31,7 +30,7 @@ exports.field = signup.field;
 exports.getOnChangeValue = signup.getOnChangeValue;
 exports.loginWithLinkForm = signup.loginWithLinkForm;
 exports.loginWithPasswordForm = signup.loginWithPasswordForm;
+exports.onboardingForm = signup.onboardingForm;
 exports.resetForm = signup.resetForm;
 exports.signupForm = signup.signupForm;
 exports.textField = signup.textField;
-exports.onboardingForm = onboarding.onboardingForm;

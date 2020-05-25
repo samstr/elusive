@@ -15,11 +15,11 @@ require('./utils-24b30e03.js');
 require('styled-jsx/style');
 require('prop-types');
 require('react');
-var SignupForm = require('./SignupForm-50923600.js');
+var SignupForm = require('./SignupForm-dc51e2f3.js');
 require('react-bootstrap');
 require('axios');
 require('next/router');
-require('./signup-5c75c218.js');
+require('./signup-716da40b.js');
 
 
 
@@ -30,5 +30,6 @@ exports.GenericErrors = SignupForm.GenericErrors;
 exports.LoginWithLinkForm = SignupForm.LoginWithLinkForm;
 exports.LoginWithPasswordForm = SignupForm.LoginWithPasswordForm;
 exports.LogoutForm = SignupForm.LogoutForm;
+exports.OnboardingForm = SignupForm.OnboardingForm;
 exports.ResetForm = SignupForm.ResetForm;
 exports.SignupForm = SignupForm.SignupForm;

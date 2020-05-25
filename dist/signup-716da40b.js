@@ -344,6 +344,24 @@ var loginWithPasswordForm = (function () {
   });
 });
 
+var onboardingForm = (function () {
+  var authOptions = index.options.auth;
+  return createForm({
+    fields: {
+      password: textField('password', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your password'
+        },
+        minLength: {
+          value: authOptions.passwordMinLength,
+          errorMessage: 'Your password is too short'
+        }
+      })
+    }
+  });
+});
+
 var resetForm = (function () {
   return createForm({
     fields: {
@@ -390,6 +408,7 @@ exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
 exports.loginWithLinkForm = loginWithLinkForm;
 exports.loginWithPasswordForm = loginWithPasswordForm;
+exports.onboardingForm = onboardingForm;
 exports.resetForm = resetForm;
 exports.signupForm = signupForm;
 exports.textField = textField;

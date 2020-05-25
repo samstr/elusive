@@ -18,12 +18,12 @@ var _JSXStyle = _interopDefault(require('styled-jsx/style'));
 var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-50923600.js');
+var SignupForm = require('./SignupForm-dc51e2f3.js');
 var reactBootstrap = require('react-bootstrap');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-require('./signup-5c75c218.js');
+require('./signup-716da40b.js');
 var utils$3 = require('./utils-081fbcf9.js');
 var Link = _interopDefault(require('next/link'));
 
@@ -448,7 +448,87 @@ var MagicLoginPage = function MagicLoginPage() {
   }));
 };
 
+var useRequireAuth = function useRequireAuth() {
+  var router$1 = router.useRouter();
+
+  var _useSessionContext = useSessionContext(),
+      sessionContext = _useSessionContext.sessionContext;
+
+  React.useEffect(function () {
+    if (sessionContext._ready && !sessionContext.isAuthenticated) {
+      router$1.replace(utils$1$1.loginRouteWithNext());
+    }
+  }, [sessionContext._ready]);
+};
+
 var __jsx$4 = React__default.createElement;
+
+function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var OnboardingPage = function OnboardingPage() {
+  var _session$claims, _session$claims$user;
+
+  useRequireAuth();
+  var session = useSession();
+
+  var _useState = React.useState(),
+      success = _useState[0],
+      setSuccess = _useState[1];
+
+  var _useSessionContext = useSessionContext(),
+      setSessionContext = _useSessionContext.setSessionContext;
+
+  React.useEffect(function () {
+    if (session._ready && session.isAuthenticated) {
+      var user = session.claims.user;
+
+      if (!user.needsOnboarding) {
+        setSuccess(true);
+      }
+    }
+  }, [session._ready]);
+
+  var onSuccess = function onSuccess(data) {
+    setSessionContext(_objectSpread$2(_objectSpread$2({}, data.session), {}, {
+      _ready: true
+    }));
+    setSuccess(true);
+  };
+
+  return __jsx$4(SignupForm.AuthBasePage, null, session._ready ? __jsx$4(React__default.Fragment, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "What next?"), __jsx$4("div", {
+    className: "options"
+  }, __jsx$4(Link, {
+    href: utils$1$1.settingsProfileRoute()
+  }, __jsx$4("a", {
+    className: "option"
+  }, __jsx$4("div", {
+    className: "icon"
+  }, __jsx$4("img", {
+    src: "/img/icons/user-1a73e8.svg",
+    width: "38"
+  })), __jsx$4("div", {
+    className: "details"
+  }, __jsx$4("div", {
+    className: "heading"
+  }, "Setup your profile"), __jsx$4("div", {
+    className: "description"
+  }, "Whether you're a creator or a fan, the next step is to set your name and picture. Click here to edit your profile.")))))) : __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Create a password"), __jsx$4("div", {
+    className: "intro"
+  }, "Let's create a password for you to use when you login"), __jsx$4("div", {
+    className: "form"
+  }, __jsx$4(SignupForm.OnboardingForm, {
+    email: (session === null || session === void 0 ? void 0 : (_session$claims = session.claims) === null || _session$claims === void 0 ? void 0 : (_session$claims$user = _session$claims.user) === null || _session$claims$user === void 0 ? void 0 : _session$claims$user.email) || '',
+    onSuccess: onSuccess
+  })))) : __jsx$4(reactBootstrap.Spinner, {
+    animation: "border",
+    role: "status",
+    variant: "primary"
+  }));
+};
+
+var __jsx$5 = React__default.createElement;
 
 var ResetPage = function ResetPage() {
   useSession();
@@ -462,16 +542,16 @@ var ResetPage = function ResetPage() {
     return setSuccess(true);
   };
 
-  return __jsx$4(SignupForm.AuthBasePage, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Check your inbox"), __jsx$4("div", {
+  return __jsx$5(SignupForm.AuthBasePage, null, success ? __jsx$5(React__default.Fragment, null, __jsx$5("h1", null, "Check your inbox"), __jsx$5("div", {
     className: "intro"
-  }, __jsx$4("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Forgot your password?"), __jsx$4("div", {
+  }, __jsx$5("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$5("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$5(React__default.Fragment, null, __jsx$5("h1", null, "Forgot your password?"), __jsx$5("div", {
     className: "form"
-  }, __jsx$4(SignupForm.ResetForm, {
+  }, __jsx$5(SignupForm.ResetForm, {
     onSuccess: onSuccess
   }))));
 };
 
-var __jsx$5 = React__default.createElement;
+var __jsx$6 = React__default.createElement;
 
 var SignupPage = function SignupPage() {
   var router$1 = router.useRouter();
@@ -491,20 +571,20 @@ var SignupPage = function SignupPage() {
     return setSuccess(true);
   };
 
-  return __jsx$5(SignupForm.AuthBasePage, null, success ? __jsx$5(React__default.Fragment, null, __jsx$5("h1", null, "Check your inbox"), __jsx$5("div", {
+  return __jsx$6(SignupForm.AuthBasePage, null, success ? __jsx$6(React__default.Fragment, null, __jsx$6("h1", null, "Check your inbox"), __jsx$6("div", {
     className: "intro"
-  }, __jsx$5("p", null, "Please confirm your email address to get started."), __jsx$5("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$5(React__default.Fragment, null, __jsx$5("h1", null, "Create an account"), __jsx$5("div", {
+  }, __jsx$6("p", null, "Please confirm your email address to get started."), __jsx$6("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$6(React__default.Fragment, null, __jsx$6("h1", null, "Create an account"), __jsx$6("div", {
     className: "form"
-  }, __jsx$5(SignupForm.SignupForm, {
+  }, __jsx$6(SignupForm.SignupForm, {
     onSuccess: onSuccess
-  })), __jsx$5("div", {
+  })), __jsx$6("div", {
     className: "footer"
-  }, __jsx$5(Link, {
+  }, __jsx$6(Link, {
     href: utils$1$1.loginRoute()
-  }, __jsx$5("a", null, "I already have an account")))));
+  }, __jsx$6("a", null, "I already have an account")))));
 };
 
-var __jsx$6 = React__default.createElement;
+var __jsx$7 = React__default.createElement;
 var defaultValue$1 = null;
 var UserContext = React.createContext(defaultValue$1);
 var UserContextProvider = function UserContextProvider(_ref) {
@@ -523,7 +603,7 @@ var UserContextProvider = function UserContextProvider(_ref) {
     setUserContext: setUserContext,
     resetUserContext: resetUserContext
   };
-  return __jsx$6(UserContext.Provider, {
+  return __jsx$7(UserContext.Provider, {
     value: context
   }, children);
 };
@@ -541,22 +621,9 @@ var useRedirect = function useRedirect(href, asPath) {
   }, []);
 };
 
-var useRequireAuth = function useRequireAuth() {
-  var router$1 = router.useRouter();
+function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  var _useSessionContext = useSessionContext(),
-      sessionContext = _useSessionContext.sessionContext;
-
-  React.useEffect(function () {
-    if (sessionContext._ready && !sessionContext.isAuthenticated) {
-      router$1.replace(utils$1$1.loginRouteWithNext());
-    }
-  }, [sessionContext._ready]);
-};
-
-function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var useUser = function useUser() {
   var _useUserContext = useUserContext(),
@@ -608,7 +675,7 @@ var useUser = function useUser() {
               case 3:
                 response = _context.sent;
                 cancelRequest = null;
-                _user = _objectSpread$2(_objectSpread$2({}, response.data.user), {}, {
+                _user = _objectSpread$3(_objectSpread$3({}, response.data.user), {}, {
                   _ready: true
                 });
                 setUser(_user);
@@ -647,6 +714,7 @@ var useUser = function useUser() {
 exports.LoginPage = LoginPage;
 exports.LogoutPage = LogoutPage;
 exports.MagicLoginPage = MagicLoginPage;
+exports.OnboardingPage = OnboardingPage;
 exports.ResetPage = ResetPage;
 exports.SessionContext = SessionContext;
 exports.SessionContextProvider = SessionContextProvider;

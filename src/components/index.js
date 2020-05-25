@@ -19,6 +19,9 @@ export { LoginWithPasswordForm };
 import LogoutForm from './LogoutForm';
 export { LogoutForm };
 
+import OnboardingForm from './OnboardingForm';
+export { OnboardingForm };
+
 import ResetForm from './ResetForm';
 export { ResetForm };
 
