@@ -3,3 +3,9 @@ export { AuthBasePage };
 
 import Button from './Button';
 export { Button };
+
+import LoginWithLinkForm from './LoginWithLinkForm';
+export { LoginWithLinkForm };
+
+import LoginWithPasswordForm from './LoginWithPasswordForm';
+export { LoginWithPasswordForm };

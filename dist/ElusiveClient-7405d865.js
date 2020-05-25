@@ -1,7 +1,6 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var defineProperty = require('./defineProperty-ba7cd53d.js');
 
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
@@ -17,6 +16,21 @@ function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
 }
 
 var ElusiveClient = /*#__PURE__*/function () {
@@ -252,6 +266,7 @@ var ElusiveClient = /*#__PURE__*/function () {
   return ElusiveClient;
 }();
 
-defineProperty._defineProperty(ElusiveClient, "instance", void 0);
+_defineProperty(ElusiveClient, "instance", void 0);
 
 exports.ElusiveClient = ElusiveClient;
+exports._defineProperty = _defineProperty;

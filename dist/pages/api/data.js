@@ -3,8 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('../../classCallCheck-d2bb402f.js');
-require('../../ElusiveClient-b6e2cec5.js');
-require('../../defineProperty-ba7cd53d.js');
+require('../../ElusiveClient-7405d865.js');
 var index = require('../../index.js');
 require('../../FormErrors-bf65213f.js');
 require('react');
@@ -12,16 +11,16 @@ require('prop-types');
 require('react-bootstrap');
 var asyncToGenerator = require('../../asyncToGenerator-42483001.js');
 require('bcryptjs');
-require('../../utils-53071686.js');
+require('../../utils-c048fd8a.js');
 require('../../utils-3409f232.js');
-require('../../utils-9098034f.js');
+require('../../utils-24b30e03.js');
 require('uuid');
-require('../../utils-71c02254.js');
+require('../../utils-8f18a4f1.js');
 require('moment');
 var users = require('../../models/users.js');
 var magicLogins = require('../../models/magicLogins.js');
-var utils$6 = require('../../utils-e94a7920.js');
-var utils$7 = require('../../utils-1fe8b89d.js');
+var utils$5 = require('../../utils-4c0a00ca.js');
+var utils$6 = require('../../utils-ca026662.js');
 require('jsonwebtoken');
 
 var magicLoginDataAPI = /*#__PURE__*/function () {
@@ -92,7 +91,7 @@ var magicLoginDataAPI = /*#__PURE__*/function () {
 
           case 19:
             claims = tokenOptions.createClaims(magicLogin.user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
+            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), magicLogin.user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,

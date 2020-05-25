@@ -1,4 +1,4 @@
-import { createForm, emailField } from '../utils';
+import { createForm, emailField } from './utils';
 
 export default () => {
   return createForm({

@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import Elusive from '../../';
 import { TooManyResetAttemptsError, sendResetEmail } from '../../auth';
-import { resetForm } from '../../forms/auth';
+import { resetForm } from '../../forms';
 import { POST } from '../../http';
 import { createMagicLogin } from '../../models/magicLogins';
 import {

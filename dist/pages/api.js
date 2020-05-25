@@ -5,8 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-require('../ElusiveClient-b6e2cec5.js');
-var defineProperty = require('../defineProperty-ba7cd53d.js');
+var ElusiveClient = require('../ElusiveClient-7405d865.js');
 var index = require('../index.js');
 var FormErrors = require('../FormErrors-bf65213f.js');
 require('react');
@@ -15,27 +14,27 @@ require('react-bootstrap');
 var errors = require('../errors-bd1f45c5.js');
 var asyncToGenerator = require('../asyncToGenerator-42483001.js');
 require('bcryptjs');
-require('../utils-53071686.js');
+require('../utils-c048fd8a.js');
 require('../utils-3409f232.js');
-var utils$2 = require('../utils-9098034f.js');
-require('../utils-4edd432e.js');
-var signup = require('../signup-4f7fd5f0.js');
-var utils$4 = require('../utils-4a27a4e3.js');
-var utils$5 = require('../utils-b82a9439.js');
+var utils$2 = require('../utils-24b30e03.js');
+var loginWithPassword = require('../login-with-password-b9acd6c9.js');
+var signup = require('../signup-0d250b67.js');
+var utils$3 = require('../utils-4a27a4e3.js');
+var utils$4 = require('../utils-b82a9439.js');
 require('uuid');
-require('../utils-71c02254.js');
+require('../utils-8f18a4f1.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$6 = require('../utils-e94a7920.js');
-var utils$7 = require('../utils-1fe8b89d.js');
+var utils$5 = require('../utils-4c0a00ca.js');
+var utils$6 = require('../utils-ca026662.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = /*#__PURE__*/function () {
   var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(req, res, api) {
     var sentry, options, _yield$getSession, session, tokens, data;
@@ -46,14 +45,14 @@ var apiWrapper = /*#__PURE__*/function () {
           case 0:
             sentry = index.services.sentry;
             options = _objectSpread({
-              allowedMethods: [utils$4.GET],
+              allowedMethods: [utils$3.GET],
               requireAuth: false,
-              reloadUserSource: utils$6.RELOAD_USER_SOURCE_REFRESH_TOKEN
+              reloadUserSource: utils$5.RELOAD_USER_SOURCE_REFRESH_TOKEN
             }, api.options);
             _context.prev = 2;
-            utils$4.validateRequest(req, res, options);
+            utils$3.validateRequest(req, res, options);
             _context.next = 6;
-            return utils$6.getSession(req, options.reloadUserSource);
+            return utils$5.getSession(req, options.reloadUserSource);
 
           case 6:
             _yield$getSession = _context.sent;
@@ -65,7 +64,7 @@ var apiWrapper = /*#__PURE__*/function () {
               break;
             }
 
-            return _context.abrupt("return", utils$4.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
+            return _context.abrupt("return", utils$3.httpForbiddenResponse(res, FormErrors.errorJson(new Error('You do not have access to view this page.'))));
 
           case 11:
             data = {};
@@ -88,35 +87,35 @@ var apiWrapper = /*#__PURE__*/function () {
               break;
             }
 
-            return _context.abrupt("return", utils$4.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
+            return _context.abrupt("return", utils$3.httpBadRequestResponse(res, FormErrors.errorJson(data.errors)));
 
           case 20:
-            return _context.abrupt("return", utils$4.httpOKResponse(res, data));
+            return _context.abrupt("return", utils$3.httpOKResponse(res, data));
 
           case 23:
             _context.prev = 23;
             _context.t3 = _context["catch"](2);
 
-            if (!(_context.t3 instanceof utils$4.HttpError)) {
+            if (!(_context.t3 instanceof utils$3.HttpError)) {
               _context.next = 28;
               break;
             }
 
-            if (!(_context.t3 instanceof utils$4.HttpMethodNotAllowedError)) {
+            if (!(_context.t3 instanceof utils$3.HttpMethodNotAllowedError)) {
               _context.next = 28;
               break;
             }
 
-            return _context.abrupt("return", utils$4.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t3)));
+            return _context.abrupt("return", utils$3.httpMethodNotAllowedResponse(res, FormErrors.errorJson(_context.t3)));
 
           case 28:
-            if (!(_context.t3 instanceof utils$6.SessionError || _context.t3 instanceof utils$7.TokenError)) {
+            if (!(_context.t3 instanceof utils$5.SessionError || _context.t3 instanceof utils$6.TokenError)) {
               _context.next = 31;
               break;
             }
 
-            utils$6.deleteSessionCookies(res);
-            return _context.abrupt("return", utils$4.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t3)));
+            utils$5.deleteSessionCookies(res);
+            return _context.abrupt("return", utils$3.httpUnauthorizedResponse(res, FormErrors.errorJson(_context.t3)));
 
           case 31:
             if (!(_context.t3 instanceof FormErrors.BaseError)) {
@@ -124,7 +123,7 @@ var apiWrapper = /*#__PURE__*/function () {
               break;
             }
 
-            return _context.abrupt("return", utils$4.httpBadRequestResponse(res, FormErrors.errorJson(_context.t3)));
+            return _context.abrupt("return", utils$3.httpBadRequestResponse(res, FormErrors.errorJson(_context.t3)));
 
           case 33:
             console.error('error in apiWrapper:', _context.t3);
@@ -133,7 +132,7 @@ var apiWrapper = /*#__PURE__*/function () {
               sentry.captureException(_context.t3);
             }
 
-            return _context.abrupt("return", utils$4.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
+            return _context.abrupt("return", utils$3.httpInternalServerErrorResponse(res, FormErrors.errorJson(new Error('An unknown error occured.'))));
 
           case 36:
           case "end":
@@ -223,7 +222,7 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            _loginWithPasswordFor = signup.loginWithPasswordForm().validate({
+            _loginWithPasswordFor = loginWithPassword.loginWithPasswordForm().validate({
               type: type,
               email: email,
               password: password,
@@ -271,7 +270,7 @@ var loginAPI = /*#__PURE__*/function () {
 
           case 34:
             claims = tokenOptions.createClaims(user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
+            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,
@@ -285,7 +284,7 @@ var loginAPI = /*#__PURE__*/function () {
               break;
             }
 
-            _loginWithLinkForm$va = signup.loginWithLinkForm().validate({
+            _loginWithLinkForm$va = loginWithPassword.loginWithLinkForm().validate({
               type: type,
               email: email,
               next: next
@@ -335,7 +334,7 @@ var loginAPI = /*#__PURE__*/function () {
   };
 }();
 loginAPI.options = {
-  allowedMethods: [utils$4.POST]
+  allowedMethods: [utils$3.POST]
 };
 
 var logoutAPI = /*#__PURE__*/function () {
@@ -355,7 +354,7 @@ var logoutAPI = /*#__PURE__*/function () {
             throw new errors.NotAuthenticatedError('You are not logged in');
 
           case 3:
-            utils$6.deleteSessionCookies(res);
+            utils$5.deleteSessionCookies(res);
             return _context.abrupt("return", {
               isAuthenticated: false,
               claims: null
@@ -375,7 +374,7 @@ var logoutAPI = /*#__PURE__*/function () {
 }();
 
 logoutAPI.options = {
-  allowedMethods: [utils$4.POST]
+  allowedMethods: [utils$3.POST]
 };
 
 var onboardingAPI = /*#__PURE__*/function () {
@@ -433,7 +432,7 @@ var onboardingAPI = /*#__PURE__*/function () {
           case 15:
             user = _context.sent;
             claims = tokenOptions.createClaims(user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
+            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,
@@ -455,7 +454,7 @@ var onboardingAPI = /*#__PURE__*/function () {
 }();
 
 onboardingAPI.options = {
-  allowedMethods: [utils$4.POST],
+  allowedMethods: [utils$3.POST],
   requireAuth: true
 };
 
@@ -548,7 +547,7 @@ var resetAPI = /*#__PURE__*/function () {
 }();
 
 resetAPI.options = {
-  allowedMethods: [utils$4.POST]
+  allowedMethods: [utils$3.POST]
 };
 
 var sessionAPI = /*#__PURE__*/function () {
@@ -562,7 +561,7 @@ var sessionAPI = /*#__PURE__*/function () {
             tokenOptions = index.options.tokens; // Are there tokens? That means we regenerated the session. Set new cookies
 
             if (session.isAuthenticated && tokens) {
-              utils$6.createSessionCookies(res, utils$7.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+              utils$5.createSessionCookies(res, utils$6.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
             }
 
             return _context.abrupt("return", {
@@ -583,7 +582,7 @@ var sessionAPI = /*#__PURE__*/function () {
 }();
 
 sessionAPI.options = {
-  reloadUserSource: utils$6.RELOAD_USER_SOURCE_DATABASE
+  reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE
 };
 
 var signupAPI = /*#__PURE__*/function () {
@@ -675,7 +674,7 @@ var signupAPI = /*#__PURE__*/function () {
               email: cleanValues.email,
               enabled: true,
               registrationIP: ip,
-              profilePictureURL: "".concat(baseURL, "/img/profile-picture/default-").concat(utils$5.randomInt(1, authOptions.numDefaultProfilePictureVariations), ".png"),
+              profilePictureURL: "".concat(baseURL, "/img/profile-picture/default-").concat(utils$4.randomInt(1, authOptions.numDefaultProfilePictureVariations), ".png"),
               verifications: {
                 email: false
               }
@@ -716,7 +715,7 @@ var signupAPI = /*#__PURE__*/function () {
 }();
 
 signupAPI.options = {
-  allowedMethods: [utils$4.POST]
+  allowedMethods: [utils$3.POST]
 };
 
 var userAPI = /*#__PURE__*/function () {
@@ -775,7 +774,7 @@ var userAPI = /*#__PURE__*/function () {
 }();
 
 userAPI.options = {
-  reloadUserSource: utils$6.RELOAD_USER_SOURCE_DATABASE,
+  reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE,
   requireAuth: true
 };
 

@@ -7,7 +7,7 @@ import {
   UserAlreadyExistsError,
   sendSignupEmail,
 } from '../../auth';
-import { signupForm } from '../../forms/auth';
+import { signupForm } from '../../forms';
 import { POST } from '../../http';
 import { randomInt } from '../../math';
 import { createMagicLogin } from '../../models/magicLogins';

@@ -10,7 +10,7 @@ import {
   comparePasswordHash,
   sendLoginEmail,
 } from '../../auth';
-import { loginWithLinkForm, loginWithPasswordForm } from '../../forms/auth';
+import { loginWithLinkForm, loginWithPasswordForm } from '../../forms';
 import { POST } from '../../http';
 import {
   createLoginAttempt,

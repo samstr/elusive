@@ -1,6 +1,6 @@
-import { LOGIN_TYPES } from '../../auth';
-import { InvalidFieldValueError } from '../errors';
-import { createForm, emailField, textField } from '../utils';
+import { LOGIN_TYPES } from '../auth';
+import { InvalidFieldValueError } from './errors';
+import { createForm, emailField, textField } from './utils';
 
 export default () =>
   createForm({

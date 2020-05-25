@@ -3,6 +3,7 @@
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
 var FormErrors = require('./FormErrors-bf65213f.js');
+var utils$2 = require('./utils-24b30e03.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = FormErrors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = FormErrors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return FormErrors._possibleConstructorReturn(this, result); }; }
 
@@ -274,6 +275,74 @@ var getOnChangeValue = function getOnChangeValue(event) {
   };
 };
 
+var loginWithLinkForm = (function () {
+  return createForm({
+    fields: {
+      email: emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your email'
+        },
+        invalid: {
+          errorMessage: 'Your email is invalid'
+        }
+      }),
+      type: textField('type', {
+        required: {
+          value: true,
+          errorMessage: 'Type field is missing.'
+        }
+      }, function (type) {
+        if (!utils$2.LOGIN_TYPES.includes(type)) {
+          throw new InvalidFieldValueError('Type field is invalid.', ['type']);
+        }
+
+        return type;
+      }),
+      next: textField('next')
+    }
+  });
+});
+
+var loginWithPasswordForm = (function () {
+  var authOptions = index.options.auth;
+  return createForm({
+    fields: {
+      email: emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your email.'
+        },
+        invalid: {
+          errorMessage: 'Your email is invalid.'
+        }
+      }),
+      password: textField('password', {
+        required: {
+          value: true,
+          errorMessage: 'Please enter your password.'
+        },
+        minLength: {
+          value: authOptions.passwordMinLength,
+          errorMessage: 'Your password is too short.'
+        }
+      }),
+      type: textField('type', {
+        required: {
+          value: true,
+          errorMessage: 'Type field is missing.'
+        }
+      }, function (type) {
+        if (!utils$2.LOGIN_TYPES.includes(type)) {
+          throw new InvalidFieldValueError('Type field is invalid.', ['type']);
+        }
+
+        return type;
+      })
+    }
+  });
+});
+
 exports.FieldValueTooLongError = FieldValueTooLongError;
 exports.FieldValueTooShortError = FieldValueTooShortError;
 exports.FormError = FormError;
@@ -286,4 +355,6 @@ exports.createForm = createForm;
 exports.emailField = emailField;
 exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
+exports.loginWithLinkForm = loginWithLinkForm;
+exports.loginWithPasswordForm = loginWithPasswordForm;
 exports.textField = textField;

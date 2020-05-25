@@ -1,7 +1,7 @@
-import Elusive from '../../';
-import { LOGIN_TYPES } from '../../auth';
-import { InvalidFieldValueError } from '../errors';
-import { createForm, emailField, textField } from '../utils';
+import Elusive from '../';
+import { LOGIN_TYPES } from '../auth';
+import { InvalidFieldValueError } from './errors';
+import { createForm, emailField, textField } from './utils';
 
 export default () => {
   const { auth: authOptions } = Elusive.options;

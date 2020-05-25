@@ -1,6 +1,6 @@
 import Elusive from '../../';
 import { hashPassword } from '../../auth';
-import { onboardingForm } from '../../forms/auth';
+import { onboardingForm } from '../../forms';
 import { POST } from '../../http';
 import {
   UserNotEnabledError,

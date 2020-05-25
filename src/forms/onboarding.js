@@ -1,5 +1,5 @@
-import Elusive from '../../';
-import { createForm, textField } from '../utils';
+import Elusive from '../';
+import { createForm, textField } from './utils';
 
 export default () => {
   const { auth: authOptions } = Elusive.options;
