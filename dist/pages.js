@@ -13,12 +13,108 @@ var PropTypes = _interopDefault(require('prop-types'));
 require('react-bootstrap');
 var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 var utils$1 = require('./utils-3409f232.js');
+require('styled-jsx/style');
+var Button = require('./Button-5ade7c13.js');
 var utils = require('./utils-4a27a4e3.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
 
 var __jsx = React__default.createElement;
+//import useSession from './useSession';
+//console.log('AuthBasePage', AuthBasePage);
+
+var LoginPage = function LoginPage() {
+  //const router = useRouter();
+  //const session = useSession();
+  //const [type, setType] = useState();
+  //const [success, setSuccess] = useState();
+  //const { site: siteOptions } = Elusive.options;
+
+  /* const loginTypeRouteWithNext = (type) => {
+    let url = `${loginRoute()}?type=${type}`;
+     if (router.query.next) {
+      url = `${url}&next=${encodeURIComponent(router.query.next)}`;
+    }
+     return url;
+  };
+   if (type === LOGIN_TYPE_PASSWORD) {
+    return (
+      <AuthBasePage>
+        <h1>Login to {siteOptions.name}</h1>
+        <div>
+          <LoginWithPasswordForm onSuccess={onPasswordSuccess} />
+        </div>
+        <div>
+          <Link href={resetRoute()}>
+            <a>Forgot your password?</a>
+          </Link>
+          &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+          <Link href={loginTypeRouteWithNext(LOGIN_TYPE_LINK)}>
+            <a>Email me a login link</a>
+          </Link>
+        </div>
+      </AuthBasePage>
+    );
+  } else if (type === LOGIN_TYPE_LINK) {
+    if (success) {
+      return (
+        <AuthBasePage>
+          <h1>Check your inbox</h1>
+          <div>
+            <p>We have sent you an email with an automatic login link.</p>
+            <p>
+              You may need to check your spam folder or whitelist XXX@XXX.COM
+            </p>
+          </div>
+        </AuthBasePage>
+      );
+    } else {
+      return (
+        <AuthBasePage>
+          <h1>Login to {siteOptions.name}</h1>
+          <div><LoginWithLinkForm onSuccess={onLinkSuccess} /></div>
+          <div>
+            <Link href={loginTypeRouteWithNext(LOGIN_TYPE_PASSWORD)}>
+              <a>Use password</a>
+            </Link>
+          </div>
+        </AuthBasePage>
+      );
+    }
+  }
+   return (
+    <AuthBasePage>
+      <h1>How do you want to login?</h1>
+      <div>
+        <Link href={loginTypeRouteWithNext(LOGIN_TYPE_PASSWORD)}>
+          <a>
+            <div>
+              <img src="/img/icons/password-1a73e8.svg" width="38" />
+            </div>
+            <div>Login with my password</div>
+          </a>
+        </Link>
+        <Link href={loginTypeRouteWithNext(LOGIN_TYPE_LINK)}>
+          <a>
+            <div>
+              <img src="/img/icons/email-1a73e8.svg" width="38" />
+            </div>
+            <div>Email me a login link</div>
+          </a>
+        </Link>
+      </div>
+      <div>
+        <Link href={signupRoute()}>
+          <a>Create an account instead</a>
+        </Link>
+      </div>
+    </AuthBasePage>
+  );*/
+  return __jsx(Button.AuthBasePage, null, "Login");
+};
+
+var __jsx$1 = React__default.createElement;
 var defaultValue = {
   isAuthenticated: false,
   claims: null,
@@ -41,7 +137,7 @@ var SessionContextProvider = function SessionContextProvider(_ref) {
     setSessionContext: setSessionContext,
     resetSessionContext: resetSessionContext
   };
-  return __jsx(SessionContext.Provider, {
+  return __jsx$1(SessionContext.Provider, {
     value: context
   }, children);
 };
@@ -50,36 +146,6 @@ SessionContextProvider.propTypes = {
 };
 var useSessionContext = function useSessionContext() {
   return React.useContext(SessionContext);
-};
-
-var __jsx$1 = React__default.createElement;
-var defaultValue$1 = null;
-var UserContext = React.createContext(defaultValue$1);
-var UserContextProvider = function UserContextProvider(_ref) {
-  var children = _ref.children;
-
-  var _useState = React.useState(defaultValue$1),
-      userContext = _useState[0],
-      setUserContext = _useState[1];
-
-  var resetUserContext = function resetUserContext() {
-    return setUserContext(defaultValue$1);
-  };
-
-  var context = {
-    userContext: userContext,
-    setUserContext: setUserContext,
-    resetUserContext: resetUserContext
-  };
-  return __jsx$1(UserContext.Provider, {
-    value: context
-  }, children);
-};
-UserContextProvider.propTypes = {
-  children: PropTypes.node.isRequired
-};
-var useUserContext = function useUserContext() {
-  return React.useContext(UserContext);
 };
 
 var useData = function useData() {
@@ -168,6 +234,36 @@ var useData = function useData() {
     };
   }, []);
   return data;
+};
+
+var __jsx$2 = React__default.createElement;
+var defaultValue$1 = null;
+var UserContext = React.createContext(defaultValue$1);
+var UserContextProvider = function UserContextProvider(_ref) {
+  var children = _ref.children;
+
+  var _useState = React.useState(defaultValue$1),
+      userContext = _useState[0],
+      setUserContext = _useState[1];
+
+  var resetUserContext = function resetUserContext() {
+    return setUserContext(defaultValue$1);
+  };
+
+  var context = {
+    userContext: userContext,
+    setUserContext: setUserContext,
+    resetUserContext: resetUserContext
+  };
+  return __jsx$2(UserContext.Provider, {
+    value: context
+  }, children);
+};
+UserContextProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+var useUserContext = function useUserContext() {
+  return React.useContext(UserContext);
 };
 
 var useRedirect = function useRedirect(href, asPath) {
@@ -381,6 +477,7 @@ var useUser = function useUser() {
   return user;
 };
 
+exports.LoginPage = LoginPage;
 exports.SessionContext = SessionContext;
 exports.SessionContextProvider = SessionContextProvider;
 exports.UserContext = UserContext;

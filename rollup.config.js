@@ -40,12 +40,21 @@ export default [
       'jsonwebtoken',
       'moment',
       'next',
+      'next/link',
       'next/router',
       'prop-types',
       'react',
       'react-bootstrap',
       'react-dom',
       'sanitize-html',
+      'styled-jsx',
+      'styled-jsx/babel',
+      'styled-jsx/style',
+      'styled-jsx/babel-test',
+      'styled-jsx/css',
+      'styled-jsx/macro',
+      'styled-jsx/server',
+      'styled-jsx/webpack',
       'uuid',
     ],
     plugins: [
@@ -55,7 +64,14 @@ export default [
       babel({
         runtimeHelpers: true,
         exclude: 'node_modules/**',
-        presets: ['next/babel'],
+        presets: [
+          [
+            'next/babel',
+            {
+              'styled-jsx': {},
+            },
+          ],
+        ],
         extensions: ['.js', '.jsx', '.json', '.svg', '.ts', '.tsx'],
       }),
       commonjs(),

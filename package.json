@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "2.2.6",
+  "version": "2.2.24",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "yarn clean && rollup -c",
+    "build": "NODE_ENV=production yarn clean && rollup -c",
     "lint": "eslint ./src",
     "upgrade-deps": "yarn upgrade-interactive --latest"
   },
@@ -43,6 +43,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "styled-jsx": "^3.3.0",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
