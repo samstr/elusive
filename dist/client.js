@@ -1,7 +1,8 @@
 'use strict';
 
 require('./classCallCheck-d2bb402f.js');
-var ElusiveClient = require('./ElusiveClient-7405d865.js');
+var ElusiveClient = require('./ElusiveClient-b6e2cec5.js');
+require('./defineProperty-ba7cd53d.js');
 
 
 

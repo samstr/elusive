@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { AuthBasePage, LogoutForm } from '../components';
+import { useSession } from '../hooks';
 import { indexRoute, loginRoute } from '../routes';
-
-import useSession from './useSession';
 
 const LogoutPage = () => {
   const router = useRouter();

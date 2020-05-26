@@ -5,33 +5,34 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-var ElusiveClient = require('../ElusiveClient-7405d865.js');
+require('../ElusiveClient-b6e2cec5.js');
+var defineProperty = require('../defineProperty-ba7cd53d.js');
 var index = require('../index.js');
 var errors = require('../errors-b316e546.js');
 var utils = require('../utils-8eb11d51.js');
 var errors$1 = require('../errors-bc789b6a.js');
 var asyncToGenerator = require('../asyncToGenerator-42483001.js');
 require('bcryptjs');
-require('../utils-c048fd8a.js');
+require('../utils-53071686.js');
 require('../utils-3409f232.js');
-var utils$2 = require('../utils-24b30e03.js');
-var signupForm = require('../signupForm-b6131d87.js');
+var utils$2 = require('../utils-9098034f.js');
+var signupForm = require('../signupForm-70d92045.js');
 var utils$3 = require('../utils-081fbcf9.js');
 var utils$4 = require('../utils-b82a9439.js');
 require('uuid');
-require('../utils-8f18a4f1.js');
+require('../utils-71c02254.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$6 = require('../utils-20cfc836.js');
-var utils$7 = require('../utils-f3bf87dc.js');
+var utils$6 = require('../utils-a909b953.js');
+var utils$7 = require('../utils-93c902e4.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = /*#__PURE__*/function () {
   var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(req, res, api) {
     var sentry, options, _yield$getSession, session, tokens, data;

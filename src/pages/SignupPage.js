@@ -3,10 +3,9 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import Elusive from '../';
+import { useSession } from '../hooks';
 import { homeRoute, loginRoute } from '../routes';
 import { AuthBasePage, SignupForm } from '../components';
-
-import useSession from './useSession';
 
 const SignupPage = () => {
   const router = useRouter();

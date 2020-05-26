@@ -9,9 +9,8 @@ import {
   LoginWithLinkForm,
   LoginWithPasswordForm,
 } from '../components';
+import { useSession } from '../hooks';
 import { homeRoute, loginRoute, resetRoute, signupRoute } from '../routes';
-
-import useSession from './useSession';
 
 const LoginPage = () => {
   const router = useRouter();

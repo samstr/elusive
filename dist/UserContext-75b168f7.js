@@ -36,9 +36,6 @@ var SessionContextProvider = function SessionContextProvider(_ref) {
 SessionContextProvider.propTypes = {
   children: PropTypes.node.isRequired
 };
-var useSessionContext = function useSessionContext() {
-  return React.useContext(SessionContext);
-};
 
 var __jsx$1 = React__default.createElement;
 var defaultValue$1 = null;
@@ -66,13 +63,8 @@ var UserContextProvider = function UserContextProvider(_ref) {
 UserContextProvider.propTypes = {
   children: PropTypes.node.isRequired
 };
-var useUserContext = function useUserContext() {
-  return React.useContext(UserContext);
-};
 
 exports.SessionContext = SessionContext;
 exports.SessionContextProvider = SessionContextProvider;
 exports.UserContext = UserContext;
 exports.UserContextProvider = UserContextProvider;
-exports.useSessionContext = useSessionContext;
-exports.useUserContext = useUserContext;

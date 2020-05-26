@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 const defaultValue = {
   isAuthenticated: false,
@@ -30,5 +30,3 @@ export const SessionContextProvider = ({ children }) => {
 SessionContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export const useSessionContext = () => useContext(SessionContext);

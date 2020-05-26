@@ -2,13 +2,13 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var ElusiveClient = require('./ElusiveClient-7405d865.js');
+var defineProperty = require('./defineProperty-ba7cd53d.js');
 require('./index.js');
 var utils = require('./utils-8eb11d51.js');
 var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 require('bcryptjs');
 var utils$1$1 = require('./utils-3409f232.js');
-var utils$2 = require('./utils-24b30e03.js');
+var utils$2 = require('./utils-9098034f.js');
 var _JSXStyle = _interopDefault(require('styled-jsx/style'));
 var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');
@@ -17,7 +17,7 @@ var reactBootstrap = require('react-bootstrap');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var router = require('next/router');
-var signupForm = require('./signupForm-b6131d87.js');
+var signupForm = require('./signupForm-70d92045.js');
 
 var __jsx = React__default.createElement;
 
@@ -134,7 +134,7 @@ var __jsx$4 = React__default.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
   var onSuccess = _ref.onSuccess;
@@ -163,7 +163,7 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
         value = _getOnChangeValue.value;
 
     setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
-    setValues(_objectSpread(_objectSpread({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
+    setValues(_objectSpread(_objectSpread({}, values), {}, defineProperty._defineProperty({}, field, value)));
   };
 
   var submit = /*#__PURE__*/function () {
@@ -254,7 +254,7 @@ var __jsx$5 = React__default.createElement;
 
 function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
   var onSuccess = _ref.onSuccess;
@@ -282,7 +282,7 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
         value = _getOnChangeValue.value;
 
     setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
-    setValues(_objectSpread$1(_objectSpread$1({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
+    setValues(_objectSpread$1(_objectSpread$1({}, values), {}, defineProperty._defineProperty({}, field, value)));
   };
 
   var submit = /*#__PURE__*/function () {
@@ -458,7 +458,7 @@ var __jsx$7 = React__default.createElement;
 
 function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var OnboardingForm = function OnboardingForm(_ref) {
   var email = _ref.email,
@@ -485,7 +485,7 @@ var OnboardingForm = function OnboardingForm(_ref) {
         value = _getOnChangeValue.value;
 
     setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
-    setValues(_objectSpread$2(_objectSpread$2({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
+    setValues(_objectSpread$2(_objectSpread$2({}, values), {}, defineProperty._defineProperty({}, field, value)));
   };
 
   var submit = /*#__PURE__*/function () {
@@ -585,7 +585,7 @@ var __jsx$8 = React__default.createElement;
 
 function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var ResetForm = function ResetForm(_ref) {
   var onSuccess = _ref.onSuccess;
@@ -611,7 +611,7 @@ var ResetForm = function ResetForm(_ref) {
         value = _getOnChangeValue.value;
 
     setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
-    setValues(_objectSpread$3(_objectSpread$3({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
+    setValues(_objectSpread$3(_objectSpread$3({}, values), {}, defineProperty._defineProperty({}, field, value)));
   };
 
   var submit = /*#__PURE__*/function () {
@@ -701,7 +701,7 @@ var __jsx$9 = React__default.createElement;
 
 function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { ElusiveClient._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var SignupForm = function SignupForm(_ref) {
   var onSuccess = _ref.onSuccess;
@@ -727,7 +727,7 @@ var SignupForm = function SignupForm(_ref) {
         value = _getOnChangeValue.value;
 
     setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
-    setValues(_objectSpread$4(_objectSpread$4({}, values), {}, ElusiveClient._defineProperty({}, field, value)));
+    setValues(_objectSpread$4(_objectSpread$4({}, values), {}, defineProperty._defineProperty({}, field, value)));
   };
 
   var submit = /*#__PURE__*/function () {

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 
 import Elusive from '../';
 import { AuthBasePage, ResetForm } from '../components';
-
-import useSession from './useSession';
+import { useSession } from '../hooks';
 
 const ResetPage = () => {
   useSession();

@@ -12,6 +12,7 @@ export default [
       contexts: './src/contexts/index.js',
       errors: './src/errors/index.js',
       forms: './src/forms/index.js',
+      hooks: './src/hooks/index.js',
       http: './src/http/index.js',
       mail: './src/mail/index.js',
       math: './src/math/index.js',
