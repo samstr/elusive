@@ -3,11 +3,11 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-require('./ElusiveClient-b6e2cec5.js');
+require('./ElusiveClient-e7f8ebd1.js');
 require('./defineProperty-ba7cd53d.js');
 require('./index.js');
-require('./errors-b316e546.js');
-var utils$7 = require('./utils-93c902e4.js');
+require('./errors-6d843f19.js');
+var utils$7 = require('./utils-a5fc73ae.js');
 require('jsonwebtoken');
 
 

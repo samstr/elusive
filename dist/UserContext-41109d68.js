@@ -2,9 +2,10 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');
 var React__default = _interopDefault(React);
+var PropTypes = require('prop-types');
+var PropTypes__default = _interopDefault(PropTypes);
 
 var __jsx = React__default.createElement;
 var defaultValue = {
@@ -34,7 +35,7 @@ var SessionContextProvider = function SessionContextProvider(_ref) {
   }, children);
 };
 SessionContextProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes__default.node.isRequired
 };
 
 var __jsx$1 = React__default.createElement;
@@ -61,7 +62,7 @@ var UserContextProvider = function UserContextProvider(_ref) {
   }, children);
 };
 UserContextProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes__default.node.isRequired
 };
 
 exports.SessionContext = SessionContext;

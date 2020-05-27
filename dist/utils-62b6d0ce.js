@@ -1,13 +1,13 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var index = require('./index.js');
-var errors = require('./errors-b316e546.js');
-var asyncToGenerator = require('./asyncToGenerator-42483001.js');
+var index$1 = require('./index.js');
+var errors = require('./errors-6d843f19.js');
+var asyncToGenerator = require('./asyncToGenerator-093ecb8b.js');
 var users = require('./models/users.js');
-var utils$7 = require('./utils-93c902e4.js');
+var utils$7 = require('./utils-a5fc73ae.js');
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var SessionError = /*#__PURE__*/function (_BaseError) {
@@ -82,7 +82,7 @@ var buildSessionCookieString = function buildSessionCookieString(name, value, ex
   return ["".concat(name, "=").concat(value), 'path=/', 'SameSite=Lax', "expires=".concat(expiryDate), 'HttpOnly', process.env.NODE_ENV === 'production' ? 'Secure;' : null].join(';');
 };
 var createSessionCookieStrings = function createSessionCookieStrings(tokens, userId) {
-  var sessionOptions = index.options.sessions;
+  var sessionOptions = index$1.options.sessions;
   var dateFuture = Date.now() + 60000 * sessionOptions.cookieExpiryMins;
   var expiryDate = new Date(dateFuture).toUTCString();
   return [buildSessionCookieString(sessionOptions.accessTokenCookieName, tokens.access, expiryDate), buildSessionCookieString(sessionOptions.refreshTokenCookieName, tokens.refresh, expiryDate), buildSessionCookieString(sessionOptions.userIdCookieName, userId, expiryDate)];
@@ -91,7 +91,7 @@ var createSessionCookies = function createSessionCookies(res, tokens, userId) {
   res.setHeader('Set-Cookie', createSessionCookieStrings(tokens, userId));
 };
 var deleteSessionCookieStrings = function deleteSessionCookieStrings() {
-  var sessionOptions = index.options.sessions;
+  var sessionOptions = index$1.options.sessions;
   var expiryDate = new Date(0).toUTCString(); // set it in the past
 
   return [buildSessionCookieString(sessionOptions.accessTokenCookieName, '', expiryDate), buildSessionCookieString(sessionOptions.refreshTokenCookieName, '', expiryDate), buildSessionCookieString(sessionOptions.userIdCookieName, '', expiryDate)];
@@ -107,7 +107,7 @@ var getSession = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _Elusive$options = index.options, sessionOptions = _Elusive$options.sessions, tokenOptions = _Elusive$options.tokens;
+            _Elusive$options = index$1.options, sessionOptions = _Elusive$options.sessions, tokenOptions = _Elusive$options.tokens;
             accessToken = req.cookies[sessionOptions.accessTokenCookieName];
             refreshToken = req.cookies[sessionOptions.refreshTokenCookieName];
             userId = req.cookies[sessionOptions.userIdCookieName]; // all 3 cookies must exist if 1 does

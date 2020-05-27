@@ -1,13 +1,13 @@
 'use strict';
 
-var defineProperty = require('./defineProperty-ba7cd53d.js');
-var index = require('./index.js');
-var asyncToGenerator = require('./asyncToGenerator-42483001.js');
+var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
+var index$1 = require('./index.js');
+var asyncToGenerator = require('./asyncToGenerator-093ecb8b.js');
 var uuid = require('uuid');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var createModel = function createModel(data) {
   var model = {};
   Object.keys(data).forEach(function (key) {
@@ -139,7 +139,7 @@ var createService = function createService(model, collectionName) {
 };
 
 var _collection = function _collection(collectionName) {
-  var firebase = index.services.firebase;
+  var firebase = index$1.services.firebase;
   var firestore = firebase.firestore();
   return firestore.collection(collectionName);
 };
@@ -151,7 +151,7 @@ var _createObject = /*#__PURE__*/function () {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            firebase = index.services.firebase;
+            firebase = index$1.services.firebase;
             firestore = firebase.firestore();
             id = uuid.v4();
             dateNow = firebase.firestore.Timestamp.now();
@@ -187,7 +187,7 @@ var _getObjectByID = /*#__PURE__*/function () {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            firebase = index.services.firebase;
+            firebase = index$1.services.firebase;
             firestore = firebase.firestore();
             _context7.next = 4;
             return firestore.collection(collectionName).doc(id).get();
@@ -260,7 +260,7 @@ var _updateObject = /*#__PURE__*/function () {
       while (1) {
         switch (_context9.prev = _context9.next) {
           case 0:
-            firebase = index.services.firebase;
+            firebase = index$1.services.firebase;
             firestore = firebase.firestore();
             updateProps.dateUpdated = firebase.firestore.Timestamp.now();
             newDoc = _objectSpread(_objectSpread({}, doc), updateProps);

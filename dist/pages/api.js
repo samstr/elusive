@@ -5,34 +5,34 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('../classCallCheck-d2bb402f.js');
-require('../ElusiveClient-b6e2cec5.js');
-var defineProperty = require('../defineProperty-ba7cd53d.js');
-var index = require('../index.js');
-var errors = require('../errors-b316e546.js');
+require('../ElusiveClient-e7f8ebd1.js');
+var defineProperty$1 = require('../defineProperty-ba7cd53d.js');
+var index$1 = require('../index.js');
+var errors = require('../errors-6d843f19.js');
 var utils = require('../utils-8eb11d51.js');
-var errors$1 = require('../errors-bc789b6a.js');
-var asyncToGenerator = require('../asyncToGenerator-42483001.js');
+var errors$1 = require('../errors-304c18aa.js');
+var asyncToGenerator = require('../asyncToGenerator-093ecb8b.js');
 require('bcryptjs');
-require('../utils-53071686.js');
+require('../utils-f3ba8179.js');
 require('../utils-3409f232.js');
-var utils$2 = require('../utils-9098034f.js');
-var signupForm = require('../signupForm-70d92045.js');
-var utils$3 = require('../utils-081fbcf9.js');
+var utils$2 = require('../utils-991cd1cd.js');
+var signupForm = require('../signupForm-d8fd140c.js');
+var utils$3 = require('../utils-cb2ac89c.js');
 var utils$4 = require('../utils-b82a9439.js');
 require('uuid');
-require('../utils-71c02254.js');
+require('../utils-b0c8ef9e.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var magicLogins = require('../models/magicLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$6 = require('../utils-a909b953.js');
-var utils$7 = require('../utils-93c902e4.js');
+var utils$6 = require('../utils-62b6d0ce.js');
+var utils$7 = require('../utils-a5fc73ae.js');
 require('jsonwebtoken');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var apiWrapper = /*#__PURE__*/function () {
   var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(req, res, api) {
     var sentry, options, _yield$getSession, session, tokens, data;
@@ -41,7 +41,7 @@ var apiWrapper = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            sentry = index.services.sentry;
+            sentry = index$1.services.sentry;
             options = _objectSpread({
               allowedMethods: [utils$3.GET],
               requireAuth: false,
@@ -154,7 +154,7 @@ var loginAPI = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             req = _ref.req, res = _ref.res, session = _ref.session;
-            _Elusive$options = index.options, authOptions = _Elusive$options.auth, tokenOptions = _Elusive$options.tokens;
+            _Elusive$options = index$1.options, authOptions = _Elusive$options.auth, tokenOptions = _Elusive$options.tokens;
 
             if (!session.isAuthenticated) {
               _context.next = 4;
@@ -383,7 +383,7 @@ var magicLoginDataAPI = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             req = _ref.req, res = _ref.res;
-            tokenOptions = index.options.tokens;
+            tokenOptions = index$1.options.tokens;
             _context.next = 4;
             return magicLogins.getMagicLoginByID(req.query.id);
 
@@ -473,7 +473,7 @@ var onboardingAPI = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             req = _ref.req, res = _ref.res, session = _ref.session;
-            tokenOptions = index.options.tokens;
+            tokenOptions = index$1.options.tokens;
             password = req.body.password;
             _onboardingForm$valid = signupForm.onboardingForm().validate({
               password: password
@@ -554,7 +554,7 @@ var resetAPI = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             req = _ref.req;
-            authOptions = index.options.auth;
+            authOptions = index$1.options.auth;
             email = req.body.email;
             ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
             date1HourAgo = moment().subtract(1, 'hour');
@@ -645,7 +645,7 @@ var sessionAPI = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             res = _ref.res, session = _ref.session, tokens = _ref.tokens;
-            tokenOptions = index.options.tokens; // Are there tokens? That means we regenerated the session. Set new cookies
+            tokenOptions = index$1.options.tokens; // Are there tokens? That means we regenerated the session. Set new cookies
 
             if (session.isAuthenticated && tokens) {
               utils$6.createSessionCookies(res, utils$7.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
@@ -681,7 +681,7 @@ var signupAPI = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             req = _ref.req, res = _ref.res, session = _ref.session;
-            authOptions = index.options.auth;
+            authOptions = index$1.options.auth;
 
             if (!session.isAuthenticated) {
               _context.next = 4;

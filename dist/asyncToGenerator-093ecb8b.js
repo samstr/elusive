@@ -1,5 +1,9 @@
 'use strict';
 
+function unwrapExports (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
 function createCommonjsModule(fn, basedir, module) {
 	return module = {
 	  path: basedir,
@@ -784,4 +788,6 @@ function _asyncToGenerator(fn) {
 }
 
 exports._asyncToGenerator = _asyncToGenerator;
+exports.createCommonjsModule = createCommonjsModule;
 exports.regenerator = regenerator;
+exports.unwrapExports = unwrapExports;

@@ -5,19 +5,19 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./classCallCheck-d2bb402f.js');
-var defineProperty = require('./defineProperty-ba7cd53d.js');
-require('./errors-b316e546.js');
-var asyncToGenerator = require('./asyncToGenerator-42483001.js');
+var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
+require('./errors-6d843f19.js');
+var asyncToGenerator = require('./asyncToGenerator-093ecb8b.js');
 var utils$1$1 = require('./utils-3409f232.js');
-require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
+require('prop-types');
 var router = require('next/router');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
-var UserContext = require('./UserContext-75b168f7.js');
-var utils = require('./utils-081fbcf9.js');
-var useSession = require('./useSession-ac1cd05c.js');
+var UserContext = require('./UserContext-41109d68.js');
+var utils = require('./utils-cb2ac89c.js');
+var useSession = require('./useSession-65e05afc.js');
 
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();
@@ -32,7 +32,7 @@ var useUserContext = (function () {
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var useUser = function useUser() {
   var _useUserContext = useUserContext(),

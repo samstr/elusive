@@ -255,3 +255,4 @@ var ElusiveClient = /*#__PURE__*/function () {
 defineProperty._defineProperty(ElusiveClient, "instance", void 0);
 
 exports.ElusiveClient = ElusiveClient;
+exports._createClass = _createClass;

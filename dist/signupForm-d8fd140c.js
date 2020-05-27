@@ -1,12 +1,12 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var index = require('./index.js');
-var errors = require('./errors-b316e546.js');
+var index$1 = require('./index.js');
+var errors = require('./errors-6d843f19.js');
 var utils = require('./utils-8eb11d51.js');
-var utils$2 = require('./utils-9098034f.js');
+var utils$2 = require('./utils-991cd1cd.js');
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var FormError = /*#__PURE__*/function (_BaseError) {
@@ -104,7 +104,7 @@ function _readOnlyError(name) {
 var createForm = function createForm(_ref) {
   var fields = _ref.fields,
       _validate = _ref.validate;
-  var sentry = index.services.sentry;
+  var sentry = index$1.services.sentry;
   return {
     fields: fields,
     validate: function validate(values, fieldsToValidate) {
@@ -306,7 +306,7 @@ var loginWithLinkForm = (function () {
 });
 
 var loginWithPasswordForm = (function () {
-  var authOptions = index.options.auth;
+  var authOptions = index$1.options.auth;
   return createForm({
     fields: {
       email: emailField('email', {
@@ -345,7 +345,7 @@ var loginWithPasswordForm = (function () {
 });
 
 var onboardingForm = (function () {
-  var authOptions = index.options.auth;
+  var authOptions = index$1.options.auth;
   return createForm({
     fields: {
       password: textField('password', {

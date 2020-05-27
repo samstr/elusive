@@ -3,12 +3,12 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var index = require('./index.js');
-var errors = require('./errors-b316e546.js');
+var index$1 = require('./index.js');
+var errors = require('./errors-6d843f19.js');
 var jwt = require('jsonwebtoken');
 var jwt__default = _interopDefault(jwt);
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var TokenError = /*#__PURE__*/function (_BaseError) {
@@ -70,7 +70,7 @@ var signToken = function signToken(claims, secret, expiryMins) {
   });
 };
 var signTokens = function signTokens(claims, secret) {
-  var tokenOptions = index.options.tokens; // delete these if they exist. not needed
+  var tokenOptions = index$1.options.tokens; // delete these if they exist. not needed
 
   delete claims.iat;
   delete claims.exp;
