@@ -10,6 +10,9 @@ export { FormErrors };
 import GenericErrors from './GenericErrors';
 export { GenericErrors };
 
+import Link from './Link';
+export { Link };
+
 import LoginWithLinkForm from './LoginWithLinkForm';
 export { LoginWithLinkForm };
 

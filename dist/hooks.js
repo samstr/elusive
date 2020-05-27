@@ -12,12 +12,12 @@ var utils$1$1 = require('./utils-3409f232.js');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
+var router = require('next/router');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
-var router = require('next/router');
 var UserContext = require('./UserContext-75b168f7.js');
 var utils = require('./utils-081fbcf9.js');
-var useSession = require('./useSession-fd497c3e.js');
+var useSession = require('./useSession-ac1cd05c.js');
 
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();

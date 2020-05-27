@@ -14,9 +14,12 @@ var PropTypes = _interopDefault(require('prop-types'));
 var React = require('react');
 var React__default = _interopDefault(React);
 var reactBootstrap = require('react-bootstrap');
+var clsx = _interopDefault(require('clsx'));
+var Link$2 = _interopDefault(require('next/link'));
+var router = require('next/router');
+var MuiLink = _interopDefault(require('@material-ui/core/Link'));
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
-var router = require('next/router');
 var signupForm = require('./signupForm-70d92045.js');
 
 var __jsx = React__default.createElement;
@@ -130,7 +133,128 @@ FormErrors.propTypes = {
   includingFields: PropTypes.arrayOf(PropTypes.string)
 };
 
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
 var __jsx$4 = React__default.createElement;
+var NextComposed = React__default.forwardRef(function NextComposed(props, ref) {
+  var as = props.as,
+      href = props.href,
+      other = _objectWithoutProperties(props, ["as", "href"]);
+
+  return __jsx$4(Link$2, {
+    href: href,
+    as: as
+  }, __jsx$4("a", _extends({
+    ref: ref
+  }, other)));
+});
+NextComposed.propTypes = {
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  prefetch: PropTypes.bool
+}; // A styled version of the Next.js Link component:
+// https://nextjs.org/docs/#with-link
+
+function Link(props) {
+  var href = props.href,
+      _props$activeClassNam = props.activeClassName,
+      activeClassName = _props$activeClassNam === void 0 ? 'active' : _props$activeClassNam,
+      classNameProps = props.className,
+      innerRef = props.innerRef,
+      naked = props.naked,
+      other = _objectWithoutProperties(props, ["href", "activeClassName", "className", "innerRef", "naked"]);
+
+  var router$1 = router.useRouter();
+  var pathname = typeof href === 'string' ? href : href.pathname;
+  var className = clsx(classNameProps, defineProperty._defineProperty({}, activeClassName, router$1.pathname === pathname && activeClassName));
+
+  if (naked) {
+    return __jsx$4(NextComposed, _extends({
+      className: className,
+      ref: innerRef,
+      href: href
+    }, other));
+  }
+
+  return __jsx$4(MuiLink, _extends({
+    component: NextComposed,
+    className: className,
+    ref: innerRef,
+    href: href
+  }, other));
+}
+
+Link.propTypes = {
+  activeClassName: PropTypes.string,
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  className: PropTypes.string,
+  href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  naked: PropTypes.bool,
+  onClick: PropTypes.func,
+  prefetch: PropTypes.bool
+};
+
+var forwarder = function forwarder(props, ref) {
+  return __jsx$4(Link, _extends({}, props, {
+    innerRef: ref
+  }));
+};
+
+forwarder.displayName = 'Link';
+var Link$1 = React.forwardRef(forwarder);
+
+var __jsx$5 = React__default.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -217,12 +341,12 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
     };
   }();
 
-  return __jsx$4(reactBootstrap.Form, {
+  return __jsx$5(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$4(reactBootstrap.Form.Group, {
+  }, __jsx$5(reactBootstrap.Form.Group, {
     controlId: "email"
-  }, __jsx$4(reactBootstrap.Form.Control, {
+  }, __jsx$5(reactBootstrap.Form.Control, {
     name: "email",
     type: "text",
     placeholder: "Email",
@@ -230,13 +354,13 @@ var LoginWithLinkForm = function LoginWithLinkForm(_ref) {
     autoComplete: "off",
     isInvalid: !!utils.fieldErrors(formErrors, 'email').length,
     autoFocus: true
-  }), __jsx$4(FormErrors, {
+  }), __jsx$5(FormErrors, {
     errors: formErrors,
     field: "email"
-  })), __jsx$4(FormErrors, {
+  })), __jsx$5(FormErrors, {
     errors: formErrors,
     includingFields: ['type']
-  }), __jsx$4(Button, {
+  }), __jsx$5(Button, {
     variant: "primary",
     text: "Send",
     loadingText: "Sending",
@@ -250,7 +374,7 @@ LoginWithLinkForm.propTypes = {
   onSuccess: PropTypes.func.isRequired
 };
 
-var __jsx$5 = React__default.createElement;
+var __jsx$6 = React__default.createElement;
 
 function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -336,12 +460,12 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
     };
   }();
 
-  return __jsx$5(reactBootstrap.Form, {
+  return __jsx$6(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$5(reactBootstrap.Form.Group, {
+  }, __jsx$6(reactBootstrap.Form.Group, {
     controlId: "email"
-  }, __jsx$5(reactBootstrap.Form.Control, {
+  }, __jsx$6(reactBootstrap.Form.Control, {
     name: "email",
     type: "text",
     placeholder: "Email",
@@ -349,25 +473,25 @@ var LoginWithPasswordForm = function LoginWithPasswordForm(_ref) {
     autoComplete: "off",
     isInvalid: !!utils.fieldErrors(formErrors, 'email').length,
     autoFocus: true
-  }), __jsx$5(FormErrors, {
+  }), __jsx$6(FormErrors, {
     errors: formErrors,
     field: "email"
-  })), __jsx$5(reactBootstrap.Form.Group, {
+  })), __jsx$6(reactBootstrap.Form.Group, {
     controlId: "password"
-  }, __jsx$5(reactBootstrap.Form.Control, {
+  }, __jsx$6(reactBootstrap.Form.Control, {
     type: "password",
     name: "password",
     placeholder: "Password",
     onChange: onChange,
     autoComplete: "off",
     isInvalid: !!utils.fieldErrors(formErrors, 'password').length
-  }), __jsx$5(FormErrors, {
+  }), __jsx$6(FormErrors, {
     errors: formErrors,
     field: "password"
-  })), __jsx$5(FormErrors, {
+  })), __jsx$6(FormErrors, {
     errors: formErrors,
     includingFields: ['type']
-  }), __jsx$5(Button, {
+  }), __jsx$6(Button, {
     variant: "primary",
     text: "Login",
     loadingText: "Logging in",
@@ -381,7 +505,7 @@ LoginWithPasswordForm.propTypes = {
   onSuccess: PropTypes.func.isRequired
 };
 
-var __jsx$6 = React__default.createElement;
+var __jsx$7 = React__default.createElement;
 
 var LogoutForm = function LogoutForm(_ref) {
   var onSuccess = _ref.onSuccess;
@@ -435,12 +559,12 @@ var LogoutForm = function LogoutForm(_ref) {
     };
   }();
 
-  return __jsx$6(reactBootstrap.Form, {
+  return __jsx$7(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$6(FormErrors, {
+  }, __jsx$7(FormErrors, {
     errors: formErrors
-  }), __jsx$6(Button, {
+  }), __jsx$7(Button, {
     variant: "primary",
     text: "Logout",
     loadingText: "Logging out",
@@ -454,7 +578,7 @@ LogoutForm.propTypes = {
   onSuccess: PropTypes.func.isRequired
 };
 
-var __jsx$7 = React__default.createElement;
+var __jsx$8 = React__default.createElement;
 
 function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -539,21 +663,21 @@ var OnboardingForm = function OnboardingForm(_ref) {
     };
   }();
 
-  return __jsx$7(reactBootstrap.Form, {
+  return __jsx$8(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$7(reactBootstrap.Form.Group, {
+  }, __jsx$8(reactBootstrap.Form.Group, {
     controlId: "email"
-  }, __jsx$7(reactBootstrap.Form.Control, {
+  }, __jsx$8(reactBootstrap.Form.Control, {
     name: "email",
     type: "text",
     placeholder: "Email",
     value: email,
     hidden: true,
     readOnly: true
-  })), __jsx$7(reactBootstrap.Form.Group, {
+  })), __jsx$8(reactBootstrap.Form.Group, {
     controlId: "password"
-  }, __jsx$7(reactBootstrap.Form.Control, {
+  }, __jsx$8(reactBootstrap.Form.Control, {
     type: "password",
     name: "password",
     placeholder: "Password",
@@ -561,12 +685,12 @@ var OnboardingForm = function OnboardingForm(_ref) {
     autoComplete: "off",
     isInvalid: !!utils.fieldErrors(formErrors, 'password').length,
     autoFocus: true
-  }), __jsx$7(FormErrors, {
+  }), __jsx$8(FormErrors, {
     errors: formErrors,
     field: "password"
-  })), __jsx$7(FormErrors, {
+  })), __jsx$8(FormErrors, {
     errors: formErrors
-  }), __jsx$7(Button, {
+  }), __jsx$8(Button, {
     variant: "primary",
     text: "Save",
     loadingText: "Saving",
@@ -581,7 +705,7 @@ OnboardingForm.propTypes = {
   onSuccess: PropTypes.func.isRequired
 };
 
-var __jsx$8 = React__default.createElement;
+var __jsx$9 = React__default.createElement;
 
 function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -665,12 +789,12 @@ var ResetForm = function ResetForm(_ref) {
     };
   }();
 
-  return __jsx$8(reactBootstrap.Form, {
+  return __jsx$9(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$8(reactBootstrap.Form.Group, {
+  }, __jsx$9(reactBootstrap.Form.Group, {
     controlId: "email"
-  }, __jsx$8(reactBootstrap.Form.Control, {
+  }, __jsx$9(reactBootstrap.Form.Control, {
     name: "email",
     type: "text",
     placeholder: "Email",
@@ -678,12 +802,12 @@ var ResetForm = function ResetForm(_ref) {
     autoComplete: "off",
     isInvalid: !!utils.fieldErrors(formErrors, 'email').length,
     autoFocus: true
-  }), __jsx$8(FormErrors, {
+  }), __jsx$9(FormErrors, {
     errors: formErrors,
     field: "email"
-  })), __jsx$8(FormErrors, {
+  })), __jsx$9(FormErrors, {
     errors: formErrors
-  }), __jsx$8(Button, {
+  }), __jsx$9(Button, {
     variant: "primary",
     text: "Send",
     loadingText: "Sending",
@@ -697,7 +821,7 @@ ResetForm.propTypes = {
   onSuccess: PropTypes.func.isRequired
 };
 
-var __jsx$9 = React__default.createElement;
+var __jsx$a = React__default.createElement;
 
 function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -781,12 +905,12 @@ var SignupForm = function SignupForm(_ref) {
     };
   }();
 
-  return __jsx$9(reactBootstrap.Form, {
+  return __jsx$a(reactBootstrap.Form, {
     noValidate: true,
     onSubmit: submit
-  }, __jsx$9(reactBootstrap.Form.Group, {
+  }, __jsx$a(reactBootstrap.Form.Group, {
     controlId: "email"
-  }, __jsx$9(reactBootstrap.Form.Control, {
+  }, __jsx$a(reactBootstrap.Form.Control, {
     name: "email",
     type: "text",
     placeholder: "Email",
@@ -794,12 +918,12 @@ var SignupForm = function SignupForm(_ref) {
     autoComplete: "off",
     isInvalid: !!utils.fieldErrors(formErrors, 'email').length,
     autoFocus: true
-  }), __jsx$9(FormErrors, {
+  }), __jsx$a(FormErrors, {
     errors: formErrors,
     field: "email"
-  })), __jsx$9(FormErrors, {
+  })), __jsx$a(FormErrors, {
     errors: formErrors
-  }), __jsx$9(Button, {
+  }), __jsx$a(Button, {
     variant: "primary",
     text: "Sign Up",
     loadingText: "Signing up",
@@ -817,6 +941,7 @@ exports.AuthBasePage = AuthBasePage;
 exports.Button = Button;
 exports.FormErrors = FormErrors;
 exports.GenericErrors = GenericErrors;
+exports.Link = Link$1;
 exports.LoginWithLinkForm = LoginWithLinkForm;
 exports.LoginWithPasswordForm = LoginWithPasswordForm;
 exports.LogoutForm = LogoutForm;

@@ -19,15 +19,17 @@ var _JSXStyle = _interopDefault(require('styled-jsx/style'));
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-23517104.js');
+var SignupForm = require('./SignupForm-17aee60d.js');
 var reactBootstrap = require('react-bootstrap');
-require('axios');
+require('clsx');
+var Link$2 = _interopDefault(require('next/link'));
 var router = require('next/router');
+require('@material-ui/core/Link');
+require('axios');
 require('./signupForm-70d92045.js');
 require('./UserContext-75b168f7.js');
 require('./utils-081fbcf9.js');
-var useSession = require('./useSession-fd497c3e.js');
-var Link = _interopDefault(require('next/link'));
+var useSession = require('./useSession-ac1cd05c.js');
 
 var __jsx = React__default.createElement;
 
@@ -96,11 +98,11 @@ var LoginPage = function LoginPage() {
     onSuccess: onPasswordSuccess
   })), __jsx("div", {
     className: "jsx-1275567024" + " " + "footer"
-  }, __jsx(Link, {
+  }, __jsx(Link$2, {
     href: utils$1$1.resetRoute()
   }, __jsx("a", {
     className: "jsx-1275567024"
-  }, "Forgot your password?")), "\xA0\xA0\u2022\xA0\xA0", __jsx(Link, {
+  }, "Forgot your password?")), "\xA0\xA0\u2022\xA0\xA0", __jsx(Link$2, {
     href: loginTypeRouteWithNext(utils$2.LOGIN_TYPE_LINK)
   }, __jsx("a", {
     className: "jsx-1275567024"
@@ -120,7 +122,7 @@ var LoginPage = function LoginPage() {
     onSuccess: onLinkSuccess
   })), __jsx("div", {
     className: "jsx-1275567024" + " " + "footer"
-  }, __jsx(Link, {
+  }, __jsx(Link$2, {
     href: loginTypeRouteWithNext(utils$2.LOGIN_TYPE_PASSWORD)
   }, __jsx("a", {
     className: "jsx-1275567024"
@@ -128,7 +130,7 @@ var LoginPage = function LoginPage() {
     className: "jsx-1275567024"
   }, "How do you want to login?"), __jsx("div", {
     className: "jsx-1275567024" + " " + "options"
-  }, __jsx(Link, {
+  }, __jsx(Link$2, {
     href: loginTypeRouteWithNext(utils$2.LOGIN_TYPE_PASSWORD)
   }, __jsx("a", {
     className: "jsx-1275567024" + " " + "option"
@@ -140,7 +142,7 @@ var LoginPage = function LoginPage() {
     className: "jsx-1275567024"
   })), __jsx("div", {
     className: "jsx-1275567024" + " " + "text"
-  }, "Login with my password"))), __jsx(Link, {
+  }, "Login with my password"))), __jsx(Link$2, {
     href: loginTypeRouteWithNext(utils$2.LOGIN_TYPE_LINK)
   }, __jsx("a", {
     className: "jsx-1275567024" + " " + "option"
@@ -154,7 +156,7 @@ var LoginPage = function LoginPage() {
     className: "jsx-1275567024" + " " + "text"
   }, "Email me a login link")))), __jsx("div", {
     className: "jsx-1275567024" + " " + "footer"
-  }, __jsx(Link, {
+  }, __jsx(Link$2, {
     href: utils$1$1.signupRoute()
   }, __jsx("a", {
     className: "jsx-1275567024"
@@ -265,7 +267,7 @@ var OnboardingPage = function OnboardingPage() {
 
   return __jsx$3(SignupForm.AuthBasePage, null, session._ready ? __jsx$3(React__default.Fragment, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "What next?"), __jsx$3("div", {
     className: "options"
-  }, __jsx$3(Link, {
+  }, __jsx$3(Link$2, {
     href: utils$1$1.settingsProfileRoute()
   }, __jsx$3("a", {
     className: "option"
@@ -345,7 +347,7 @@ var SignupPage = function SignupPage() {
     onSuccess: onSuccess
   })), __jsx$5("div", {
     className: "footer"
-  }, __jsx$5(Link, {
+  }, __jsx$5(Link$2, {
     href: utils$1$1.loginRoute()
   }, __jsx$5("a", null, "I already have an account")))));
 };

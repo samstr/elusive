@@ -16,10 +16,13 @@ require('./utils-9098034f.js');
 require('styled-jsx/style');
 require('prop-types');
 require('react');
-var SignupForm = require('./SignupForm-23517104.js');
+var SignupForm = require('./SignupForm-17aee60d.js');
 require('react-bootstrap');
-require('axios');
+require('clsx');
+require('next/link');
 require('next/router');
+require('@material-ui/core/Link');
+require('axios');
 require('./signupForm-70d92045.js');
 
 
@@ -28,6 +31,7 @@ exports.AuthBasePage = SignupForm.AuthBasePage;
 exports.Button = SignupForm.Button;
 exports.FormErrors = SignupForm.FormErrors;
 exports.GenericErrors = SignupForm.GenericErrors;
+exports.Link = SignupForm.Link;
 exports.LoginWithLinkForm = SignupForm.LoginWithLinkForm;
 exports.LoginWithPasswordForm = SignupForm.LoginWithPasswordForm;
 exports.LogoutForm = SignupForm.LogoutForm;

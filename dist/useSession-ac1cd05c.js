@@ -7,9 +7,9 @@ var asyncToGenerator = require('./asyncToGenerator-42483001.js');
 var utils$1$1 = require('./utils-3409f232.js');
 var React = require('react');
 var React__default = _interopDefault(React);
+var router = require('next/router');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
-var router = require('next/router');
 var UserContext = require('./UserContext-75b168f7.js');
 var utils = require('./utils-081fbcf9.js');
 
