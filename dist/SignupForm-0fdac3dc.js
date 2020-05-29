@@ -9,8 +9,8 @@ var errors = require('./errors-6d843f19.js');
 var utils = require('./utils-8eb11d51.js');
 var asyncToGenerator = require('./asyncToGenerator-093ecb8b.js');
 require('bcryptjs');
-var utils$1$1 = require('./utils-3409f232.js');
-var utils$2 = require('./utils-991cd1cd.js');
+var utils$1$1 = require('./utils-fff88218.js');
+var utils$2 = require('./utils-04292390.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 var PropTypes = require('prop-types');
@@ -22,7 +22,7 @@ var router = require('next/router');
 var ReactDOM = require('react-dom');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
-var signupForm = require('./signupForm-d8fd140c.js');
+var signupForm = require('./signupForm-632b3954.js');
 
 function hash(str) {
   var hash = 5381,

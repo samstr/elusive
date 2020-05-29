@@ -1,4 +1,5 @@
 import {
+  authRoute,
   homeRoute,
   indexRoute,
   loginAPIRoute,
@@ -24,6 +25,7 @@ import {
   userAPIRoute,
 } from './utils';
 export {
+  authRoute,
   homeRoute,
   indexRoute,
   loginAPIRoute,

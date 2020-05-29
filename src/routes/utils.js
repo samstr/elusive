@@ -1,4 +1,5 @@
 // Page routes
+export const authRoute = () => '/auth';
 export const homeRoute = () => '/home';
 export const indexRoute = () => '/';
 export const loginRoute = () => '/login';

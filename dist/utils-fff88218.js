@@ -1,6 +1,9 @@
 'use strict';
 
 // Page routes
+var authRoute = function authRoute() {
+  return '/auth';
+};
 var homeRoute = function homeRoute() {
   return '/home';
 };
@@ -86,6 +89,7 @@ var userAPIRoute = function userAPIRoute() {
   return '/api/user';
 };
 
+exports.authRoute = authRoute;
 exports.homeRoute = homeRoute;
 exports.indexRoute = indexRoute;
 exports.loginAPIRoute = loginAPIRoute;
