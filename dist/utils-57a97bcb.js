@@ -22,6 +22,9 @@ var magicLoginRoute = function magicLoginRoute(id) {
     asPath: "/login/".concat(id)
   };
 };
+var messagesRoute = function messagesRoute() {
+  return '/messages';
+};
 var notificationsRoute = function notificationsRoute() {
   return '/notifications';
 };
@@ -101,6 +104,7 @@ exports.loginRouteWithNext = loginRouteWithNext;
 exports.logoutAPIRoute = logoutAPIRoute;
 exports.logoutRoute = logoutRoute;
 exports.magicLoginRoute = magicLoginRoute;
+exports.messagesRoute = messagesRoute;
 exports.notificationsRoute = notificationsRoute;
 exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
