@@ -11,10 +11,10 @@ require('./utils-8eb11d51.js');
 require('./asyncToGenerator-093ecb8b.js');
 require('bcryptjs');
 require('./utils-f3ba8179.js');
-require('./utils-fff88218.js');
-require('./utils-04292390.js');
+require('./utils-278ba21a.js');
+require('./utils-3983771f.js');
 require('react');
-var SignupForm = require('./SignupForm-0fdac3dc.js');
+var SignupForm = require('./SignupForm-115f80ff.js');
 require('prop-types');
 require('react-bootstrap');
 require('clsx');
@@ -22,7 +22,7 @@ require('next/link');
 require('next/router');
 require('react-dom');
 require('axios');
-require('./signupForm-632b3954.js');
+require('./signupForm-7b3b9d8d.js');
 
 
 
