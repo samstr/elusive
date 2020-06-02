@@ -10,6 +10,9 @@ var autoLoginRoute = function autoLoginRoute(id) {
     asPath: "".concat(loginRoute(), "/").concat(id)
   };
 };
+var helpRoute = function helpRoute() {
+  return '/help';
+};
 var homeRoute = function homeRoute() {
   return '/home';
 };
@@ -42,6 +45,9 @@ var settingsAccountRoute = function settingsAccountRoute() {
 };
 var termsRoute = function termsRoute() {
   return '/terms';
+};
+var privacyRoute = function privacyRoute() {
+  return '/privacy';
 }; // Route utils
 
 var loginRouteWithNext = function loginRouteWithNext() {
@@ -82,6 +88,7 @@ var userAPIRoute = function userAPIRoute() {
 };
 
 exports.autoLoginRoute = autoLoginRoute;
+exports.helpRoute = helpRoute;
 exports.homeRoute = homeRoute;
 exports.indexRoute = indexRoute;
 exports.loginAPIRoute = loginAPIRoute;
@@ -93,6 +100,7 @@ exports.messagesRoute = messagesRoute;
 exports.notificationsRoute = notificationsRoute;
 exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
+exports.privacyRoute = privacyRoute;
 exports.resetAPIRoute = resetAPIRoute;
 exports.resetRoute = resetRoute;
 exports.sessionAPIRoute = sessionAPIRoute;

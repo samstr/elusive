@@ -2,11 +2,12 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var utils$1$1 = require('./utils-997c78e5.js');
+var utils$1$1 = require('./utils-3f513b76.js');
 
 
 
 exports.autoLoginRoute = utils$1$1.autoLoginRoute;
+exports.helpRoute = utils$1$1.helpRoute;
 exports.homeRoute = utils$1$1.homeRoute;
 exports.indexRoute = utils$1$1.indexRoute;
 exports.loginAPIRoute = utils$1$1.loginAPIRoute;
@@ -18,6 +19,7 @@ exports.messagesRoute = utils$1$1.messagesRoute;
 exports.notificationsRoute = utils$1$1.notificationsRoute;
 exports.onboardingAPIRoute = utils$1$1.onboardingAPIRoute;
 exports.onboardingRoute = utils$1$1.onboardingRoute;
+exports.privacyRoute = utils$1$1.privacyRoute;
 exports.resetAPIRoute = utils$1$1.resetAPIRoute;
 exports.resetRoute = utils$1$1.resetRoute;
 exports.sessionAPIRoute = utils$1$1.sessionAPIRoute;

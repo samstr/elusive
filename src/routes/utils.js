@@ -4,6 +4,7 @@ export const autoLoginRoute = (id) => ({
   href: `${loginRoute()}/[id]`,
   asPath: `${loginRoute()}/${id}`,
 });
+export const helpRoute = () => '/help';
 export const homeRoute = () => '/home';
 export const indexRoute = () => '/';
 export const logoutRoute = () => '/logout';
@@ -15,6 +16,7 @@ export const settingsRoute = () => '/settings';
 export const settingsProfileRoute = () => '/settings/profile';
 export const settingsAccountRoute = () => '/settings/account';
 export const termsRoute = () => '/terms';
+export const privacyRoute = () => '/privacy';
 
 // Route utils
 export const loginRouteWithNext = () => {

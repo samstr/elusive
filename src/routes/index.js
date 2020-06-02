@@ -1,5 +1,6 @@
 import {
   autoLoginRoute,
+  helpRoute,
   homeRoute,
   indexRoute,
   loginRoute,
@@ -12,6 +13,7 @@ import {
   messagesRoute,
   notificationsRoute,
   onboardingAPIRoute,
+  privacyRoute,
   resetAPIRoute,
   sessionAPIRoute,
   settingsRoute,
@@ -23,6 +25,7 @@ import {
 } from './utils';
 export {
   autoLoginRoute,
+  helpRoute,
   homeRoute,
   indexRoute,
   loginRoute,
@@ -35,6 +38,7 @@ export {
   messagesRoute,
   notificationsRoute,
   onboardingAPIRoute,
+  privacyRoute,
   resetAPIRoute,
   sessionAPIRoute,
   settingsRoute,
