@@ -11,12 +11,16 @@ export const logoutRoute = () => '/logout';
 export const messagesRoute = () => '/messages';
 export const notificationsRoute = () => '/notifications';
 export const onboardingRoute = () => '/onboarding';
+export const privacyRoute = () => '/privacy';
+export const profileRoute = (username) => ({
+  href: `/[username]`,
+  asPath: `/${username}`,
+});
 export const resetRoute = () => '/reset';
 export const settingsRoute = () => '/settings';
 export const settingsProfileRoute = () => '/settings/profile';
 export const settingsAccountRoute = () => '/settings/account';
 export const termsRoute = () => '/terms';
-export const privacyRoute = () => '/privacy';
 
 // Route utils
 export const loginRouteWithNext = () => {
