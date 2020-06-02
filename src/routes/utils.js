@@ -7,6 +7,8 @@ export const autoLoginRoute = (id) => ({
 export const homeRoute = () => '/home';
 export const indexRoute = () => '/';
 export const logoutRoute = () => '/logout';
+export const messagesRoute = () => '/messages';
+export const notificationsRoute = () => '/notifications';
 export const onboardingRoute = () => '/onboarding';
 export const resetRoute = () => '/reset';
 export const settingsRoute = () => '/settings';

@@ -19,6 +19,12 @@ var indexRoute = function indexRoute() {
 var logoutRoute = function logoutRoute() {
   return '/logout';
 };
+var messagesRoute = function messagesRoute() {
+  return '/messages';
+};
+var notificationsRoute = function notificationsRoute() {
+  return '/notifications';
+};
 var onboardingRoute = function onboardingRoute() {
   return '/onboarding';
 };
@@ -83,6 +89,8 @@ exports.loginRoute = loginRoute;
 exports.loginRouteWithNext = loginRouteWithNext;
 exports.logoutAPIRoute = logoutAPIRoute;
 exports.logoutRoute = logoutRoute;
+exports.messagesRoute = messagesRoute;
+exports.notificationsRoute = notificationsRoute;
 exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
 exports.resetAPIRoute = resetAPIRoute;
