@@ -1,30 +1,15 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
+var createClass = require('./createClass-013e6a9b.js');
 var defineProperty = require('./defineProperty-ba7cd53d.js');
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
 
 var ElusiveClient = /*#__PURE__*/function () {
   function ElusiveClient() {
     classCallCheck._classCallCheck(this, ElusiveClient);
   }
 
-  _createClass(ElusiveClient, [{
+  createClass._createClass(ElusiveClient, [{
     key: "setDefaults",
     value: function setDefaults() {
       this.services = {
@@ -34,7 +19,7 @@ var ElusiveClient = /*#__PURE__*/function () {
       };
       this.options = {
         auth: {
-          magicLoginExpiryHours: 1,
+          autoLoginExpiryHours: 1,
           maxLoginAttemptsPerAccountPerHour: 8,
           maxLoginAttemptsPerIPPerHour: 16,
           maxRegistrationsPerDay: 5,
@@ -102,7 +87,7 @@ var ElusiveClient = /*#__PURE__*/function () {
             tokens = options.tokens;
 
         if (auth) {
-          var magicLoginExpiryHours = auth.magicLoginExpiryHours,
+          var autoLoginExpiryHours = auth.autoLoginExpiryHours,
               maxLoginAttemptsPerAccountPerHour = auth.maxLoginAttemptsPerAccountPerHour,
               maxLoginAttemptsPerIPPerHour = auth.maxLoginAttemptsPerIPPerHour,
               maxRegistrationsPerDay = auth.maxRegistrationsPerDay,
@@ -112,8 +97,8 @@ var ElusiveClient = /*#__PURE__*/function () {
               passwordResetExpiryHours = auth.passwordResetExpiryHours,
               saltRounds = auth.saltRounds;
 
-          if (magicLoginExpiryHours) {
-            this.options.auth.magicLoginExpiryHours = magicLoginExpiryHours;
+          if (autoLoginExpiryHours) {
+            this.options.auth.autoLoginExpiryHours = autoLoginExpiryHours;
           }
 
           if (maxLoginAttemptsPerAccountPerHour) {
@@ -255,4 +240,3 @@ var ElusiveClient = /*#__PURE__*/function () {
 defineProperty._defineProperty(ElusiveClient, "instance", void 0);
 
 exports.ElusiveClient = ElusiveClient;
-exports._createClass = _createClass;

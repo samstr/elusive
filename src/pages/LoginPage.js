@@ -6,11 +6,11 @@ import Elusive from '../';
 import { LOGIN_TYPE_LINK, LOGIN_TYPE_PASSWORD, LOGIN_TYPES } from '../auth';
 import {
   AuthBasePage,
-  LoginWithLinkForm,
-  LoginWithPasswordForm,
+  // LoginWithLinkForm,
+  // LoginWithPasswordForm,
 } from '../components';
 import { useSession } from '../hooks';
-import { homeRoute, loginRoute, resetRoute, signupRoute } from '../routes';
+import { homeRoute, loginRoute, resetRoute } from '../routes';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -64,7 +64,7 @@ const LoginPage = () => {
         <>
           <h1>Login to {siteOptions.name}</h1>
           <div className="form">
-            <LoginWithPasswordForm onSuccess={onPasswordSuccess} />
+            {/* <LoginWithPasswordForm onSuccess={onPasswordSuccess} />*/}
           </div>
           <div className="footer">
             <Link href={resetRoute()}>
@@ -94,7 +94,7 @@ const LoginPage = () => {
             <>
               <h1>Login to {siteOptions.name}</h1>
               <div className="form">
-                <LoginWithLinkForm onSuccess={onLinkSuccess} />
+                {/* <LoginWithLinkForm onSuccess={onLinkSuccess} />*/}
               </div>
               <div className="footer">
                 <Link href={loginTypeRouteWithNext(LOGIN_TYPE_PASSWORD)}>
@@ -126,11 +126,11 @@ const LoginPage = () => {
               </a>
             </Link>
           </div>
-          <div className="footer">
+          {/* <div className="footer">
             <Link href={signupRoute()}>
               <a>Create an account instead</a>
             </Link>
-          </div>
+      </div>*/}
         </>
       )}
 

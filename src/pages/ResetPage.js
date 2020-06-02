@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 
 import Elusive from '../';
-import { AuthBasePage, ResetForm } from '../components';
+import {
+  AuthBasePage,
+  // ResetForm
+} from '../components';
 import { useSession } from '../hooks';
 
 const ResetPage = () => {
@@ -31,9 +34,7 @@ const ResetPage = () => {
       ) : (
         <>
           <h1>Forgot your password?</h1>
-          <div className="form">
-            <ResetForm onSuccess={onSuccess} />
-          </div>
+          <div className="form">{/* <ResetForm onSuccess={onSuccess} />*/}</div>
         </>
       )}
     </AuthBasePage>

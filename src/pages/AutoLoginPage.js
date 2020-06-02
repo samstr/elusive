@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { Spinner } from 'react-bootstrap';
 
-import { AuthBasePage, GenericErrors } from '../components';
+import {
+  AuthBasePage,
+  // GenericErrors
+} from '../components';
 import { useData, useSessionContext } from '../hooks';
 import { homeRoute, onboardingRoute } from '../routes';
 
-const MagicLoginPage = () => {
+const AutoLoginPage = () => {
   const data = useData();
   const router = useRouter();
   const { setSessionContext } = useSessionContext();
@@ -34,13 +36,13 @@ const MagicLoginPage = () => {
       {data && errors ? (
         <>
           <h1>There was a problem</h1>
-          <GenericErrors errors={errors} />
+          {/* <GenericErrors errors={errors} />*/}
         </>
       ) : (
-        <Spinner animation="border" role="status" variant="primary" />
+        <p>Spinner</p>
       )}
     </AuthBasePage>
   );
 };
 
-export default MagicLoginPage;
+export default AutoLoginPage;

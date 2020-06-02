@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import Elusive from '../';
 import { defaultDynamicTemplateData, sendMail } from '../mail';
 import {
-  magicLoginRoute,
+  autoLoginRoute,
   termsRoute,
   onboardingRoute,
   settingsAccountRoute,
@@ -27,7 +27,7 @@ export const comparePasswordHash = (password, hash) =>
 
 export const hasRole = (role, roles) => roles.includes(role);
 
-export const sendLoginEmail = async (req, toEmail, magicLoginID, next) => {
+export const sendLoginEmail = async (req, toEmail, autoLoginID, next) => {
   const {
     auth: authOptions,
     mail: mailOptions,
@@ -35,12 +35,12 @@ export const sendLoginEmail = async (req, toEmail, magicLoginID, next) => {
   } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
 
-  let magicLoginURL = `${dynamicTemplateData.baseURL}${
-    magicLoginRoute(magicLoginID).asPath
+  let autoLoginURL = `${dynamicTemplateData.baseURL}${
+    autoLoginRoute(autoLoginID).asPath
   }`;
 
   if (next) {
-    magicLoginURL = `${magicLoginURL}?next=${encodeURIComponent(next)}`;
+    autoLoginURL = `${autoLoginURL}?next=${encodeURIComponent(next)}`;
   }
 
   return await sendMail({
@@ -51,16 +51,16 @@ export const sendLoginEmail = async (req, toEmail, magicLoginID, next) => {
       subject: `Login to your ${siteOptions.name} account`,
       preheader: `Click the button below and you will be automatically logged in to your ${siteOptions.name} account. `,
       reasonForEmail: `you requested an automatic login link`,
-      magicLoginURL,
+      autoLoginURL,
       expiryHours:
-        authOptions.magicLoginExpiryHours === 1
-          ? `${authOptions.magicLoginExpiryHours} hour`
-          : `${authOptions.magicLoginExpiryHours} hours`,
+        authOptions.autoLoginExpiryHours === 1
+          ? `${authOptions.autoLoginExpiryHours} hour`
+          : `${authOptions.autoLoginExpiryHours} hours`,
     },
   });
 };
 
-export const sendSignupEmail = async (req, toEmail, magicLoginID) => {
+export const sendSignupEmail = async (req, toEmail, autoLoginID) => {
   const { mail: mailOptions, site: siteOptions } = Elusive.options;
   const dynamicTemplateData = defaultDynamicTemplateData(req);
 
@@ -72,15 +72,15 @@ export const sendSignupEmail = async (req, toEmail, magicLoginID) => {
       subject: `Confirm your ${siteOptions.name} account`,
       preheader: `Welcome to ${siteOptions.name}. Thank you for confirming your email address. Click here to create your account. `,
       reasonForEmail: `you signed up for a ${siteOptions.name} account`,
-      magicLoginURL: `${dynamicTemplateData.baseURL}${
-        magicLoginRoute(magicLoginID).asPath
+      autoLoginURL: `${dynamicTemplateData.baseURL}${
+        autoLoginRoute(autoLoginID).asPath
       }?next=${encodeURIComponent(onboardingRoute())}`,
       termsURL: `${dynamicTemplateData.baseURL}${termsRoute()}`,
     },
   });
 };
 
-export const sendResetEmail = async (req, toEmail, magicLoginID) => {
+export const sendResetEmail = async (req, toEmail, autoLoginID) => {
   const {
     auth: authOptions,
     mail: mailOptions,
@@ -96,13 +96,13 @@ export const sendResetEmail = async (req, toEmail, magicLoginID) => {
       subject: `Reset your ${siteOptions.name} password`,
       preheader: `Someone recently requested a password change for your ${siteOptions.name} account. If this was you, you can set a new password here. `,
       reasonForEmail: `we received a password reset request for this account`,
-      magicLoginURL: `${dynamicTemplateData.baseURL}${
-        magicLoginRoute(magicLoginID).asPath
+      autoLoginURL: `${dynamicTemplateData.baseURL}${
+        autoLoginRoute(autoLoginID).asPath
       }?next=${encodeURIComponent(settingsAccountRoute())}`,
       expiryHours:
-        authOptions.magicLoginExpiryHours === 1
-          ? `${authOptions.magicLoginExpiryHours} hour`
-          : `${authOptions.magicLoginExpiryHours} hours`,
+        authOptions.autoLoginExpiryHours === 1
+          ? `${authOptions.autoLoginExpiryHours} hour`
+          : `${authOptions.autoLoginExpiryHours} hours`,
     },
   });
 };

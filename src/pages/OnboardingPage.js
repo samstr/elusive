@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { Spinner } from 'react-bootstrap';
 
-import { AuthBasePage, OnboardingForm } from '../components';
+import {
+  AuthBasePage,
+  // OnboardingForm
+} from '../components';
 import { useRequireAuth, useSession, useSessionContext } from '../hooks';
 import { settingsProfileRoute } from '../routes';
 
@@ -63,16 +65,16 @@ const OnboardingPage = () => {
                 Let&apos;s create a password for you to use when you login
               </div>
               <div className="form">
-                <OnboardingForm
+                {/* <OnboardingForm
                   email={session?.claims?.user?.email || ''}
                   onSuccess={onSuccess}
-                />
+                />*/}
               </div>
             </>
           )}
         </>
       ) : (
-        <Spinner animation="border" role="status" variant="primary" />
+        <p>Spinner</p>
       )}
     </AuthBasePage>
   );

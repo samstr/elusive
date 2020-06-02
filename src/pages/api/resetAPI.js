@@ -4,7 +4,7 @@ import Elusive from '../../';
 import { TooManyResetAttemptsError, sendResetEmail } from '../../auth';
 import { resetForm } from '../../forms';
 import { POST } from '../../http';
-import { createMagicLogin } from '../../models/magicLogins';
+import { createAutoLogin } from '../../models/autoLogins';
 import {
   listResetAttempts,
   resetAttemptsCollection,
@@ -52,11 +52,11 @@ const resetAPI = async ({ req }) => {
   );
 
   if (user && user.enabled) {
-    const magicLogin = await createMagicLogin({
+    const autoLogin = await createAutoLogin({
       userId: user.id,
     });
 
-    await sendResetEmail(req, user.email, magicLogin.id);
+    await sendResetEmail(req, user.email, autoLogin.id);
   }
 };
 

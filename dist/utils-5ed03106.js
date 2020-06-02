@@ -1,8 +1,8 @@
 'use strict';
 
 var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
-var index$1 = require('./index.js');
-var asyncToGenerator = require('./asyncToGenerator-093ecb8b.js');
+var index = require('./index.js');
+var asyncToGenerator = require('./asyncToGenerator-d7664c2f.js');
 var uuid = require('uuid');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -139,7 +139,7 @@ var createService = function createService(model, collectionName) {
 };
 
 var _collection = function _collection(collectionName) {
-  var firebase = index$1.services.firebase;
+  var firebase = index.services.firebase;
   var firestore = firebase.firestore();
   return firestore.collection(collectionName);
 };
@@ -151,7 +151,7 @@ var _createObject = /*#__PURE__*/function () {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            firebase = index$1.services.firebase;
+            firebase = index.services.firebase;
             firestore = firebase.firestore();
             id = uuid.v4();
             dateNow = firebase.firestore.Timestamp.now();
@@ -187,7 +187,7 @@ var _getObjectByID = /*#__PURE__*/function () {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            firebase = index$1.services.firebase;
+            firebase = index.services.firebase;
             firestore = firebase.firestore();
             _context7.next = 4;
             return firestore.collection(collectionName).doc(id).get();
@@ -260,7 +260,7 @@ var _updateObject = /*#__PURE__*/function () {
       while (1) {
         switch (_context9.prev = _context9.next) {
           case 0:
-            firebase = index$1.services.firebase;
+            firebase = index.services.firebase;
             firestore = firebase.firestore();
             updateProps.dateUpdated = firebase.firestore.Timestamp.now();
             newDoc = _objectSpread(_objectSpread({}, doc), updateProps);

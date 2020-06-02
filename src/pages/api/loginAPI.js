@@ -17,7 +17,7 @@ import {
   loginAttemptsCollection,
   listLoginAttempts,
 } from '../../models/loginAttempts';
-import { createMagicLogin } from '../../models/magicLogins';
+import { createAutoLogin } from '../../models/autoLogins';
 import {
   UserNotFoundError,
   UserNotEnabledError,
@@ -135,11 +135,11 @@ export const loginAPI = async ({ req, res, session }) => {
     );
 
     if (user && user.enabled) {
-      const magicLogin = await createMagicLogin({
+      const autoLogin = await createAutoLogin({
         userId: user.id,
       });
 
-      await sendLoginEmail(req, user.email, magicLogin.id, cleanValues.next);
+      await sendLoginEmail(req, user.email, autoLogin.id, cleanValues.next);
     }
   }
 };

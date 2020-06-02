@@ -10,7 +10,7 @@ import {
 import { signupForm } from '../../forms';
 import { POST } from '../../http';
 import { randomInt } from '../../math';
-import { createMagicLogin } from '../../models/magicLogins';
+import { createAutoLogin } from '../../models/autoLogins';
 import {
   UserNotEnabledError,
   createUser,
@@ -85,11 +85,11 @@ const signupAPI = async ({ req, res, session }) => {
     });
   }
 
-  const magicLogin = await createMagicLogin({
+  const autoLogin = await createAutoLogin({
     userId: user.id,
   });
 
-  await sendSignupEmail(req, user.email, magicLogin.id);
+  await sendSignupEmail(req, user.email, autoLogin.id);
 
   return {
     user: {

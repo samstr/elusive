@@ -1,6 +1,7 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
+var assertThisInitialized = require('./assertThisInitialized-bc0de409.js');
 
 function _setPrototypeOf(o, p) {
   _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
@@ -26,36 +27,12 @@ function _inherits(subClass, superClass) {
   if (superClass) _setPrototypeOf(subClass, superClass);
 }
 
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
 function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+  if (call && (assertThisInitialized._typeof(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized(self);
+  return assertThisInitialized._assertThisInitialized(self);
 }
 
 function _getPrototypeOf(o) {
@@ -152,8 +129,6 @@ var BaseError = /*#__PURE__*/function (_Error) {
 }( /*#__PURE__*/_wrapNativeSuper(Error));
 
 exports.BaseError = BaseError;
-exports._assertThisInitialized = _assertThisInitialized;
 exports._getPrototypeOf = _getPrototypeOf;
 exports._inherits = _inherits;
 exports._possibleConstructorReturn = _possibleConstructorReturn;
-exports._typeof = _typeof;

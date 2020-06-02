@@ -10,7 +10,7 @@ class ElusiveClient {
 
     this.options = {
       auth: {
-        magicLoginExpiryHours: 1,
+        autoLoginExpiryHours: 1,
         maxLoginAttemptsPerAccountPerHour: 8,
         maxLoginAttemptsPerIPPerHour: 16,
         maxRegistrationsPerDay: 5,
@@ -70,7 +70,7 @@ class ElusiveClient {
 
       if (auth) {
         const {
-          magicLoginExpiryHours,
+          autoLoginExpiryHours,
           maxLoginAttemptsPerAccountPerHour,
           maxLoginAttemptsPerIPPerHour,
           maxRegistrationsPerDay,
@@ -81,8 +81,8 @@ class ElusiveClient {
           saltRounds,
         } = auth;
 
-        if (magicLoginExpiryHours) {
-          this.options.auth.magicLoginExpiryHours = magicLoginExpiryHours;
+        if (autoLoginExpiryHours) {
+          this.options.auth.autoLoginExpiryHours = autoLoginExpiryHours;
         }
 
         if (maxLoginAttemptsPerAccountPerHour) {

@@ -1,10 +1,10 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var index$1 = require('./index.js');
-var errors = require('./errors-6d843f19.js');
+var index = require('./index.js');
+var errors = require('./errors-2aa38575.js');
 var utils = require('./utils-8eb11d51.js');
-var utils$2 = require('./utils-d3ac194a.js');
+var utils$2 = require('./utils-065de549.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
@@ -104,7 +104,7 @@ function _readOnlyError(name) {
 var createForm = function createForm(_ref) {
   var fields = _ref.fields,
       _validate = _ref.validate;
-  var sentry = index$1.services.sentry;
+  var sentry = index.services.sentry;
   return {
     fields: fields,
     validate: function validate(values, fieldsToValidate) {
@@ -306,7 +306,7 @@ var loginWithLinkForm = (function () {
 });
 
 var loginWithPasswordForm = (function () {
-  var authOptions = index$1.options.auth;
+  var authOptions = index.options.auth;
   return createForm({
     fields: {
       email: emailField('email', {
@@ -345,7 +345,7 @@ var loginWithPasswordForm = (function () {
 });
 
 var onboardingForm = (function () {
-  var authOptions = index$1.options.auth;
+  var authOptions = index.options.auth;
   return createForm({
     fields: {
       password: textField('password', {

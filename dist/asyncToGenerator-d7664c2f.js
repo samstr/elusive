@@ -1,24 +1,8 @@
 'use strict';
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
+var _commonjsHelpers = require('./_commonjsHelpers-a81e97c5.js');
 
-function createCommonjsModule(fn, basedir, module) {
-	return module = {
-	  path: basedir,
-	  exports: {},
-	  require: function (path, base) {
-      return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
-    }
-	}, fn(module, module.exports), module.exports;
-}
-
-function commonjsRequire () {
-	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
-}
-
-var runtime_1 = createCommonjsModule(function (module) {
+var runtime_1 = _commonjsHelpers.createCommonjsModule(function (module) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -788,6 +772,4 @@ function _asyncToGenerator(fn) {
 }
 
 exports._asyncToGenerator = _asyncToGenerator;
-exports.createCommonjsModule = createCommonjsModule;
 exports.regenerator = regenerator;
-exports.unwrapExports = unwrapExports;

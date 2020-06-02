@@ -1,7 +1,7 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var errors = require('./errors-6d843f19.js');
+var errors = require('./errors-2aa38575.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 

@@ -3,17 +3,20 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-require('./ElusiveClient-e7f8ebd1.js');
+require('./createClass-013e6a9b.js');
 require('./defineProperty-ba7cd53d.js');
+require('./ElusiveClient-6f759f99.js');
 require('./index.js');
-require('./errors-6d843f19.js');
+require('./errors-2aa38575.js');
+require('./assertThisInitialized-bc0de409.js');
 require('./utils-8eb11d51.js');
-require('./asyncToGenerator-093ecb8b.js');
+require('./_commonjsHelpers-a81e97c5.js');
+require('./asyncToGenerator-d7664c2f.js');
 require('bcryptjs');
-require('./utils-f3ba8179.js');
-require('./utils-a61e2e4f.js');
-require('./utils-d3ac194a.js');
-var signupForm = require('./signupForm-f9f2d346.js');
+require('./utils-001fa7d1.js');
+require('./utils-5dbf1ca5.js');
+require('./utils-065de549.js');
+var signupForm = require('./signupForm-2a463c76.js');
 
 
 

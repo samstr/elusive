@@ -1,8 +1,14 @@
 'use strict';
 
 // Page routes
-var authRoute = function authRoute() {
-  return '/auth';
+var loginRoute = function loginRoute() {
+  return '/login';
+};
+var autoLoginRoute = function autoLoginRoute(id) {
+  return {
+    href: "".concat(loginRoute(), "/[id]"),
+    asPath: "".concat(loginRoute(), "/").concat(id)
+  };
 };
 var homeRoute = function homeRoute() {
   return '/home';
@@ -10,38 +16,11 @@ var homeRoute = function homeRoute() {
 var indexRoute = function indexRoute() {
   return '/';
 };
-var loginRoute = function loginRoute() {
-  return '/login';
-};
 var logoutRoute = function logoutRoute() {
   return '/logout';
 };
-var magicLoginRoute = function magicLoginRoute(id) {
-  return {
-    href: '/login/[id]',
-    asPath: "/login/".concat(id)
-  };
-};
-var messagesRoute = function messagesRoute() {
-  return '/messages';
-};
-var notificationsRoute = function notificationsRoute() {
-  return '/notifications';
-};
 var onboardingRoute = function onboardingRoute() {
   return '/onboarding';
-};
-var privacyRoute = function privacyRoute() {
-  return '/privacy';
-};
-var profileRoute = function profileRoute(username) {
-  return {
-    href: '/[username]',
-    asPath: "/".concat(username)
-  };
-};
-var signupRoute = function signupRoute() {
-  return '/signup';
 };
 var resetRoute = function resetRoute() {
   return '/reset';
@@ -49,21 +28,16 @@ var resetRoute = function resetRoute() {
 var settingsRoute = function settingsRoute() {
   return '/settings';
 };
-var settingsAccountRoute = function settingsAccountRoute() {
-  return '/settings/account';
-};
-var settingsEmailsRoute = function settingsEmailsRoute() {
-  return '/settings/emails';
-};
-var settingsNotificationsRoute = function settingsNotificationsRoute() {
-  return '/settings/notifications';
-};
 var settingsProfileRoute = function settingsProfileRoute() {
   return '/settings/profile';
 };
+var settingsAccountRoute = function settingsAccountRoute() {
+  return '/settings/account';
+};
 var termsRoute = function termsRoute() {
   return '/terms';
-};
+}; // Route utils
+
 var loginRouteWithNext = function loginRouteWithNext() {
   var _window$location = window.location,
       pathname = _window$location.pathname,
@@ -101,7 +75,7 @@ var userAPIRoute = function userAPIRoute() {
   return '/api/user';
 };
 
-exports.authRoute = authRoute;
+exports.autoLoginRoute = autoLoginRoute;
 exports.homeRoute = homeRoute;
 exports.indexRoute = indexRoute;
 exports.loginAPIRoute = loginAPIRoute;
@@ -109,22 +83,14 @@ exports.loginRoute = loginRoute;
 exports.loginRouteWithNext = loginRouteWithNext;
 exports.logoutAPIRoute = logoutAPIRoute;
 exports.logoutRoute = logoutRoute;
-exports.magicLoginRoute = magicLoginRoute;
-exports.messagesRoute = messagesRoute;
-exports.notificationsRoute = notificationsRoute;
 exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
-exports.privacyRoute = privacyRoute;
-exports.profileRoute = profileRoute;
 exports.resetAPIRoute = resetAPIRoute;
 exports.resetRoute = resetRoute;
 exports.sessionAPIRoute = sessionAPIRoute;
 exports.settingsAccountRoute = settingsAccountRoute;
-exports.settingsEmailsRoute = settingsEmailsRoute;
-exports.settingsNotificationsRoute = settingsNotificationsRoute;
 exports.settingsProfileRoute = settingsProfileRoute;
 exports.settingsRoute = settingsRoute;
 exports.signupAPIRoute = signupAPIRoute;
-exports.signupRoute = signupRoute;
 exports.termsRoute = termsRoute;
 exports.userAPIRoute = userAPIRoute;

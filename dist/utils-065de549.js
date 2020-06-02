@@ -4,10 +4,10 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var defineProperty = require('./defineProperty-ba7cd53d.js');
 var index = require('./index.js');
-var asyncToGenerator = require('./asyncToGenerator-093ecb8b.js');
+var asyncToGenerator = require('./asyncToGenerator-d7664c2f.js');
 var bcrypt = _interopDefault(require('bcryptjs'));
-var utils = require('./utils-f3ba8179.js');
-var utils$1 = require('./utils-a61e2e4f.js');
+var utils = require('./utils-001fa7d1.js');
+var utils$1 = require('./utils-5dbf1ca5.js');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -26,8 +26,8 @@ var hasRole = function hasRole(role, roles) {
   return roles.includes(role);
 };
 var sendLoginEmail = /*#__PURE__*/function () {
-  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(req, toEmail, magicLoginID, next) {
-    var _Elusive$options, authOptions, mailOptions, siteOptions, dynamicTemplateData, magicLoginURL;
+  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(req, toEmail, autoLoginID, next) {
+    var _Elusive$options, authOptions, mailOptions, siteOptions, dynamicTemplateData, autoLoginURL;
 
     return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
@@ -35,10 +35,10 @@ var sendLoginEmail = /*#__PURE__*/function () {
           case 0:
             _Elusive$options = index.options, authOptions = _Elusive$options.auth, mailOptions = _Elusive$options.mail, siteOptions = _Elusive$options.site;
             dynamicTemplateData = utils.defaultDynamicTemplateData(req);
-            magicLoginURL = "".concat(dynamicTemplateData.baseURL).concat(utils$1.magicLoginRoute(magicLoginID).asPath);
+            autoLoginURL = "".concat(dynamicTemplateData.baseURL).concat(utils$1.autoLoginRoute(autoLoginID).asPath);
 
             if (next) {
-              magicLoginURL = "".concat(magicLoginURL, "?next=").concat(encodeURIComponent(next));
+              autoLoginURL = "".concat(autoLoginURL, "?next=").concat(encodeURIComponent(next));
             }
 
             _context.next = 6;
@@ -49,8 +49,8 @@ var sendLoginEmail = /*#__PURE__*/function () {
                 subject: "Login to your ".concat(siteOptions.name, " account"),
                 preheader: "Click the button below and you will be automatically logged in to your ".concat(siteOptions.name, " account. "),
                 reasonForEmail: "you requested an automatic login link",
-                magicLoginURL: magicLoginURL,
-                expiryHours: authOptions.magicLoginExpiryHours === 1 ? "".concat(authOptions.magicLoginExpiryHours, " hour") : "".concat(authOptions.magicLoginExpiryHours, " hours")
+                autoLoginURL: autoLoginURL,
+                expiryHours: authOptions.autoLoginExpiryHours === 1 ? "".concat(authOptions.autoLoginExpiryHours, " hour") : "".concat(authOptions.autoLoginExpiryHours, " hours")
               })
             });
 
@@ -70,7 +70,7 @@ var sendLoginEmail = /*#__PURE__*/function () {
   };
 }();
 var sendSignupEmail = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee2(req, toEmail, magicLoginID) {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee2(req, toEmail, autoLoginID) {
     var _Elusive$options2, mailOptions, siteOptions, dynamicTemplateData;
 
     return asyncToGenerator.regenerator.wrap(function _callee2$(_context2) {
@@ -87,7 +87,7 @@ var sendSignupEmail = /*#__PURE__*/function () {
                 subject: "Confirm your ".concat(siteOptions.name, " account"),
                 preheader: "Welcome to ".concat(siteOptions.name, ". Thank you for confirming your email address. Click here to create your account. "),
                 reasonForEmail: "you signed up for a ".concat(siteOptions.name, " account"),
-                magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$1.magicLoginRoute(magicLoginID).asPath, "?next=").concat(encodeURIComponent(utils$1.onboardingRoute())),
+                autoLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$1.autoLoginRoute(autoLoginID).asPath, "?next=").concat(encodeURIComponent(utils$1.onboardingRoute())),
                 termsURL: "".concat(dynamicTemplateData.baseURL).concat(utils$1.termsRoute())
               })
             });
@@ -108,7 +108,7 @@ var sendSignupEmail = /*#__PURE__*/function () {
   };
 }();
 var sendResetEmail = /*#__PURE__*/function () {
-  var _ref3 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee3(req, toEmail, magicLoginID) {
+  var _ref3 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee3(req, toEmail, autoLoginID) {
     var _Elusive$options3, authOptions, mailOptions, siteOptions, dynamicTemplateData;
 
     return asyncToGenerator.regenerator.wrap(function _callee3$(_context3) {
@@ -125,8 +125,8 @@ var sendResetEmail = /*#__PURE__*/function () {
                 subject: "Reset your ".concat(siteOptions.name, " password"),
                 preheader: "Someone recently requested a password change for your ".concat(siteOptions.name, " account. If this was you, you can set a new password here. "),
                 reasonForEmail: "we received a password reset request for this account",
-                magicLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$1.magicLoginRoute(magicLoginID).asPath, "?next=").concat(encodeURIComponent(utils$1.settingsAccountRoute())),
-                expiryHours: authOptions.magicLoginExpiryHours === 1 ? "".concat(authOptions.magicLoginExpiryHours, " hour") : "".concat(authOptions.magicLoginExpiryHours, " hours")
+                autoLoginURL: "".concat(dynamicTemplateData.baseURL).concat(utils$1.autoLoginRoute(autoLoginID).asPath, "?next=").concat(encodeURIComponent(utils$1.settingsAccountRoute())),
+                expiryHours: authOptions.autoLoginExpiryHours === 1 ? "".concat(authOptions.autoLoginExpiryHours, " hour") : "".concat(authOptions.autoLoginExpiryHours, " hours")
               })
             });
 

@@ -1,14 +1,11 @@
-import { apiWrapper } from './utils';
-export { apiWrapper };
+import autoLoginDataAPI from './autoLoginDataAPI';
+export { autoLoginDataAPI };
 
 import loginAPI from './loginAPI';
 export { loginAPI };
 
 import logoutAPI from './logoutAPI';
 export { logoutAPI };
-
-import magicLoginDataAPI from './magicLoginDataAPI';
-export { magicLoginDataAPI };
 
 import onboardingAPI from './onboardingAPI';
 export { onboardingAPI };
@@ -24,3 +21,6 @@ export { signupAPI };
 
 import userAPI from './userAPI';
 export { userAPI };
+
+import { apiWrapper } from './utils';
+export { apiWrapper };

@@ -18,7 +18,7 @@ export default [
       math: './src/math/index.js',
       'models/index': './src/models/index.js',
       'models/loginAttempts': './src/models/loginAttempts.js',
-      'models/magicLogins': './src/models/magicLogins.js',
+      'models/autoLogins': './src/models/autoLogins.js',
       'models/resetAttempts': './src/models/resetAttempts.js',
       'models/users': './src/models/users.js',
       pages: './src/pages/index.js',
