@@ -13,11 +13,11 @@ require('./utils-8eb11d51.js');
 require('./asyncToGenerator-093ecb8b.js');
 require('bcryptjs');
 require('./utils-f3ba8179.js');
-var utils$1$1 = require('./utils-57a97bcb.js');
-var utils$2 = require('./utils-2db396be.js');
+var utils$1$1 = require('./utils-a61e2e4f.js');
+var utils$2 = require('./utils-d3ac194a.js');
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-dbffbd46.js');
+var SignupForm = require('./SignupForm-2a332223.js');
 require('prop-types');
 var reactBootstrap = require('react-bootstrap');
 require('clsx');
@@ -25,10 +25,10 @@ var Link$3 = _interopDefault(require('next/link'));
 var router = require('next/router');
 require('react-dom');
 require('axios');
-require('./signupForm-d7904e62.js');
+require('./signupForm-f9f2d346.js');
 require('./UserContext-41109d68.js');
 require('./utils-cb2ac89c.js');
-var useSession = require('./useSession-1b61d6ad.js');
+var useSession = require('./useSession-4c38741b.js');
 
 var __jsx = React__default.createElement;
 

@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var utils$1$1 = require('./utils-57a97bcb.js');
+var utils$1$1 = require('./utils-a61e2e4f.js');
 
 
 
@@ -20,6 +20,7 @@ exports.notificationsRoute = utils$1$1.notificationsRoute;
 exports.onboardingAPIRoute = utils$1$1.onboardingAPIRoute;
 exports.onboardingRoute = utils$1$1.onboardingRoute;
 exports.privacyRoute = utils$1$1.privacyRoute;
+exports.profileRoute = utils$1$1.profileRoute;
 exports.resetAPIRoute = utils$1$1.resetAPIRoute;
 exports.resetRoute = utils$1$1.resetRoute;
 exports.sessionAPIRoute = utils$1$1.sessionAPIRoute;

@@ -34,6 +34,12 @@ var onboardingRoute = function onboardingRoute() {
 var privacyRoute = function privacyRoute() {
   return '/privacy';
 };
+var profileRoute = function profileRoute(username) {
+  return {
+    href: '/[username]',
+    asPath: "/".concat(username)
+  };
+};
 var signupRoute = function signupRoute() {
   return '/signup';
 };
@@ -109,6 +115,7 @@ exports.notificationsRoute = notificationsRoute;
 exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
 exports.privacyRoute = privacyRoute;
+exports.profileRoute = profileRoute;
 exports.resetAPIRoute = resetAPIRoute;
 exports.resetRoute = resetRoute;
 exports.sessionAPIRoute = sessionAPIRoute;

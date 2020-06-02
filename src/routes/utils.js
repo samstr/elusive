@@ -12,6 +12,10 @@ export const messagesRoute = () => '/messages';
 export const notificationsRoute = () => '/notifications';
 export const onboardingRoute = () => '/onboarding';
 export const privacyRoute = () => '/privacy';
+export const profileRoute = (username) => ({
+  href: '/[username]',
+  asPath: `/${username}`,
+});
 export const signupRoute = () => '/signup';
 export const resetRoute = () => '/reset';
 export const settingsRoute = () => '/settings';

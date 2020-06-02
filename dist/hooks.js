@@ -8,7 +8,7 @@ require('./classCallCheck-d2bb402f.js');
 var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
 require('./errors-6d843f19.js');
 var asyncToGenerator = require('./asyncToGenerator-093ecb8b.js');
-var utils$1$1 = require('./utils-57a97bcb.js');
+var utils$1$1 = require('./utils-a61e2e4f.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 require('prop-types');
@@ -17,7 +17,7 @@ var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var UserContext = require('./UserContext-41109d68.js');
 var utils = require('./utils-cb2ac89c.js');
-var useSession = require('./useSession-1b61d6ad.js');
+var useSession = require('./useSession-4c38741b.js');
 
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();
