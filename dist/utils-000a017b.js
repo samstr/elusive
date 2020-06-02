@@ -31,6 +31,15 @@ var notificationsRoute = function notificationsRoute() {
 var onboardingRoute = function onboardingRoute() {
   return '/onboarding';
 };
+var privacyRoute = function privacyRoute() {
+  return '/privacy';
+};
+var profileRoute = function profileRoute(username) {
+  return {
+    href: "/[username]",
+    asPath: "/".concat(username)
+  };
+};
 var resetRoute = function resetRoute() {
   return '/reset';
 };
@@ -45,9 +54,6 @@ var settingsAccountRoute = function settingsAccountRoute() {
 };
 var termsRoute = function termsRoute() {
   return '/terms';
-};
-var privacyRoute = function privacyRoute() {
-  return '/privacy';
 }; // Route utils
 
 var loginRouteWithNext = function loginRouteWithNext() {
@@ -101,6 +107,7 @@ exports.notificationsRoute = notificationsRoute;
 exports.onboardingAPIRoute = onboardingAPIRoute;
 exports.onboardingRoute = onboardingRoute;
 exports.privacyRoute = privacyRoute;
+exports.profileRoute = profileRoute;
 exports.resetAPIRoute = resetAPIRoute;
 exports.resetRoute = resetRoute;
 exports.sessionAPIRoute = sessionAPIRoute;
