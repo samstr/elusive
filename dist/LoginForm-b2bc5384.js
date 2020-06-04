@@ -35,7 +35,9 @@ var useStyles = styles$2.makeStyles(function (theme) {
       height: '100%'
     },
     content: defineProperty$1._defineProperty({
-      width: '100%'
+      width: '100%',
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(4)
     }, theme.breakpoints.up('sm'), {
       maxWidth: 380,
       width: 380

@@ -11,6 +11,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   content: {
     width: '100%',
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
     [theme.breakpoints.up('sm')]: {
       maxWidth: 380,
       width: 380,
