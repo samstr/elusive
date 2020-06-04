@@ -7,11 +7,11 @@ var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
 var assertThisInitialized = require('./assertThisInitialized-bc0de409.js');
 var _commonjsHelpers = require('./_commonjsHelpers-19ed5375.js');
 var core = require('@material-ui/core');
+var clsx = _interopDefault(require('clsx'));
 var PropTypes = require('prop-types');
 var PropTypes__default = _interopDefault(PropTypes);
 var React = require('react');
 var React__default = _interopDefault(React);
-var clsx = _interopDefault(require('clsx'));
 var NextLink = _interopDefault(require('next/link'));
 var router = require('next/router');
 var ReactDOM = require('react-dom');
@@ -36,17 +36,40 @@ function _extends() {
 
 var __jsx = React__default.createElement;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+var useStyles = makeStyles(function (theme) {
+  return {
+    loading: {
+      backgroundColor: theme.palette.primary.dark,
+      color: '#8aafe1'
+    }
+  };
+});
+
 var Button = function Button(props) {
-  var isLoading = props.isLoading,
-      loadingText = props.loadingText;
-  return __jsx(core.Button, _extends({}, props, {
-    disabled: disabled || isLoading
-  }), isLoading && loadingText ? "".concat(loadingText, "...") : 'Loading...', !isLoading && text);
+  var classes = useStyles();
+  var disabled = props.disabled,
+      isLoading = props.isLoading,
+      loadingText = props.loadingText,
+      text = props.text;
+
+  var cleanProps = _objectSpread({}, props);
+
+  delete cleanProps.isLoading;
+  delete cleanProps.loadingText;
+  return __jsx(core.Button, _extends({}, cleanProps, {
+    disabled: disabled || isLoading,
+    className: clsx(isLoading && classes.loading)
+  }), isLoading && __jsx(React__default.Fragment, null, loadingText ? "".concat(loadingText, "...") : 'Loading...'), !isLoading && text);
 };
 
 Button.propTypes = {
+  disabled: PropTypes__default.bool,
   isLoading: PropTypes__default.bool,
-  loadingText: PropTypes__default.string
+  loadingText: PropTypes__default.string,
+  text: PropTypes__default.string.isRequired
 };
 
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -4600,7 +4623,7 @@ function useSynchronousEffect(func, values) {
   );
 }
 
-function makeStyles(stylesOrCreator) {
+function makeStyles$1(stylesOrCreator) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   var name = options.name,
@@ -4793,7 +4816,7 @@ var withStyles = function withStyles(stylesOrCreator) {
       }
     }
 
-    var useStyles = makeStyles(stylesOrCreator, _extends({
+    var useStyles = makeStyles$1(stylesOrCreator, _extends({
       defaultTheme: defaultTheme,
       Component: Component,
       name: name || Component.displayName,
