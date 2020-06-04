@@ -18,19 +18,18 @@ var asyncToGenerator = require('../asyncToGenerator-d7664c2f.js');
 require('bcryptjs');
 require('../utils-001fa7d1.js');
 require('../utils-ac544182.js');
-var utils$2 = require('../utils-f7e0915c.js');
-var signupForm = require('../signupForm-53c73d36.js');
+var utils$2 = require('../utils-83868bae.js');
+var signupForm = require('../signupForm-92e5f556.js');
 var utils$3 = require('../utils-325de3e4.js');
 var utils$4 = require('../utils-b82a9439.js');
 require('uuid');
 require('../utils-5ed03106.js');
-var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var autoLogins = require('../models/autoLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$6 = require('../utils-ff12f956.js');
-var utils$7 = require('../utils-5b075576.js');
+var utils$5 = require('../utils-93eff99f.js');
+var utils$6 = require('../utils-5b075576.js');
 require('jsonwebtoken');
 
 var autoLoginDataAPI = /*#__PURE__*/function () {
@@ -101,7 +100,7 @@ var autoLoginDataAPI = /*#__PURE__*/function () {
 
           case 19:
             claims = tokenOptions.createClaims(autoLogin.user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), autoLogin.user.id);
+            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), autoLogin.user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,
@@ -122,196 +121,6 @@ var autoLoginDataAPI = /*#__PURE__*/function () {
   };
 }();
 
-var loginAPI = /*#__PURE__*/function () {
-  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
-    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, type, email, password, next, recentLoginAttemptsByAccount, _loginWithPasswordFor, cleanValues, errors, user, claims, _loginWithLinkForm$va, _cleanValues, _errors, _user, autoLogin;
-
-    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            req = _ref.req, res = _ref.res, session = _ref.session;
-            _Elusive$options = index.options, authOptions = _Elusive$options.auth, tokenOptions = _Elusive$options.tokens;
-
-            if (!session.isAuthenticated) {
-              _context.next = 4;
-              break;
-            }
-
-            throw new errors$1.AlreadyAuthenticatedError('You are already logged in');
-
-          case 4:
-            ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
-            date1HourAgo = moment().subtract(1, 'hour');
-
-            if (!(process.env.NODE_ENV === 'production')) {
-              _context.next = 12;
-              break;
-            }
-
-            _context.next = 9;
-            return loginAttempts.listLoginAttempts(loginAttempts.loginAttemptsCollection().where('ip', '==', ip).where('dateCreated', '>', date1HourAgo).limit(authOptions.maxLoginAttemptsPerIPPerHour));
-
-          case 9:
-            recentLoginAttemptsByIP = _context.sent;
-
-            if (!(recentLoginAttemptsByIP.length >= authOptions.maxLoginAttemptsPerIPPerHour)) {
-              _context.next = 12;
-              break;
-            }
-
-            throw new errors$1.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
-
-          case 12:
-            _req$body = req.body, type = _req$body.type, email = _req$body.email, password = _req$body.password, next = _req$body.next;
-
-            if (!(process.env.NODE_ENV === 'production')) {
-              _context.next = 19;
-              break;
-            }
-
-            _context.next = 16;
-            return loginAttempts.listLoginAttempts(loginAttempts.loginAttemptsCollection().where('ip', '==', ip).where('email', '==', email).where('dateCreated', '>', date1HourAgo).limit(authOptions.maxLoginAttemptsPerAccountPerHour));
-
-          case 16:
-            recentLoginAttemptsByAccount = _context.sent;
-
-            if (!(recentLoginAttemptsByAccount.length >= authOptions.maxLoginAttemptsPerAccountPerHour)) {
-              _context.next = 19;
-              break;
-            }
-
-            throw new errors$1.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
-
-          case 19:
-            _context.next = 21;
-            return loginAttempts.createLoginAttempt({
-              ip: ip,
-              email: email,
-              type: type
-            });
-
-          case 21:
-            if (!(type === utils$2.LOGIN_TYPE_PASSWORD)) {
-              _context.next = 39;
-              break;
-            }
-
-            _loginWithPasswordFor = signupForm.loginWithPasswordForm().validate({
-              type: type,
-              email: email,
-              password: password,
-              next: next
-            }), cleanValues = _loginWithPasswordFor.cleanValues, errors = _loginWithPasswordFor.errors;
-
-            if (!(errors && errors.length)) {
-              _context.next = 25;
-              break;
-            }
-
-            return _context.abrupt("return", {
-              errors: errors
-            });
-
-          case 25:
-            _context.next = 27;
-            return users.getUser(users.usersCollection().where('email', '==', cleanValues.email));
-
-          case 27:
-            user = _context.sent;
-
-            if (user) {
-              _context.next = 30;
-              break;
-            }
-
-            throw new users.UserNotFoundError('Authentication failed');
-
-          case 30:
-            if (user.enabled) {
-              _context.next = 32;
-              break;
-            }
-
-            throw new users.UserNotEnabledError('Authentication failed');
-
-          case 32:
-            if (utils$2.comparePasswordHash(cleanValues.password, user.password)) {
-              _context.next = 34;
-              break;
-            }
-
-            throw new errors$1.AuthenticationFailedError('Authentication failed');
-
-          case 34:
-            claims = tokenOptions.createClaims(user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
-            return _context.abrupt("return", {
-              session: {
-                isAuthenticated: true,
-                claims: claims
-              }
-            });
-
-          case 39:
-            if (!(type === utils$2.LOGIN_TYPE_LINK)) {
-              _context.next = 52;
-              break;
-            }
-
-            _loginWithLinkForm$va = signupForm.loginWithLinkForm().validate({
-              type: type,
-              email: email,
-              next: next
-            }), _cleanValues = _loginWithLinkForm$va.cleanValues, _errors = _loginWithLinkForm$va.errors;
-
-            if (!(_errors && _errors.length)) {
-              _context.next = 43;
-              break;
-            }
-
-            return _context.abrupt("return", {
-              errors: _errors
-            });
-
-          case 43:
-            _context.next = 45;
-            return users.getUser(users.usersCollection().where('email', '==', _cleanValues.email));
-
-          case 45:
-            _user = _context.sent;
-
-            if (!(_user && _user.enabled)) {
-              _context.next = 52;
-              break;
-            }
-
-            _context.next = 49;
-            return autoLogins.createAutoLogin({
-              userId: _user.id
-            });
-
-          case 49:
-            autoLogin = _context.sent;
-            _context.next = 52;
-            return utils$2.sendLoginEmail(req, _user.email, autoLogin.id, _cleanValues.next);
-
-          case 52:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function loginAPI(_x) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-loginAPI.options = {
-  allowedMethods: [utils$3.POST]
-};
-
 var logoutAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
     var res, session;
@@ -329,7 +138,7 @@ var logoutAPI = /*#__PURE__*/function () {
             throw new errors$1.NotAuthenticatedError('You are not logged in');
 
           case 3:
-            utils$6.deleteSessionCookies(res);
+            utils$5.deleteSessionCookies(res);
             return _context.abrupt("return", {
               isAuthenticated: false,
               claims: null
@@ -407,7 +216,7 @@ var onboardingAPI = /*#__PURE__*/function () {
           case 15:
             user = _context.sent;
             claims = tokenOptions.createClaims(user);
-            utils$6.createSessionCookies(res, utils$7.signTokens(claims, tokenOptions.secret), user.id);
+            utils$5.createSessionCookies(res, utils$6.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
               session: {
                 isAuthenticated: true,
@@ -536,7 +345,7 @@ var sessionAPI = /*#__PURE__*/function () {
             tokenOptions = index.options.tokens; // Are there tokens? That means we regenerated the session. Set new cookies
 
             if (session.isAuthenticated && tokens) {
-              utils$6.createSessionCookies(res, utils$7.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
+              utils$5.createSessionCookies(res, utils$6.signTokens(session.claims, tokenOptions.secret), session.claims.user.id);
             }
 
             return _context.abrupt("return", {
@@ -557,7 +366,7 @@ var sessionAPI = /*#__PURE__*/function () {
 }();
 
 sessionAPI.options = {
-  reloadUserSource: utils$6.RELOAD_USER_SOURCE_DATABASE
+  reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE
 };
 
 var signupAPI = /*#__PURE__*/function () {
@@ -749,7 +558,7 @@ var userAPI = /*#__PURE__*/function () {
 }();
 
 userAPI.options = {
-  reloadUserSource: utils$6.RELOAD_USER_SOURCE_DATABASE,
+  reloadUserSource: utils$5.RELOAD_USER_SOURCE_DATABASE,
   requireAuth: true
 };
 
@@ -768,12 +577,12 @@ var apiWrapper = /*#__PURE__*/function () {
             options = _objectSpread({
               allowedMethods: [utils$3.GET],
               requireAuth: false,
-              reloadUserSource: utils$6.RELOAD_USER_SOURCE_REFRESH_TOKEN
+              reloadUserSource: utils$5.RELOAD_USER_SOURCE_REFRESH_TOKEN
             }, api.options);
             _context.prev = 2;
             utils$3.validateRequest(req, res, options);
             _context.next = 6;
-            return utils$6.getSession(req, options.reloadUserSource);
+            return utils$5.getSession(req, options.reloadUserSource);
 
           case 6:
             _yield$getSession = _context.sent;
@@ -830,12 +639,12 @@ var apiWrapper = /*#__PURE__*/function () {
             return _context.abrupt("return", utils$3.httpMethodNotAllowedResponse(res, utils.errorJson(_context.t3)));
 
           case 28:
-            if (!(_context.t3 instanceof utils$6.SessionError || _context.t3 instanceof utils$7.TokenError)) {
+            if (!(_context.t3 instanceof utils$5.SessionError || _context.t3 instanceof utils$6.TokenError)) {
               _context.next = 31;
               break;
             }
 
-            utils$6.deleteSessionCookies(res);
+            utils$5.deleteSessionCookies(res);
             return _context.abrupt("return", utils$3.httpUnauthorizedResponse(res, utils.errorJson(_context.t3)));
 
           case 31:
@@ -870,7 +679,6 @@ var apiWrapper = /*#__PURE__*/function () {
 
 exports.apiWrapper = apiWrapper;
 exports.autoLoginDataAPI = autoLoginDataAPI;
-exports.loginAPI = loginAPI;
 exports.logoutAPI = logoutAPI;
 exports.onboardingAPI = onboardingAPI;
 exports.resetAPI = resetAPI;

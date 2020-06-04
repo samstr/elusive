@@ -10,13 +10,7 @@ require('./index.js');
 require('./errors-2aa38575.js');
 require('./assertThisInitialized-bc0de409.js');
 require('./utils-8eb11d51.js');
-require('./_commonjsHelpers-a81e97c5.js');
-require('./asyncToGenerator-d7664c2f.js');
-require('bcryptjs');
-require('./utils-001fa7d1.js');
-require('./utils-ac544182.js');
-require('./utils-f7e0915c.js');
-var signupForm = require('./signupForm-53c73d36.js');
+var signupForm = require('./signupForm-92e5f556.js');
 
 
 
@@ -32,8 +26,6 @@ exports.createForm = signupForm.createForm;
 exports.emailField = signupForm.emailField;
 exports.field = signupForm.field;
 exports.getOnChangeValue = signupForm.getOnChangeValue;
-exports.loginWithLinkForm = signupForm.loginWithLinkForm;
-exports.loginWithPasswordForm = signupForm.loginWithPasswordForm;
 exports.onboardingForm = signupForm.onboardingForm;
 exports.resetForm = signupForm.resetForm;
 exports.signupForm = signupForm.signupForm;

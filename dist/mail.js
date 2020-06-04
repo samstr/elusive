@@ -9,9 +9,9 @@ require('./ElusiveClient-6f759f99.js');
 require('./index.js');
 require('./_commonjsHelpers-a81e97c5.js');
 require('./asyncToGenerator-d7664c2f.js');
-var utils$1 = require('./utils-001fa7d1.js');
+var utils = require('./utils-001fa7d1.js');
 
 
 
-exports.defaultDynamicTemplateData = utils$1.defaultDynamicTemplateData;
-exports.sendMail = utils$1.sendMail;
+exports.defaultDynamicTemplateData = utils.defaultDynamicTemplateData;
+exports.sendMail = utils.sendMail;

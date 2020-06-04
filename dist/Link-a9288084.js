@@ -11,7 +11,7 @@ var React__default = _interopDefault(React);
 var PropTypes = require('prop-types');
 var PropTypes__default = _interopDefault(PropTypes);
 var clsx = _interopDefault(require('clsx'));
-var Link$1$1 = _interopDefault(require('next/link'));
+var NextLink = _interopDefault(require('next/link'));
 var router = require('next/router');
 var ReactDOM = require('react-dom');
 
@@ -7399,7 +7399,7 @@ var NextComposed = React__default.forwardRef(function NextComposed(props, ref) {
       href = props.href,
       other = _objectWithoutProperties(props, ["as", "href"]);
 
-  return __jsx$1(Link$1$1, {
+  return __jsx$1(NextLink, {
     href: href,
     as: as
   }, __jsx$1("a", _extends({
@@ -7464,4 +7464,3 @@ var Link$2 = React.forwardRef(forwarder);
 
 exports.AuthBasePage = AuthBasePage;
 exports.Link = Link$2;
-exports.style = style$1;

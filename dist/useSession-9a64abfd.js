@@ -4,7 +4,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
 var asyncToGenerator = require('./asyncToGenerator-d7664c2f.js');
-var utils$1$1 = require('./utils-ac544182.js');
+var utils$1 = require('./utils-ac544182.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 var router = require('next/router');
@@ -34,8 +34,8 @@ var useData = function useData() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$1$1.loginRoute()) {
-        router$1.replace(utils$1$1.loginRoute());
+      if (pathname !== utils$1.loginRoute()) {
+        router$1.replace(utils$1.loginRoute());
       }
 
       return;
@@ -113,7 +113,7 @@ var useRequireAuth = function useRequireAuth() {
 
   React.useEffect(function () {
     if (sessionContext._ready && !sessionContext.isAuthenticated) {
-      router$1.replace(utils$1$1.loginRouteWithNext());
+      router$1.replace(utils$1.loginRouteWithNext());
     }
   }, [sessionContext._ready]);
 };
@@ -141,8 +141,8 @@ var useSession = function useSession() {
       resetSessionContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$1$1.loginRoute()) {
-        router$1.replace(utils$1$1.loginRoute());
+      if (pathname !== utils$1.loginRoute()) {
+        router$1.replace(utils$1.loginRoute());
       }
 
       return;
@@ -164,7 +164,7 @@ var useSession = function useSession() {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__default(utils$1$1.sessionAPIRoute(), {
+                return axios__default(utils$1.sessionAPIRoute(), {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelRequest = c;
                   })
@@ -183,8 +183,8 @@ var useSession = function useSession() {
                   pathname = window.location.pathname;
                   user = _session.claims.user;
 
-                  if (user.needsOnboarding && pathname !== utils$1$1.onboardingRoute()) {
-                    router$1.replace(utils$1$1.onboardingRoute());
+                  if (user.needsOnboarding && pathname !== utils$1.onboardingRoute()) {
+                    router$1.replace(utils$1.onboardingRoute());
                   }
                 }
 

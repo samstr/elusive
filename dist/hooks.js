@@ -10,7 +10,7 @@ require('./errors-2aa38575.js');
 require('./assertThisInitialized-bc0de409.js');
 require('./_commonjsHelpers-a81e97c5.js');
 var asyncToGenerator = require('./asyncToGenerator-d7664c2f.js');
-var utils$1$1 = require('./utils-ac544182.js');
+var utils$1 = require('./utils-ac544182.js');
 var React = require('react');
 var React__default = _interopDefault(React);
 require('prop-types');
@@ -19,7 +19,7 @@ var UserContext = require('./UserContext-41109d68.js');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var utils = require('./utils-325de3e4.js');
-var useSession = require('./useSession-033f5a9c.js');
+var useSession = require('./useSession-9a64abfd.js');
 
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();
@@ -54,8 +54,8 @@ var useUser = function useUser() {
       resetUserContext();
       var pathname = window.location.pathname;
 
-      if (pathname !== utils$1$1.loginRoute()) {
-        router$1.replace(utils$1$1.loginRoute());
+      if (pathname !== utils$1.loginRoute()) {
+        router$1.replace(utils$1.loginRoute());
       }
 
       return;
@@ -77,7 +77,7 @@ var useUser = function useUser() {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__default(utils$1$1.userAPIRoute(), {
+                return axios__default(utils$1.userAPIRoute(), {
                   cancelToken: new axios.CancelToken(function (c) {
                     cancelRequest = c;
                   })

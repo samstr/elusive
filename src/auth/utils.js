@@ -9,10 +9,6 @@ import {
   settingsAccountRoute,
 } from '../routes';
 
-export const LOGIN_TYPE_LINK = 'link';
-export const LOGIN_TYPE_PASSWORD = 'password';
-export const LOGIN_TYPES = [LOGIN_TYPE_LINK, LOGIN_TYPE_PASSWORD];
-
 export const ROLE_USER = 'user';
 export const ROLE_ADMIN = 'admin';
 

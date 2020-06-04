@@ -14,16 +14,16 @@ require('../asyncToGenerator-d7664c2f.js');
 require('bcryptjs');
 require('../utils-001fa7d1.js');
 require('../utils-ac544182.js');
-var utils$2 = require('../utils-f7e0915c.js');
+var utils$2 = require('../utils-83868bae.js');
 require('uuid');
-var utils = require('../utils-5ed03106.js');
+var utils$3 = require('../utils-5ed03106.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'users';
 var model = function model(data) {
-  var model = utils.createModel(data);
+  var model = utils$3.createModel(data);
 
   model.hasRole = function (role) {
     return utils$2.hasRole(role, model.roles);
@@ -32,7 +32,7 @@ var model = function model(data) {
   return model;
 };
 
-var _createService = utils.createService(model, COLLECTION),
+var _createService = utils$3.createService(model, COLLECTION),
     usersCollection = _createService.collection,
     getUserByID = _createService.getObjectByID,
     getUser = _createService.getObject,

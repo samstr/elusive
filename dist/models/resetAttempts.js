@@ -12,17 +12,17 @@ require('../assertThisInitialized-bc0de409.js');
 require('../_commonjsHelpers-a81e97c5.js');
 require('../asyncToGenerator-d7664c2f.js');
 require('uuid');
-var utils = require('../utils-5ed03106.js');
+var utils$3 = require('../utils-5ed03106.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'resetAttempts';
 var model = function model(data) {
-  return utils.createModel(data);
+  return utils$3.createModel(data);
 };
 
-var _createService = utils.createService(model, COLLECTION),
+var _createService = utils$3.createService(model, COLLECTION),
     resetAttemptsCollection = _createService.collection,
     getResetAttemptByID = _createService.getObjectByID,
     getResetAttempt = _createService.getObject,

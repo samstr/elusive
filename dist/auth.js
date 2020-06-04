@@ -15,7 +15,7 @@ require('./asyncToGenerator-d7664c2f.js');
 require('bcryptjs');
 require('./utils-001fa7d1.js');
 require('./utils-ac544182.js');
-var utils$2 = require('./utils-f7e0915c.js');
+var utils$2 = require('./utils-83868bae.js');
 
 
 
@@ -27,9 +27,6 @@ exports.TooManyLoginAttemptsError = errors$1.TooManyLoginAttemptsError;
 exports.TooManyRegistrationsError = errors$1.TooManyRegistrationsError;
 exports.TooManyResetAttemptsError = errors$1.TooManyResetAttemptsError;
 exports.UserAlreadyExistsError = errors$1.UserAlreadyExistsError;
-exports.LOGIN_TYPES = utils$2.LOGIN_TYPES;
-exports.LOGIN_TYPE_LINK = utils$2.LOGIN_TYPE_LINK;
-exports.LOGIN_TYPE_PASSWORD = utils$2.LOGIN_TYPE_PASSWORD;
 exports.comparePasswordHash = utils$2.comparePasswordHash;
 exports.hasRole = utils$2.hasRole;
 exports.hashPassword = utils$2.hashPassword;

@@ -15,12 +15,6 @@ export {
   UnknownFormError,
 };
 
-import loginWithLinkForm from './loginWithLinkForm';
-export { loginWithLinkForm };
-
-import loginWithPasswordForm from './loginWithPasswordForm';
-export { loginWithPasswordForm };
-
 import onboardingForm from './onboardingForm';
 export { onboardingForm };
 

@@ -20,9 +20,6 @@ export {
 };
 
 import {
-  LOGIN_TYPE_LINK,
-  LOGIN_TYPE_PASSWORD,
-  LOGIN_TYPES,
   comparePasswordHash,
   hashPassword,
   hasRole,
@@ -31,9 +28,6 @@ import {
   sendSignupEmail,
 } from './utils';
 export {
-  LOGIN_TYPE_LINK,
-  LOGIN_TYPE_PASSWORD,
-  LOGIN_TYPES,
   comparePasswordHash,
   hashPassword,
   hasRole,

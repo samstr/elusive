@@ -16,9 +16,9 @@ var asyncToGenerator = require('../asyncToGenerator-d7664c2f.js');
 require('bcryptjs');
 require('../utils-001fa7d1.js');
 require('../utils-ac544182.js');
-require('../utils-f7e0915c.js');
+require('../utils-83868bae.js');
 require('uuid');
-var utils = require('../utils-5ed03106.js');
+var utils$3 = require('../utils-5ed03106.js');
 var moment = _interopDefault(require('moment'));
 var users = require('./users.js');
 
@@ -27,7 +27,7 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var COLLECTION = 'autoLogins';
 var model = function model(data) {
-  var model = utils.createModel(data);
+  var model = utils$3.createModel(data);
 
   model.hasExpired = function () {
     return autoLoginExpired(model);
@@ -61,7 +61,7 @@ var model = function model(data) {
   return model;
 };
 
-var _createService = utils.createService(model, COLLECTION),
+var _createService = utils$3.createService(model, COLLECTION),
     autoLoginsCollection = _createService.collection,
     getAutoLoginByID = _createService.getObjectByID,
     getAutoLogin = _createService.getObject,
