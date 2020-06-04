@@ -5,6 +5,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var createClass = require('./createClass-013e6a9b.js');
 var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
 var assertThisInitialized = require('./assertThisInitialized-bc0de409.js');
+var utils = require('./utils-8eb11d51.js');
 var _commonjsHelpers = require('./_commonjsHelpers-19ed5375.js');
 var core = require('@material-ui/core');
 var styles$2 = require('@material-ui/core/styles');
@@ -13,6 +14,7 @@ var PropTypes = require('prop-types');
 var PropTypes__default = _interopDefault(PropTypes);
 var React = require('react');
 var React__default = _interopDefault(React);
+var lab = require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
 var router = require('next/router');
 var ReactDOM = require('react-dom');
@@ -71,6 +73,61 @@ Button.propTypes = {
   isLoading: PropTypes__default.bool,
   loadingText: PropTypes__default.string,
   text: PropTypes__default.string.isRequired
+};
+
+var __jsx$1 = React__default.createElement;
+
+var ErrorAlert = function ErrorAlert(_ref) {
+  var className = _ref.className,
+      errors = _ref.errors,
+      includingFields = _ref.includingFields;
+  var filteredErrors = utils.genericErrors(errors, includingFields);
+  if (!(filteredErrors === null || filteredErrors === void 0 ? void 0 : filteredErrors.length)) return null;
+  return __jsx$1(lab.Alert, {
+    severity: "error",
+    variant: "filled",
+    className: className
+  }, filteredErrors.map(function (_ref2) {
+    var message = _ref2.message;
+    return __jsx$1("div", {
+      key: message
+    }, message);
+  }));
+};
+
+ErrorAlert.propTypes = {
+  className: PropTypes__default.string,
+  errors: PropTypes__default.arrayOf(PropTypes__default.shape({
+    message: PropTypes__default.string.isRequired,
+    fields: PropTypes__default.arrayOf(PropTypes__default.string)
+  })),
+  includingFields: PropTypes__default.arrayOf(PropTypes__default.string)
+};
+
+var __jsx$2 = React__default.createElement;
+
+var ErrorHelperText = function ErrorHelperText(_ref) {
+  var errors = _ref.errors,
+      field = _ref.field;
+  var filteredErrors = utils.fieldErrors(errors, field);
+  if (!(filteredErrors === null || filteredErrors === void 0 ? void 0 : filteredErrors.length)) return null;
+  return __jsx$2(React__default.Fragment, null, filteredErrors.map(function (_ref2) {
+    var message = _ref2.message;
+    return __jsx$2("span", {
+      key: message,
+      style: {
+        display: 'block'
+      }
+    }, message);
+  }));
+};
+
+ErrorHelperText.propTypes = {
+  errors: PropTypes__default.arrayOf(PropTypes__default.shape({
+    message: PropTypes__default.string.isRequired,
+    fields: PropTypes__default.arrayOf(PropTypes__default.string)
+  })),
+  field: PropTypes__default.string.isRequired
 };
 
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -6769,16 +6826,16 @@ var MuiLink = withStyles$1(styles$1, {
   name: 'MuiLink'
 })(Link);
 
-var __jsx$1 = React__default.createElement;
+var __jsx$3 = React__default.createElement;
 var NextComposed = React__default.forwardRef(function NextComposed(props, ref) {
   var as = props.as,
       href = props.href,
       other = _objectWithoutProperties(props, ["as", "href"]);
 
-  return __jsx$1(NextLink, {
+  return __jsx$3(NextLink, {
     href: href,
     as: as
-  }, __jsx$1("a", _extends({
+  }, __jsx$3("a", _extends({
     ref: ref
   }, other)));
 });
@@ -6803,14 +6860,14 @@ function Link$1(props) {
   var className = clsx(classNameProps, defineProperty$1._defineProperty({}, activeClassName, router$1.pathname === pathname && activeClassName));
 
   if (naked) {
-    return __jsx$1(NextComposed, _extends({
+    return __jsx$3(NextComposed, _extends({
       className: className,
       ref: innerRef,
       href: href
     }, other));
   }
 
-  return __jsx$1(MuiLink, _extends({
+  return __jsx$3(MuiLink, _extends({
     component: NextComposed,
     className: className,
     ref: innerRef,
@@ -6830,7 +6887,7 @@ Link$1.propTypes = {
 };
 
 var forwarder = function forwarder(props, ref) {
-  return __jsx$1(Link$1, _extends({}, props, {
+  return __jsx$3(Link$1, _extends({}, props, {
     innerRef: ref
   }));
 };
@@ -6839,4 +6896,6 @@ forwarder.displayName = 'Link';
 var Link$2 = React.forwardRef(forwarder);
 
 exports.Button = Button;
+exports.ErrorAlert = ErrorAlert;
+exports.ErrorHelperText = ErrorHelperText;
 exports.Link = Link$2;
