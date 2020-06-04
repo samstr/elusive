@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import {
-  AuthBasePage,
-  // LogoutForm
-} from '../components';
+import // LogoutForm
+'../components';
 import { useSession } from '../hooks';
 import { indexRoute, loginRoute } from '../routes';
 
@@ -23,11 +21,11 @@ const LogoutPage = () => {
   };
 
   return (
-    <AuthBasePage>
+    <>
       <h1>Logout</h1>
       <div className="intro">Are sure you want to logout?</div>
       <div className="form">{/* <LogoutForm onSuccess={onSuccess} />*/}</div>
-    </AuthBasePage>
+    </>
   );
 };
 

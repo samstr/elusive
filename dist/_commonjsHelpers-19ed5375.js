@@ -1,9 +1,5 @@
 'use strict';
 
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
 function createCommonjsModule(fn, basedir, module) {
 	return module = {
 	  path: basedir,
@@ -19,4 +15,3 @@ function commonjsRequire () {
 }
 
 exports.createCommonjsModule = createCommonjsModule;
-exports.unwrapExports = unwrapExports;

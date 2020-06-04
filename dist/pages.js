@@ -11,21 +11,22 @@ require('./ElusiveClient-6f759f99.js');
 var index = require('./index.js');
 require('./errors-2aa38575.js');
 require('./assertThisInitialized-bc0de409.js');
-require('./_commonjsHelpers-a81e97c5.js');
-require('./asyncToGenerator-d7664c2f.js');
+require('./_commonjsHelpers-19ed5375.js');
+require('./asyncToGenerator-c3c48e74.js');
 var utils$1 = require('./utils-ac544182.js');
+require('./Link-20980b48.js');
+require('@material-ui/core');
+require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-var Link = require('./Link-a9288084.js');
-require('prop-types');
 require('clsx');
 var NextLink = _interopDefault(require('next/link'));
 var router = require('next/router');
 require('react-dom');
-require('./UserContext-41109d68.js');
+require('./UserContext-1558dc2a.js');
 require('axios');
 require('./utils-325de3e4.js');
-var useSession = require('./useSession-9a64abfd.js');
+var useSession = require('./useSession-540ddfd0.js');
 
 var __jsx = React__default.createElement;
 
@@ -58,7 +59,7 @@ var AutoLoginPage = function AutoLoginPage() {
       }
     }
   }, [data]);
-  return __jsx(Link.AuthBasePage, null, data && errors ? __jsx(React__default.Fragment, null, __jsx("h1", null, "There was a problem")) : __jsx("p", null, "Spinner"));
+  return __jsx(React__default.Fragment, null, data && errors ? __jsx(React__default.Fragment, null, __jsx("h1", null, "There was a problem")) : __jsx("p", null, "Spinner"));
 };
 
 var __jsx$1 = React__default.createElement;
@@ -72,7 +73,7 @@ var LogoutPage = function LogoutPage() {
     }
   }, [session]);
 
-  return __jsx$1(Link.AuthBasePage, null, __jsx$1("h1", null, "Logout"), __jsx$1("div", {
+  return __jsx$1(React__default.Fragment, null, __jsx$1("h1", null, "Logout"), __jsx$1("div", {
     className: "intro"
   }, "Are sure you want to logout?"), __jsx$1("div", {
     className: "form"
@@ -102,7 +103,7 @@ var OnboardingPage = function OnboardingPage() {
     }
   }, [session._ready]);
 
-  return __jsx$2(Link.AuthBasePage, null, session._ready ? __jsx$2(React__default.Fragment, null, success ? __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "What next?"), __jsx$2("div", {
+  return __jsx$2(React__default.Fragment, null, session._ready ? __jsx$2(React__default.Fragment, null, success ? __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "What next?"), __jsx$2("div", {
     className: "options"
   }, __jsx$2(NextLink, {
     href: utils$1.settingsProfileRoute()
@@ -136,7 +137,7 @@ var ResetPage = function ResetPage() {
       success = _useState[0],
       setSuccess = _useState[1];
 
-  return __jsx$3(Link.AuthBasePage, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Check your inbox"), __jsx$3("div", {
+  return __jsx$3(React__default.Fragment, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Check your inbox"), __jsx$3("div", {
     className: "intro"
   }, __jsx$3("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$3("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Forgot your password?"), __jsx$3("div", {
     className: "form"

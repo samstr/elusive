@@ -9,10 +9,10 @@ require('../ElusiveClient-6f759f99.js');
 require('../index.js');
 var errors = require('../errors-2aa38575.js');
 require('../assertThisInitialized-bc0de409.js');
-require('../_commonjsHelpers-a81e97c5.js');
-require('../asyncToGenerator-d7664c2f.js');
+require('../_commonjsHelpers-19ed5375.js');
+require('../asyncToGenerator-c3c48e74.js');
 require('uuid');
-var utils$3 = require('../utils-5ed03106.js');
+var utils$3 = require('../utils-89b27073.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 

@@ -3,7 +3,7 @@
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var index = require('./index.js');
 var errors = require('./errors-2aa38575.js');
-var asyncToGenerator = require('./asyncToGenerator-d7664c2f.js');
+var asyncToGenerator = require('./asyncToGenerator-c3c48e74.js');
 var users = require('./models/users.js');
 var utils$6 = require('./utils-5b075576.js');
 

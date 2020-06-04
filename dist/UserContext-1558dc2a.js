@@ -2,10 +2,10 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var React = require('react');
-var React__default = _interopDefault(React);
 var PropTypes = require('prop-types');
 var PropTypes__default = _interopDefault(PropTypes);
+var React = require('react');
+var React__default = _interopDefault(React);
 
 var __jsx = React__default.createElement;
 var defaultValue = {

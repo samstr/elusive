@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
-import {
-  AuthBasePage,
-  // OnboardingForm
-} from '../components';
+import // OnboardingForm
+'../components';
 import { useRequireAuth, useSession, useSessionContext } from '../hooks';
 import { settingsProfileRoute } from '../routes';
 
@@ -34,7 +32,7 @@ const OnboardingPage = () => {
   };
 
   return (
-    <AuthBasePage>
+    <>
       {session._ready ? (
         <>
           {success ? (
@@ -76,7 +74,7 @@ const OnboardingPage = () => {
       ) : (
         <p>Spinner</p>
       )}
-    </AuthBasePage>
+    </>
   );
 };
 

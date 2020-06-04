@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import {
-  AuthBasePage,
-  // GenericErrors
-} from '../components';
+import // GenericErrors
+'../components';
 import { useData, useSessionContext } from '../hooks';
 import { homeRoute, onboardingRoute } from '../routes';
 
@@ -32,7 +30,7 @@ const AutoLoginPage = () => {
   }, [data]);
 
   return (
-    <AuthBasePage>
+    <>
       {data && errors ? (
         <>
           <h1>There was a problem</h1>
@@ -41,7 +39,7 @@ const AutoLoginPage = () => {
       ) : (
         <p>Spinner</p>
       )}
-    </AuthBasePage>
+    </>
   );
 };
 

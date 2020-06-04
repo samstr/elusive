@@ -15,6 +15,9 @@ export {
   UnknownFormError,
 };
 
+import loginForm from './loginForm';
+export { loginForm };
+
 import onboardingForm from './onboardingForm';
 export { onboardingForm };
 
