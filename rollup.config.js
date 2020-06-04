@@ -37,6 +37,7 @@ export default [
       '@material-ui/core',
       '@material-ui/core/styles',
       '@material-ui/icons',
+      '@material-ui/lab',
       'axios',
       'bcryptjs',
       'clsx',
