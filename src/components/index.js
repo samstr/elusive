@@ -1,5 +1,5 @@
-import AuthPageWrapper from './AuthPageWrapper';
-export { AuthPageWrapper };
+import AuthPage, { useStyles as useAuthPageStyles } from './AuthPage';
+export { AuthPage, useAuthPageStyles };
 
 import Button from './Button';
 export { Button };

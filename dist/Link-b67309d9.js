@@ -55,7 +55,7 @@ var useStyles = styles$2.makeStyles(function (theme) {
   };
 });
 
-var AuthPageWrapper = function AuthPageWrapper(_ref) {
+var AuthPage = function AuthPage(_ref) {
   var children = _ref.children;
   var classes = useStyles();
   return __jsx("div", {
@@ -65,7 +65,7 @@ var AuthPageWrapper = function AuthPageWrapper(_ref) {
   }, children));
 };
 
-AuthPageWrapper.propTypes = {
+AuthPage.propTypes = {
   children: PropTypes__default.node.isRequired
 };
 
@@ -6945,8 +6945,9 @@ var forwarder = function forwarder(props, ref) {
 forwarder.displayName = 'Link';
 var Link$2 = React.forwardRef(forwarder);
 
-exports.AuthPageWrapper = AuthPageWrapper;
+exports.AuthPage = AuthPage;
 exports.Button = Button;
 exports.ErrorAlert = ErrorAlert;
 exports.ErrorHelperText = ErrorHelperText;
 exports.Link = Link$2;
+exports.useStyles = useStyles;

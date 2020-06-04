@@ -10,7 +10,7 @@ require('./_commonjsHelpers-19ed5375.js');
 require('@material-ui/core/styles');
 require('prop-types');
 require('react');
-var Link = require('./Link-ab4a7ef7.js');
+var Link = require('./Link-b67309d9.js');
 require('@material-ui/core');
 require('clsx');
 require('@material-ui/lab');
@@ -20,8 +20,9 @@ require('react-dom');
 
 
 
-exports.AuthPageWrapper = Link.AuthPageWrapper;
+exports.AuthPage = Link.AuthPage;
 exports.Button = Link.Button;
 exports.ErrorAlert = Link.ErrorAlert;
 exports.ErrorHelperText = Link.ErrorHelperText;
 exports.Link = Link.Link;
+exports.useAuthPageStyles = Link.useStyles;

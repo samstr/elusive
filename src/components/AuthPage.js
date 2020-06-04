@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AuthPageWrapper = ({ children }) => {
+const AuthPage = ({ children }) => {
   const classes = useStyles();
 
   return (
@@ -46,8 +46,8 @@ const AuthPageWrapper = ({ children }) => {
   );
 };
 
-AuthPageWrapper.propTypes = {
+AuthPage.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default AuthPageWrapper;
+export default AuthPage;
