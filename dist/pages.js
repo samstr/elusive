@@ -16,12 +16,12 @@ require('@material-ui/core/styles');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-require('./LoginForm-b2bc5384.js');
-require('@material-ui/core');
+var LoginForm = require('./LoginForm-b2bc5384.js');
+var core = require('@material-ui/core');
 require('clsx');
 require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
-var router = require('next/router');
+var router$1 = require('next/router');
 require('react-dom');
 require('axios');
 require('./utils-c37e1803.js');
@@ -38,7 +38,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 var AutoLoginPage = function AutoLoginPage() {
   var data = useSession.useData();
-  var router$1 = router.useRouter();
+  var router = router$1.useRouter();
 
   var _useSessionContext = useSession.useSessionContext(),
       setSessionContext = _useSessionContext.setSessionContext;
@@ -53,11 +53,11 @@ var AutoLoginPage = function AutoLoginPage() {
       }));
 
       if ((_data$session$claims = data.session.claims) === null || _data$session$claims === void 0 ? void 0 : (_data$session$claims$ = _data$session$claims.user) === null || _data$session$claims$ === void 0 ? void 0 : _data$session$claims$.needsOnboarding) {
-        router$1.replace(utils$1.onboardingRoute());
-      } else if (router$1.query.next) {
-        window.location = decodeURIComponent(router$1.query.next);
+        router.replace(utils$1.onboardingRoute());
+      } else if (router.query.next) {
+        window.location = decodeURIComponent(router.query.next);
       } else {
-        router$1.replace(utils$1.homeRoute());
+        router.replace(utils$1.homeRoute());
       }
     }
   }, [data]);
@@ -66,23 +66,59 @@ var AutoLoginPage = function AutoLoginPage() {
 
 var __jsx$1 = React__default.createElement;
 
-var LogoutPage = function LogoutPage() {
-  var router$1 = router.useRouter();
+var LoginPage = function LoginPage() {
   var session = useSession.useSession();
+  var classes = LoginForm.useStyles();
+  var siteOptions = index$1.options.site;
   React.useEffect(function () {
-    if (session._ready && !session.isAuthenticated) {
-      router$1.replace(utils$1.loginRoute());
+    if (session._ready && session.isAuthenticated) {
+      router.replace(utils$1.homeRoute());
     }
   }, [session]);
 
-  return __jsx$1(React__default.Fragment, null, __jsx$1("h1", null, "Logout"), __jsx$1("div", {
+  var onSuccess = function onSuccess() {
+    var next = utils$1.homeRoute();
+
+    if (router.query.next) {
+      next = decodeURIComponent(router.query.next);
+    }
+
+    window.location = next;
+  };
+
+  return __jsx$1(LoginForm.AuthPage, null, __jsx$1(core.Typography, {
+    variant: "h4",
+    className: classes.title
+  }, "Login to ", siteOptions.name), __jsx$1("div", {
+    className: classes.form
+  }, __jsx$1(LoginForm.LoginForm, {
+    onSuccess: onSuccess
+  })), __jsx$1("div", {
+    className: classes.footer
+  }, __jsx$1(LoginForm.Link, {
+    href: utils$1.resetRoute()
+  }, "Forgot password?")));
+};
+
+var __jsx$2 = React__default.createElement;
+
+var LogoutPage = function LogoutPage() {
+  var router = router$1.useRouter();
+  var session = useSession.useSession();
+  React.useEffect(function () {
+    if (session._ready && !session.isAuthenticated) {
+      router.replace(utils$1.loginRoute());
+    }
+  }, [session]);
+
+  return __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "Logout"), __jsx$2("div", {
     className: "intro"
-  }, "Are sure you want to logout?"), __jsx$1("div", {
+  }, "Are sure you want to logout?"), __jsx$2("div", {
     className: "form"
   }));
 };
 
-var __jsx$2 = React__default.createElement;
+var __jsx$3 = React__default.createElement;
 
 var OnboardingPage = function OnboardingPage() {
   useSession.useRequireAuth();
@@ -105,31 +141,31 @@ var OnboardingPage = function OnboardingPage() {
     }
   }, [session._ready]);
 
-  return __jsx$2(React__default.Fragment, null, session._ready ? __jsx$2(React__default.Fragment, null, success ? __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "What next?"), __jsx$2("div", {
+  return __jsx$3(React__default.Fragment, null, session._ready ? __jsx$3(React__default.Fragment, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "What next?"), __jsx$3("div", {
     className: "options"
-  }, __jsx$2(NextLink, {
+  }, __jsx$3(NextLink, {
     href: utils$1.settingsProfileRoute()
-  }, __jsx$2("a", {
+  }, __jsx$3("a", {
     className: "option"
-  }, __jsx$2("div", {
+  }, __jsx$3("div", {
     className: "icon"
-  }, __jsx$2("img", {
+  }, __jsx$3("img", {
     src: "/img/icons/user-1a73e8.svg",
     width: "38"
-  })), __jsx$2("div", {
+  })), __jsx$3("div", {
     className: "details"
-  }, __jsx$2("div", {
+  }, __jsx$3("div", {
     className: "heading"
-  }, "Setup your profile"), __jsx$2("div", {
+  }, "Setup your profile"), __jsx$3("div", {
     className: "description"
-  }, "Whether you're a creator or a fan, the next step is to set your name and picture. Click here to edit your profile.")))))) : __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "Create a password"), __jsx$2("div", {
+  }, "Whether you're a creator or a fan, the next step is to set your name and picture. Click here to edit your profile.")))))) : __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Create a password"), __jsx$3("div", {
     className: "intro"
-  }, "Let's create a password for you to use when you login"), __jsx$2("div", {
+  }, "Let's create a password for you to use when you login"), __jsx$3("div", {
     className: "form"
-  }))) : __jsx$2("p", null, "Spinner"));
+  }))) : __jsx$3("p", null, "Spinner"));
 };
 
-var __jsx$3 = React__default.createElement;
+var __jsx$4 = React__default.createElement;
 
 var ResetPage = function ResetPage() {
   useSession.useSession();
@@ -139,14 +175,15 @@ var ResetPage = function ResetPage() {
       success = _useState[0],
       setSuccess = _useState[1];
 
-  return __jsx$3(React__default.Fragment, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Check your inbox"), __jsx$3("div", {
+  return __jsx$4(React__default.Fragment, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Check your inbox"), __jsx$4("div", {
     className: "intro"
-  }, __jsx$3("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$3("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Forgot your password?"), __jsx$3("div", {
+  }, __jsx$4("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Forgot your password?"), __jsx$4("div", {
     className: "form"
   })));
 };
 
 exports.AutoLoginPage = AutoLoginPage;
+exports.LoginPage = LoginPage;
 exports.LogoutPage = LogoutPage;
 exports.OnboardingPage = OnboardingPage;
 exports.ResetPage = ResetPage;
