@@ -3,8 +3,8 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var index = require('./index.js');
-var errors = require('./errors-2aa38575.js');
+var index$1 = require('./index.js');
+var errors = require('./errors-6d843f19.js');
 var jwt = require('jsonwebtoken');
 var jwt__default = _interopDefault(jwt);
 
@@ -70,7 +70,7 @@ var signToken = function signToken(claims, secret, expiryMins) {
   });
 };
 var signTokens = function signTokens(claims, secret) {
-  var tokenOptions = index.options.tokens; // delete these if they exist. not needed
+  var tokenOptions = index$1.options.tokens; // delete these if they exist. not needed
 
   delete claims.iat;
   delete claims.exp;

@@ -1,8 +1,20 @@
 'use strict';
 
-var _commonjsHelpers = require('./_commonjsHelpers-19ed5375.js');
+function createCommonjsModule(fn, basedir, module) {
+	return module = {
+	  path: basedir,
+	  exports: {},
+	  require: function (path, base) {
+      return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
+    }
+	}, fn(module, module.exports), module.exports;
+}
 
-var runtime_1 = _commonjsHelpers.createCommonjsModule(function (module) {
+function commonjsRequire () {
+	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
+}
+
+var runtime_1 = createCommonjsModule(function (module) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -772,4 +784,5 @@ function _asyncToGenerator(fn) {
 }
 
 exports._asyncToGenerator = _asyncToGenerator;
+exports.createCommonjsModule = createCommonjsModule;
 exports.regenerator = regenerator;

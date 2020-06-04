@@ -12,3 +12,6 @@ export { ErrorHelperText };
 
 import Link from './Link';
 export { Link };
+
+import LoginForm from './LoginForm';
+export { LoginForm };

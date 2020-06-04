@@ -3,56 +3,31 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
-require('./createClass-013e6a9b.js');
+require('./ElusiveClient-d044fa81.js');
 require('./defineProperty-ba7cd53d.js');
-require('./ElusiveClient-6f759f99.js');
-var index = require('./index.js');
-require('./errors-2aa38575.js');
-require('./assertThisInitialized-bc0de409.js');
+require('./index.js');
+require('./errors-6d843f19.js');
 require('./utils-8eb11d51.js');
-var signupForm = require('./signupForm-92e5f556.js');
+var utils$2 = require('./utils-c37e1803.js');
+var loginForm = require('./loginForm-ad6aea81.js');
+var signupForm = require('./signupForm-2814efa0.js');
 
-var loginForm = (function () {
-  var authOptions = index.options.auth;
-  return signupForm.createForm({
-    fields: {
-      email: signupForm.emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Please enter your email.'
-        },
-        invalid: {
-          errorMessage: 'Your email is invalid.'
-        }
-      }),
-      password: signupForm.textField('password', {
-        required: {
-          value: true,
-          errorMessage: 'Please enter your password.'
-        },
-        minLength: {
-          value: authOptions.passwordMinLength,
-          errorMessage: 'Your password is too short.'
-        }
-      })
-    }
-  });
-});
 
-exports.FieldValueTooLongError = signupForm.FieldValueTooLongError;
-exports.FieldValueTooShortError = signupForm.FieldValueTooShortError;
-exports.FormError = signupForm.FormError;
-exports.InvalidFieldValueError = signupForm.InvalidFieldValueError;
-exports.MissingRequiredFieldError = signupForm.MissingRequiredFieldError;
-exports.UnknownFormError = signupForm.UnknownFormError;
-exports.booleanField = signupForm.booleanField;
-exports.clearFormFieldErrors = signupForm.clearFormFieldErrors;
-exports.createForm = signupForm.createForm;
-exports.emailField = signupForm.emailField;
-exports.field = signupForm.field;
-exports.getOnChangeValue = signupForm.getOnChangeValue;
+
+exports.FieldValueTooLongError = utils$2.FieldValueTooLongError;
+exports.FieldValueTooShortError = utils$2.FieldValueTooShortError;
+exports.FormError = utils$2.FormError;
+exports.InvalidFieldValueError = utils$2.InvalidFieldValueError;
+exports.MissingRequiredFieldError = utils$2.MissingRequiredFieldError;
+exports.UnknownFormError = utils$2.UnknownFormError;
+exports.booleanField = utils$2.booleanField;
+exports.clearFormFieldErrors = utils$2.clearFormFieldErrors;
+exports.createForm = utils$2.createForm;
+exports.emailField = utils$2.emailField;
+exports.field = utils$2.field;
+exports.getOnChangeValue = utils$2.getOnChangeValue;
+exports.textField = utils$2.textField;
+exports.loginForm = loginForm.loginForm;
 exports.onboardingForm = signupForm.onboardingForm;
 exports.resetForm = signupForm.resetForm;
 exports.signupForm = signupForm.signupForm;
-exports.textField = signupForm.textField;
-exports.loginForm = loginForm;

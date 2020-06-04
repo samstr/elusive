@@ -1,8 +1,8 @@
 'use strict';
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
-var index = require('./index.js');
-var errors = require('./errors-2aa38575.js');
+var index$1 = require('./index.js');
+var errors = require('./errors-6d843f19.js');
 var utils = require('./utils-8eb11d51.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
@@ -103,7 +103,7 @@ function _readOnlyError(name) {
 var createForm = function createForm(_ref) {
   var fields = _ref.fields,
       _validate = _ref.validate;
-  var sentry = index.services.sentry;
+  var sentry = index$1.services.sentry;
   return {
     fields: fields,
     validate: function validate(values, fieldsToValidate) {
@@ -275,56 +275,6 @@ var getOnChangeValue = function getOnChangeValue(event) {
   };
 };
 
-var onboardingForm = (function () {
-  var authOptions = index.options.auth;
-  return createForm({
-    fields: {
-      password: textField('password', {
-        required: {
-          value: true,
-          errorMessage: 'Please enter your password'
-        },
-        minLength: {
-          value: authOptions.passwordMinLength,
-          errorMessage: 'Your password is too short'
-        }
-      })
-    }
-  });
-});
-
-var resetForm = (function () {
-  return createForm({
-    fields: {
-      email: emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Your email is required'
-        },
-        invalid: {
-          errorMessage: 'Your email address is invalid'
-        }
-      })
-    }
-  });
-});
-
-var signupForm = (function () {
-  return createForm({
-    fields: {
-      email: emailField('email', {
-        required: {
-          value: true,
-          errorMessage: 'Your email is required'
-        },
-        invalid: {
-          errorMessage: 'Your email address is invalid'
-        }
-      })
-    }
-  });
-});
-
 exports.FieldValueTooLongError = FieldValueTooLongError;
 exports.FieldValueTooShortError = FieldValueTooShortError;
 exports.FormError = FormError;
@@ -337,7 +287,4 @@ exports.createForm = createForm;
 exports.emailField = emailField;
 exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
-exports.onboardingForm = onboardingForm;
-exports.resetForm = resetForm;
-exports.signupForm = signupForm;
 exports.textField = textField;

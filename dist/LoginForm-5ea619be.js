@@ -2,11 +2,13 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var createClass = require('./createClass-013e6a9b.js');
+var ElusiveClient = require('./ElusiveClient-d044fa81.js');
 var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
-var assertThisInitialized = require('./assertThisInitialized-bc0de409.js');
+require('./index.js');
+var errors = require('./errors-6d843f19.js');
 var utils = require('./utils-8eb11d51.js');
-var _commonjsHelpers = require('./_commonjsHelpers-19ed5375.js');
+var asyncToGenerator = require('./asyncToGenerator-7a28bf2e.js');
+var utils$1 = require('./utils-ac544182.js');
 var styles$2 = require('@material-ui/core/styles');
 var PropTypes = require('prop-types');
 var PropTypes__default = _interopDefault(PropTypes);
@@ -18,6 +20,10 @@ var lab = require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
 var router = require('next/router');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
+var axios__default = _interopDefault(axios);
+var utils$2 = require('./utils-c37e1803.js');
+var loginForm = require('./loginForm-ad6aea81.js');
 
 var __jsx = React__default.createElement;
 var useStyles = styles$2.makeStyles(function (theme) {
@@ -241,7 +247,7 @@ function chainPropTypes(propType1, propType2) {
 }
 
 function isPlainObject(item) {
-  return item && assertThisInitialized._typeof(item) === 'object' && item.constructor === Object;
+  return item && errors._typeof(item) === 'object' && item.constructor === Object;
 }
 function deepmerge(target, source) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
@@ -377,7 +383,7 @@ var reactIs_production_min = {
 	typeOf: typeOf
 };
 
-var reactIs_development = _commonjsHelpers.createCommonjsModule(function (module, exports) {
+var reactIs_development = asyncToGenerator.createCommonjsModule(function (module, exports) {
 
 
 
@@ -578,7 +584,7 @@ var reactIs_development_26 = reactIs_development.isSuspense;
 var reactIs_development_27 = reactIs_development.isValidElementType;
 var reactIs_development_28 = reactIs_development.typeOf;
 
-var reactIs = _commonjsHelpers.createCommonjsModule(function (module) {
+var reactIs = asyncToGenerator.createCommonjsModule(function (module) {
 
 if (process.env.NODE_ENV === 'production') {
   module.exports = reactIs_production_min;
@@ -633,7 +639,7 @@ function getDisplayName(Component) {
     return getFunctionComponentName(Component, 'Component');
   }
 
-  if (assertThisInitialized._typeof(Component) === 'object') {
+  if (errors._typeof(Component) === 'object') {
     switch (Component.$$typeof) {
       case reactIs.ForwardRef:
         return getWrappedName(Component, Component.render, 'ForwardRef');
@@ -1022,7 +1028,7 @@ function (_BaseStyleRule) {
     if (selector) {
       _this.selectorText = selector;
     } else if (scoped !== false) {
-      _this.id = generateId(assertThisInitialized._assertThisInitialized(assertThisInitialized._assertThisInitialized(_this)), sheet);
+      _this.id = generateId(errors._assertThisInitialized(errors._assertThisInitialized(_this)), sheet);
       _this.selectorText = "." + escape(_this.id);
     }
 
@@ -1084,7 +1090,7 @@ function (_BaseStyleRule) {
     return toCss(this.selectorText, this.style, opts);
   };
 
-  createClass._createClass(StyleRule, [{
+  ElusiveClient._createClass(StyleRule, [{
     key: "selector",
     set: function set(selector) {
       if (selector === this.selectorText) return;
@@ -2187,7 +2193,7 @@ function () {
     return css;
   };
 
-  createClass._createClass(SheetsRegistry, [{
+  ElusiveClient._createClass(SheetsRegistry, [{
     key: "index",
 
     /**
@@ -4498,7 +4504,7 @@ function getStylesCreator(stylesOrCreator) {
   var themingEnabled = typeof stylesOrCreator === 'function';
 
   if (process.env.NODE_ENV !== 'production') {
-    if (assertThisInitialized._typeof(stylesOrCreator) !== 'object' && !themingEnabled) {
+    if (errors._typeof(stylesOrCreator) !== 'object' && !themingEnabled) {
       console.error(['Material-UI: The `styles` argument provided is invalid.', 'You need to provide a function generating the styles or a styles object.'].join('\n'));
     }
   }
@@ -5827,7 +5833,7 @@ function handleBreakpoints(props, propValue, styleFromPropValue) {
     }, {});
   }
 
-  if (assertThisInitialized._typeof(propValue) === 'object') {
+  if (errors._typeof(propValue) === 'object') {
     var _themeBreakpoints = props.theme.breakpoints || defaultBreakpoints;
 
     return Object.keys(propValue).reduce(function (acc, breakpoint) {
@@ -6945,9 +6951,169 @@ var forwarder = function forwarder(props, ref) {
 forwarder.displayName = 'Link';
 var Link$2 = React.forwardRef(forwarder);
 
+var __jsx$5 = React__default.createElement;
+
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+var useStyles$2 = styles$2.makeStyles(function (theme) {
+  return {
+    textField: {
+      width: '100%',
+      marginBottom: theme.spacing(2)
+    },
+    textFieldInput: {
+      backgroundColor: theme.palette.common.white
+    },
+    button: {
+      width: '100%'
+    },
+    errors: {
+      marginBottom: theme.spacing(2)
+    }
+  };
+});
+var defaultValues = {
+  email: '',
+  password: ''
+};
+
+var LoginForm = function LoginForm(_ref) {
+  var onSuccess = _ref.onSuccess;
+  var classes = useStyles$2();
+
+  var _useState = React.useState(defaultValues),
+      values = _useState[0],
+      setValues = _useState[1];
+
+  var _useState2 = React.useState(null),
+      formErrors = _useState2[0],
+      setFormErrors = _useState2[1];
+
+  var _useState3 = React.useState(false),
+      isSubmitting = _useState3[0],
+      setIsSubmitting = _useState3[1];
+
+  var onChange = function onChange(event) {
+    var _getOnChangeValue = utils$2.getOnChangeValue(event),
+        field = _getOnChangeValue.field,
+        value = _getOnChangeValue.value;
+
+    setFormErrors(utils$2.clearFormFieldErrors(formErrors, field));
+    setValues(_objectSpread$1(_objectSpread$1({}, values), {}, defineProperty$1._defineProperty({}, field, value)));
+  };
+
+  var submit = /*#__PURE__*/function () {
+    var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(event) {
+      var _loginForm$validate, cleanValues, errors, response, _err$response, _err$response$data;
+
+      return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              setFormErrors(null);
+              _loginForm$validate = loginForm.loginForm().validate(values), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
+
+              if (!(errors && errors.length)) {
+                _context.next = 5;
+                break;
+              }
+
+              return _context.abrupt("return", setFormErrors(errors));
+
+            case 5:
+              setIsSubmitting(true);
+              _context.prev = 6;
+              _context.next = 9;
+              return axios__default.post(utils$1.loginAPIRoute(), cleanValues);
+
+            case 9:
+              response = _context.sent;
+              onSuccess(response.data);
+              _context.next = 17;
+              break;
+
+            case 13:
+              _context.prev = 13;
+              _context.t0 = _context["catch"](6);
+              setIsSubmitting(false);
+              setFormErrors((_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.errors);
+
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[6, 13]]);
+    }));
+
+    return function submit(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return __jsx$5("form", {
+    onSubmit: submit
+  }, __jsx$5(core.TextField, {
+    id: "login-form-email",
+    name: "email",
+    label: "Email address",
+    variant: "outlined",
+    className: classes.textField,
+    InputProps: {
+      classes: {
+        root: classes.textFieldInput
+      }
+    },
+    autoFocus: true,
+    onChange: onChange,
+    helperText: __jsx$5(ErrorHelperText, {
+      errors: formErrors,
+      field: "email"
+    }),
+    error: !!utils.fieldErrors(formErrors, 'email').length
+  }), __jsx$5(core.TextField, {
+    id: "login-form-password",
+    name: "password",
+    type: "password",
+    label: "Password",
+    variant: "outlined",
+    className: classes.textField,
+    InputProps: {
+      classes: {
+        root: classes.textFieldInput
+      }
+    },
+    onChange: onChange,
+    helperText: __jsx$5(ErrorHelperText, {
+      errors: formErrors,
+      field: "password"
+    }),
+    error: !!utils.fieldErrors(formErrors, 'password').length
+  }), __jsx$5(ErrorAlert, {
+    errors: formErrors,
+    className: classes.errors
+  }), __jsx$5(Button, {
+    variant: "contained",
+    color: "primary",
+    type: "submit",
+    text: "Login",
+    loadingText: "Logging in",
+    isLoading: isSubmitting,
+    className: classes.button,
+    disableElevation: true
+  }));
+};
+
+LoginForm.propTypes = {
+  onSuccess: PropTypes__default.func.isRequired
+};
+
 exports.AuthPage = AuthPage;
 exports.Button = Button;
 exports.ErrorAlert = ErrorAlert;
 exports.ErrorHelperText = ErrorHelperText;
 exports.Link = Link$2;
+exports.LoginForm = LoginForm;
 exports.useStyles = useStyles;

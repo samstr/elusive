@@ -3,20 +3,17 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var classCallCheck = require('../classCallCheck-d2bb402f.js');
-require('../createClass-013e6a9b.js');
+require('../ElusiveClient-d044fa81.js');
 require('../defineProperty-ba7cd53d.js');
-require('../ElusiveClient-6f759f99.js');
 require('../index.js');
-var errors = require('../errors-2aa38575.js');
-require('../assertThisInitialized-bc0de409.js');
-require('../_commonjsHelpers-19ed5375.js');
-require('../asyncToGenerator-c3c48e74.js');
+var errors = require('../errors-6d843f19.js');
+require('../asyncToGenerator-7a28bf2e.js');
 require('bcryptjs');
-require('../utils-34fd287d.js');
+require('../utils-8c3c3461.js');
 require('../utils-ac544182.js');
-var utils$2 = require('../utils-88ea097e.js');
+var utils$2 = require('../utils-744e9199.js');
 require('uuid');
-var utils$3 = require('../utils-89b27073.js');
+var utils$3 = require('../utils-6bc10708.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 

@@ -5,31 +5,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 require('./classCallCheck-d2bb402f.js');
-require('./createClass-013e6a9b.js');
+require('./ElusiveClient-d044fa81.js');
 var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
-require('./ElusiveClient-6f759f99.js');
-var index = require('./index.js');
-require('./errors-2aa38575.js');
-require('./assertThisInitialized-bc0de409.js');
+var index$1 = require('./index.js');
+require('./errors-6d843f19.js');
 require('./utils-8eb11d51.js');
-require('./_commonjsHelpers-19ed5375.js');
-require('./asyncToGenerator-c3c48e74.js');
+require('./asyncToGenerator-7a28bf2e.js');
 var utils$1 = require('./utils-ac544182.js');
 require('@material-ui/core/styles');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-require('./Link-b67309d9.js');
+require('./LoginForm-5ea619be.js');
 require('@material-ui/core');
 require('clsx');
 require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
 var router = require('next/router');
 require('react-dom');
-require('./UserContext-1558dc2a.js');
 require('axios');
-require('./utils-325de3e4.js');
-var useSession = require('./useSession-540ddfd0.js');
+require('./utils-c37e1803.js');
+require('./loginForm-ad6aea81.js');
+require('./UserContext-1558dc2a.js');
+require('./utils-cb2ac89c.js');
+var useSession = require('./useSession-8dd087fe.js');
 
 var __jsx = React__default.createElement;
 
@@ -134,7 +133,7 @@ var __jsx$3 = React__default.createElement;
 
 var ResetPage = function ResetPage() {
   useSession.useSession();
-  var mailOptions = index.options.mail;
+  var mailOptions = index$1.options.mail;
 
   var _useState = React.useState(),
       success = _useState[0],
