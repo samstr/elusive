@@ -1,3 +1,6 @@
+import AuthPageWrapper from './AuthPageWrapper';
+export { AuthPageWrapper };
+
 import Button from './Button';
 export { Button };
 

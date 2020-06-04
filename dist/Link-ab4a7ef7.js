@@ -7,17 +7,67 @@ var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
 var assertThisInitialized = require('./assertThisInitialized-bc0de409.js');
 var utils = require('./utils-8eb11d51.js');
 var _commonjsHelpers = require('./_commonjsHelpers-19ed5375.js');
-var core = require('@material-ui/core');
 var styles$2 = require('@material-ui/core/styles');
-var clsx = _interopDefault(require('clsx'));
 var PropTypes = require('prop-types');
 var PropTypes__default = _interopDefault(PropTypes);
 var React = require('react');
 var React__default = _interopDefault(React);
+var core = require('@material-ui/core');
+var clsx = _interopDefault(require('clsx'));
 var lab = require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
 var router = require('next/router');
 var ReactDOM = require('react-dom');
+
+var __jsx = React__default.createElement;
+var useStyles = styles$2.makeStyles(function (theme) {
+  return {
+    root: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100%'
+    },
+    content: defineProperty$1._defineProperty({
+      width: '100%'
+    }, theme.breakpoints.up('sm'), {
+      maxWidth: 380,
+      width: 380
+    }),
+    title: {
+      fontWeight: 'bold !important',
+      paddingBottom: theme.spacing(2),
+      textAlign: 'center'
+    },
+    intro: {
+      fontSize: 16,
+      textAlign: 'center',
+      paddingBottom: theme.spacing(2)
+    },
+    form: {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2)
+    },
+    footer: {
+      paddingTop: theme.spacing(2),
+      textAlign: 'center'
+    }
+  };
+});
+
+var AuthPageWrapper = function AuthPageWrapper(_ref) {
+  var children = _ref.children;
+  var classes = useStyles();
+  return __jsx("div", {
+    className: classes.root
+  }, __jsx("div", {
+    className: classes.content
+  }, children));
+};
+
+AuthPageWrapper.propTypes = {
+  children: PropTypes__default.node.isRequired
+};
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -37,12 +87,12 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-var __jsx = React__default.createElement;
+var __jsx$1 = React__default.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var useStyles = styles$2.makeStyles(function (theme) {
+var useStyles$1 = styles$2.makeStyles(function (theme) {
   return {
     loading: {
       opacity: 0.75,
@@ -52,7 +102,7 @@ var useStyles = styles$2.makeStyles(function (theme) {
 });
 
 var Button = function Button(props) {
-  var classes = useStyles();
+  var classes = useStyles$1();
   var className = props.className,
       isLoading = props.isLoading,
       loadingText = props.loadingText,
@@ -62,9 +112,9 @@ var Button = function Button(props) {
 
   delete cleanProps.isLoading;
   delete cleanProps.loadingText;
-  return __jsx(core.Button, _extends({}, cleanProps, {
+  return __jsx$1(core.Button, _extends({}, cleanProps, {
     className: clsx(className, isLoading && classes.loading)
-  }), isLoading && __jsx(React__default.Fragment, null, loadingText ? "".concat(loadingText, "...") : 'Loading...'), !isLoading && text);
+  }), isLoading && __jsx$1(React__default.Fragment, null, loadingText ? "".concat(loadingText, "...") : 'Loading...'), !isLoading && text);
 };
 
 Button.propTypes = {
@@ -75,7 +125,7 @@ Button.propTypes = {
   text: PropTypes__default.string.isRequired
 };
 
-var __jsx$1 = React__default.createElement;
+var __jsx$2 = React__default.createElement;
 
 var ErrorAlert = function ErrorAlert(_ref) {
   var className = _ref.className,
@@ -83,13 +133,13 @@ var ErrorAlert = function ErrorAlert(_ref) {
       includingFields = _ref.includingFields;
   var filteredErrors = utils.genericErrors(errors, includingFields);
   if (!(filteredErrors === null || filteredErrors === void 0 ? void 0 : filteredErrors.length)) return null;
-  return __jsx$1(lab.Alert, {
+  return __jsx$2(lab.Alert, {
     severity: "error",
     variant: "filled",
     className: className
   }, filteredErrors.map(function (_ref2) {
     var message = _ref2.message;
-    return __jsx$1("div", {
+    return __jsx$2("div", {
       key: message
     }, message);
   }));
@@ -104,16 +154,16 @@ ErrorAlert.propTypes = {
   includingFields: PropTypes__default.arrayOf(PropTypes__default.string)
 };
 
-var __jsx$2 = React__default.createElement;
+var __jsx$3 = React__default.createElement;
 
 var ErrorHelperText = function ErrorHelperText(_ref) {
   var errors = _ref.errors,
       field = _ref.field;
   var filteredErrors = utils.fieldErrors(errors, field);
   if (!(filteredErrors === null || filteredErrors === void 0 ? void 0 : filteredErrors.length)) return null;
-  return __jsx$2(React__default.Fragment, null, filteredErrors.map(function (_ref2) {
+  return __jsx$3(React__default.Fragment, null, filteredErrors.map(function (_ref2) {
     var message = _ref2.message;
-    return __jsx$2("span", {
+    return __jsx$3("span", {
       key: message,
       style: {
         display: 'block'
@@ -6826,16 +6876,16 @@ var MuiLink = withStyles$1(styles$1, {
   name: 'MuiLink'
 })(Link);
 
-var __jsx$3 = React__default.createElement;
+var __jsx$4 = React__default.createElement;
 var NextComposed = React__default.forwardRef(function NextComposed(props, ref) {
   var as = props.as,
       href = props.href,
       other = _objectWithoutProperties(props, ["as", "href"]);
 
-  return __jsx$3(NextLink, {
+  return __jsx$4(NextLink, {
     href: href,
     as: as
-  }, __jsx$3("a", _extends({
+  }, __jsx$4("a", _extends({
     ref: ref
   }, other)));
 });
@@ -6860,14 +6910,14 @@ function Link$1(props) {
   var className = clsx(classNameProps, defineProperty$1._defineProperty({}, activeClassName, router$1.pathname === pathname && activeClassName));
 
   if (naked) {
-    return __jsx$3(NextComposed, _extends({
+    return __jsx$4(NextComposed, _extends({
       className: className,
       ref: innerRef,
       href: href
     }, other));
   }
 
-  return __jsx$3(MuiLink, _extends({
+  return __jsx$4(MuiLink, _extends({
     component: NextComposed,
     className: className,
     ref: innerRef,
@@ -6887,7 +6937,7 @@ Link$1.propTypes = {
 };
 
 var forwarder = function forwarder(props, ref) {
-  return __jsx$3(Link$1, _extends({}, props, {
+  return __jsx$4(Link$1, _extends({}, props, {
     innerRef: ref
   }));
 };
@@ -6895,6 +6945,7 @@ var forwarder = function forwarder(props, ref) {
 forwarder.displayName = 'Link';
 var Link$2 = React.forwardRef(forwarder);
 
+exports.AuthPageWrapper = AuthPageWrapper;
 exports.Button = Button;
 exports.ErrorAlert = ErrorAlert;
 exports.ErrorHelperText = ErrorHelperText;

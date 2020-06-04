@@ -7,12 +7,12 @@ require('./defineProperty-ba7cd53d.js');
 require('./assertThisInitialized-bc0de409.js');
 require('./utils-8eb11d51.js');
 require('./_commonjsHelpers-19ed5375.js');
-var Link = require('./Link-b0666c28.js');
-require('@material-ui/core');
 require('@material-ui/core/styles');
-require('clsx');
 require('prop-types');
 require('react');
+var Link = require('./Link-ab4a7ef7.js');
+require('@material-ui/core');
+require('clsx');
 require('@material-ui/lab');
 require('next/link');
 require('next/router');
@@ -20,6 +20,7 @@ require('react-dom');
 
 
 
+exports.AuthPageWrapper = Link.AuthPageWrapper;
 exports.Button = Link.Button;
 exports.ErrorAlert = Link.ErrorAlert;
 exports.ErrorHelperText = Link.ErrorHelperText;
