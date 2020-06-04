@@ -20,6 +20,7 @@ export const resetRoute = () => '/reset';
 export const settingsRoute = () => '/settings';
 export const settingsProfileRoute = () => '/settings/profile';
 export const settingsAccountRoute = () => '/settings/account';
+export const signupRoute = () => '/signup';
 export const termsRoute = () => '/terms';
 
 // Route utils

@@ -21,6 +21,7 @@ import {
   settingsAccountRoute,
   settingsProfileRoute,
   signupAPIRoute,
+  signupRoute,
   termsRoute,
   userAPIRoute,
 } from './utils';
@@ -47,6 +48,7 @@ export {
   settingsAccountRoute,
   settingsProfileRoute,
   signupAPIRoute,
+  signupRoute,
   termsRoute,
   userAPIRoute,
 };

@@ -52,6 +52,9 @@ var settingsProfileRoute = function settingsProfileRoute() {
 var settingsAccountRoute = function settingsAccountRoute() {
   return '/settings/account';
 };
+var signupRoute = function signupRoute() {
+  return '/signup';
+};
 var termsRoute = function termsRoute() {
   return '/terms';
 }; // Route utils
@@ -115,5 +118,6 @@ exports.settingsAccountRoute = settingsAccountRoute;
 exports.settingsProfileRoute = settingsProfileRoute;
 exports.settingsRoute = settingsRoute;
 exports.signupAPIRoute = signupAPIRoute;
+exports.signupRoute = signupRoute;
 exports.termsRoute = termsRoute;
 exports.userAPIRoute = userAPIRoute;
