@@ -2,11 +2,12 @@ import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 
 import Elusive from '../';
-import { AuthPage, ResetForm } from '../components';
+import { AuthPage, ResetForm, useAuthPageStyles } from '../components';
 import { useSession } from '../hooks';
 
 const ResetPage = () => {
   useSession();
+  const classes = useAuthPageStyles();
   const [success, setSuccess] = useState();
   const { mail: mailOptions } = Elusive.options;
 

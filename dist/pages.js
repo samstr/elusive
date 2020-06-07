@@ -169,6 +169,7 @@ var __jsx$4 = React__default.createElement;
 
 var ResetPage = function ResetPage() {
   useSession.useSession();
+  var classes = SignupForm.useStyles();
 
   var _useState = React.useState(),
       success = _useState[0],
@@ -238,7 +239,11 @@ var LoginPage$1 = function LoginPage() {
     className: classes.footer
   }, __jsx$5(SignupForm.Link, {
     href: utils$1.loginRoute()
-  }, "I already have an account"))));
+  }, "I already have an account"))), __jsx$5("p", {
+    onClick: function onClick() {
+      return setSuccess(true);
+    }
+  }, "test"));
 };
 
 exports.AutoLoginPage = AutoLoginPage;

@@ -48,6 +48,7 @@ const LoginPage = () => {
           </div>
         </>
       )}
+      <p onClick={() => setSuccess(true)}>test</p>
     </AuthPage>
   );
 };
