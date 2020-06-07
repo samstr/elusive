@@ -187,6 +187,11 @@ var __jsx$5 = React__default.createElement;
 var LoginPage$1 = function LoginPage() {
   var session = useSession.useSession();
   var classes = SignupForm.useStyles();
+
+  var _useState = React.useState(),
+      success = _useState[0],
+      setSuccess = _useState[1];
+
   var _Elusive$options = index$1.options,
       mailOptions = _Elusive$options.mail,
       siteOptions = _Elusive$options.site;
