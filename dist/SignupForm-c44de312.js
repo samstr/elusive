@@ -34,14 +34,11 @@ var useStyles = styles$2.makeStyles(function (theme) {
       justifyContent: 'center',
       height: '100%'
     },
-    content: defineProperty$1._defineProperty({
+    content: {
       width: '100%',
       paddingTop: theme.spacing(4),
       paddingBottom: theme.spacing(4)
-    }, theme.breakpoints.up('sm'), {
-      maxWidth: 380,
-      width: 380
-    }),
+    },
     title: {
       fontWeight: 'bold !important',
       paddingBottom: theme.spacing(2),
@@ -52,10 +49,12 @@ var useStyles = styles$2.makeStyles(function (theme) {
       textAlign: 'center',
       paddingBottom: theme.spacing(2)
     },
-    form: {
+    form: defineProperty$1._defineProperty({
       paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(2)
-    },
+    }, theme.breakpoints.up('sm'), {
+      maxWidth: 380
+    }),
     footer: {
       paddingTop: theme.spacing(2),
       textAlign: 'center'

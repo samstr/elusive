@@ -13,10 +13,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: 380,
-      width: 380,
-    },
   },
   title: {
     fontWeight: 'bold !important',
@@ -31,6 +27,9 @@ export const useStyles = makeStyles((theme) => ({
   form: {
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: 380,
+    },
   },
   footer: {
     paddingTop: theme.spacing(2),
