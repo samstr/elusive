@@ -9,6 +9,7 @@ import { homeRoute, loginRoute } from '../routes';
 const LoginPage = () => {
   const session = useSession();
   const classes = useAuthPageStyles();
+  const [success, setSuccess] = useState();
   const { mail: mailOptions, site: siteOptions } = Elusive.options;
 
   useEffect(() => {
