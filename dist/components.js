@@ -13,7 +13,7 @@ require('./utils-ac544182.js');
 require('@material-ui/core/styles');
 require('prop-types');
 require('react');
-var LoginForm = require('./LoginForm-b2bc5384.js');
+var LoginForm = require('./LoginForm-5870efbe.js');
 require('@material-ui/core');
 require('clsx');
 require('@material-ui/lab');
@@ -22,7 +22,7 @@ require('next/router');
 require('react-dom');
 require('axios');
 require('./utils-c37e1803.js');
-require('./loginForm-ad6aea81.js');
+require('./loginForm-87c1cb24.js');
 
 
 

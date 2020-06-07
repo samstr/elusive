@@ -9,7 +9,7 @@ require('./index.js');
 require('./errors-6d843f19.js');
 require('./utils-8eb11d51.js');
 var utils$2 = require('./utils-c37e1803.js');
-var loginForm = require('./loginForm-ad6aea81.js');
+var loginForm = require('./loginForm-87c1cb24.js');
 var signupForm = require('./signupForm-2814efa0.js');
 
 

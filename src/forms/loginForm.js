@@ -9,10 +9,10 @@ export default () => {
       email: emailField('email', {
         required: {
           value: true,
-          errorMessage: 'Please enter your email.',
+          errorMessage: 'Please enter your email address.',
         },
         invalid: {
-          errorMessage: 'Your email is invalid.',
+          errorMessage: 'Your email address is invalid.',
         },
       }),
       password: textField('password', {
