@@ -56,17 +56,17 @@ const signupAPI = async ({ req, res, session }) => {
     usersCollection().where('email', '==', cleanValues.email)
   );
 
-  if (user && user.password) {
-    throw new UserAlreadyExistsError(
-      'An account with this email address already exists.'
-    );
-  }
+  if (user) {
+    if (user.password) {
+      throw new UserAlreadyExistsError(
+        'An account with this email address already exists.'
+      );
+    }
 
-  if (user && !user.enabled) {
-    throw new UserNotEnabledError('This account has been disabled.');
-  }
-
-  if (!user) {
+    if (!user.enabled) {
+      throw new UserNotEnabledError('This account has been disabled.');
+    }
+  } else {
     const baseURL = `${
       process.env.NODE_ENV === 'production' ? 'https' : 'http'
     }://${req.headers.host}`;
