@@ -88,8 +88,8 @@ const SignupForm = ({ onSuccess }) => {
         variant="contained"
         color="primary"
         type="submit"
-        text="Sign Up"
-        loadingText="Signing up"
+        text="Create account"
+        loadingText="Creating account"
         isLoading={isSubmitting}
         className={classes.button}
         disableElevation
