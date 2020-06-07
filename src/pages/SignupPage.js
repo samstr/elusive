@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 
 import Elusive from '../';
@@ -10,7 +9,7 @@ const LoginPage = () => {
   const session = useSession();
   const classes = useAuthPageStyles();
   const [success, setSuccess] = useState();
-  const { mail: mailOptions, site: siteOptions } = Elusive.options;
+  const { mail: mailOptions } = Elusive.options;
 
   useEffect(() => {
     if (session._ready && session.isAuthenticated) {
@@ -21,25 +20,17 @@ const LoginPage = () => {
   const onSuccess = () => setSuccess(true);
 
   return (
-    <AuthPage>
+    <AuthPage title={success ? 'Check your inbox' : 'Create an account'}>
       {success ? (
-        <>
-          <Typography variant="h4" className={classes.title}>
-            Check your inbox
-          </Typography>
-          <div className={classes.intro}>
-            <p>Please confirm your email address to get started.</p>
-            <p>
-              You may need to check your spam folder or whitelist{' '}
-              {mailOptions.fromEmail}
-            </p>
-          </div>
-        </>
+        <div className={classes.intro}>
+          <p>Please confirm your email address to get started.</p>
+          <p>
+            You may need to check your spam folder or whitelist{' '}
+            {mailOptions.fromEmail}
+          </p>
+        </div>
       ) : (
         <>
-          <Typography variant="h4" className={classes.title}>
-            Create an account
-          </Typography>
           <div className={classes.form}>
             <SignupForm onSuccess={onSuccess} />
           </div>

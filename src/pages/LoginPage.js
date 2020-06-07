@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 
 import Elusive from '../';
@@ -26,10 +25,7 @@ const LoginPage = () => {
   };
 
   return (
-    <AuthPage>
-      <Typography variant="h4" className={classes.title}>
-        Login to {siteOptions.name}
-      </Typography>
+    <AuthPage title={`Login to ${siteOptions.name}`}>
       <div className={classes.form}>
         <LoginForm onSuccess={onSuccess} />
       </div>

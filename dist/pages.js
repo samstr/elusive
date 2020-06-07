@@ -12,12 +12,12 @@ require('./errors-6d843f19.js');
 require('./utils-8eb11d51.js');
 require('./asyncToGenerator-7a28bf2e.js');
 var utils$1 = require('./utils-ac544182.js');
+require('@material-ui/core');
 require('@material-ui/core/styles');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-7d385010.js');
-var core = require('@material-ui/core');
+var SignupForm = require('./SignupForm-a9790b03.js');
 require('clsx');
 require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
@@ -86,10 +86,9 @@ var LoginPage = function LoginPage() {
     window.location = next;
   };
 
-  return __jsx$1(SignupForm.AuthPage, null, __jsx$1(core.Typography, {
-    variant: "h4",
-    className: classes.title
-  }, "Login to ", siteOptions.name), __jsx$1("div", {
+  return __jsx$1(SignupForm.AuthPage, {
+    title: "Login to ".concat(siteOptions.name)
+  }, __jsx$1("div", {
     className: classes.form
   }, __jsx$1(SignupForm.LoginForm, {
     onSuccess: onSuccess
@@ -181,19 +180,15 @@ var ResetPage = function ResetPage() {
     return setSuccess(true);
   };
 
-  return __jsx$4(SignupForm.AuthPage, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4(core.Typography, {
-    variant: "h4",
-    className: classes.title
-  }, "Check your inbox"), __jsx$4("div", {
+  return __jsx$4(SignupForm.AuthPage, {
+    title: success ? 'Check your inbox' : 'Forgot your password?'
+  }, success ? __jsx$4("div", {
     className: classes.intro
-  }, __jsx$4("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$4(React__default.Fragment, null, __jsx$4(core.Typography, {
-    variant: "h4",
-    className: classes.title
-  }, "Forgot your password?"), __jsx$4("div", {
+  }, __jsx$4("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail)) : __jsx$4("div", {
     className: classes.form
   }, __jsx$4(SignupForm.ResetForm, {
     onSuccess: onSuccess
-  }))));
+  })));
 };
 
 var __jsx$5 = React__default.createElement;
@@ -206,9 +201,7 @@ var LoginPage$1 = function LoginPage() {
       success = _useState[0],
       setSuccess = _useState[1];
 
-  var _Elusive$options = index$1.options,
-      mailOptions = _Elusive$options.mail,
-      siteOptions = _Elusive$options.site;
+  var mailOptions = index$1.options.mail;
   React.useEffect(function () {
     if (session._ready && session.isAuthenticated) {
       router.replace(utils$1.homeRoute());
@@ -219,15 +212,11 @@ var LoginPage$1 = function LoginPage() {
     return setSuccess(true);
   };
 
-  return __jsx$5(SignupForm.AuthPage, null, success ? __jsx$5(React__default.Fragment, null, __jsx$5(core.Typography, {
-    variant: "h4",
-    className: classes.title
-  }, "Check your inbox"), __jsx$5("div", {
+  return __jsx$5(SignupForm.AuthPage, {
+    title: success ? 'Check your inbox' : 'Create an account'
+  }, success ? __jsx$5("div", {
     className: classes.intro
-  }, __jsx$5("p", null, "Please confirm your email address to get started."), __jsx$5("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$5(React__default.Fragment, null, __jsx$5(core.Typography, {
-    variant: "h4",
-    className: classes.title
-  }, "Create an account"), __jsx$5("div", {
+  }, __jsx$5("p", null, "Please confirm your email address to get started."), __jsx$5("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail)) : __jsx$5(React__default.Fragment, null, __jsx$5("div", {
     className: classes.form
   }, __jsx$5(SignupForm.SignupForm, {
     onSuccess: onSuccess

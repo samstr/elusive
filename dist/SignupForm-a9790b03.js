@@ -9,12 +9,12 @@ var errors = require('./errors-6d843f19.js');
 var utils = require('./utils-8eb11d51.js');
 var asyncToGenerator = require('./asyncToGenerator-7a28bf2e.js');
 var utils$1 = require('./utils-ac544182.js');
+var core = require('@material-ui/core');
 var styles$2 = require('@material-ui/core/styles');
 var PropTypes = require('prop-types');
 var PropTypes__default = _interopDefault(PropTypes);
 var React = require('react');
 var React__default = _interopDefault(React);
-var core = require('@material-ui/core');
 var clsx = _interopDefault(require('clsx'));
 var lab = require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
@@ -63,17 +63,22 @@ var useStyles = styles$2.makeStyles(function (theme) {
 });
 
 var AuthPage = function AuthPage(_ref) {
-  var children = _ref.children;
+  var children = _ref.children,
+      title = _ref.title;
   var classes = useStyles();
   return __jsx("div", {
     className: classes.root
   }, __jsx("div", {
     className: classes.content
-  }, children));
+  }, title && __jsx(core.Typography, {
+    variant: "h4",
+    className: classes.title
+  }, title), children));
 };
 
 AuthPage.propTypes = {
-  children: PropTypes__default.node.isRequired
+  children: PropTypes__default.node.isRequired,
+  title: PropTypes__default.string
 };
 
 function _extends() {
