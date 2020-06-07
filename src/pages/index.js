@@ -12,3 +12,6 @@ export { OnboardingPage };
 
 import ResetPage from './ResetPage';
 export { ResetPage };
+
+import SignupPage from './SignupPage';
+export { SignupPage };

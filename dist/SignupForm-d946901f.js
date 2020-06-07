@@ -22,8 +22,8 @@ var router = require('next/router');
 var ReactDOM = require('react-dom');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
-var utils$2 = require('./utils-c37e1803.js');
-var loginForm = require('./loginForm-87c1cb24.js');
+var signupForm = require('./signupForm-1231bb04.js');
+var loginForm = require('./loginForm-669f34d0.js');
 
 var __jsx = React__default.createElement;
 var useStyles = styles$2.makeStyles(function (theme) {
@@ -6997,11 +6997,11 @@ var LoginForm = function LoginForm(_ref) {
       setIsSubmitting = _useState3[1];
 
   var onChange = function onChange(event) {
-    var _getOnChangeValue = utils$2.getOnChangeValue(event),
+    var _getOnChangeValue = signupForm.getOnChangeValue(event),
         field = _getOnChangeValue.field,
         value = _getOnChangeValue.value;
 
-    setFormErrors(utils$2.clearFormFieldErrors(formErrors, field));
+    setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
     setValues(_objectSpread$1(_objectSpread$1({}, values), {}, defineProperty$1._defineProperty({}, field, value)));
   };
 
@@ -7112,10 +7112,151 @@ LoginForm.propTypes = {
   onSuccess: PropTypes__default.func.isRequired
 };
 
+var __jsx$6 = React__default.createElement;
+
+function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+var useStyles$3 = styles$2.makeStyles(function (theme) {
+  return {
+    textField: {
+      width: '100%',
+      marginBottom: theme.spacing(2)
+    },
+    textFieldInput: {
+      backgroundColor: theme.palette.common.white
+    },
+    button: {
+      width: '100%'
+    },
+    errors: {
+      marginBottom: theme.spacing(2)
+    }
+  };
+});
+var defaultValues$1 = {
+  email: ''
+};
+
+var SignupForm = function SignupForm(_ref) {
+  var onSuccess = _ref.onSuccess;
+  var classes = useStyles$3();
+
+  var _useState = React.useState(defaultValues$1),
+      values = _useState[0],
+      setValues = _useState[1];
+
+  var _useState2 = React.useState(null),
+      formErrors = _useState2[0],
+      setFormErrors = _useState2[1];
+
+  var _useState3 = React.useState(false),
+      isSubmitting = _useState3[0],
+      setIsSubmitting = _useState3[1];
+
+  var onChange = function onChange(event) {
+    var _getOnChangeValue = signupForm.getOnChangeValue(event),
+        field = _getOnChangeValue.field,
+        value = _getOnChangeValue.value;
+
+    setFormErrors(signupForm.clearFormFieldErrors(formErrors, field));
+    setValues(_objectSpread$2(_objectSpread$2({}, values), {}, defineProperty$1._defineProperty({}, field, value)));
+  };
+
+  var submit = /*#__PURE__*/function () {
+    var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(event) {
+      var _signupForm$validate, cleanValues, errors, response, _err$response, _err$response$data;
+
+      return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              setFormErrors(null);
+              _signupForm$validate = signupForm.signupForm().validate(values), cleanValues = _signupForm$validate.cleanValues, errors = _signupForm$validate.errors;
+
+              if (!(errors && errors.length)) {
+                _context.next = 5;
+                break;
+              }
+
+              return _context.abrupt("return", setFormErrors(errors));
+
+            case 5:
+              setIsSubmitting(true);
+              _context.prev = 6;
+              _context.next = 9;
+              return axios__default.post(utils$1.signupAPIRoute(), cleanValues);
+
+            case 9:
+              response = _context.sent;
+              onSuccess(response.data);
+              _context.next = 17;
+              break;
+
+            case 13:
+              _context.prev = 13;
+              _context.t0 = _context["catch"](6);
+              setIsSubmitting(false);
+              setFormErrors((_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.errors);
+
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[6, 13]]);
+    }));
+
+    return function submit(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return __jsx$6("form", {
+    onSubmit: submit
+  }, __jsx$6(core.TextField, {
+    id: "signup-form-email",
+    name: "email",
+    label: "Email address",
+    variant: "outlined",
+    className: classes.textField,
+    InputProps: {
+      classes: {
+        root: classes.textFieldInput
+      }
+    },
+    autoFocus: true,
+    onChange: onChange,
+    helperText: __jsx$6(ErrorHelperText, {
+      errors: formErrors,
+      field: "email"
+    }),
+    error: !!utils.fieldErrors(formErrors, 'email').length
+  }), __jsx$6(ErrorAlert, {
+    errors: formErrors,
+    className: classes.errors
+  }), __jsx$6(Button, {
+    variant: "contained",
+    color: "primary",
+    type: "submit",
+    text: "Sign Up",
+    loadingText: "Signing up",
+    isLoading: isSubmitting,
+    className: classes.button,
+    disableElevation: true
+  }));
+};
+
+SignupForm.propTypes = {
+  onSuccess: PropTypes__default.func.isRequired
+};
+
 exports.AuthPage = AuthPage;
 exports.Button = Button;
 exports.ErrorAlert = ErrorAlert;
 exports.ErrorHelperText = ErrorHelperText;
 exports.Link = Link$2;
 exports.LoginForm = LoginForm;
+exports.SignupForm = SignupForm;
 exports.useStyles = useStyles;

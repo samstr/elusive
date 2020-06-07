@@ -16,7 +16,7 @@ require('@material-ui/core/styles');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-var LoginForm = require('./LoginForm-5870efbe.js');
+var SignupForm = require('./SignupForm-d946901f.js');
 var core = require('@material-ui/core');
 require('clsx');
 require('@material-ui/lab');
@@ -24,8 +24,8 @@ var NextLink = _interopDefault(require('next/link'));
 var router$1 = require('next/router');
 require('react-dom');
 require('axios');
-require('./utils-c37e1803.js');
-require('./loginForm-87c1cb24.js');
+require('./signupForm-1231bb04.js');
+require('./loginForm-669f34d0.js');
 require('./UserContext-1558dc2a.js');
 require('./utils-cb2ac89c.js');
 var useSession = require('./useSession-8dd087fe.js');
@@ -68,7 +68,7 @@ var __jsx$1 = React__default.createElement;
 
 var LoginPage = function LoginPage() {
   var session = useSession.useSession();
-  var classes = LoginForm.useStyles();
+  var classes = SignupForm.useStyles();
   var siteOptions = index$1.options.site;
   React.useEffect(function () {
     if (session._ready && session.isAuthenticated) {
@@ -86,16 +86,16 @@ var LoginPage = function LoginPage() {
     window.location = next;
   };
 
-  return __jsx$1(LoginForm.AuthPage, null, __jsx$1(core.Typography, {
+  return __jsx$1(SignupForm.AuthPage, null, __jsx$1(core.Typography, {
     variant: "h4",
     className: classes.title
   }, "Login to ", siteOptions.name), __jsx$1("div", {
     className: classes.form
-  }, __jsx$1(LoginForm.LoginForm, {
+  }, __jsx$1(SignupForm.LoginForm, {
     onSuccess: onSuccess
   })), __jsx$1("div", {
     className: classes.footer
-  }, __jsx$1(LoginForm.Link, {
+  }, __jsx$1(SignupForm.Link, {
     href: utils$1.resetRoute()
   }, "Forgot password?")));
 };
@@ -182,8 +182,46 @@ var ResetPage = function ResetPage() {
   })));
 };
 
+var __jsx$5 = React__default.createElement;
+
+var LoginPage$1 = function LoginPage() {
+  var session = useSession.useSession();
+  var classes = SignupForm.useStyles();
+  var _Elusive$options = index$1.options,
+      mailOptions = _Elusive$options.mail,
+      siteOptions = _Elusive$options.site;
+  React.useEffect(function () {
+    if (session._ready && session.isAuthenticated) {
+      router.replace(utils$1.homeRoute());
+    }
+  }, [session]);
+
+  var onSuccess = function onSuccess() {
+    return setSuccess(true);
+  };
+
+  return __jsx$5(SignupForm.AuthPage, null, success ? __jsx$5(React__default.Fragment, null, __jsx$5(core.Typography, {
+    variant: "h4",
+    className: classes.title
+  }, "Login to ", siteOptions.name), __jsx$5("div", {
+    className: classes.intro
+  }, __jsx$5("p", null, "Please confirm your email address to get started."), __jsx$5("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$5(React__default.Fragment, null, __jsx$5(core.Typography, {
+    variant: "h4",
+    className: classes.title
+  }, "Create an account"), __jsx$5("div", {
+    className: classes.form
+  }, __jsx$5(SignupForm.SignupForm, {
+    onSuccess: onSuccess
+  })), __jsx$5("div", {
+    className: classes.footer
+  }, __jsx$5(SignupForm.Link, {
+    href: utils$1.loginRoute()
+  }, "I already have an account"))));
+};
+
 exports.AutoLoginPage = AutoLoginPage;
 exports.LoginPage = LoginPage;
 exports.LogoutPage = LogoutPage;
 exports.OnboardingPage = OnboardingPage;
 exports.ResetPage = ResetPage;
+exports.SignupPage = LoginPage$1;
