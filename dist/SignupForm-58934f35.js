@@ -51,9 +51,10 @@ var useStyles = styles$2.makeStyles(function (theme) {
     },
     form: defineProperty$1._defineProperty({
       paddingTop: theme.spacing(2),
-      paddingBottom: theme.spacing(2)
+      paddingBottom: theme.spacing(2),
+      minWidth: 288
     }, theme.breakpoints.up('sm'), {
-      maxWidth: 380
+      width: 340
     }),
     footer: {
       paddingTop: theme.spacing(2),
@@ -7117,11 +7118,96 @@ LoginForm.propTypes = {
 };
 
 var __jsx$6 = React__default.createElement;
+var useStyles$3 = styles$2.makeStyles(function (theme) {
+  return {
+    button: {
+      width: '100%'
+    },
+    errors: {
+      marginBottom: theme.spacing(2)
+    }
+  };
+});
+
+var LogoutForm = function LogoutForm(_ref) {
+  var onSuccess = _ref.onSuccess;
+  var classes = useStyles$3();
+
+  var _useState = React.useState(null),
+      formErrors = _useState[0],
+      setFormErrors = _useState[1];
+
+  var _useState2 = React.useState(false),
+      isSubmitting = _useState2[0],
+      setIsSubmitting = _useState2[1];
+
+  var submit = /*#__PURE__*/function () {
+    var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(event) {
+      var response, _err$response, _err$response$data;
+
+      return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              setFormErrors(null);
+              setIsSubmitting(true);
+              _context.prev = 3;
+              _context.next = 6;
+              return axios__default.post(utils$1.logoutAPIRoute(), cleanValues);
+
+            case 6:
+              response = _context.sent;
+              onSuccess(response.data);
+              _context.next = 14;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](3);
+              setIsSubmitting(false);
+              setFormErrors((_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.errors);
+
+            case 14:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[3, 10]]);
+    }));
+
+    return function submit(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return __jsx$6("form", {
+    onSubmit: submit
+  }, __jsx$6(ErrorAlert, {
+    errors: formErrors,
+    className: classes.errors
+  }), __jsx$6(Button, {
+    variant: "contained",
+    color: "primary",
+    type: "submit",
+    text: "Logout",
+    loadingText: "Logging out",
+    isLoading: isSubmitting,
+    className: classes.button,
+    disableElevation: true
+  }));
+};
+
+LogoutForm.propTypes = {
+  onSuccess: PropTypes__default.func.isRequired
+};
+
+var __jsx$7 = React__default.createElement;
 
 function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var useStyles$3 = styles$2.makeStyles(function (theme) {
+var useStyles$4 = styles$2.makeStyles(function (theme) {
   return {
     textField: {
       width: '100%',
@@ -7144,7 +7230,7 @@ var defaultValues$1 = {
 
 var ResetForm = function ResetForm(_ref) {
   var onSuccess = _ref.onSuccess;
-  var classes = useStyles$3();
+  var classes = useStyles$4();
 
   var _useState = React.useState(defaultValues$1),
       values = _useState[0],
@@ -7217,9 +7303,9 @@ var ResetForm = function ResetForm(_ref) {
     };
   }();
 
-  return __jsx$6("form", {
+  return __jsx$7("form", {
     onSubmit: submit
-  }, __jsx$6(core.TextField, {
+  }, __jsx$7(core.TextField, {
     id: "reset-form-email",
     name: "email",
     label: "Email address",
@@ -7232,15 +7318,15 @@ var ResetForm = function ResetForm(_ref) {
     },
     autoFocus: true,
     onChange: onChange,
-    helperText: __jsx$6(ErrorHelperText, {
+    helperText: __jsx$7(ErrorHelperText, {
       errors: formErrors,
       field: "email"
     }),
     error: !!utils.fieldErrors(formErrors, 'email').length
-  }), __jsx$6(ErrorAlert, {
+  }), __jsx$7(ErrorAlert, {
     errors: formErrors,
     className: classes.errors
-  }), __jsx$6(Button, {
+  }), __jsx$7(Button, {
     variant: "contained",
     color: "primary",
     type: "submit",
@@ -7256,12 +7342,12 @@ ResetForm.propTypes = {
   onSuccess: PropTypes__default.func.isRequired
 };
 
-var __jsx$7 = React__default.createElement;
+var __jsx$8 = React__default.createElement;
 
 function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var useStyles$4 = styles$2.makeStyles(function (theme) {
+var useStyles$5 = styles$2.makeStyles(function (theme) {
   return {
     textField: {
       width: '100%',
@@ -7284,7 +7370,7 @@ var defaultValues$2 = {
 
 var SignupForm = function SignupForm(_ref) {
   var onSuccess = _ref.onSuccess;
-  var classes = useStyles$4();
+  var classes = useStyles$5();
 
   var _useState = React.useState(defaultValues$2),
       values = _useState[0],
@@ -7357,9 +7443,9 @@ var SignupForm = function SignupForm(_ref) {
     };
   }();
 
-  return __jsx$7("form", {
+  return __jsx$8("form", {
     onSubmit: submit
-  }, __jsx$7(core.TextField, {
+  }, __jsx$8(core.TextField, {
     id: "signup-form-email",
     name: "email",
     label: "Email address",
@@ -7372,15 +7458,15 @@ var SignupForm = function SignupForm(_ref) {
     },
     autoFocus: true,
     onChange: onChange,
-    helperText: __jsx$7(ErrorHelperText, {
+    helperText: __jsx$8(ErrorHelperText, {
       errors: formErrors,
       field: "email"
     }),
     error: !!utils.fieldErrors(formErrors, 'email').length
-  }), __jsx$7(ErrorAlert, {
+  }), __jsx$8(ErrorAlert, {
     errors: formErrors,
     className: classes.errors
-  }), __jsx$7(Button, {
+  }), __jsx$8(Button, {
     variant: "contained",
     color: "primary",
     type: "submit",
@@ -7402,6 +7488,7 @@ exports.ErrorAlert = ErrorAlert;
 exports.ErrorHelperText = ErrorHelperText;
 exports.Link = Link$2;
 exports.LoginForm = LoginForm;
+exports.LogoutForm = LogoutForm;
 exports.ResetForm = ResetForm;
 exports.SignupForm = SignupForm;
 exports.useStyles = useStyles;

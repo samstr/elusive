@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import // LogoutForm
-'../components';
+import { AuthPage, LogoutForm, useAuthPageStyles } from '../components';
 import { useSession } from '../hooks';
 import { indexRoute, loginRoute } from '../routes';
 
 const LogoutPage = () => {
   const router = useRouter();
   const session = useSession();
+  const classes = useAuthPageStyles();
 
   useEffect(() => {
     if (session._ready && !session.isAuthenticated) {
@@ -21,11 +21,12 @@ const LogoutPage = () => {
   };
 
   return (
-    <>
-      <h1>Logout</h1>
-      <div className="intro">Are sure you want to logout?</div>
-      <div className="form">{/* <LogoutForm onSuccess={onSuccess} />*/}</div>
-    </>
+    <AuthPage title="Logout">
+      <div className={classes.intro}>Are you sure you want to logout?</div>
+      <div className={classes.form}>
+        <LogoutForm onSuccess={onSuccess} />
+      </div>
+    </AuthPage>
   );
 };
 

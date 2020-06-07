@@ -28,8 +28,9 @@ export const useStyles = makeStyles((theme) => ({
   form: {
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
+    minWidth: 288,
     [theme.breakpoints.up('sm')]: {
-      maxWidth: 380,
+      width: 340,
     },
   },
   footer: {

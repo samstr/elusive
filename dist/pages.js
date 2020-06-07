@@ -17,7 +17,7 @@ require('@material-ui/core/styles');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-a9790b03.js');
+var SignupForm = require('./SignupForm-58934f35.js');
 require('clsx');
 require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
@@ -104,17 +104,26 @@ var __jsx$2 = React__default.createElement;
 var LogoutPage = function LogoutPage() {
   var router = router$1.useRouter();
   var session = useSession.useSession();
+  var classes = SignupForm.useStyles();
   React.useEffect(function () {
     if (session._ready && !session.isAuthenticated) {
       router.replace(utils$1.loginRoute());
     }
   }, [session]);
 
-  return __jsx$2(React__default.Fragment, null, __jsx$2("h1", null, "Logout"), __jsx$2("div", {
-    className: "intro"
-  }, "Are sure you want to logout?"), __jsx$2("div", {
-    className: "form"
-  }));
+  var onSuccess = function onSuccess() {
+    window.location = utils$1.indexRoute();
+  };
+
+  return __jsx$2(SignupForm.AuthPage, {
+    title: "Logout"
+  }, __jsx$2("div", {
+    className: classes.intro
+  }, "Are you sure you want to logout?"), __jsx$2("div", {
+    className: classes.form
+  }, __jsx$2(SignupForm.LogoutForm, {
+    onSuccess: onSuccess
+  })));
 };
 
 var __jsx$3 = React__default.createElement;
