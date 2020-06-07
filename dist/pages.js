@@ -16,7 +16,7 @@ require('@material-ui/core/styles');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-c44de312.js');
+var SignupForm = require('./SignupForm-7d385010.js');
 var core = require('@material-ui/core');
 require('clsx');
 require('@material-ui/lab');

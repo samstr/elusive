@@ -35,7 +35,7 @@ var useStyles = styles$2.makeStyles(function (theme) {
       height: '100%'
     },
     content: {
-      width: '100%',
+      textAlign: 'center',
       paddingTop: theme.spacing(4),
       paddingBottom: theme.spacing(4)
     },
