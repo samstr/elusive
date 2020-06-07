@@ -429,29 +429,33 @@ var signupAPI = /*#__PURE__*/function () {
           case 18:
             user = _context.sent;
 
-            if (!(user && user.password)) {
-              _context.next = 21;
+            if (!user) {
+              _context.next = 26;
+              break;
+            }
+
+            if (!user.password) {
+              _context.next = 22;
               break;
             }
 
             throw new errors$1.UserAlreadyExistsError('An account with this email address already exists.');
 
-          case 21:
-            if (!(user && !user.enabled)) {
-              _context.next = 23;
+          case 22:
+            if (user.enabled) {
+              _context.next = 24;
               break;
             }
 
             throw new users.UserNotEnabledError('This account has been disabled.');
 
-          case 23:
-            if (user) {
-              _context.next = 28;
-              break;
-            }
+          case 24:
+            _context.next = 30;
+            break;
 
+          case 26:
             baseURL = "".concat(process.env.NODE_ENV === 'production' ? 'https' : 'http', "://").concat(req.headers.host);
-            _context.next = 27;
+            _context.next = 29;
             return users.createUser({
               email: cleanValues.email,
               enabled: true,
@@ -462,28 +466,28 @@ var signupAPI = /*#__PURE__*/function () {
               }
             });
 
-          case 27:
+          case 29:
             user = _context.sent;
 
-          case 28:
-            _context.next = 30;
+          case 30:
+            _context.next = 32;
             return autoLogins.createAutoLogin({
               userId: user.id
             });
 
-          case 30:
+          case 32:
             autoLogin = _context.sent;
-            _context.next = 33;
+            _context.next = 35;
             return utils$2.sendSignupEmail(req, user.email, autoLogin.id);
 
-          case 33:
+          case 35:
             return _context.abrupt("return", {
               user: {
                 id: user.id
               }
             });
 
-          case 34:
+          case 36:
           case "end":
             return _context.stop();
         }
