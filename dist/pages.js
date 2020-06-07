@@ -193,11 +193,7 @@ var ResetPage = function ResetPage() {
     className: classes.form
   }, __jsx$4(SignupForm.ResetForm, {
     onSuccess: onSuccess
-  }))), __jsx$4("p", {
-    onClick: function onClick() {
-      return setSuccess(true);
-    }
-  }, "test"));
+  }))));
 };
 
 var __jsx$5 = React__default.createElement;
@@ -226,7 +222,7 @@ var LoginPage$1 = function LoginPage() {
   return __jsx$5(SignupForm.AuthPage, null, success ? __jsx$5(React__default.Fragment, null, __jsx$5(core.Typography, {
     variant: "h4",
     className: classes.title
-  }, "Login to ", siteOptions.name), __jsx$5("div", {
+  }, "Check your inbox"), __jsx$5("div", {
     className: classes.intro
   }, __jsx$5("p", null, "Please confirm your email address to get started."), __jsx$5("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$5(React__default.Fragment, null, __jsx$5(core.Typography, {
     variant: "h4",
@@ -239,11 +235,7 @@ var LoginPage$1 = function LoginPage() {
     className: classes.footer
   }, __jsx$5(SignupForm.Link, {
     href: utils$1.loginRoute()
-  }, "I already have an account"))), __jsx$5("p", {
-    onClick: function onClick() {
-      return setSuccess(true);
-    }
-  }, "test"));
+  }, "I already have an account"))));
 };
 
 exports.AutoLoginPage = AutoLoginPage;

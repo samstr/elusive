@@ -25,7 +25,7 @@ const LoginPage = () => {
       {success ? (
         <>
           <Typography variant="h4" className={classes.title}>
-            Login to {siteOptions.name}
+            Check your inbox
           </Typography>
           <div className={classes.intro}>
             <p>Please confirm your email address to get started.</p>
@@ -48,7 +48,6 @@ const LoginPage = () => {
           </div>
         </>
       )}
-      <p onClick={() => setSuccess(true)}>test</p>
     </AuthPage>
   );
 };
