@@ -14,7 +14,7 @@ require('@material-ui/core');
 require('@material-ui/core/styles');
 require('prop-types');
 require('react');
-var SignupForm = require('./SignupForm-58934f35.js');
+var SignupForm = require('./SignupForm-fd8e7a62.js');
 require('clsx');
 require('@material-ui/lab');
 require('next/link');

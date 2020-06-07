@@ -11,9 +11,11 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
   },
   content: {
-    textAlign: 'center',
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '75%',
+    },
   },
   title: {
     fontWeight: 'bold !important',

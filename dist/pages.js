@@ -12,12 +12,12 @@ require('./errors-6d843f19.js');
 require('./utils-8eb11d51.js');
 require('./asyncToGenerator-7a28bf2e.js');
 var utils$1 = require('./utils-ac544182.js');
-require('@material-ui/core');
+var core = require('@material-ui/core');
 require('@material-ui/core/styles');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-58934f35.js');
+var SignupForm = require('./SignupForm-fd8e7a62.js');
 require('clsx');
 require('@material-ui/lab');
 var NextLink = _interopDefault(require('next/link'));
@@ -61,7 +61,9 @@ var AutoLoginPage = function AutoLoginPage() {
       }
     }
   }, [data]);
-  return __jsx(React__default.Fragment, null, data && errors ? __jsx(React__default.Fragment, null, __jsx("h1", null, "There was a problem")) : __jsx("p", null, "Spinner"));
+  return __jsx(SignupForm.AuthPage, null, __jsx(React__default.Fragment, null, data && errors ? __jsx(SignupForm.ErrorAlert, {
+    errors: errors
+  }) : __jsx(core.CircularProgress, null)));
 };
 
 var __jsx$1 = React__default.createElement;

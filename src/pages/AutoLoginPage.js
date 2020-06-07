@@ -1,8 +1,8 @@
+import { CircularProgress } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import // GenericErrors
-'../components';
+import { AuthPage, ErrorAlert } from '../components';
 import { useData, useSessionContext } from '../hooks';
 import { homeRoute, onboardingRoute } from '../routes';
 
@@ -30,16 +30,11 @@ const AutoLoginPage = () => {
   }, [data]);
 
   return (
-    <>
-      {data && errors ? (
-        <>
-          <h1>There was a problem</h1>
-          {/* <GenericErrors errors={errors} />*/}
-        </>
-      ) : (
-        <p>Spinner</p>
-      )}
-    </>
+    <AuthPage>
+      <>
+        {data && errors ? <ErrorAlert errors={errors} /> : <CircularProgress />}
+      </>
+    </AuthPage>
   );
 };
 

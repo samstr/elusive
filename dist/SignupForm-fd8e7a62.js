@@ -34,11 +34,12 @@ var useStyles = styles$2.makeStyles(function (theme) {
       justifyContent: 'center',
       height: '100%'
     },
-    content: {
-      textAlign: 'center',
+    content: defineProperty$1._defineProperty({
       paddingTop: theme.spacing(4),
       paddingBottom: theme.spacing(4)
-    },
+    }, theme.breakpoints.up('sm'), {
+      maxWidth: '75%'
+    }),
     title: {
       fontWeight: 'bold !important',
       paddingBottom: theme.spacing(2),
