@@ -275,6 +275,22 @@ var getOnChangeValue = function getOnChangeValue(event) {
   };
 };
 
+var resetForm = (function () {
+  return createForm({
+    fields: {
+      email: emailField('email', {
+        required: {
+          value: true,
+          errorMessage: 'Your email is required'
+        },
+        invalid: {
+          errorMessage: 'Your email address is invalid'
+        }
+      })
+    }
+  });
+});
+
 var signupForm = (function () {
   return createForm({
     fields: {
@@ -303,5 +319,6 @@ exports.createForm = createForm;
 exports.emailField = emailField;
 exports.field = field;
 exports.getOnChangeValue = getOnChangeValue;
+exports.resetForm = resetForm;
 exports.signupForm = signupForm;
 exports.textField = textField;

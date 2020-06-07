@@ -1,7 +1,7 @@
 'use strict';
 
 var index$1 = require('./index.js');
-var signupForm = require('./signupForm-1231bb04.js');
+var signupForm = require('./signupForm-ee459d84.js');
 
 var loginForm = (function () {
   var authOptions = index$1.options.auth;

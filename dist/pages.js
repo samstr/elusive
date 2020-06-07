@@ -16,7 +16,7 @@ require('@material-ui/core/styles');
 require('prop-types');
 var React = require('react');
 var React__default = _interopDefault(React);
-var SignupForm = require('./SignupForm-e0a69855.js');
+var SignupForm = require('./SignupForm-54ff5db4.js');
 var core = require('@material-ui/core');
 require('clsx');
 require('@material-ui/lab');
@@ -24,8 +24,8 @@ var NextLink = _interopDefault(require('next/link'));
 var router$1 = require('next/router');
 require('react-dom');
 require('axios');
-require('./signupForm-1231bb04.js');
-require('./loginForm-669f34d0.js');
+require('./signupForm-ee459d84.js');
+require('./loginForm-5d0cd44b.js');
 require('./UserContext-1558dc2a.js');
 require('./utils-cb2ac89c.js');
 var useSession = require('./useSession-8dd087fe.js');
@@ -97,7 +97,7 @@ var LoginPage = function LoginPage() {
     className: classes.footer
   }, __jsx$1(SignupForm.Link, {
     href: utils$1.resetRoute()
-  }, "Forgot password?")));
+  }, "Forgot your password?")));
 };
 
 var __jsx$2 = React__default.createElement;
@@ -169,17 +169,34 @@ var __jsx$4 = React__default.createElement;
 
 var ResetPage = function ResetPage() {
   useSession.useSession();
-  var mailOptions = index$1.options.mail;
 
   var _useState = React.useState(),
       success = _useState[0],
       setSuccess = _useState[1];
 
-  return __jsx$4(React__default.Fragment, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Check your inbox"), __jsx$4("div", {
-    className: "intro"
-  }, __jsx$4("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$4(React__default.Fragment, null, __jsx$4("h1", null, "Forgot your password?"), __jsx$4("div", {
-    className: "form"
-  })));
+  var mailOptions = index$1.options.mail;
+
+  var onSuccess = function onSuccess() {
+    return setSuccess(true);
+  };
+
+  return __jsx$4(SignupForm.AuthPage, null, success ? __jsx$4(React__default.Fragment, null, __jsx$4(core.Typography, {
+    variant: "h4",
+    className: classes.title
+  }, "Check your inbox"), __jsx$4("div", {
+    className: classes.intro
+  }, __jsx$4("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail))) : __jsx$4(React__default.Fragment, null, __jsx$4(core.Typography, {
+    variant: "h4",
+    className: classes.title
+  }, "Forgot your password?"), __jsx$4("div", {
+    className: classes.form
+  }, __jsx$4(SignupForm.ResetForm, {
+    onSuccess: onSuccess
+  }))), __jsx$4("p", {
+    onClick: function onClick() {
+      return setSuccess(true);
+    }
+  }, "test"));
 };
 
 var __jsx$5 = React__default.createElement;

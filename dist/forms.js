@@ -8,9 +8,9 @@ require('./defineProperty-ba7cd53d.js');
 require('./index.js');
 require('./errors-6d843f19.js');
 require('./utils-8eb11d51.js');
-var signupForm = require('./signupForm-1231bb04.js');
-var loginForm = require('./loginForm-669f34d0.js');
-var resetForm = require('./resetForm-9a1e22e6.js');
+var signupForm = require('./signupForm-ee459d84.js');
+var loginForm = require('./loginForm-5d0cd44b.js');
+var onboardingForm = require('./onboardingForm-03851fc2.js');
 
 
 
@@ -26,8 +26,8 @@ exports.createForm = signupForm.createForm;
 exports.emailField = signupForm.emailField;
 exports.field = signupForm.field;
 exports.getOnChangeValue = signupForm.getOnChangeValue;
+exports.resetForm = signupForm.resetForm;
 exports.signupForm = signupForm.signupForm;
 exports.textField = signupForm.textField;
 exports.loginForm = loginForm.loginForm;
-exports.onboardingForm = resetForm.onboardingForm;
-exports.resetForm = resetForm.resetForm;
+exports.onboardingForm = onboardingForm.onboardingForm;

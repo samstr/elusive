@@ -34,7 +34,7 @@ const LoginPage = () => {
         <LoginForm onSuccess={onSuccess} />
       </div>
       <div className={classes.footer}>
-        <Link href={resetRoute()}>Forgot password?</Link>
+        <Link href={resetRoute()}>Forgot your password?</Link>
       </div>
     </AuthPage>
   );

@@ -1,24 +1,25 @@
+import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 
 import Elusive from '../';
-import // ResetForm
-'../components';
+import { AuthPage, ResetForm } from '../components';
 import { useSession } from '../hooks';
 
 const ResetPage = () => {
   useSession();
-  const { mail: mailOptions } = Elusive.options;
-
   const [success, setSuccess] = useState();
+  const { mail: mailOptions } = Elusive.options;
 
   const onSuccess = () => setSuccess(true);
 
   return (
-    <>
+    <AuthPage>
       {success ? (
         <>
-          <h1>Check your inbox</h1>
-          <div className="intro">
+          <Typography variant="h4" className={classes.title}>
+            Check your inbox
+          </Typography>
+          <div className={classes.intro}>
             <p>
               If an account exists with this email address, an e-mail will be
               sent with further instructions.
@@ -31,11 +32,16 @@ const ResetPage = () => {
         </>
       ) : (
         <>
-          <h1>Forgot your password?</h1>
-          <div className="form">{/* <ResetForm onSuccess={onSuccess} />*/}</div>
+          <Typography variant="h4" className={classes.title}>
+            Forgot your password?
+          </Typography>
+          <div className={classes.form}>
+            <ResetForm onSuccess={onSuccess} />
+          </div>
         </>
       )}
-    </>
+      <p onClick={() => setSuccess(true)}>test</p>
+    </AuthPage>
   );
 };
 

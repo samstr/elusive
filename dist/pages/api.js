@@ -16,8 +16,8 @@ require('bcryptjs');
 require('../utils-8c3c3461.js');
 require('../utils-ac544182.js');
 var utils$2 = require('../utils-744e9199.js');
-var signupForm = require('../signupForm-1231bb04.js');
-var resetForm = require('../resetForm-9a1e22e6.js');
+var signupForm = require('../signupForm-ee459d84.js');
+var onboardingForm = require('../onboardingForm-03851fc2.js');
 var utils$2$1 = require('../utils-cb2ac89c.js');
 var utils$3 = require('../utils-b82a9439.js');
 require('uuid');
@@ -170,7 +170,7 @@ var onboardingAPI = /*#__PURE__*/function () {
             req = _ref.req, res = _ref.res, session = _ref.session;
             tokenOptions = index$1.options.tokens;
             password = req.body.password;
-            _onboardingForm$valid = resetForm.onboardingForm().validate({
+            _onboardingForm$valid = onboardingForm.onboardingForm().validate({
               password: password
             }), cleanValues = _onboardingForm$valid.cleanValues, errors = _onboardingForm$valid.errors;
 
@@ -280,7 +280,7 @@ var resetAPI = /*#__PURE__*/function () {
             });
 
           case 13:
-            _resetForm$validate = resetForm.resetForm().validate({
+            _resetForm$validate = signupForm.resetForm().validate({
               email: email
             }), cleanValues = _resetForm$validate.cleanValues, errors = _resetForm$validate.errors;
 

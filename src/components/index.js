@@ -16,5 +16,8 @@ export { Link };
 import LoginForm from './LoginForm';
 export { LoginForm };
 
+import ResetForm from './ResetForm';
+export { ResetForm };
+
 import SignupForm from './SignupForm';
 export { SignupForm };
