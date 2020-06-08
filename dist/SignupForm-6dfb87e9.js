@@ -7143,21 +7143,22 @@ var LogoutForm = function LogoutForm(_ref) {
               setIsSubmitting(true);
               _context.prev = 3;
               _context.next = 6;
-              return axios__default.post(utils$1.logoutAPIRoute(), cleanValues);
+              return axios__default.post(utils$1.logoutAPIRoute());
 
             case 6:
               response = _context.sent;
               onSuccess(response.data);
-              _context.next = 14;
+              _context.next = 15;
               break;
 
             case 10:
               _context.prev = 10;
               _context.t0 = _context["catch"](3);
+              console.log('err', _context.t0);
               setIsSubmitting(false);
               setFormErrors((_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.errors);
 
-            case 14:
+            case 15:
             case "end":
               return _context.stop();
           }
@@ -7179,7 +7180,7 @@ var LogoutForm = function LogoutForm(_ref) {
     variant: "contained",
     color: "primary",
     type: "submit",
-    text: "Logout",
+    text: "Logout 2",
     loadingText: "Logging out",
     isLoading: isSubmitting,
     className: classes.button,

@@ -19,7 +19,7 @@ const LogoutForm = ({ onSuccess }) => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(logoutAPIRoute(), cleanValues);
+      const response = await axios.post(logoutAPIRoute());
       onSuccess(response.data);
     } catch (err) {
       setIsSubmitting(false);
