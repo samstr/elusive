@@ -210,7 +210,7 @@ var loginAPI = /*#__PURE__*/function () {
           case 26:
             user = _context.sent;
 
-            if (user) {
+            if (!(!user || !(user === null || user === void 0 ? void 0 : user.enabled) || !(user === null || user === void 0 ? void 0 : user.password))) {
               _context.next = 29;
               break;
             }
@@ -218,22 +218,14 @@ var loginAPI = /*#__PURE__*/function () {
             throw new users.UserNotFoundError('Authentication failed');
 
           case 29:
-            if (user.enabled) {
-              _context.next = 31;
-              break;
-            }
-
-            throw new users.UserNotEnabledError('Authentication failed');
-
-          case 31:
             if (utils$2.comparePasswordHash(cleanValues.password, user.password)) {
-              _context.next = 33;
+              _context.next = 31;
               break;
             }
 
             throw new errors$1.AuthenticationFailedError('Authentication failed');
 
-          case 33:
+          case 31:
             claims = tokenOptions.createClaims(user);
             utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), user.id);
             return _context.abrupt("return", {
@@ -243,7 +235,7 @@ var loginAPI = /*#__PURE__*/function () {
               }
             });
 
-          case 36:
+          case 34:
           case "end":
             return _context.stop();
         }

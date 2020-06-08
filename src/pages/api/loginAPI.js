@@ -90,12 +90,8 @@ export const loginAPI = async ({ req, res, session }) => {
     usersCollection().where('email', '==', cleanValues.email)
   );
 
-  if (!user) {
+  if (!user || !user?.enabled || !user?.password) {
     throw new UserNotFoundError('Authentication failed');
-  }
-
-  if (!user.enabled) {
-    throw new UserNotEnabledError('Authentication failed');
   }
 
   if (!comparePasswordHash(cleanValues.password, user.password)) {
