@@ -2,22 +2,18 @@ import moment from 'moment';
 
 import Elusive from '../../';
 import {
-  LOGIN_TYPE_LINK,
-  LOGIN_TYPE_PASSWORD,
   AlreadyAuthenticatedError,
   AuthenticationFailedError,
   TooManyLoginAttemptsError,
   comparePasswordHash,
-  sendLoginEmail,
 } from '../../auth';
-import { loginWithLinkForm, loginWithPasswordForm } from '../../forms';
+import { loginForm } from '../../forms';
 import { POST } from '../../http';
 import {
   createLoginAttempt,
   loginAttemptsCollection,
   listLoginAttempts,
 } from '../../models/loginAttempts';
-import { createAutoLogin } from '../../models/autoLogins';
 import {
   UserNotFoundError,
   UserNotEnabledError,
@@ -54,7 +50,7 @@ export const loginAPI = async ({ req, res, session }) => {
     }
   }
 
-  const { type, email, password, next } = req.body;
+  const { email, password, next } = req.body;
 
   if (process.env.NODE_ENV === 'production') {
     const recentLoginAttemptsByAccount = await listLoginAttempts(
@@ -78,70 +74,44 @@ export const loginAPI = async ({ req, res, session }) => {
   await createLoginAttempt({
     ip,
     email,
-    type,
   });
 
-  if (type === LOGIN_TYPE_PASSWORD) {
-    const { cleanValues, errors } = loginWithPasswordForm().validate({
-      type,
-      email,
-      password,
-      next,
-    });
+  const { cleanValues, errors } = loginForm().validate({
+    email,
+    password,
+    next,
+  });
 
-    if (errors && errors.length) {
-      return { errors };
-    }
-
-    const user = await getUser(
-      usersCollection().where('email', '==', cleanValues.email)
-    );
-
-    if (!user) {
-      throw new UserNotFoundError('Authentication failed');
-    }
-
-    if (!user.enabled) {
-      throw new UserNotEnabledError('Authentication failed');
-    }
-
-    if (!comparePasswordHash(cleanValues.password, user.password)) {
-      throw new AuthenticationFailedError('Authentication failed');
-    }
-
-    const claims = tokenOptions.createClaims(user);
-
-    createSessionCookies(res, signTokens(claims, tokenOptions.secret), user.id);
-
-    return {
-      session: {
-        isAuthenticated: true,
-        claims,
-      },
-    };
-  } else if (type === LOGIN_TYPE_LINK) {
-    const { cleanValues, errors } = loginWithLinkForm().validate({
-      type,
-      email,
-      next,
-    });
-
-    if (errors && errors.length) {
-      return { errors };
-    }
-
-    const user = await getUser(
-      usersCollection().where('email', '==', cleanValues.email)
-    );
-
-    if (user && user.enabled) {
-      const autoLogin = await createAutoLogin({
-        userId: user.id,
-      });
-
-      await sendLoginEmail(req, user.email, autoLogin.id, cleanValues.next);
-    }
+  if (errors && errors.length) {
+    return { errors };
   }
+
+  const user = await getUser(
+    usersCollection().where('email', '==', cleanValues.email)
+  );
+
+  if (!user) {
+    throw new UserNotFoundError('Authentication failed');
+  }
+
+  if (!user.enabled) {
+    throw new UserNotEnabledError('Authentication failed');
+  }
+
+  if (!comparePasswordHash(cleanValues.password, user.password)) {
+    throw new AuthenticationFailedError('Authentication failed');
+  }
+
+  const claims = tokenOptions.createClaims(user);
+
+  createSessionCookies(res, signTokens(claims, tokenOptions.secret), user.id);
+
+  return {
+    session: {
+      isAuthenticated: true,
+      claims,
+    },
+  };
 };
 
 loginAPI.options = {

@@ -1,8 +1,8 @@
 import autoLoginDataAPI from './autoLoginDataAPI';
 export { autoLoginDataAPI };
 
-// import loginAPI from './loginAPI';
-// export { loginAPI };
+import loginAPI from './loginAPI';
+export { loginAPI };
 
 import logoutAPI from './logoutAPI';
 export { logoutAPI };

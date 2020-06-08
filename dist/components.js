@@ -14,15 +14,14 @@ require('@material-ui/core');
 require('@material-ui/core/styles');
 require('prop-types');
 require('react');
-var SignupForm = require('./SignupForm-d8cd6661.js');
+var SignupForm = require('./SignupForm-cd977883.js');
 require('clsx');
 require('@material-ui/lab');
 require('next/link');
 require('next/router');
 require('react-dom');
 require('axios');
-require('./signupForm-d3b09043.js');
-require('./loginForm-d90bd1d0.js');
+require('./signupForm-6a97ccb8.js');
 
 
 

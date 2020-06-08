@@ -22,8 +22,7 @@ var router = require('next/router');
 var ReactDOM = require('react-dom');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
-var signupForm = require('./signupForm-d3b09043.js');
-var loginForm = require('./loginForm-d90bd1d0.js');
+var signupForm = require('./signupForm-6a97ccb8.js');
 
 var __jsx = React__default.createElement;
 var useStyles = styles$2.makeStyles(function (theme) {
@@ -7020,7 +7019,7 @@ var LoginForm = function LoginForm(_ref) {
             case 0:
               event.preventDefault();
               setFormErrors(null);
-              _loginForm$validate = loginForm.loginForm().validate(values), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
+              _loginForm$validate = signupForm.loginForm().validate(values), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
 
               if (!(errors && errors.length)) {
                 _context.next = 5;

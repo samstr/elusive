@@ -16,11 +16,12 @@ require('bcryptjs');
 require('../utils-8c3c3461.js');
 require('../utils-ac544182.js');
 var utils$2 = require('../utils-744e9199.js');
-var signupForm = require('../signupForm-d3b09043.js');
+var signupForm = require('../signupForm-6a97ccb8.js');
 var utils$2$1 = require('../utils-cb2ac89c.js');
 var utils$3 = require('../utils-b82a9439.js');
 require('uuid');
 require('../utils-6bc10708.js');
+var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var autoLogins = require('../models/autoLogins.js');
@@ -117,6 +118,146 @@ var autoLoginDataAPI = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+
+var loginAPI = /*#__PURE__*/function () {
+  var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
+    var req, res, session, _Elusive$options, authOptions, tokenOptions, ip, date1HourAgo, recentLoginAttemptsByIP, _req$body, email, password, next, recentLoginAttemptsByAccount, _loginForm$validate, cleanValues, errors, user, claims;
+
+    return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            req = _ref.req, res = _ref.res, session = _ref.session;
+            _Elusive$options = index$1.options, authOptions = _Elusive$options.auth, tokenOptions = _Elusive$options.tokens;
+
+            if (!session.isAuthenticated) {
+              _context.next = 4;
+              break;
+            }
+
+            throw new errors$1.AlreadyAuthenticatedError('You are already logged in');
+
+          case 4:
+            ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+            date1HourAgo = moment().subtract(1, 'hour');
+
+            if (!(process.env.NODE_ENV === 'production')) {
+              _context.next = 12;
+              break;
+            }
+
+            _context.next = 9;
+            return loginAttempts.listLoginAttempts(loginAttempts.loginAttemptsCollection().where('ip', '==', ip).where('dateCreated', '>', date1HourAgo).limit(authOptions.maxLoginAttemptsPerIPPerHour));
+
+          case 9:
+            recentLoginAttemptsByIP = _context.sent;
+
+            if (!(recentLoginAttemptsByIP.length >= authOptions.maxLoginAttemptsPerIPPerHour)) {
+              _context.next = 12;
+              break;
+            }
+
+            throw new errors$1.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
+
+          case 12:
+            _req$body = req.body, email = _req$body.email, password = _req$body.password, next = _req$body.next;
+
+            if (!(process.env.NODE_ENV === 'production')) {
+              _context.next = 19;
+              break;
+            }
+
+            _context.next = 16;
+            return loginAttempts.listLoginAttempts(loginAttempts.loginAttemptsCollection().where('ip', '==', ip).where('email', '==', email).where('dateCreated', '>', date1HourAgo).limit(authOptions.maxLoginAttemptsPerAccountPerHour));
+
+          case 16:
+            recentLoginAttemptsByAccount = _context.sent;
+
+            if (!(recentLoginAttemptsByAccount.length >= authOptions.maxLoginAttemptsPerAccountPerHour)) {
+              _context.next = 19;
+              break;
+            }
+
+            throw new errors$1.TooManyLoginAttemptsError('You have attempted to login too many times. Try again later.');
+
+          case 19:
+            _context.next = 21;
+            return loginAttempts.createLoginAttempt({
+              ip: ip,
+              email: email
+            });
+
+          case 21:
+            _loginForm$validate = signupForm.loginForm().validate({
+              email: email,
+              password: password,
+              next: next
+            }), cleanValues = _loginForm$validate.cleanValues, errors = _loginForm$validate.errors;
+
+            if (!(errors && errors.length)) {
+              _context.next = 24;
+              break;
+            }
+
+            return _context.abrupt("return", {
+              errors: errors
+            });
+
+          case 24:
+            _context.next = 26;
+            return users.getUser(users.usersCollection().where('email', '==', cleanValues.email));
+
+          case 26:
+            user = _context.sent;
+
+            if (user) {
+              _context.next = 29;
+              break;
+            }
+
+            throw new users.UserNotFoundError('Authentication failed');
+
+          case 29:
+            if (user.enabled) {
+              _context.next = 31;
+              break;
+            }
+
+            throw new users.UserNotEnabledError('Authentication failed');
+
+          case 31:
+            if (utils$2.comparePasswordHash(cleanValues.password, user.password)) {
+              _context.next = 33;
+              break;
+            }
+
+            throw new errors$1.AuthenticationFailedError('Authentication failed');
+
+          case 33:
+            claims = tokenOptions.createClaims(user);
+            utils$4.createSessionCookies(res, utils$5.signTokens(claims, tokenOptions.secret), user.id);
+            return _context.abrupt("return", {
+              session: {
+                isAuthenticated: true,
+                claims: claims
+              }
+            });
+
+          case 36:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function loginAPI(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+loginAPI.options = {
+  allowedMethods: [utils$2$1.POST]
+};
 
 var logoutAPI = /*#__PURE__*/function () {
   var _ref2 = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(_ref) {
@@ -680,6 +821,7 @@ var apiWrapper = /*#__PURE__*/function () {
 
 exports.apiWrapper = apiWrapper;
 exports.autoLoginDataAPI = autoLoginDataAPI;
+exports.loginAPI = loginAPI;
 exports.logoutAPI = logoutAPI;
 exports.onboardingAPI = onboardingAPI;
 exports.resetAPI = resetAPI;

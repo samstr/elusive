@@ -21,4 +21,9 @@ module.exports = {
   rules: {
     'require-jsdoc': 'off',
   },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };
