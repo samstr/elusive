@@ -81,6 +81,7 @@ const OnboardingForm = ({ email, onSuccess }) => {
           name="email"
           label="Email address"
           variant="outlined"
+          value={email}
           className={classes.textField}
           InputProps={{ classes: { root: classes.textFieldInput } }}
           onChange={onChange}

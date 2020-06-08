@@ -7318,6 +7318,7 @@ var OnboardingForm = function OnboardingForm(_ref) {
     name: "email",
     label: "Email address",
     variant: "outlined",
+    value: email,
     className: classes.textField,
     InputProps: {
       classes: {
