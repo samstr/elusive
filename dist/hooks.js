@@ -17,13 +17,26 @@ var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var UserContext = require('./UserContext-1558dc2a.js');
 var utils = require('./utils-cb2ac89c.js');
-var useSession = require('./useSession-8dd087fe.js');
+var useSession = require('./useSession-069cbdf9.js');
 
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();
   React.useEffect(function () {
     router$1.replace(href, asPath);
   }, []);
+};
+
+var useRequireAuth = function useRequireAuth() {
+  var router$1 = router.useRouter();
+
+  var _useSessionContext = useSession.useSessionContext(),
+      sessionContext = _useSessionContext.sessionContext;
+
+  React.useEffect(function () {
+    if (sessionContext._ready && !sessionContext.isAuthenticated) {
+      router$1.replace(utils$1.loginRouteWithNext());
+    }
+  }, [sessionContext._ready]);
 };
 
 var useUserContext = (function () {
@@ -121,9 +134,9 @@ var useUser = function useUser() {
 };
 
 exports.useData = useSession.useData;
-exports.useRequireAuth = useSession.useRequireAuth;
 exports.useSession = useSession.useSession;
 exports.useSessionContext = useSession.useSessionContext;
 exports.useRedirect = useRedirect;
+exports.useRequireAuth = useRequireAuth;
 exports.useUser = useUser;
 exports.useUserContext = useUserContext;

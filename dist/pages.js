@@ -20,7 +20,7 @@ var React__default = _interopDefault(React);
 var SignupForm = require('./SignupForm-09121337.js');
 require('clsx');
 require('@material-ui/lab');
-var NextLink = _interopDefault(require('next/link'));
+require('next/link');
 var router$1 = require('next/router');
 require('react-dom');
 require('axios');
@@ -28,7 +28,7 @@ require('./signupForm-d3b09043.js');
 require('./loginForm-d90bd1d0.js');
 require('./UserContext-1558dc2a.js');
 require('./utils-cb2ac89c.js');
-var useSession = require('./useSession-8dd087fe.js');
+var useSession = require('./useSession-069cbdf9.js');
 
 var __jsx = React__default.createElement;
 
@@ -130,53 +130,6 @@ var LogoutPage = function LogoutPage() {
 
 var __jsx$3 = React__default.createElement;
 
-var OnboardingPage = function OnboardingPage() {
-  useSession.useRequireAuth();
-  var session = useSession.useSession();
-
-  var _useState = React.useState(),
-      success = _useState[0],
-      setSuccess = _useState[1];
-
-  var _useSessionContext = useSession.useSessionContext(),
-      setSessionContext = _useSessionContext.setSessionContext;
-
-  React.useEffect(function () {
-    if (session._ready && session.isAuthenticated) {
-      var user = session.claims.user;
-
-      if (!user.needsOnboarding) {
-        setSuccess(true);
-      }
-    }
-  }, [session._ready]);
-
-  return __jsx$3(React__default.Fragment, null, session._ready ? __jsx$3(React__default.Fragment, null, success ? __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "What next?"), __jsx$3("div", {
-    className: "options"
-  }, __jsx$3(NextLink, {
-    href: utils$1.settingsProfileRoute()
-  }, __jsx$3("a", {
-    className: "option"
-  }, __jsx$3("div", {
-    className: "icon"
-  }, __jsx$3("img", {
-    src: "/img/icons/user-1a73e8.svg",
-    width: "38"
-  })), __jsx$3("div", {
-    className: "details"
-  }, __jsx$3("div", {
-    className: "heading"
-  }, "Setup your profile"), __jsx$3("div", {
-    className: "description"
-  }, "Whether you're a creator or a fan, the next step is to set your name and picture. Click here to edit your profile.")))))) : __jsx$3(React__default.Fragment, null, __jsx$3("h1", null, "Create a password"), __jsx$3("div", {
-    className: "intro"
-  }, "Let's create a password for you to use when you login"), __jsx$3("div", {
-    className: "form"
-  }))) : __jsx$3("p", null, "Spinner"));
-};
-
-var __jsx$4 = React__default.createElement;
-
 var ResetPage = function ResetPage() {
   useSession.useSession();
   var classes = SignupForm.useStyles();
@@ -191,18 +144,18 @@ var ResetPage = function ResetPage() {
     return setSuccess(true);
   };
 
-  return __jsx$4(SignupForm.AuthPage, {
+  return __jsx$3(SignupForm.AuthPage, {
     title: success ? 'Check your inbox' : 'Forgot your password?'
-  }, success ? __jsx$4("div", {
+  }, success ? __jsx$3("div", {
     className: classes.intro
-  }, __jsx$4("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail)) : __jsx$4("div", {
+  }, __jsx$3("p", null, "If an account exists with this email address, an e-mail will be sent with further instructions."), __jsx$3("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail)) : __jsx$3("div", {
     className: classes.form
-  }, __jsx$4(SignupForm.ResetForm, {
+  }, __jsx$3(SignupForm.ResetForm, {
     onSuccess: onSuccess
   })));
 };
 
-var __jsx$5 = React__default.createElement;
+var __jsx$4 = React__default.createElement;
 
 var LoginPage$1 = function LoginPage() {
   var session = useSession.useSession();
@@ -223,17 +176,17 @@ var LoginPage$1 = function LoginPage() {
     return setSuccess(true);
   };
 
-  return __jsx$5(SignupForm.AuthPage, {
+  return __jsx$4(SignupForm.AuthPage, {
     title: success ? 'Check your inbox' : 'Create an account'
-  }, success ? __jsx$5("div", {
+  }, success ? __jsx$4("div", {
     className: classes.intro
-  }, __jsx$5("p", null, "Please confirm your email address to get started."), __jsx$5("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail)) : __jsx$5(React__default.Fragment, null, __jsx$5("div", {
+  }, __jsx$4("p", null, "Please confirm your email address to get started."), __jsx$4("p", null, "You may need to check your spam folder or whitelist", ' ', mailOptions.fromEmail)) : __jsx$4(React__default.Fragment, null, __jsx$4("div", {
     className: classes.form
-  }, __jsx$5(SignupForm.SignupForm, {
+  }, __jsx$4(SignupForm.SignupForm, {
     onSuccess: onSuccess
-  })), __jsx$5("div", {
+  })), __jsx$4("div", {
     className: classes.footer
-  }, __jsx$5(SignupForm.Link, {
+  }, __jsx$4(SignupForm.Link, {
     href: utils$1.loginRoute()
   }, "I already have an account"))));
 };
@@ -241,6 +194,5 @@ var LoginPage$1 = function LoginPage() {
 exports.AutoLoginPage = AutoLoginPage;
 exports.LoginPage = LoginPage;
 exports.LogoutPage = LogoutPage;
-exports.OnboardingPage = OnboardingPage;
 exports.ResetPage = ResetPage;
 exports.SignupPage = LoginPage$1;
