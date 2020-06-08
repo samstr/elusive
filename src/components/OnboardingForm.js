@@ -68,7 +68,6 @@ const OnboardingForm = ({ email, onSuccess }) => {
           value={email}
           className={classes.textField}
           InputProps={{ classes: { root: classes.textFieldInput } }}
-          autoFocus={true}
           onChange={onChange}
           helperText={<ErrorHelperText errors={formErrors} field="email" />}
           error={!!fieldErrors(formErrors, 'email').length}
@@ -82,6 +81,7 @@ const OnboardingForm = ({ email, onSuccess }) => {
         variant="outlined"
         className={classes.textField}
         InputProps={{ classes: { root: classes.textFieldInput } }}
+        autoFocus={true}
         onChange={onChange}
         helperText={<ErrorHelperText errors={formErrors} field="password" />}
         error={!!fieldErrors(formErrors, 'password').length}
