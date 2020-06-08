@@ -16,8 +16,7 @@ require('bcryptjs');
 require('../utils-8c3c3461.js');
 require('../utils-ac544182.js');
 var utils$2 = require('../utils-744e9199.js');
-var signupForm = require('../signupForm-ee459d84.js');
-var onboardingForm = require('../onboardingForm-03851fc2.js');
+var signupForm = require('../signupForm-d3b09043.js');
 var utils$2$1 = require('../utils-cb2ac89c.js');
 var utils$3 = require('../utils-b82a9439.js');
 require('uuid');
@@ -170,7 +169,7 @@ var onboardingAPI = /*#__PURE__*/function () {
             req = _ref.req, res = _ref.res, session = _ref.session;
             tokenOptions = index$1.options.tokens;
             password = req.body.password;
-            _onboardingForm$valid = onboardingForm.onboardingForm().validate({
+            _onboardingForm$valid = signupForm.onboardingForm().validate({
               password: password
             }), cleanValues = _onboardingForm$valid.cleanValues, errors = _onboardingForm$valid.errors;
 

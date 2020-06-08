@@ -14,15 +14,15 @@ require('@material-ui/core');
 require('@material-ui/core/styles');
 require('prop-types');
 require('react');
-var SignupForm = require('./SignupForm-2edea9cf.js');
+var SignupForm = require('./SignupForm-09121337.js');
 require('clsx');
 require('@material-ui/lab');
 require('next/link');
 require('next/router');
 require('react-dom');
 require('axios');
-require('./signupForm-ee459d84.js');
-require('./loginForm-5d0cd44b.js');
+require('./signupForm-d3b09043.js');
+require('./loginForm-d90bd1d0.js');
 
 
 
@@ -33,6 +33,7 @@ exports.ErrorHelperText = SignupForm.ErrorHelperText;
 exports.Link = SignupForm.Link;
 exports.LoginForm = SignupForm.LoginForm;
 exports.LogoutForm = SignupForm.LogoutForm;
+exports.OnboardingForm = SignupForm.OnboardingForm;
 exports.ResetForm = SignupForm.ResetForm;
 exports.SignupForm = SignupForm.SignupForm;
 exports.useAuthPageStyles = SignupForm.useStyles;
