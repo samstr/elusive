@@ -63,6 +63,19 @@ var useStyles = styles$2.makeStyles(function (theme) {
     footer: {
       paddingTop: theme.spacing(2),
       textAlign: 'center'
+    },
+    textField: {
+      width: '100%',
+      marginBottom: theme.spacing(2)
+    },
+    textFieldInput: {
+      backgroundColor: theme.palette.common.white
+    },
+    button: {
+      width: '100%'
+    },
+    errors: {
+      marginBottom: theme.spacing(2)
     }
   };
 });
@@ -6967,23 +6980,6 @@ var __jsx$5 = React__default.createElement;
 function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var useStyles$2 = styles$2.makeStyles(function (theme) {
-  return {
-    textField: {
-      width: '100%',
-      marginBottom: theme.spacing(2)
-    },
-    textFieldInput: {
-      backgroundColor: theme.palette.common.white
-    },
-    button: {
-      width: '100%'
-    },
-    errors: {
-      marginBottom: theme.spacing(2)
-    }
-  };
-});
 var defaultValues = {
   email: '',
   password: ''
@@ -6991,7 +6987,7 @@ var defaultValues = {
 
 var LoginForm = function LoginForm(_ref) {
   var onSuccess = _ref.onSuccess;
-  var classes = useStyles$2();
+  var classes = useStyles();
 
   var _useState = React.useState(defaultValues),
       values = _useState[0],
@@ -7122,20 +7118,10 @@ LoginForm.propTypes = {
 };
 
 var __jsx$6 = React__default.createElement;
-var useStyles$3 = styles$2.makeStyles(function (theme) {
-  return {
-    button: {
-      width: '100%'
-    },
-    errors: {
-      marginBottom: theme.spacing(2)
-    }
-  };
-});
 
 var LogoutForm = function LogoutForm(_ref) {
   var onSuccess = _ref.onSuccess;
-  var classes = useStyles$3();
+  var classes = useStyles();
 
   var _useState = React.useState(null),
       formErrors = _useState[0],
@@ -7211,23 +7197,6 @@ var __jsx$7 = React__default.createElement;
 function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var useStyles$4 = styles$2.makeStyles(function (theme) {
-  return {
-    textField: {
-      width: '100%',
-      marginBottom: theme.spacing(2)
-    },
-    textFieldInput: {
-      backgroundColor: theme.palette.common.white
-    },
-    button: {
-      width: '100%'
-    },
-    errors: {
-      marginBottom: theme.spacing(2)
-    }
-  };
-});
 var defaultValues$1 = {
   password: ''
 };
@@ -7235,7 +7204,7 @@ var defaultValues$1 = {
 var OnboardingForm = function OnboardingForm(_ref) {
   var email = _ref.email,
       onSuccess = _ref.onSuccess;
-  var classes = useStyles$4();
+  var classes = useStyles();
 
   var _useState = React.useState(defaultValues$1),
       values = _useState[0],
@@ -7374,30 +7343,13 @@ var __jsx$8 = React__default.createElement;
 function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var useStyles$5 = styles$2.makeStyles(function (theme) {
-  return {
-    textField: {
-      width: '100%',
-      marginBottom: theme.spacing(2)
-    },
-    textFieldInput: {
-      backgroundColor: theme.palette.common.white
-    },
-    button: {
-      width: '100%'
-    },
-    errors: {
-      marginBottom: theme.spacing(2)
-    }
-  };
-});
 var defaultValues$2 = {
   email: ''
 };
 
 var ResetForm = function ResetForm(_ref) {
   var onSuccess = _ref.onSuccess;
-  var classes = useStyles$5();
+  var classes = useStyles();
 
   var _useState = React.useState(defaultValues$2),
       values = _useState[0],
@@ -7514,30 +7466,13 @@ var __jsx$9 = React__default.createElement;
 function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var useStyles$6 = styles$2.makeStyles(function (theme) {
-  return {
-    textField: {
-      width: '100%',
-      marginBottom: theme.spacing(2)
-    },
-    textFieldInput: {
-      backgroundColor: theme.palette.common.white
-    },
-    button: {
-      width: '100%'
-    },
-    errors: {
-      marginBottom: theme.spacing(2)
-    }
-  };
-});
 var defaultValues$3 = {
   email: ''
 };
 
 var SignupForm = function SignupForm(_ref) {
   var onSuccess = _ref.onSuccess;
-  var classes = useStyles$6();
+  var classes = useStyles();
 
   var _useState = React.useState(defaultValues$3),
       values = _useState[0],

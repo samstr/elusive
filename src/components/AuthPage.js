@@ -42,6 +42,19 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(2),
     textAlign: 'center',
   },
+  textField: {
+    width: '100%',
+    marginBottom: theme.spacing(2),
+  },
+  textFieldInput: {
+    backgroundColor: theme.palette.common.white,
+  },
+  button: {
+    width: '100%',
+  },
+  errors: {
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const AuthPage = ({ children, title }) => {

@@ -1,21 +1,12 @@
-import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import { logoutAPIRoute } from '../routes';
 
+import { useStyles } from './AuthPage';
 import Button from './Button';
 import ErrorAlert from './ErrorAlert';
-
-const useStyles = makeStyles((theme) => ({
-  button: {
-    width: '100%',
-  },
-  errors: {
-    marginBottom: theme.spacing(2),
-  },
-}));
 
 const LogoutForm = ({ onSuccess }) => {
   const classes = useStyles();

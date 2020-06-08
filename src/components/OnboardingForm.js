@@ -1,5 +1,4 @@
 import { Hidden, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -12,25 +11,10 @@ import {
 } from '../forms';
 import { onboardingAPIRoute } from '../routes';
 
+import { useStyles } from './AuthPage';
 import Button from './Button';
 import ErrorAlert from './ErrorAlert';
 import ErrorHelperText from './ErrorHelperText';
-
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  textFieldInput: {
-    backgroundColor: theme.palette.common.white,
-  },
-  button: {
-    width: '100%',
-  },
-  errors: {
-    marginBottom: theme.spacing(2),
-  },
-}));
 
 const defaultValues = {
   password: '',
