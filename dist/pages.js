@@ -70,6 +70,7 @@ var __jsx$1 = React__default.createElement;
 var LoginPage = function LoginPage() {
   var session = useSession.useSession();
   var classes = SignupForm.useStyles();
+  var router = router$1.useRouter();
   var siteOptions = index$1.options.site;
   React.useEffect(function () {
     if (session._ready && session.isAuthenticated) {

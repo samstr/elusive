@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import Elusive from '../';
@@ -8,6 +9,7 @@ import { homeRoute, resetRoute } from '../routes';
 const LoginPage = () => {
   const session = useSession();
   const classes = useAuthPageStyles();
+  const router = useRouter();
   const { site: siteOptions } = Elusive.options;
 
   useEffect(() => {
