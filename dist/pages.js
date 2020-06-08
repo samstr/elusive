@@ -21,7 +21,7 @@ var SignupForm = require('./SignupForm-00559597.js');
 require('clsx');
 require('@material-ui/lab');
 require('next/link');
-var router$1 = require('next/router');
+var router = require('next/router');
 require('react-dom');
 require('axios');
 require('./signupForm-6a97ccb8.js');
@@ -37,7 +37,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 var AutoLoginPage = function AutoLoginPage() {
   var data = useSession.useData();
-  var router = router$1.useRouter();
+  var router$1 = router.useRouter();
 
   var _useSessionContext = useSession.useSessionContext(),
       setSessionContext = _useSessionContext.setSessionContext;
@@ -52,11 +52,11 @@ var AutoLoginPage = function AutoLoginPage() {
       }));
 
       if ((_data$session$claims = data.session.claims) === null || _data$session$claims === void 0 ? void 0 : (_data$session$claims$ = _data$session$claims.user) === null || _data$session$claims$ === void 0 ? void 0 : _data$session$claims$.needsOnboarding) {
-        router.replace(utils$1.onboardingRoute());
-      } else if (router.query.next) {
-        window.location = decodeURIComponent(router.query.next);
+        router$1.replace(utils$1.onboardingRoute());
+      } else if (router$1.query.next) {
+        window.location = decodeURIComponent(router$1.query.next);
       } else {
-        router.replace(utils$1.homeRoute());
+        router$1.replace(utils$1.homeRoute());
       }
     }
   }, [data]);
@@ -69,20 +69,20 @@ var __jsx$1 = React__default.createElement;
 
 var LoginPage = function LoginPage() {
   var session = useSession.useSession();
+  var router$1 = router.useRouter();
   var classes = SignupForm.useStyles();
-  var router = router$1.useRouter();
   var siteOptions = index$1.options.site;
   React.useEffect(function () {
     if (session._ready && session.isAuthenticated) {
-      router.replace(utils$1.homeRoute());
+      router$1.replace(utils$1.homeRoute());
     }
   }, [session]);
 
   var onSuccess = function onSuccess() {
     var next = utils$1.homeRoute();
 
-    if (router.query.next) {
-      next = decodeURIComponent(router.query.next);
+    if (router$1.query.next) {
+      next = decodeURIComponent(router$1.query.next);
     }
 
     window.location = next;
@@ -104,12 +104,12 @@ var LoginPage = function LoginPage() {
 var __jsx$2 = React__default.createElement;
 
 var LogoutPage = function LogoutPage() {
-  var router = router$1.useRouter();
   var session = useSession.useSession();
+  var router$1 = router.useRouter();
   var classes = SignupForm.useStyles();
   React.useEffect(function () {
     if (session._ready && !session.isAuthenticated) {
-      router.replace(utils$1.loginRoute());
+      router$1.replace(utils$1.loginRoute());
     }
   }, [session]);
 
@@ -159,6 +159,7 @@ var __jsx$4 = React__default.createElement;
 
 var LoginPage$1 = function LoginPage() {
   var session = useSession.useSession();
+  var router$1 = router.useRouter();
   var classes = SignupForm.useStyles();
 
   var _useState = React.useState(),
@@ -168,7 +169,7 @@ var LoginPage$1 = function LoginPage() {
   var mailOptions = index$1.options.mail;
   React.useEffect(function () {
     if (session._ready && session.isAuthenticated) {
-      router.replace(utils$1.homeRoute());
+      router$1.replace(utils$1.homeRoute());
     }
   }, [session]);
 

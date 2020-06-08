@@ -8,8 +8,8 @@ import { homeRoute, resetRoute } from '../routes';
 
 const LoginPage = () => {
   const session = useSession();
-  const classes = useAuthPageStyles();
   const router = useRouter();
+  const classes = useAuthPageStyles();
   const { site: siteOptions } = Elusive.options;
 
   useEffect(() => {

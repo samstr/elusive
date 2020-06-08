@@ -6,8 +6,8 @@ import { useSession } from '../hooks';
 import { indexRoute, loginRoute } from '../routes';
 
 const LogoutPage = () => {
-  const router = useRouter();
   const session = useSession();
+  const router = useRouter();
   const classes = useAuthPageStyles();
 
   useEffect(() => {

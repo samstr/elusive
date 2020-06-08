@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import Elusive from '../';
@@ -7,6 +8,7 @@ import { homeRoute, loginRoute } from '../routes';
 
 const LoginPage = () => {
   const session = useSession();
+  const router = useRouter();
   const classes = useAuthPageStyles();
   const [success, setSuccess] = useState();
   const { mail: mailOptions } = Elusive.options;
