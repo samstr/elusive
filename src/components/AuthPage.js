@@ -31,6 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     minWidth: 288,
+    maxWidth: 340,
     marginLeft: 'auto',
     marginRight: 'auto',
     [theme.breakpoints.up('sm')]: {
