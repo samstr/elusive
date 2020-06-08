@@ -7148,17 +7148,16 @@ var LogoutForm = function LogoutForm(_ref) {
             case 6:
               response = _context.sent;
               onSuccess(response.data);
-              _context.next = 15;
+              _context.next = 14;
               break;
 
             case 10:
               _context.prev = 10;
               _context.t0 = _context["catch"](3);
-              console.log('err', _context.t0);
               setIsSubmitting(false);
               setFormErrors((_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.errors);
 
-            case 15:
+            case 14:
             case "end":
               return _context.stop();
           }
@@ -7180,7 +7179,7 @@ var LogoutForm = function LogoutForm(_ref) {
     variant: "contained",
     color: "primary",
     type: "submit",
-    text: "Logout 2",
+    text: "Logout",
     loadingText: "Logging out",
     isLoading: isSubmitting,
     className: classes.button,
