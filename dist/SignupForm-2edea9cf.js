@@ -53,7 +53,9 @@ var useStyles = styles$2.makeStyles(function (theme) {
     form: defineProperty$1._defineProperty({
       paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(2),
-      minWidth: 288
+      minWidth: 288,
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }, theme.breakpoints.up('sm'), {
       width: 340
     }),
