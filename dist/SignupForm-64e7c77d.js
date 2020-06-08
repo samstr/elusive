@@ -7293,6 +7293,7 @@ var OnboardingForm = function OnboardingForm(_ref) {
         root: classes.textFieldInput
       }
     },
+    autoFocus: true,
     onChange: onChange,
     helperText: __jsx$7(ErrorHelperText, {
       errors: formErrors,
