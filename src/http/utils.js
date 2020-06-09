@@ -1,4 +1,6 @@
-import { HttpMethodNotAllowedError } from './errors';
+import { errorJson } from '../errors';
+
+import { HttpInternalServerError, HttpMethodNotAllowedError } from './errors';
 
 export const GET = 'GET';
 export const POST = 'POST';
@@ -44,8 +46,16 @@ export const httpForbiddenResponse = (res, data) =>
 
 // 405
 export const httpMethodNotAllowedResponse = (res, data) =>
-  httpResponse(res, HTTP_STATUS_METHOD_NOT_ALLOWED, data);
+  httpResponse(
+    res,
+    HTTP_STATUS_METHOD_NOT_ALLOWED,
+    data || errorJson(new HttpMethodNotAllowedError('Method not allowed.'))
+  );
 
 // 500
 export const httpInternalServerErrorResponse = (res, data) =>
-  httpResponse(res, HTTP_STATUS_INTERNAL_SERVER_ERROR, data);
+  httpResponse(
+    res,
+    HTTP_STATUS_INTERNAL_SERVER_ERROR,
+    data || errorJson(new HttpInternalServerError('An unknown error occured.'))
+  );

@@ -11,7 +11,7 @@ var router = require('next/router');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var UserContext = require('./UserContext-1558dc2a.js');
-var utils = require('./utils-580fc22b.js');
+var utils$2 = require('./utils-ca45b13c.js');
 
 var useSessionContext = (function () {
   return React.useContext(UserContext.SessionContext);
@@ -30,7 +30,7 @@ var useData = function useData() {
   var handleError = function handleError(err) {
     if (axios__default.isCancel(err)) return;
 
-    if (err.response && err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
+    if (err.response && err.response.status === utils$2.HTTP_STATUS_UNAUTHORIZED) {
       resetSessionContext();
       var pathname = window.location.pathname;
 
@@ -124,7 +124,7 @@ var useSession = function useSession() {
   var handleError = function handleError(err) {
     if (axios__default.isCancel(err)) return;
 
-    if (err.response && err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
+    if (err.response && err.response.status === utils$2.HTTP_STATUS_UNAUTHORIZED) {
       resetSessionContext();
       var pathname = window.location.pathname;
 

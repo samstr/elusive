@@ -7,6 +7,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 require('./classCallCheck-d2bb402f.js');
 var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
 require('./errors-6d843f19.js');
+require('./utils-8eb11d51.js');
 var asyncToGenerator = require('./asyncToGenerator-7a28bf2e.js');
 var utils$1 = require('./utils-ac544182.js');
 require('prop-types');
@@ -16,8 +17,8 @@ var router = require('next/router');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var UserContext = require('./UserContext-1558dc2a.js');
-var utils = require('./utils-580fc22b.js');
-var useSession = require('./useSession-2ede6d1a.js');
+var utils$2 = require('./utils-ca45b13c.js');
+var useSession = require('./useSession-37c04e09.js');
 
 var useRedirect = function useRedirect(href, asPath) {
   var router$1 = router.useRouter();
@@ -61,7 +62,7 @@ var useUser = function useUser() {
   var handleError = function handleError(err) {
     if (axios__default.isCancel(err)) return;
 
-    if (err.response && err.response.status === utils.HTTP_STATUS_UNAUTHORIZED) {
+    if (err.response && err.response.status === utils$2.HTTP_STATUS_UNAUTHORIZED) {
       resetUserContext();
       var pathname = window.location.pathname;
 

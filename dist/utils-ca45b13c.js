@@ -2,6 +2,7 @@
 
 var classCallCheck = require('./classCallCheck-d2bb402f.js');
 var errors = require('./errors-6d843f19.js');
+var utils = require('./utils-8eb11d51.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 
@@ -84,11 +85,11 @@ var httpForbiddenResponse = function httpForbiddenResponse(res, data) {
 }; // 405
 
 var httpMethodNotAllowedResponse = function httpMethodNotAllowedResponse(res, data) {
-  return httpResponse(res, HTTP_STATUS_METHOD_NOT_ALLOWED, data);
+  return httpResponse(res, HTTP_STATUS_METHOD_NOT_ALLOWED, data || utils.errorJson(new HttpMethodNotAllowedError('Method not allowed.')));
 }; // 500
 
 var httpInternalServerErrorResponse = function httpInternalServerErrorResponse(res, data) {
-  return httpResponse(res, HTTP_STATUS_INTERNAL_SERVER_ERROR, data);
+  return httpResponse(res, HTTP_STATUS_INTERNAL_SERVER_ERROR, data || utils.errorJson(new HttpInternalServerError('An unknown error occured.')));
 };
 
 exports.GET = GET;
