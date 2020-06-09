@@ -26,8 +26,8 @@ require('react-dom');
 require('axios');
 require('./signupForm-6a97ccb8.js');
 require('./UserContext-1558dc2a.js');
-require('./utils-ca45b13c.js');
-var useSession = require('./useSession-37c04e09.js');
+require('./utils-212d2ba6.js');
+var useSession = require('./useSession-82eb7f7d.js');
 
 var __jsx = React__default.createElement;
 

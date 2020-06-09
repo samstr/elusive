@@ -1,6 +1,12 @@
 import { errorJson } from '../errors';
 
-import { HttpInternalServerError, HttpMethodNotAllowedError } from './errors';
+import {
+  HttpBadRequestError,
+  HttpForbiddenError,
+  HttpInternalServerError,
+  HttpMethodNotAllowedError,
+  HttpUnauthorizedError,
+} from './errors';
 
 export const GET = 'GET';
 export const POST = 'POST';
@@ -30,19 +36,31 @@ export const httpResponse = (res, status, data) => {
 
 // 200
 export const httpOKResponse = (res, data) =>
-  httpResponse(res, HTTP_STATUS_OK, data);
+  httpResponse(res, HTTP_STATUS_OK, data || {});
 
 // 400
 export const httpBadRequestResponse = (res, data) =>
-  httpResponse(res, HTTP_STATUS_BAD_REQUEST, data);
+  httpResponse(
+    res,
+    HTTP_STATUS_BAD_REQUEST,
+    data || errorJson(new HttpBadRequestError('Bad request.'))
+  );
 
 // 401
 export const httpUnauthorizedResponse = (res, data) =>
-  httpResponse(res, HTTP_STATUS_UNAUTHORIZED, data);
+  httpResponse(
+    res,
+    HTTP_STATUS_UNAUTHORIZED,
+    data || errorJson(new HttpUnauthorizedError('Unauthorized.'))
+  );
 
 // 403
 export const httpForbiddenResponse = (res, data) =>
-  httpResponse(res, HTTP_STATUS_FORBIDDEN, data);
+  httpResponse(
+    res,
+    HTTP_STATUS_FORBIDDEN,
+    data || errorJson(new HttpForbiddenError('Forbidden.'))
+  );
 
 // 405
 export const httpMethodNotAllowedResponse = (res, data) =>

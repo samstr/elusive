@@ -20,31 +20,70 @@ var HttpError = /*#__PURE__*/function (_BaseError) {
 
   return HttpError;
 }(errors.BaseError);
-var HttpInternalServerError = /*#__PURE__*/function (_HttpError) {
-  errors._inherits(HttpInternalServerError, _HttpError);
+var HttpBadRequestError = /*#__PURE__*/function (_HttpError) {
+  errors._inherits(HttpBadRequestError, _HttpError);
 
-  var _super2 = _createSuper(HttpInternalServerError);
+  var _super2 = _createSuper(HttpBadRequestError);
 
-  function HttpInternalServerError() {
-    classCallCheck._classCallCheck(this, HttpInternalServerError);
+  function HttpBadRequestError() {
+    classCallCheck._classCallCheck(this, HttpBadRequestError);
 
     return _super2.apply(this, arguments);
   }
 
-  return HttpInternalServerError;
+  return HttpBadRequestError;
 }(HttpError);
-var HttpMethodNotAllowedError = /*#__PURE__*/function (_HttpError2) {
-  errors._inherits(HttpMethodNotAllowedError, _HttpError2);
+var HttpForbiddenError = /*#__PURE__*/function (_HttpError2) {
+  errors._inherits(HttpForbiddenError, _HttpError2);
 
-  var _super3 = _createSuper(HttpMethodNotAllowedError);
+  var _super3 = _createSuper(HttpForbiddenError);
 
-  function HttpMethodNotAllowedError() {
-    classCallCheck._classCallCheck(this, HttpMethodNotAllowedError);
+  function HttpForbiddenError() {
+    classCallCheck._classCallCheck(this, HttpForbiddenError);
 
     return _super3.apply(this, arguments);
   }
 
+  return HttpForbiddenError;
+}(HttpError);
+var HttpInternalServerError = /*#__PURE__*/function (_HttpError3) {
+  errors._inherits(HttpInternalServerError, _HttpError3);
+
+  var _super4 = _createSuper(HttpInternalServerError);
+
+  function HttpInternalServerError() {
+    classCallCheck._classCallCheck(this, HttpInternalServerError);
+
+    return _super4.apply(this, arguments);
+  }
+
+  return HttpInternalServerError;
+}(HttpError);
+var HttpMethodNotAllowedError = /*#__PURE__*/function (_HttpError4) {
+  errors._inherits(HttpMethodNotAllowedError, _HttpError4);
+
+  var _super5 = _createSuper(HttpMethodNotAllowedError);
+
+  function HttpMethodNotAllowedError() {
+    classCallCheck._classCallCheck(this, HttpMethodNotAllowedError);
+
+    return _super5.apply(this, arguments);
+  }
+
   return HttpMethodNotAllowedError;
+}(HttpError);
+var HttpUnauthorizedError = /*#__PURE__*/function (_HttpError5) {
+  errors._inherits(HttpUnauthorizedError, _HttpError5);
+
+  var _super6 = _createSuper(HttpUnauthorizedError);
+
+  function HttpUnauthorizedError() {
+    classCallCheck._classCallCheck(this, HttpUnauthorizedError);
+
+    return _super6.apply(this, arguments);
+  }
+
+  return HttpUnauthorizedError;
 }(HttpError);
 
 var GET = 'GET';
@@ -69,19 +108,19 @@ var httpResponse = function httpResponse(res, status, data) {
 }; // 200
 
 var httpOKResponse = function httpOKResponse(res, data) {
-  return httpResponse(res, HTTP_STATUS_OK, data);
+  return httpResponse(res, HTTP_STATUS_OK, data || {});
 }; // 400
 
 var httpBadRequestResponse = function httpBadRequestResponse(res, data) {
-  return httpResponse(res, HTTP_STATUS_BAD_REQUEST, data);
+  return httpResponse(res, HTTP_STATUS_BAD_REQUEST, data || utils.errorJson(new HttpBadRequestError('Bad request.')));
 }; // 401
 
 var httpUnauthorizedResponse = function httpUnauthorizedResponse(res, data) {
-  return httpResponse(res, HTTP_STATUS_UNAUTHORIZED, data);
+  return httpResponse(res, HTTP_STATUS_UNAUTHORIZED, data || utils.errorJson(new HttpUnauthorizedError('Unauthorized.')));
 }; // 403
 
 var httpForbiddenResponse = function httpForbiddenResponse(res, data) {
-  return httpResponse(res, HTTP_STATUS_FORBIDDEN, data);
+  return httpResponse(res, HTTP_STATUS_FORBIDDEN, data || utils.errorJson(new HttpForbiddenError('Forbidden.')));
 }; // 405
 
 var httpMethodNotAllowedResponse = function httpMethodNotAllowedResponse(res, data) {
@@ -99,9 +138,12 @@ exports.HTTP_STATUS_INTERNAL_SERVER_ERROR = HTTP_STATUS_INTERNAL_SERVER_ERROR;
 exports.HTTP_STATUS_METHOD_NOT_ALLOWED = HTTP_STATUS_METHOD_NOT_ALLOWED;
 exports.HTTP_STATUS_OK = HTTP_STATUS_OK;
 exports.HTTP_STATUS_UNAUTHORIZED = HTTP_STATUS_UNAUTHORIZED;
+exports.HttpBadRequestError = HttpBadRequestError;
 exports.HttpError = HttpError;
+exports.HttpForbiddenError = HttpForbiddenError;
 exports.HttpInternalServerError = HttpInternalServerError;
 exports.HttpMethodNotAllowedError = HttpMethodNotAllowedError;
+exports.HttpUnauthorizedError = HttpUnauthorizedError;
 exports.POST = POST;
 exports.httpBadRequestResponse = httpBadRequestResponse;
 exports.httpForbiddenResponse = httpForbiddenResponse;

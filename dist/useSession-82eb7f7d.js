@@ -11,7 +11,7 @@ var router = require('next/router');
 var axios = require('axios');
 var axios__default = _interopDefault(axios);
 var UserContext = require('./UserContext-1558dc2a.js');
-var utils$2 = require('./utils-ca45b13c.js');
+var utils$2 = require('./utils-212d2ba6.js');
 
 var useSessionContext = (function () {
   return React.useContext(UserContext.SessionContext);

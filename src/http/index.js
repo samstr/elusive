@@ -1,9 +1,19 @@
 import {
+  HttpBadRequestError,
   HttpError,
+  HttpForbiddenError,
   HttpInternalServerError,
   HttpMethodNotAllowedError,
+  HttpUnauthorizedError,
 } from './errors';
-export { HttpError, HttpInternalServerError, HttpMethodNotAllowedError };
+export {
+  HttpBadRequestError,
+  HttpError,
+  HttpForbiddenError,
+  HttpInternalServerError,
+  HttpMethodNotAllowedError,
+  HttpUnauthorizedError,
+};
 
 import {
   GET,
