@@ -1,5 +1,9 @@
-import { HttpError, HttpMethodNotAllowedError } from './errors';
-export { HttpError, HttpMethodNotAllowedError };
+import {
+  HttpError,
+  HttpInternalServerError,
+  HttpMethodNotAllowedError,
+} from './errors';
+export { HttpError, HttpInternalServerError, HttpMethodNotAllowedError };
 
 import {
   GET,

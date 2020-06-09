@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 require('./classCallCheck-d2bb402f.js');
 require('./errors-6d843f19.js');
-var utils = require('./utils-cb2ac89c.js');
+var utils = require('./utils-580fc22b.js');
 
 
 
@@ -16,6 +16,7 @@ exports.HTTP_STATUS_METHOD_NOT_ALLOWED = utils.HTTP_STATUS_METHOD_NOT_ALLOWED;
 exports.HTTP_STATUS_OK = utils.HTTP_STATUS_OK;
 exports.HTTP_STATUS_UNAUTHORIZED = utils.HTTP_STATUS_UNAUTHORIZED;
 exports.HttpError = utils.HttpError;
+exports.HttpInternalServerError = utils.HttpInternalServerError;
 exports.HttpMethodNotAllowedError = utils.HttpMethodNotAllowedError;
 exports.POST = utils.POST;
 exports.httpBadRequestResponse = utils.httpBadRequestResponse;
