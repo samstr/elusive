@@ -227,7 +227,7 @@ var _getObject = /*#__PURE__*/function () {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            query.limit(1);
+            query = query.limit(1);
             _context8.next = 3;
             return query.get();
 

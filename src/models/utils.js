@@ -71,7 +71,7 @@ export const getObjectByID = async (model, collectionName, id) => {
 };
 
 export const getObject = async (model, query) => {
-  query.limit(1);
+  query = query.limit(1);
 
   const docs = await query.get();
 
