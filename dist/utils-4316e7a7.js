@@ -11,12 +11,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 var createModel = function createModel(data) {
   var model = {};
   Object.keys(data).forEach(function (key) {
+    var _data$key;
+
     // It's a firestore Timestamp just return the timestamp (seconds)
-    if (data[key].seconds) {
-      model[key] = data[key].seconds;
-    } else {
-      model[key] = data[key];
-    }
+    model[key] = ((_data$key = data[key]) === null || _data$key === void 0 ? void 0 : _data$key.seconds) ? data[key].seconds : data[key];
   });
   return model;
 };

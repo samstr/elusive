@@ -7,11 +7,7 @@ export const createModel = (data) => {
 
   Object.keys(data).forEach((key) => {
     // It's a firestore Timestamp just return the timestamp (seconds)
-    if (data[key].seconds) {
-      model[key] = data[key].seconds;
-    } else {
-      model[key] = data[key];
-    }
+    model[key] = data[key]?.seconds ? data[key].seconds : data[key];
   });
 
   return model;
