@@ -12,6 +12,7 @@ export const GET = 'GET';
 export const POST = 'POST';
 
 export const HTTP_STATUS_OK = 200;
+export const HTTP_STATUS_ACCEPTED = 202;
 
 export const HTTP_STATUS_BAD_REQUEST = 400;
 export const HTTP_STATUS_UNAUTHORIZED = 401;
@@ -37,6 +38,10 @@ export const httpResponse = (res, status, data) => {
 // 200
 export const httpOKResponse = (res, data) =>
   httpResponse(res, HTTP_STATUS_OK, data || {});
+
+export const httpAcceptedResponse = (res, data) => {
+  httpResponse(res, HTTP_STATUS_ACCEPTED, data || {});
+};
 
 // 400
 export const httpBadRequestResponse = (res, data) =>

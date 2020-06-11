@@ -89,6 +89,7 @@ var HttpUnauthorizedError = /*#__PURE__*/function (_HttpError5) {
 var GET = 'GET';
 var POST = 'POST';
 var HTTP_STATUS_OK = 200;
+var HTTP_STATUS_ACCEPTED = 202;
 var HTTP_STATUS_BAD_REQUEST = 400;
 var HTTP_STATUS_UNAUTHORIZED = 401;
 var HTTP_STATUS_FORBIDDEN = 403;
@@ -109,6 +110,9 @@ var httpResponse = function httpResponse(res, status, data) {
 
 var httpOKResponse = function httpOKResponse(res, data) {
   return httpResponse(res, HTTP_STATUS_OK, data || {});
+};
+var httpAcceptedResponse = function httpAcceptedResponse(res, data) {
+  httpResponse(res, HTTP_STATUS_ACCEPTED, data || {});
 }; // 400
 
 var httpBadRequestResponse = function httpBadRequestResponse(res, data) {
@@ -132,6 +136,7 @@ var httpInternalServerErrorResponse = function httpInternalServerErrorResponse(r
 };
 
 exports.GET = GET;
+exports.HTTP_STATUS_ACCEPTED = HTTP_STATUS_ACCEPTED;
 exports.HTTP_STATUS_BAD_REQUEST = HTTP_STATUS_BAD_REQUEST;
 exports.HTTP_STATUS_FORBIDDEN = HTTP_STATUS_FORBIDDEN;
 exports.HTTP_STATUS_INTERNAL_SERVER_ERROR = HTTP_STATUS_INTERNAL_SERVER_ERROR;
@@ -145,6 +150,7 @@ exports.HttpInternalServerError = HttpInternalServerError;
 exports.HttpMethodNotAllowedError = HttpMethodNotAllowedError;
 exports.HttpUnauthorizedError = HttpUnauthorizedError;
 exports.POST = POST;
+exports.httpAcceptedResponse = httpAcceptedResponse;
 exports.httpBadRequestResponse = httpBadRequestResponse;
 exports.httpForbiddenResponse = httpForbiddenResponse;
 exports.httpInternalServerErrorResponse = httpInternalServerErrorResponse;
