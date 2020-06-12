@@ -5,6 +5,7 @@ import {
   HttpForbiddenError,
   HttpInternalServerError,
   HttpMethodNotAllowedError,
+  HttpNotFoundError,
   HttpUnauthorizedError,
 } from './errors';
 
@@ -17,6 +18,7 @@ export const HTTP_STATUS_ACCEPTED = 202;
 export const HTTP_STATUS_BAD_REQUEST = 400;
 export const HTTP_STATUS_UNAUTHORIZED = 401;
 export const HTTP_STATUS_FORBIDDEN = 403;
+export const HTTP_STATUS_NOT_FOUND = 404;
 export const HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
 
 export const HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
@@ -65,6 +67,14 @@ export const httpForbiddenResponse = (res, data) =>
     res,
     HTTP_STATUS_FORBIDDEN,
     data || errorJson(new HttpForbiddenError('Forbidden.'))
+  );
+
+// 404
+export const httpNotFoundResponse = (res, data) =>
+  httpResponse(
+    res,
+    HTTP_STATUS_NOT_FOUND,
+    data || errorJson(new HttpNotFoundError('Not found.'))
   );
 
 // 405

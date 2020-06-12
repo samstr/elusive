@@ -72,15 +72,28 @@ var HttpMethodNotAllowedError = /*#__PURE__*/function (_HttpError4) {
 
   return HttpMethodNotAllowedError;
 }(HttpError);
-var HttpUnauthorizedError = /*#__PURE__*/function (_HttpError5) {
-  errors._inherits(HttpUnauthorizedError, _HttpError5);
+var HttpNotFoundError = /*#__PURE__*/function (_HttpError5) {
+  errors._inherits(HttpNotFoundError, _HttpError5);
 
-  var _super6 = _createSuper(HttpUnauthorizedError);
+  var _super6 = _createSuper(HttpNotFoundError);
+
+  function HttpNotFoundError() {
+    classCallCheck._classCallCheck(this, HttpNotFoundError);
+
+    return _super6.apply(this, arguments);
+  }
+
+  return HttpNotFoundError;
+}(HttpError);
+var HttpUnauthorizedError = /*#__PURE__*/function (_HttpError6) {
+  errors._inherits(HttpUnauthorizedError, _HttpError6);
+
+  var _super7 = _createSuper(HttpUnauthorizedError);
 
   function HttpUnauthorizedError() {
     classCallCheck._classCallCheck(this, HttpUnauthorizedError);
 
-    return _super6.apply(this, arguments);
+    return _super7.apply(this, arguments);
   }
 
   return HttpUnauthorizedError;
@@ -93,6 +106,7 @@ var HTTP_STATUS_ACCEPTED = 202;
 var HTTP_STATUS_BAD_REQUEST = 400;
 var HTTP_STATUS_UNAUTHORIZED = 401;
 var HTTP_STATUS_FORBIDDEN = 403;
+var HTTP_STATUS_NOT_FOUND = 404;
 var HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
 var HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
 var validateRequest = function validateRequest(req, res, options) {
@@ -125,6 +139,10 @@ var httpUnauthorizedResponse = function httpUnauthorizedResponse(res, data) {
 
 var httpForbiddenResponse = function httpForbiddenResponse(res, data) {
   return httpResponse(res, HTTP_STATUS_FORBIDDEN, data || utils.errorJson(new HttpForbiddenError('Forbidden.')));
+}; // 404
+
+var httpNotFoundResponse = function httpNotFoundResponse(res, data) {
+  return httpResponse(res, HTTP_STATUS_NOT_FOUND, data || utils.errorJson(new HttpNotFoundError('Not found.')));
 }; // 405
 
 var httpMethodNotAllowedResponse = function httpMethodNotAllowedResponse(res, data) {
@@ -141,6 +159,7 @@ exports.HTTP_STATUS_BAD_REQUEST = HTTP_STATUS_BAD_REQUEST;
 exports.HTTP_STATUS_FORBIDDEN = HTTP_STATUS_FORBIDDEN;
 exports.HTTP_STATUS_INTERNAL_SERVER_ERROR = HTTP_STATUS_INTERNAL_SERVER_ERROR;
 exports.HTTP_STATUS_METHOD_NOT_ALLOWED = HTTP_STATUS_METHOD_NOT_ALLOWED;
+exports.HTTP_STATUS_NOT_FOUND = HTTP_STATUS_NOT_FOUND;
 exports.HTTP_STATUS_OK = HTTP_STATUS_OK;
 exports.HTTP_STATUS_UNAUTHORIZED = HTTP_STATUS_UNAUTHORIZED;
 exports.HttpBadRequestError = HttpBadRequestError;
@@ -148,6 +167,7 @@ exports.HttpError = HttpError;
 exports.HttpForbiddenError = HttpForbiddenError;
 exports.HttpInternalServerError = HttpInternalServerError;
 exports.HttpMethodNotAllowedError = HttpMethodNotAllowedError;
+exports.HttpNotFoundError = HttpNotFoundError;
 exports.HttpUnauthorizedError = HttpUnauthorizedError;
 exports.POST = POST;
 exports.httpAcceptedResponse = httpAcceptedResponse;
@@ -155,6 +175,7 @@ exports.httpBadRequestResponse = httpBadRequestResponse;
 exports.httpForbiddenResponse = httpForbiddenResponse;
 exports.httpInternalServerErrorResponse = httpInternalServerErrorResponse;
 exports.httpMethodNotAllowedResponse = httpMethodNotAllowedResponse;
+exports.httpNotFoundResponse = httpNotFoundResponse;
 exports.httpOKResponse = httpOKResponse;
 exports.httpResponse = httpResponse;
 exports.httpUnauthorizedResponse = httpUnauthorizedResponse;

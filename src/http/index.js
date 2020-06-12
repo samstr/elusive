@@ -4,6 +4,7 @@ import {
   HttpForbiddenError,
   HttpInternalServerError,
   HttpMethodNotAllowedError,
+  HttpNotFoundError,
   HttpUnauthorizedError,
 } from './errors';
 export {
@@ -12,6 +13,7 @@ export {
   HttpForbiddenError,
   HttpInternalServerError,
   HttpMethodNotAllowedError,
+  HttpNotFoundError,
   HttpUnauthorizedError,
 };
 
@@ -22,6 +24,7 @@ import {
   HTTP_STATUS_FORBIDDEN,
   HTTP_STATUS_INTERNAL_SERVER_ERROR,
   HTTP_STATUS_METHOD_NOT_ALLOWED,
+  HTTP_STATUS_NOT_FOUND,
   HTTP_STATUS_OK,
   HTTP_STATUS_UNAUTHORIZED,
   POST,
@@ -30,6 +33,7 @@ import {
   httpForbiddenResponse,
   httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
+  httpNotFoundResponse,
   httpOKResponse,
   httpResponse,
   httpUnauthorizedResponse,
@@ -42,6 +46,7 @@ export {
   HTTP_STATUS_FORBIDDEN,
   HTTP_STATUS_INTERNAL_SERVER_ERROR,
   HTTP_STATUS_METHOD_NOT_ALLOWED,
+  HTTP_STATUS_NOT_FOUND,
   HTTP_STATUS_OK,
   HTTP_STATUS_UNAUTHORIZED,
   POST,
@@ -50,6 +55,7 @@ export {
   httpForbiddenResponse,
   httpInternalServerErrorResponse,
   httpMethodNotAllowedResponse,
+  httpNotFoundResponse,
   httpOKResponse,
   httpResponse,
   httpUnauthorizedResponse,
