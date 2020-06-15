@@ -28,7 +28,9 @@ export const createModel = (data) => {
     }
   };
 
-  return iterate(data);
+  iterate(data);
+
+  return data;
 };
 
 export const createService = (model, collectionName) => ({

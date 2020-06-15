@@ -26,7 +26,8 @@ var createModel = function createModel(data) {
     }
   };
 
-  return iterate(data);
+  iterate(data);
+  return data;
 };
 var createService = function createService(model, collectionName) {
   return {
