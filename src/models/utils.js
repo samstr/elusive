@@ -3,14 +3,26 @@ import { v4 as uuidv4 } from 'uuid';
 import Elusive from '../';
 
 export const createModel = (data) => {
-  const model = {};
+  const iterate = (obj, stack) => {
+    for (const property in obj) {
+      if (obj.hasOwnProperty(property)) {
+        if (typeof obj[property] == 'object') {
+          // It's a firestore Timestamp just return the timestamp (seconds)
+          if (obj[property].seconds && obj[property].nanoseconds) {
+            obj[property] = obj[property].seconds;
+          } else {
+            iterate(obj[property], stack + '.' + property);
+          }
+        } else {
+          console.log(property + '   ' + obj[property]);
+        }
+      }
+    }
+  };
 
-  Object.keys(data).forEach((key) => {
-    // It's a firestore Timestamp just return the timestamp (seconds)
-    model[key] = data[key]?.seconds ? data[key].seconds : data[key];
-  });
+  iterate(data, '');
 
-  return model;
+  return data;
 };
 
 export const createService = (model, collectionName) => ({

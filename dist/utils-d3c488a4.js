@@ -9,14 +9,25 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty$1._defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var createModel = function createModel(data) {
-  var model = {};
-  Object.keys(data).forEach(function (key) {
-    var _data$key;
+  var iterate = function iterate(obj, stack) {
+    for (var property in obj) {
+      if (obj.hasOwnProperty(property)) {
+        if (typeof obj[property] == 'object') {
+          // It's a firestore Timestamp just return the timestamp (seconds)
+          if (obj[property].seconds && obj[property].nanoseconds) {
+            obj[property] = obj[property].seconds;
+          } else {
+            iterate(obj[property]);
+          }
+        } else {
+          console.log(property + '   ' + obj[property]);
+        }
+      }
+    }
+  };
 
-    // It's a firestore Timestamp just return the timestamp (seconds)
-    model[key] = ((_data$key = data[key]) === null || _data$key === void 0 ? void 0 : _data$key.seconds) ? data[key].seconds : data[key];
-  });
-  return model;
+  iterate(data);
+  return data;
 };
 var createService = function createService(model, collectionName) {
   return {
