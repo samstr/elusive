@@ -12,7 +12,7 @@ var createModel = function createModel(data) {
   var iterate = function iterate(obj, stack) {
     for (var property in obj) {
       if (obj.hasOwnProperty(property)) {
-        if (typeof obj[property] == 'object') {
+        if (typeof obj[property] == 'object' && obj[property] !== null) {
           // It's a firestore Timestamp just return the timestamp (seconds)
           if (obj[property].seconds && obj[property].nanoseconds) {
             obj[property] = obj[property].seconds;
