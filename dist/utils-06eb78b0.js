@@ -19,8 +19,6 @@ var createModel = function createModel(data) {
           } else {
             iterate(obj[property]);
           }
-        } else {
-          console.log(property + '   ' + obj[property]);
         }
       }
     }

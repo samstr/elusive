@@ -13,8 +13,6 @@ export const createModel = (data) => {
           } else {
             iterate(obj[property], stack + '.' + property);
           }
-        } else {
-          console.log(property + '   ' + obj[property]);
         }
       }
     }
