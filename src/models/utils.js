@@ -10,6 +10,8 @@ export const createModel = (data) => {
           // It's a firestore Timestamp just return the timestamp (seconds)
           if (obj[property].seconds && obj[property].nanoseconds) {
             obj[property] = obj[property].seconds;
+          } else if (obj[property]._seconds && obj[property]._nanoseconds) {
+            obj[property] = obj[property]._seconds;
           } else {
             iterate(obj[property], stack + '.' + property);
           }
