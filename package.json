@@ -1,6 +1,6 @@
 {
   "name": "elusive",
-  "version": "2.6.17",
+  "version": "2.7.0",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
@@ -44,8 +44,7 @@
     "next": "^9.4.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "uuid": "^8.1.0"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

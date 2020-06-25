@@ -8,8 +8,7 @@ require('../defineProperty-ba7cd53d.js');
 require('../index.js');
 var errors = require('../errors-6d843f19.js');
 require('../asyncToGenerator-7a28bf2e.js');
-require('uuid');
-var utils$3 = require('../utils-f06f54c4.js');
+var utils$3 = require('../utils-f7ef4c1d.js');
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = errors._getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = errors._getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return errors._possibleConstructorReturn(this, result); }; }
 

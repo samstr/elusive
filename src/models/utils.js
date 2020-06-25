@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 import Elusive from '../';
 
 export const createModel = (data) => {
@@ -54,7 +52,10 @@ export const collection = (collectionName) => {
 export const createObject = async (model, collectionName, createProps) => {
   const { firebase } = Elusive.services;
   const firestore = firebase.firestore();
-  const id = uuidv4();
+
+  const collectionRef = firestore.collection(collectionName);
+  const ref = collectionRef.doc();
+  const id = ref.id;
 
   const dateNow = firebase.firestore.Timestamp.now();
   const doc = {
@@ -63,7 +64,7 @@ export const createObject = async (model, collectionName, createProps) => {
     dateUpdated: dateNow,
   };
 
-  await firestore.collection(collectionName).doc(id).set(doc);
+  await collectionRef.doc(id).set(doc);
 
   return model({
     ...doc,

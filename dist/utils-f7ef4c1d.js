@@ -3,7 +3,6 @@
 var defineProperty$1 = require('./defineProperty-ba7cd53d.js');
 var index$1 = require('./index.js');
 var asyncToGenerator = require('./asyncToGenerator-7a28bf2e.js');
-var uuid = require('uuid');
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -155,28 +154,30 @@ var _collection = function _collection(collectionName) {
 
 var _createObject = /*#__PURE__*/function () {
   var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee6(model, collectionName, createProps) {
-    var firebase, firestore, id, dateNow, doc;
+    var firebase, firestore, collectionRef, ref, id, dateNow, doc;
     return asyncToGenerator.regenerator.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
             firebase = index$1.services.firebase;
             firestore = firebase.firestore();
-            id = uuid.v4();
+            collectionRef = firestore.collection(collectionName);
+            ref = collectionRef.doc();
+            id = ref.id;
             dateNow = firebase.firestore.Timestamp.now();
             doc = _objectSpread(_objectSpread({}, createProps), {}, {
               dateCreated: dateNow,
               dateUpdated: dateNow
             });
-            _context6.next = 7;
-            return firestore.collection(collectionName).doc(id).set(doc);
+            _context6.next = 9;
+            return collectionRef.doc(id).set(doc);
 
-          case 7:
+          case 9:
             return _context6.abrupt("return", model(_objectSpread(_objectSpread({}, doc), {}, {
               id: id
             })));
 
-          case 8:
+          case 10:
           case "end":
             return _context6.stop();
         }

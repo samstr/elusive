@@ -19,14 +19,13 @@ var utils$2 = require('../utils-744e9199.js');
 var signupForm = require('../signupForm-6a97ccb8.js');
 var utils$2$1 = require('../utils-059a987a.js');
 var utils$3 = require('../utils-b82a9439.js');
-require('uuid');
-require('../utils-f06f54c4.js');
+require('../utils-f7ef4c1d.js');
 var loginAttempts = require('../models/loginAttempts.js');
 var moment = _interopDefault(require('moment'));
 var users = require('../models/users.js');
 var autoLogins = require('../models/autoLogins.js');
 var resetAttempts = require('../models/resetAttempts.js');
-var utils$4 = require('../utils-d1b730ca.js');
+var utils$4 = require('../utils-ab0cad7a.js');
 var utils$5 = require('../utils-ff0a4179.js');
 require('jsonwebtoken');
 

@@ -7,8 +7,7 @@ require('../ElusiveClient-d044fa81.js');
 require('../defineProperty-ba7cd53d.js');
 require('../index.js');
 require('../asyncToGenerator-7a28bf2e.js');
-require('uuid');
-var utils = require('../utils-f06f54c4.js');
+var utils = require('../utils-f7ef4c1d.js');
 
 
 

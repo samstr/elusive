@@ -49,7 +49,6 @@ export default [
       'prop-types',
       'react',
       'react-dom',
-      'uuid',
     ],
     plugins: [
       resolve({
