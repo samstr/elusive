@@ -1,4 +1,4 @@
-import moment from 'moment';
+/*import moment from 'moment';
 
 import Elusive from '../../';
 import { TooManyResetAttemptsError, sendResetEmail } from '../../auth';
@@ -65,3 +65,4 @@ resetAPI.options = {
 };
 
 export default resetAPI;
+*/

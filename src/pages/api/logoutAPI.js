@@ -1,4 +1,4 @@
-import { NotAuthenticatedError } from '../../auth';
+/*import { NotAuthenticatedError } from '../../auth';
 import { POST } from '../../http';
 import { deleteSessionCookies } from '../../sessions';
 
@@ -20,3 +20,4 @@ logoutAPI.options = {
 };
 
 export default logoutAPI;
+*/

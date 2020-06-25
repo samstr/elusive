@@ -1,4 +1,4 @@
-import Elusive from '../';
+/*import Elusive from '../';
 
 import { getUserByID } from '../models/users';
 import {
@@ -178,3 +178,4 @@ export const getSession = async (req, reloadUserSource) => {
 
   return { session, tokens };
 };
+*/

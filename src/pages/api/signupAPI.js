@@ -1,4 +1,4 @@
-import moment from 'moment';
+/*import moment from 'moment';
 
 import Elusive from '../../';
 import {
@@ -103,3 +103,4 @@ signupAPI.options = {
 };
 
 export default signupAPI;
+*/

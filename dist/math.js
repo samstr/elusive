@@ -2,8 +2,12 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var utils = require('./utils-b82a9439.js');
+var randomInt = function randomInt(min, max) {
+  var _min = Math.ceil(min);
 
+  var _max = Math.floor(max);
 
+  return Math.floor(Math.random() * (_max - _min + 1)) + _min;
+};
 
-exports.randomInt = utils.randomInt;
+exports.randomInt = randomInt;

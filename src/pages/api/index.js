@@ -1,4 +1,4 @@
-import autoLoginDataAPI from './autoLoginDataAPI';
+/*import autoLoginDataAPI from './autoLoginDataAPI';
 export { autoLoginDataAPI };
 
 import loginAPI from './loginAPI';
@@ -24,3 +24,4 @@ export { userAPI };
 
 import { apiWrapper } from './utils';
 export { apiWrapper };
+*/

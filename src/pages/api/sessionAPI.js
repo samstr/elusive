@@ -1,4 +1,4 @@
-import Elusive from '../../';
+/*import Elusive from '../../';
 import {
   RELOAD_USER_SOURCE_DATABASE,
   createSessionCookies,
@@ -25,3 +25,4 @@ sessionAPI.options = {
 };
 
 export default sessionAPI;
+*/

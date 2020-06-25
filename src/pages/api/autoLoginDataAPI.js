@@ -1,4 +1,4 @@
-import Elusive from '../../';
+/*import Elusive from '../../';
 import {
   AutoLoginAlreadyUsedError,
   AutoLoginExpiredError,
@@ -63,3 +63,4 @@ const autoLoginDataAPI = async ({ req, res }) => {
 };
 
 export default autoLoginDataAPI;
+*/

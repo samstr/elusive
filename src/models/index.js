@@ -1,20 +1,2 @@
-import {
-  collection,
-  createModel,
-  createObject,
-  createService,
-  getObject,
-  getObjectByID,
-  listObjects,
-  updateObject,
-} from './utils';
-export {
-  collection,
-  createModel,
-  createObject,
-  createService,
-  getObject,
-  getObjectByID,
-  listObjects,
-  updateObject,
-};
+import { create, get, id, list, model, update } from './utils';
+export { create, get, id, list, model, update };
