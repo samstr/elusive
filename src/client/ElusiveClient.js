@@ -217,7 +217,9 @@ class ElusiveClient {
     if (ElusiveClient.instance) {
       return ElusiveClient.instance;
     }
+
     ElusiveClient.instance = new ElusiveClient();
+
     return ElusiveClient.instance;
   }
 }

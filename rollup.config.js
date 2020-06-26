@@ -16,10 +16,11 @@ export default [
       http: './src/http/index.js',
       mail: './src/mail/index.js',
       math: './src/math/index.js',
-      models: './src/models/index.js',
       pages: './src/pages/index.js',
       'pages/api': './src/pages/api/index.js',
       routes: './src/routes/index.js',
+      'services/firebase/firestore':
+        './src/services/firebase/firestore/index.js',
       sessions: './src/sessions/index.js',
       tokens: './src/tokens/index.js',
     },
