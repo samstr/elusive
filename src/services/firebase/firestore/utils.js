@@ -81,7 +81,7 @@ export const getDocument = async (docRefOrQuery) => {
       });
     });
 
-    return doc;
+    return doc || null;
   }
 };
 

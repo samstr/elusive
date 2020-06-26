@@ -124,7 +124,7 @@ var getDocument = /*#__PURE__*/function () {
                 id: result.id
               }, result.data()));
             });
-            return _context2.abrupt("return", _doc);
+            return _context2.abrupt("return", _doc || null);
 
           case 20:
           case "end":
