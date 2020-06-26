@@ -1,6 +1,16 @@
 class ElusiveClient {
   static instance;
 
+  static getInstance() {
+    if (ElusiveClient.instance) {
+      return ElusiveClient.instance;
+    }
+
+    ElusiveClient.instance = new ElusiveClient();
+
+    return ElusiveClient.instance;
+  }
+
   setDefaults() {
     this.services = {
       firebase: null,
@@ -211,16 +221,6 @@ class ElusiveClient {
         }
       }
     }
-  }
-
-  static getInstance() {
-    if (ElusiveClient.instance) {
-      return ElusiveClient.instance;
-    }
-
-    ElusiveClient.instance = new ElusiveClient();
-
-    return ElusiveClient.instance;
   }
 }
 
