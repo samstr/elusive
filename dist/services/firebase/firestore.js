@@ -35,7 +35,7 @@ var modelData = function modelData(data) {
 };
 
 var createDocument = /*#__PURE__*/function () {
-  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(collectionRef, createProps) {
+  var _ref = asyncToGenerator._asyncToGenerator( /*#__PURE__*/asyncToGenerator.regenerator.mark(function _callee(collectionRef, data) {
     var firebase, id, docRef, dateNow, doc;
     return asyncToGenerator.regenerator.wrap(function _callee$(_context) {
       while (1) {
@@ -45,7 +45,7 @@ var createDocument = /*#__PURE__*/function () {
             id = collectionRef.doc().id;
             docRef = collectionRef.doc(id);
             dateNow = firebase.firestore.Timestamp.now();
-            doc = _objectSpread(_objectSpread({}, createProps), {}, {
+            doc = _objectSpread(_objectSpread({}, data), {}, {
               dateCreated: dateNow,
               dateUpdated: dateNow
             });

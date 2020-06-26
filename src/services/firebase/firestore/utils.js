@@ -31,7 +31,7 @@ const modelData = (data) => {
   return data;
 };
 
-export const createDocument = async (collectionRef, createProps) => {
+export const createDocument = async (collectionRef, data) => {
   const { firebase } = Elusive.services;
 
   const id = collectionRef.doc().id;
@@ -39,7 +39,7 @@ export const createDocument = async (collectionRef, createProps) => {
 
   const dateNow = firebase.firestore.Timestamp.now();
   const doc = {
-    ...createProps,
+    ...data,
     dateCreated: dateNow,
     dateUpdated: dateNow,
   };
