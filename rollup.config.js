@@ -5,24 +5,7 @@ import babel from 'rollup-plugin-babel';
 export default [
   {
     input: {
-      index: './src/index.js',
-      auth: './src/auth/index.js',
-      client: './src/client/index.js',
-      components: './src/components/index.js',
-      contexts: './src/contexts/index.js',
-      errors: './src/errors/index.js',
-      forms: './src/forms/index.js',
-      hooks: './src/hooks/index.js',
-      http: './src/http/index.js',
-      mail: './src/mail/index.js',
-      math: './src/math/index.js',
-      pages: './src/pages/index.js',
-      'pages/api': './src/pages/api/index.js',
-      routes: './src/routes/index.js',
-      'services/firebase/firestore':
-        './src/services/firebase/firestore/index.js',
-      sessions: './src/sessions/index.js',
-      tokens: './src/tokens/index.js',
+      'aws/rds': './src/aws/rds/index.js'
     },
     output: [
       {
@@ -31,19 +14,7 @@ export default [
       },
     ],
     external: [
-      '@material-ui/core',
-      '@material-ui/core/styles',
-      '@material-ui/icons',
-      '@material-ui/lab',
-      'axios',
-      'bcryptjs',
-      'clsx',
-      'jsonwebtoken',
-      'moment',
-      'next',
-      'next/link',
-      'next/router',
-      'prop-types',
+      'pg',
       'react',
       'react-dom',
     ],

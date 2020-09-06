@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var pg = require('pg');
+
 function createCommonjsModule(fn, basedir, module) {
 	return module = {
 	  path: basedir,
@@ -783,6 +787,210 @@ function _asyncToGenerator(fn) {
   };
 }
 
-exports._asyncToGenerator = _asyncToGenerator;
-exports.createCommonjsModule = createCommonjsModule;
-exports.regenerator = regenerator;
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+var WRITER = 'writer';
+var READER = 'reader';
+
+var RDS = /*#__PURE__*/function () {
+  function RDS() {
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, RDS);
+
+    var database = config.database,
+        debug = config.debug,
+        password = config.password,
+        port = config.port,
+        readerHost = config.readerHost,
+        user = config.user,
+        writerHost = config.writerHost;
+
+    if (database) {
+      this.database = database;
+    }
+
+    if (debug) {
+      this.debug = debug;
+    }
+
+    if (password) {
+      this.password = password;
+    }
+
+    if (port) {
+      this.port = port;
+    }
+
+    if (readerHost) {
+      this.readerHost = readerHost;
+    }
+
+    if (user) {
+      this.user = user;
+    }
+
+    if (writerHost) {
+      this.writerHost = writerHost;
+    }
+  }
+
+  _createClass(RDS, [{
+    key: "connect",
+    value: function connect(source) {
+      if (!this.client) {
+        this.source = source;
+
+        if (this.debug) {
+          console.log("Connecting to ".concat(this.source));
+        }
+
+        this.client = new pg.Client({
+          user: this.user,
+          host: this.source === WRITER ? this.writerHost : this.readerHost,
+          database: this.database,
+          password: this.password,
+          port: this.port
+        });
+        this.client.connect();
+      } else {
+        if (this.debug) {
+          console.log("Client already exists (connected to ".concat(this.source));
+        }
+      }
+    }
+  }, {
+    key: "disconnect",
+    value: function disconnect() {
+      if (this.client) {
+        if (this.debug) {
+          console.log("Disconnecting from ".concat(this.source, ": Done"));
+        }
+
+        this.client.end();
+      } else {
+        if (this.debug) {
+          console.log("No need to disconnect (no client connected)");
+        }
+      }
+    }
+  }, {
+    key: "query",
+    value: function () {
+      var _query2 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(_query, values) {
+        return regenerator.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (this.debug) {
+                  console.log("Query (".concat(this.source, "):"), _query.replace('\n', '').replace(/\s+/g, ' '), values || []);
+                }
+
+                return _context.abrupt("return", this.client.query(_query, values));
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function query(_x, _x2) {
+        return _query2.apply(this, arguments);
+      }
+
+      return query;
+    }()
+  }, {
+    key: "transaction",
+    value: function () {
+      var _transaction = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(fn) {
+        var data;
+        return regenerator.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+
+                if (this.debug) {
+                  console.log('Transaction: BEGIN');
+                }
+
+                _context2.next = 4;
+                return this.client.query('BEGIN');
+
+              case 4:
+                _context2.next = 6;
+                return fn();
+
+              case 6:
+                data = _context2.sent;
+
+                if (this.debug) {
+                  console.log('Transaction: COMMIT');
+                }
+
+                _context2.next = 10;
+                return this.client.query('COMMIT');
+
+              case 10:
+                return _context2.abrupt("return", data);
+
+              case 13:
+                _context2.prev = 13;
+                _context2.t0 = _context2["catch"](0);
+                console.error('Error during transation', _context2.t0);
+
+                if (this.debug) {
+                  console.log('Transaction: ROLLBACK');
+                }
+
+                _context2.next = 19;
+                return this.client.query('ROLLBACK');
+
+              case 19:
+                return _context2.abrupt("return", false);
+
+              case 20:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 13]]);
+      }));
+
+      function transaction(_x3) {
+        return _transaction.apply(this, arguments);
+      }
+
+      return transaction;
+    }()
+  }]);
+
+  return RDS;
+}();
+
+exports.RDS = RDS;
+exports.READER = READER;
+exports.WRITER = WRITER;
