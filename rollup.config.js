@@ -5,7 +5,8 @@ import babel from 'rollup-plugin-babel';
 export default [
   {
     input: {
-      'aws/rds': './src/aws/rds/index.js'
+      'aws/lambda': './src/aws/lambda.js',
+      'aws/rds': './src/aws/rds.js',
     },
     output: [
       {
@@ -13,11 +14,7 @@ export default [
         format: 'cjs',
       },
     ],
-    external: [
-      'pg',
-      'react',
-      'react-dom',
-    ],
+    external: ['pg', 'react', 'react-dom'],
     plugins: [
       resolve({
         preferBuiltins: true,

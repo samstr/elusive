@@ -1,3 +1,0 @@
-[submodule "lib/email-templates"]
-	path = lib/email-templates
-	url = https://github.com/sendgrid/email-templates
