@@ -15,7 +15,7 @@ export default [
         format: 'cjs',
       },
     ],
-    external: ['camelcase', 'moment', 'next', 'pg', 'react', 'react-dom'],
+    external: ['pg', 'react', 'react-dom'],
     plugins: [
       resolve({
         preferBuiltins: true,
