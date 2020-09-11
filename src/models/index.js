@@ -1,10 +1,16 @@
-const camelCase = require('camelcase');
+import camelCase from 'camelcase';
+import moment from 'moment';
 
 export class Model {
   constructor(data) {
     if (data) {
       Object.keys(data).map((key) => {
-        this[camelCase(key)] = data[key];
+        const ccKey = camelCase(key);
+        if (key.startsWith('date_')) {
+          this[ccKey] = moment(data[key]);
+        } else {
+          this[ccKey] = data[key];
+        }
       });
     }
   }
