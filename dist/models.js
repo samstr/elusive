@@ -13,7 +13,11 @@ var Model = function Model(data) {
 
   if (data) {
     Object.keys(data).map(function (key) {
-      _this[camelCase(key)] = data[key];
+      if (key.startsWith('_')) {
+        _this["_".concat(camelCase(key))] = data[key];
+      } else {
+        _this[camelCase(key)] = data[key];
+      }
     });
   }
 };
