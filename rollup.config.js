@@ -7,6 +7,7 @@ export default [
     input: {
       'aws/lambda': './src/aws/lambda.js',
       'aws/rds': './src/aws/rds.js',
+      models: './src/models/index.js',
     },
     output: [
       {

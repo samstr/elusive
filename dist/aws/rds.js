@@ -2,6 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var classCallCheck = require('../classCallCheck-d2bb402f.js');
 var pg = require('pg');
 
 function createCommonjsModule(fn, basedir, module) {
@@ -787,12 +788,6 @@ function _asyncToGenerator(fn) {
   };
 }
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -816,7 +811,7 @@ var RDS = /*#__PURE__*/function () {
   function RDS() {
     var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    _classCallCheck(this, RDS);
+    classCallCheck._classCallCheck(this, RDS);
 
     var database = config.database,
         debug = config.debug,

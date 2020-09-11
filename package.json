@@ -1,12 +1,13 @@
 {
   "name": "elusive",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "repository": "https://github.com/samstr/elusive",
   "main": "dist/index.js",
   "files": [
     "dist",
     "aws/lambda.js",
-    "aws/rds.js"
+    "aws/rds.js",
+    "models.js"
   ],
   "scripts": {
     "clean": "rm -rf ./dist",
@@ -15,6 +16,7 @@
     "deps:upgrade": "yarn upgrade-interactive --latest"
   },
   "dependencies": {
+    "camelcase": "^6.0.0",
     "next": "^9.5.3",
     "pg": "^8.3.3",
     "react": "^16.13.1",
